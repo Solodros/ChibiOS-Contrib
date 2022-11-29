@@ -322,6 +322,15 @@
 #define WB32_DMAC_IT_SRCTRAN                                 (0x2U << 3)
 #define WB32_DMAC_IT_DSTTRAN                                 (0x3U << 3)
 #define WB32_DMAC_IT_ERR                                     (0x4U << 3)
+
+/** @defgroup DMAC_interrupts_states_definitions 
+  * @{
+  */
+#define WB32_DMAC_IT_STATE_TFR                               (0x1U << 0)
+#define WB32_DMAC_IT_STATE_BLOCK                             (0x1U << 1)
+#define WB32_DMAC_IT_STATE_SRCTRAN                           (0x1U << 2)
+#define WB32_DMAC_IT_STATE_DSTTRAN                           (0x1U << 3)
+#define WB32_DMAC_IT_STATE_ERR                               (0x1U << 4)
 /**
   * @}
   */
@@ -641,9 +650,13 @@ typedef struct {
     (dmastp)->dmac->Ch[(dmastp)->channel].CFGL = (((mode) & WB32_DMA_CHCFG_PL_MASK) >> 8) |           \
                                                  (((mode) & WB32_DMA_CHCFG_CIRC) << 24) |             \
                                                  (((mode) & WB32_DMA_CHCFG_CIRC) << 25);              \
-    if ((mode) & (WB32_DMA_CHCFG_TCIE | WB32_DMA_CHCFG_HTIE)) {                                       \
+    if ((mode) & (WB32_DMA_CHCFG_TCIE)) {                                                             \
       (dmastp)->dmac->Ch[(dmastp)->channel].CTLL |= WB32_DMAC_INTERRUPT_EN;                           \
       dmaStreamEnableInterrupt(dmastp, WB32_DMAC_IT_TFR);                                             \
+    }                                                                                                 \
+    if ((mode) & (WB32_DMA_CHCFG_HTIE)) {                                                             \
+      (dmastp)->dmac->Ch[(dmastp)->channel].CTLL |= WB32_DMAC_INTERRUPT_EN;                           \
+      dmaStreamEnableInterrupt(dmastp, WB32_DMAC_IT_BLOCK);                                           \
     }                                                                                                 \
     if ((mode) & WB32_DMA_CHCFG_TEIE) {                                                               \
       (dmastp)->dmac->Ch[(dmastp)->channel].CTLL |= WB32_DMAC_INTERRUPT_EN;                           \
@@ -827,8 +840,8 @@ typedef struct {
  * @param[in] n         number of data units to copy
  */
 #define dmaStartMemCopy(dmastp, mode, src, dst, n) {                        \
-    (mode).src_addr_inc = WB32_DMAC_SRC_ADDR_INC;                              \
-    (mode).dst_addr_inc = WB32_DMAC_DST_ADDR_INC;                              \
+    (mode).src_addr_inc = WB32_DMAC_SRC_ADDR_INC;                           \
+    (mode).dst_addr_inc = WB32_DMAC_DST_ADDR_INC;                           \
     (mode).trf_tfc = WB32_DMAC_TRF_TFC_M2MD;                                \
     dmaStreamSetSource(dmastp, src);                                        \
     dmaStreamSetDestination(dmastp, dst);                                   \
