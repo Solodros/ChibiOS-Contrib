@@ -680,6 +680,7 @@ void gpt_lld_start(GPTDriver *gptp) {
 #endif
     }
 #endif
+  }
 
   /* Prescaler value calculation.*/
   psc = (uint16_t)((gptp->clock / gptp->config->frequency) - 1);
@@ -694,6 +695,7 @@ void gpt_lld_start(GPTDriver *gptp) {
   gptp->tim->DIER = gptp->config->dier &        /* DMA-related DIER bits.   */
                     ~AIR32_TIM_DIER_IRQ_MASK;
 }
+
 
 /**
  * @brief   Deactivates the GPT peripheral.
@@ -893,8 +895,7 @@ void gpt_lld_polled_delay(GPTDriver *gptp, gptcnt_t interval) {
   gptp->tim->EGR = AIR32_TIM_EGR_UG;            /* Update event.            */
   gptp->tim->SR  = 0;                           /* Clear pending IRQs.      */
   gptp->tim->CR1 = AIR32_TIM_CR1_OPM | AIR32_TIM_CR1_URS | AIR32_TIM_CR1_CEN;
-  while (!(gptp->tim->SR & AIR32_TIM_SR_UIF))
-    ;
+  while (!(gptp->tim->SR & AIR32_TIM_SR_UIF));
   gptp->tim->SR = 0;                            /* Clear pending IRQs.      */
 }
 

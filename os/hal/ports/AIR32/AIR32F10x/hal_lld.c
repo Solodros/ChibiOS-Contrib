@@ -207,23 +207,41 @@ void air32_clock_init(void) {
 #endif
   /* HSE activation.*/
   RCC->CR |= RCC_CR_HSEON;
-  while (!(RCC->CR & RCC_CR_HSERDY))
-    ;                                       /* Waits until HSE is stable.   */
+  while (!(RCC->CR & RCC_CR_HSERDY));       /* Waits until HSE is stable.   */
 #endif
 
 #if AIR32_LSI_ENABLED
   /* LSI activation.*/
   RCC->CSR |= RCC_CSR_LSION;
-  while ((RCC->CSR & RCC_CSR_LSIRDY) == 0)
-    ;                                       /* Waits until LSI is stable.   */
+  while ((RCC->CSR & RCC_CSR_LSIRDY) == 0); /* Waits until LSI is stable.   */
 #endif
 
 #if AIR32_ACTIVATE_PLL
   /* PLL activation.*/
+#if AIR32_PLLCLKOUT > 120000000
+  volatile uint32_t sramsize = 0;
+  *(volatile uint32_t *)(0x400210F0) = 1;
+	*(volatile uint32_t *)(0x40016C00) = 0xa7d93a86;
+	*(volatile uint32_t *)(0x40016C00) = 0xab12dfcd;
+	*(volatile uint32_t *)(0x40016C00) = 0xcded3526;
+	sramsize = *(volatile uint32_t *)(0x40016C18);
+	*(volatile uint32_t *)(0x40016C18) = 0x200183FF;
+	*(volatile uint32_t *)(0x4002228C) = 0xa5a5a5a5;
+
+	SYSFREQ_SET(AIR32_PLLMUL, 1, 0, 1);
+	RCC->CFGR = (RCC->CFGR & ~0x00030000) | AIR32_PLLSRC | AIR32_PLLXTPRE;
+	
+	*(volatile uint32_t *)(0x40016C18) = sramsize;
+	*(volatile uint32_t *)(0x400210F0) = 0;
+	*(volatile uint32_t *)(0x40016C00) = ~0xa7d93a86;
+	*(volatile uint32_t *)(0x40016C00) = ~0xab12dfcd;
+	*(volatile uint32_t *)(0x40016C00) = ~0xcded3526;
+	*(volatile uint32_t *)(0x4002228C) = ~0xa5a5a5a5;
+#else
   RCC->CFGR |= AIR32_PLLMUL | AIR32_PLLXTPRE | AIR32_PLLSRC;
+#endif
   RCC->CR   |= RCC_CR_PLLON;
-  while (!(RCC->CR & RCC_CR_PLLRDY))
-    ;                                       /* Waits until PLL is stable.   */
+  while (!(RCC->CR & RCC_CR_PLLRDY));       /* Waits until PLL is stable.   */
 #endif
 
   /* Clock settings.*/
@@ -244,8 +262,7 @@ void air32_clock_init(void) {
 #if (AIR32_SW != AIR32_SW_HSI)
   /* Switches clock source.*/
   RCC->CFGR |= AIR32_SW;
-  while ((RCC->CFGR & RCC_CFGR_SWS) != (AIR32_SW << 2))
-    ;                                       /* Waits selection complete.    */
+  while ((RCC->CFGR & RCC_CFGR_SWS) != (AIR32_SW << 2)); /* Waits selection complete.    */
 #endif
 
 #if !AIR32_HSI_ENABLED

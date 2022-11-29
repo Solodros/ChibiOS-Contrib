@@ -7193,6 +7193,7 @@ typedef struct
 
 #define MODIFY_REG(REG, CLEARMASK, SETMASK)  WRITE_REG((REG), (((READ_REG(REG)) & (~(CLEARMASK))) | (SETMASK)))
 
+#define SYSFREQ_SET	(*((void (*)(uint32_t, uint8_t, uint8_t, uint8_t))(*(uint32_t *)0x1FFFD00C)))
 /**
   * @}
   */
