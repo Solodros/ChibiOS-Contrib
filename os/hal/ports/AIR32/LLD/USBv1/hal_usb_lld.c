@@ -290,9 +290,22 @@ static void usb_packet_write_from_buffer(usbep_t ep,
  * @notapi
  */
 static void usb_serve_endpoints(USBDriver *usbp, uint32_t istr) {
-  size_t n;
+  size_t n, i;
   uint32_t ep = istr & ISTR_EP_ID_MASK;
   uint32_t epr = AIR32_USB->EPR[ep];
+  for (i = 0; i < (USB_MAX_ENDPOINTS + 1); i++) {
+    epr = AIR32_USB->EPR[i];
+    if (epr & (EPR_CTR_RX | EPR_CTR_TX)) {
+      ep = i;
+      if (epr & EPR_CTR_RX) {
+        istr |= ISTR_DIR;
+      }
+      if (epr & EPR_CTR_TX) {
+        istr &= ISTR_DIR;
+      }
+      break;
+    }
+  }
   const USBEndpointConfig *epcp = usbp->epc[ep];
 
   if ((istr & ISTR_DIR) == 0U) {
