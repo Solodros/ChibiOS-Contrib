@@ -1,8 +1,8 @@
 # List of the ChibiOS generic AIR32F10x startup and CMSIS files.
-STARTUPSRC = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/crt1.c
+STARTUPSRC = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/crt1.c 
 
-STARTUPASM = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/crt0_v7m.S \
-             $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/vectors.S
+STARTUPASM = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/vectors.S \
+             $(CHIBIOS_CONTRIB)/os/common/startup/ARMCMx/compilers/GCC/ctr0_air32.S
 
 STARTUPINC = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC \
              $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/ld \
