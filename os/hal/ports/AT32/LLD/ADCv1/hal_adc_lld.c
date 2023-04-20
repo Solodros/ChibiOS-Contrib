@@ -108,8 +108,8 @@ void adc_lld_init(void) {
   while ((ADC1->CTRL2 & ADC_CTRL2_ADCALINIT) != 0);
 
   /* Calibration.*/
-  ADC1->CTRL2 = ADC_CTRL2_ADCEN | ADC_CTRL2_RPEN;
-  while ((ADC1->CTRL2 & ADC_CTRL2_RPEN) != 0);
+  ADC1->CTRL2 = ADC_CTRL2_ADCEN | ADC_CTRL2_ADCAL;
+  while ((ADC1->CTRL2 & ADC_CTRL2_ADCAL) != 0);
 
   /* Return the ADC in low power mode.*/
   ADC1->CTRL2 = 0;

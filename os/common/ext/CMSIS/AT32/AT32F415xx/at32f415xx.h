@@ -492,6 +492,194 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define DMA_CTRL_CHPL_HIGHEST            (0x3U << 12)
 #define DMA_CTRL_M2M                     (0x1U << 14)
 
+/******************  Bit definition for ADC_CTRL1 register  ***************/
+#define ADC_CTRL1_SQEN                   (0x1U << 8)
+
+/******************  Bit definition for ADC_CTRL2 register  ***************/
+#define ADC_CTRL2_ADCEN                  (0x1U << 0)
+#define ADC_CTRL2_RPEN                   (0x1U << 1)
+#define ADC_CTRL2_ADCAL                  (0x1U << 2)
+#define ADC_CTRL2_ADCALINIT              (0x1U << 3)
+#define ADC_CTRL2_OCDMAEN                (0x1U << 8)
+#define ADC_CTRL2_PCTEN                  (0x1U << 15)
+#define ADC_CTRL2_OCTEN                  (0x1U << 20)
+
+/******************  Bit definition for I2C_CTRL1 register  ***************/
+#define I2C_CTRL1_I2CEN                  (0x1U << 0)
+#define I2C_CTRL1_PERMODE                (0x1U << 1)
+#define I2C_CTRL1_SMBMODE                (0x1U << 3)
+#define I2C_CTRL1_GENSTART               (0x1U << 8)
+#define I2C_CTRL1_GENSTOP                (0x1U << 9)
+#define I2C_CTRL1_ACKEN                  (0x1U << 10)
+#define I2C_CTRL1_RESET                  (0x1U << 15)
+
+/******************  Bit definition for I2C_CTRL2 register  ***************/
+#define I2C_CTRL2_CLKFREQ                (0xFFU << 0)
+#define I2C_CTRL2_ERRIEN                 (0x1U << 8)
+#define I2C_CTRL2_EVTIEN                 (0x1U << 9)
+#define I2C_CTRL2_DMAEN                  (0x1U << 11)
+#define I2C_CTRL2_DMAEND                 (0x1U << 12)
+
+/******************  Bit definition for I2C_STS1 register  ****************/
+#define I2C_STS1_STARTF                  (0x1U << 0)
+#define I2C_STS1_ADDR7F                  (0x1U << 1)
+#define I2C_STS1_TDC                     (0x1U << 2)
+#define I2C_STS1_ADDRHF                  (0x1U << 3)
+#define I2C_STS1_STOPF                   (0x1U << 4)
+#define I2C_STS1_TDBE                    (0x1U << 7)
+#define I2C_STS1_BUSERR                  (0x1U << 8)
+#define I2C_STS1_ARLOST                  (0x1U << 9)
+#define I2C_STS1_ACKFAIL                 (0x1U << 10)
+#define I2C_STS1_OUF                     (0x1U << 11)
+#define I2C_STS1_PECERR                  (0x1U << 12)
+#define I2C_STS1_TMOUT                   (0x1U << 14)
+#define I2C_STS1_ALERTF                  (0x1U << 15)
+
+/******************  Bit definition for I2C_STS2 register  ****************/
+#define I2C_STS2_TRMODE                  (0x1U << 0)
+#define I2C_STS2_BUSYF                   (0x1U << 1)
+#define I2C_STS2_DIRF                    (0x1U << 2)
+
+/******************  Bit definition for I2C_CLKCTRL register  *************/
+#define I2C_CLKCTRL_SPEED                (0xFFFU << 0)
+#define I2C_CLKCTRL_DUTYMODE             (0x1U << 14)
+#define I2C_CLKCTRL_SPEEDMODE            (0x1U << 15)
+
+/*******************  Bit definition for USART_STS register  **************/
+#define USART_STS_PERR                    (0x1U << 0)                   
+#define USART_STS_FERR                    (0x1U << 1)                   
+#define USART_STS_NERR                    (0x1U << 2)                   
+#define USART_STS_ROERR                   (0x1U << 3)                   
+#define USART_STS_IDLEF                   (0x1U << 4)                  
+#define USART_STS_RDBF                    (0x1U << 5)
+#define USART_STS_TDC                     (0x1U << 6)
+#define USART_STS_TDBE                    (0x1U << 7)
+#define USART_STS_BFF                     (0x1U << 8)
+#define USART_STS_CTSCF                   (0x1U << 9)
+
+/*******************  Bit definition for USART_DT register  ***************/
+#define USART_DT_DT                       (0x1FF << 0)
+
+/******************  Bit definition for USART_CTRL1 register  *************/
+#define USART_CTRL1_SBF                   (0x1U << 0)
+#define USART_CTRL1_RM                    (0x1U << 1)
+#define USART_CTRL1_REN                   (0x1U << 2)
+#define USART_CTRL1_TEN                   (0x1U << 3)
+#define USART_CTRL1_IDLEIEN               (0x1U << 4)
+#define USART_CTRL1_RDBFIEN               (0x1U << 5)
+#define USART_CTRL1_TDCIEN                (0x1U << 6)
+#define USART_CTRL1_TDBEIEN               (0x1U << 7)
+#define USART_CTRL1_PERRIEN               (0x1U << 8)
+#define USART_CTRL1_PSEL                  (0x1U << 9)
+#define USART_CTRL1_PEN                   (0x1U << 10)
+#define USART_CTRL1_WUM                   (0x1U << 11)
+#define USART_CTRL1_DBN                   (0x1U << 12)
+#define USART_CTRL1_UEN                   (0x1U << 13)
+
+/******************  Bit definition for USART_CTRL2 register  *************/
+#define USART_CTRL2_ID                    (0xFU << 0)
+#define USART_CTRL2_BFBN                  (0x1U << 5)
+#define USART_CTRL2_BFIEN                 (0x1U << 6)
+#define USART_CTRL2_LBCP                  (0x1U << 8)
+#define USART_CTRL2_CLKPHA                (0x1U << 9)
+#define USART_CTRL2_CLKPOL                (0x1U << 10)
+#define USART_CTRL2_CLKEN                 (0x1U << 11)
+#define USART_CTRL2_STOPBN                (0x3U << 12)
+#define USART_CTRL2_STOP_0                (0x1U << 12)           
+#define USART_CTRL2_STOP_1                (0x1U << 13)  
+#define USART_CTRL2_STOPBN_1_BITS         (0x0U << 12)
+#define USART_CTRL2_STOPBN_0P5_BITS       (0x1U << 12)
+#define USART_CTRL2_STOPBN_2_BITS         (0x2U << 12)
+#define USART_CTRL2_STOPBN_1P5_BITS       (0x3U << 12)
+#define USART_CTRL2_LINEN                 (0x1U << 14)
+
+/******************  Bit definition for USART_CTRL3 register  *************/
+#define USART_CTRL3_ERRIEN                (0x1U << 0)
+#define USART_CTRL3_IRDAEN                (0x1U << 1)
+#define USART_CTRL3_IRDALP                (0x1U << 2)
+#define USART_CTRL3_SLBEN                 (0x1U << 3)
+#define USART_CTRL3_SCNACKEN              (0x1U << 4)
+#define USART_CTRL3_SCMEN                 (0x1U << 5)
+#define USART_CTRL3_DMAREN                (0x1U << 6)
+#define USART_CTRL3_DMATEN                (0x1U << 7)
+#define USART_CTRL3_RTSEN                 (0x1U << 8)
+#define USART_CTRL3_CTSEN                 (0x1U << 9)
+#define USART_CTRL3_CTSCFIEN              (0x1U << 10)
+
+/*******************  Bit definition for SPI_CTRL1 register  **************/
+#define SPI_CTRL1_CLKPHA                  (0x1U << 0)
+#define SPI_CTRL1_CLKPOL                  (0x1U << 1)
+#define SPI_CTRL1_MSTEN                   (0x1U << 2)
+#define SPI_CTRL1_MDIV                    (0x7U << 3)
+#define SPI_CTRL1_MDIV_2                  (0x0U << 3)
+#define SPI_CTRL1_MDIV_4                  (0x1U << 3)
+#define SPI_CTRL1_MDIV_8                  (0x2U << 3)
+#define SPI_CTRL1_MDIV_16                 (0x3U << 3)
+#define SPI_CTRL1_MDIV_32                 (0x4U << 3)
+#define SPI_CTRL1_MDIV_64                 (0x5U << 3)
+#define SPI_CTRL1_MDIV_128                (0x6U << 3)
+#define SPI_CTRL1_MDIV_256                (0x7U << 3)
+#define SPI_CTRL1_MDIV_512                (0x0U << 3)
+#define SPI_CTRL1_MDIV_1024               (0x0U << 3)
+#define SPI_CTRL1_SPIEN                   (0x1U << 6)
+#define SPI_CTRL1_LTF                     (0x1U << 7)
+#define SPI_CTRL1_SWCSIL                  (0x1U << 8)
+#define SPI_CTRL1_SWCSEN                  (0x1U << 9)
+#define SPI_CTRL1_ORA                     (0x1U << 10)
+#define SPI_CTRL1_FBN                     (0x1U << 11)
+#define SPI_CTRL1_NTC                     (0x1U << 12)
+#define SPI_CTRL1_CCEN                    (0x1U << 13)
+#define SPI_CTRL1_SLBTD                   (0x1U << 14)
+#define SPI_CTRL1_SLBEN                   (0x1U << 15)
+
+/*******************  Bit definition for SPI_CTRL2 register  **************/
+#define SPI_CTRL2_DMAREN                  (0x1U << 0)
+#define SPI_CTRL2_DMATEN                  (0x1U << 1)
+#define SPI_CTRL2_HWCSOE                  (0x1U << 2)
+#define SPI_CTRL2_ERRIE                   (0x1U << 5)
+#define SPI_CTRL2_RDBFIE                  (0x1U << 6)
+#define SPI_CTRL2_TDBEIE                  (0x1U << 7)
+#define SPI_CTRL2_MDIV                    (0x1U << 8)
+#define SPI_CTRL2_MDIV_512_1024           (0x1U << 8)
+
+/*******************  Bit definition for SPI_STS register  ********************/
+#define SPI_STS_RDBF                       (0x1U << 0)
+#define SPI_STS_TDBE                       (0x1U << 1)
+#define SPI_STS_ACS                        (0x1U << 2)
+#define SPI_STS_TUERR                      (0x1U << 3)
+#define SPI_STS_CCERR                      (0x1U << 4)
+#define SPI_STS_MMERR                      (0x1U << 5)
+#define SPI_STS_ROERR                      (0x1U << 6)
+#define SPI_STS_BF                         (0x1U << 7)
+
+/*******************  Bit definition for SPI_I2SCTRL register  *****************/
+#define SPI_I2SCTRL_I2SCBN                 (0x1U << 0)
+#define SPI_I2SCTRL_I2SDBN                 (0x3U << 1)
+#define SPI_I2SCTRL_I2SDBN_16BITS          (0x0U << 1)
+#define SPI_I2SCTRL_I2SDBN_24BITS          (0x1U << 1)
+#define SPI_I2SCTRL_I2SDBN_32BITS          (0x2U << 1)
+#define SPI_I2SCTRL_I2SDBN_NONE            (0x3U << 1)
+#define SPI_I2SCTRL_I2SCLKPOL              (0x1U << 3)
+#define SPI_I2SCTRL_STDSEL                 (0x3U << 4)
+#define SPI_I2SCTRL_STDSEL_PHILIPS         (0x0U << 4)
+#define SPI_I2SCTRL_STDSEL_MSB             (0x1U << 4)
+#define SPI_I2SCTRL_STDSEL_LSB             (0x2U << 4)
+#define SPI_I2SCTRL_STDSEL_PCM             (0x3U << 4)
+#define SPI_I2SCTRL_PCMFSSEL               (0x1U << 7)
+#define SPI_I2SCTRL_OPERSEL                (0x3U << 8)
+#define SPI_I2SCTRL_OPERSEL_ST             (0x0U << 8)
+#define SPI_I2SCTRL_OPERSEL_SR             (0x1U << 8)
+#define SPI_I2SCTRL_OPERSEL_HT             (0x2U << 8)
+#define SPI_I2SCTRL_OPERSEL_HR             (0x3U << 8)
+#define SPI_I2SCTRL_I2SEN                  (0x1U << 10)
+#define SPI_I2SCTRL_I2SMSEL                (0x1U << 11)
+
+/*******************  Bit definition for SPI_I2SCLKP register  ************/
+#define SPI_I2SCLKP_I2SDIV_1               (0xFFU << 0)
+#define SPI_I2SCLKP_I2SODD                 (0x1U << 8)
+#define SPI_I2SCLKP_I2SMCLKOE              (0x1U << 9)
+#define SPI_I2SCLKP_I2SDIV_2               (0x3U << 10)
+
 /******************  Bit definition for IOMUX_REMAP register  *************/
 #define IOMUX_REMAP_SPI1_MUX                ((0x1U << 0) | (0x1U << 31))
 #define IOMUX_REMAP_SPI1_MUX_0              (0x1U << 0)   
@@ -528,7 +716,6 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define IOMUX_REMAP_SWJTAG_MUX_NOJNTRST     (0x1U << 24)    /*!< Full SWJ (JTAG-DP + SW-DP) but without JNTRST */
 #define IOMUX_REMAP_SWJTAG_MUX_JTAGDISABLE  (0x2U << 24)    /*!< JTAG-DP Disabled and SW-DP Enabled */
 #define IOMUX_REMAP_SWJTAG_MUX_DISABLE      (0x4U << 24)    /*!< JTAG-DP Disabled and SW-DP Disabled */
-
 
 /******************  Bit definition for DEBUG_CTRL register  **************/
 #define DEBUG_CTRL_SLEEP                 (0x1U << 0)
@@ -1177,10 +1364,259 @@ typedef struct
     */
   __IO uint32_t MADDR;
 } DMA_Channel_TypeDef;
-/**
-  * @}
-  */
 
+/**
+  * @brief type define adc register all
+  */
+typedef struct
+{
+  /**
+    * @brief adc sts register, offset:0x00
+    */
+  __IO uint32_t STS;
+
+  /**
+    * @brief adc ctrl1 register, offset:0x04
+    */  
+   __IO uint32_t CTRL1;
+
+   /**
+    * @brief adc ctrl2 register, offset:0x08
+    */
+  __IO uint32_t CTRL2;
+
+  /**
+  * @brief adc spt1 register, offset:0x0C
+  */
+  __IO uint32_t SPT1;
+
+  /**
+  * @brief adc spt2 register, offset:0x10
+  */
+  __IO uint32_t SPT2;
+
+  /**
+  * @brief adc pcdto1 register, offset:0x14
+  */
+  __IO uint32_t PCDTO1;
+
+  /**
+  * @brief adc pcdto2 register, offset:0x18
+  */
+  __IO uint32_t PCDTO2;
+
+  /**
+  * @brief adc pcdto3 register, offset:0x1C
+  */
+  __IO uint32_t PCDTO3;
+
+  /**
+  * @brief adc pcdto4 register, offset:0x20
+  */
+  __IO uint32_t PCDTO4;
+
+  /**
+  * @brief adc vmhb register, offset:0x24
+  */
+  __IO uint32_t VMHB;
+
+  /**
+  * @brief adc vmlb register, offset:0x28
+  */
+  __IO uint32_t VMLB;
+
+  /**
+  * @brief adc osq1 register, offset:0x2C
+  */
+  __IO uint32_t OSQ1;
+
+  /**
+  * @brief adc osq2 register, offset:0x30
+  */
+  __IO uint32_t OSQ2;
+
+  /**
+  * @brief adc osq3 register, offset:0x34
+  */
+  __IO uint32_t OSQ3;
+
+  /**
+  * @brief adc psq register, offset:0x38
+  */
+  __IO uint32_t PSQ;
+
+  /**
+  * @brief adc pdt1 register, offset:0x3C
+  */
+  __IO uint32_t PDT1;
+
+  /**
+  * @brief adc pdt2 register, offset:0x40
+  */
+  __IO uint32_t PDT2;
+
+  /**
+  * @brief adc pdt3 register, offset:0x44
+  */
+  __IO uint32_t PDT3;
+
+  /**
+  * @brief adc pdt4 register, offset:0x48
+  */
+  __IO uint32_t PDT4;
+
+  /**
+  * @brief adc odt register, offset:0x4C
+  */
+  __IO uint32_t ODT;
+
+} ADC_TypeDef;
+
+/**
+  * @brief type define i2c register all
+  */
+typedef struct
+{
+  /**
+    * @brief i2c ctrl1 register, offset:0x00
+    */
+  __IO uint32_t CTRL1;
+
+  /**
+    * @brief i2c ctrl2 register, offset:0x04
+    */
+  __IO uint32_t CTRL2;
+
+  /**
+    * @brief i2c oaddr1 register, offset:0x08
+    */
+  __IO uint32_t OADDR1;
+
+  /**
+    * @brief i2c oaddr2 register, offset:0x0C
+    */
+  __IO uint32_t OADDR2;
+  /**
+    * @brief i2c dt register, offset:0x10
+    */
+  __IO uint32_t DT;
+
+  /**
+    * @brief i2c sts1 register, offset:0x14
+    */
+  __IO uint32_t STS1;
+
+  /**
+    * @brief i2c sts2 register, offset:0x18
+    */
+  __IO uint32_t STS2;
+
+  /**
+    * @brief i2c clkctrl register, offset:0x1C
+    */
+  __IO uint32_t CLKCTRL;
+
+  /**
+    * @brief i2c tmrise register, offset:0x20
+    */
+  __IO uint32_t TMRISE;
+
+} I2C_TypeDef;
+
+
+/**
+  * @brief type define usart register all
+  */
+typedef struct
+{
+  /**
+    * @brief usart sts register, offset:0x00
+    */
+  __IO uint32_t STS;
+
+  /**
+    * @brief usart dt register, offset:0x04
+    */
+  __IO uint32_t DR;
+
+  /**
+    * @brief usart baudr register, offset:0x08
+    */
+  __IO uint32_t BAUDR;
+
+  /**
+    * @brief usart ctrl1 register, offset:0x0C
+    */
+  __IO uint32_t CTRL1;
+
+  /**
+    * @brief usart ctrl2 register, offset:0x10
+    */
+  __IO uint32_t CTRL2;
+
+  /**
+    * @brief usart ctrl3 register, offset:0x14
+    */
+  __IO uint32_t CTRL3;
+
+  /**
+    * @brief usart gdiv register, offset:0x18
+    */
+  __IO uint32_t GDIV;
+
+} USART_TypeDef;
+
+/**
+  * @brief type define spi register all
+  */
+typedef struct
+{
+
+  /**
+    * @brief spi ctrl1 register, offset:0x00
+    */
+  __IO uint32_t CTRL1;
+
+  /**
+    * @brief spi ctrl2 register, offset:0x04
+    */
+  __IO uint32_t CTRL2;
+
+  /**
+    * @brief spi sts register, offset:0x08
+    */
+  __IO uint32_t STS;
+
+  /**
+    * @brief spi dt register, offset:0x0C
+    */
+  __IO uint32_t DT;
+
+  /**
+    * @brief spi cpoly register, offset:0x10
+    */
+  __IO uint32_t CPOLY;
+
+  /**
+    * @brief spi rcrc register, offset:0x14
+    */
+  __IO uint32_t RCRC;
+  /**
+    * @brief spi tcrc register, offset:0x18
+    */
+  __IO uint32_t TCRC;
+
+  /**
+    * @brief spi i2sctrl register, offset:0x1C
+    */
+  __IO uint32_t I2SCTRL;
+
+  /**
+    * @brief spi i2sclk register, offset:0x20
+    */
+  __IO uint32_t I2SCLK;
+
+} SPI_TypeDef;
 
 /**
   * @}
@@ -1220,6 +1656,16 @@ typedef struct
 #define DMA2_Channel5                     ((DMA_Channel_TypeDef *) DMA2_CHANNEL5_BASE)
 #define DMA2_Channel6                     ((DMA_Channel_TypeDef *) DMA2_CHANNEL6_BASE)
 #define DMA2_Channel7                     ((DMA_Channel_TypeDef *) DMA2_CHANNEL7_BASE)
+#define ADC1                              ((ADC_TypeDef *) ADC1_BASE)
+#define I2C1                              ((I2C_TypeDef *) I2C1_BASE)
+#define I2C2                              ((I2C_TypeDef *) I2C2_BASE)
+#define USART1                            ((USART_TypeDef *) USART1_BASE)
+#define USART2                            ((USART_TypeDef *) USART2_BASE)
+#define USART3                            ((USART_TypeDef *) USART3_BASE)
+#define UART4                             ((USART_TypeDef *) UART4_BASE)
+#define UART5                             ((USART_TypeDef *) UART5_BASE)
+#define SPI1                              ((SPI_TypeDef *) SPI1_BASE)
+#define SPI2                              ((SPI_TypeDef *) SPI2_BASE)
 
 /**
   * @}

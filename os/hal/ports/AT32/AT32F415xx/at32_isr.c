@@ -348,6 +348,12 @@ OSAL_IRQ_HANDLER(AT32_EXTI22_HANDLER) {
 #include "at32_tim4.inc"
 #include "at32_tim5.inc"
 
+#include "at32_usart1.inc"
+#include "at32_usart2.inc"
+#include "at32_usart3.inc"
+#include "at32_uart4.inc"
+#include "at32_uart5.inc"
+
 /*===========================================================================*/
 /* Driver exported functions.                                                */
 /*===========================================================================*/
@@ -382,6 +388,11 @@ void irqInit(void) {
   tim4_irq_init();
   tim5_irq_init();
 
+  usart1_irq_init();
+  usart2_irq_init();
+  usart3_irq_init();
+  uart4_irq_init();
+  uart5_irq_init();
 }
 
 /**
@@ -414,6 +425,11 @@ void irqDeinit(void) {
   tim4_irq_deinit();
   tim5_irq_deinit();
 
+  usart1_irq_deinit();
+  usart2_irq_deinit();
+  usart3_irq_deinit();
+  uart4_irq_deinit();
+  uart5_irq_deinit();
 }
 
 /** @} */
