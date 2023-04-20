@@ -184,7 +184,7 @@
  *
  * @api
  */
-#define crmEnableADC1(lp) crmEnableAPB2(RCC_APB2ENR_ADC1EN, lp)
+#define crmEnableADC1(lp) crmEnableAPB2(CRM_APB2EN_ADC1EN, lp)
 
 /**
  * @brief   Disables the ADC1 peripheral clock.
