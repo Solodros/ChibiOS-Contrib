@@ -35,13 +35,6 @@
 #define AT32_FLASH_LINE_SIZE               2U
 #define AT32_FLASH_LINE_MASK               (AT32_FLASH_LINE_SIZE - 1U)
 
-#define AT32_FLASH_ERASE_SECTOR_SIZE       2048U
-#if defined(AT32F415xB) || defined(AT32F415x8)
-#define AT32_FLASH_ERASE_SECTORS_PER_BANK  (AT32_FLASH_SECTORS_PER_BANK / 2)
-#elif defined(AT32F415xC)
-#define AT32_FLASH_ERASE_SECTORS_PER_BANK  AT32_FLASH_SECTORS_PER_BANK
-#endif
-
 /*===========================================================================*/
 /* Driver exported variables.                                                */
 /*===========================================================================*/
@@ -60,9 +53,9 @@ static const flash_descriptor_t efl_lld_descriptor = {
                       FLASH_ATTR_MEMORY_MAPPED,
  .page_size         = AT32_FLASH_LINE_SIZE,
  .sectors_count     = AT32_FLASH_NUMBER_OF_BANKS *
-                      AT32_FLASH_ERASE_SECTORS_PER_BANK,
+                      AT32_FLASH_SECTORS_PER_BANK,
  .sectors           = NULL,
- .sectors_size      = AT32_FLASH_ERASE_SECTOR_SIZE,
+ .sectors_size      = AT32_FLASH_SECTOR_SIZE,
  .address           = (uint8_t *)FLASH_BASE,
  .size              = AT32_FLASH_NUMBER_OF_BANKS *
                       AT32_FLASH_SECTORS_PER_BANK *
