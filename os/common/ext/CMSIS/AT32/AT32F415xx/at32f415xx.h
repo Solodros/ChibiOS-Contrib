@@ -620,7 +620,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define SPI_CTRL1_MDIV_128                (0x6U << 3)
 #define SPI_CTRL1_MDIV_256                (0x7U << 3)
 #define SPI_CTRL1_MDIV_512                (0x0U << 3)
-#define SPI_CTRL1_MDIV_1024               (0x0U << 3)
+#define SPI_CTRL1_MDIV_1024               (0x1U << 3)
 #define SPI_CTRL1_SPIEN                   (0x1U << 6)
 #define SPI_CTRL1_LTF                     (0x1U << 7)
 #define SPI_CTRL1_SWCSIL                  (0x1U << 8)
