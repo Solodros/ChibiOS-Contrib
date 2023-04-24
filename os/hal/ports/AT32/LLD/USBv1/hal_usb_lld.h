@@ -528,11 +528,11 @@ struct USBDriver {
 
 #if defined(AT32F413xx)
 #if !defined(usb_lld_connect_bus)
-#define usb_lld_connect_bus(usbp) (AT32_USB->CNTR |= CNTR_PDWN)
+#define usb_lld_connect_bus(usbp) (AT32_USB->CNTR &= ~CNTR_PDWN)
 #endif
 
 #if !defined(usb_lld_disconnect_bus)
-#define usb_lld_disconnect_bus(usbp) (AT32_USB->CNTR &= ~CNTR_PDWN)
+#define usb_lld_disconnect_bus(usbp) (AT32_USB->CNTR |= CNTR_PDWN)
 #endif
 #endif /* AT32F413xx */
 
