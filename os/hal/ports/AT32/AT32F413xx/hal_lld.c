@@ -15,8 +15,8 @@
 */
 
 /**
- * @file    AT32F415xx/hal_lld.c
- * @brief   AT32F415xx HAL subsystem low level driver source.
+ * @file    AT32F413xx/hal_lld.c
+ * @brief   AT32F413xx HAL subsystem low level driver source.
  *
  * @addtogroup HAL
  * @{
@@ -59,7 +59,7 @@ static void hal_lld_backup_domain_init(void) {
   /* Reset BKP domain if different clock source selected.*/
   if ((CRM->BPDC & AT32_RTCSEL_MASK) != AT32_RTCSEL) {
     /* Backup domain reset.*/
-    CRM->BPDC = CRM_BPDC_BDRST;
+    CRM->BPDC = CRM_BPDC_BPDRST;
     CRM->BPDC = 0;
   }
 
@@ -78,12 +78,12 @@ static void hal_lld_backup_domain_init(void) {
 #if AT32_RTCSEL != AT32_RTCSEL_NOCLOCK
   /* If the backup domain hasn't been initialized yet then proceed with
      initialization.*/
-  if ((CRM->BPDC & CRM_BPDC_ERTCEN) == 0) {
+  if ((CRM->BPDC & CRM_BPDC_RTCEN) == 0) {
     /* Selects clock source.*/
     CRM->BPDC |= AT32_RTCSEL;
 
     /* RTC clock enabled.*/
-    CRM->BPDC |= CRM_BPDC_ERTCEN;
+    CRM->BPDC |= CRM_BPDC_RTCEN;
   }
 #endif /* AT32_RTCSEL != AT32_RTCSEL_NOCLOCK */
 }
@@ -109,6 +109,7 @@ void hal_lld_init(void) {
 
   /* PWR clocks enabled.*/
   crmEnablePWCInterface(true);
+  crmEnableBPRInterface(true);
 
   /* Initializes the backup domain.*/
   hal_lld_backup_domain_init();
@@ -134,13 +135,10 @@ void at32_clock_reset(void)
 
   /* reset cfg register, include sclk switch, ahbdiv, apb1div, apb2div, adcdiv,
      clkout pllrcs, pllhextdiv, pllmult, usbdiv and pllrange bits */
-  CRM->CFG = 0x00000000;
-
-  /* reset pllfr, pllms, pllns and pllfref bits */
-  CRM->PLL = 0x00001F10U;
+  CRM->CFG = 0;
 
   /* reset clkout[3], usbbufs, hickdiv, clkoutdiv */
-  CRM->MISC1 = 0x00100000;
+  CRM->MISC1 = 0;
 
   /* disable all interrupts enable and clear pending bits  */
   CRM->CLKINT = 0x009F0000;
@@ -159,8 +157,6 @@ void at32_clock_init(void) {
   CRM->CFG  |= CRM_CFG_SCLK_HICK;                                /* CFGR reset value.            */
   while ((CRM->CFG & CRM_CFG_SCLKSTS) != CRM_CFG_SCLKSTS_HICK); /* Waits until HSI is selected. */
   at32_clock_reset();
-  /* Flash setup and final clock selection.   */
-  FLASH->PSR = AT32_FLASHBITS;
   
 #if AT32_HSE_ENABLED
 #if defined(AT32_HSE_BYPASS)
@@ -178,36 +174,33 @@ void at32_clock_init(void) {
   while ((CRM->CTRLSTS & CRM_CTRLSTS_LICKSTBL) == 0); /* Waits until LSI is stable.   */
 #endif
 
-#if AT32_HAS_OTG1
+#if AT32_HAS_USB
 #if (AT32_USBCLK_SRC == AT32_USBCLK_SRC_HSI48)        /* USB use HSI.                 */
   CRM->MISC1 |= CRM_MISC1_HICKDIV;
-  CRM->MISC2 |= CRM_MISC2_HICK_TO_USB | CRM_MISC2_HICK_TO_SCLK;
+  CRM->MISC3 |= CRM_MISC2_HICK_TO_USB | CRM_MISC2_HICK_TO_SCLK;
 #endif
 #endif
 
   /*FIXME: need to improve flexible pll config*/
 #if AT32_ACTIVATE_PLL
   /* PLL activation.*/
-  CRM->CFG  |= AT32_PLLMUL | AT32_PLLHEXTDIV | AT32_PLLRCS;
-#ifdef AT32_PLLCLKREF
-  CRM->PLL  |= AT32_PLLCLKREF;
-#endif
+  CRM->CFG  |= AT32_PLLMUL | AT32_PLLHEXTDIV | AT32_PLLRCS | AT32_PLLRANGE;
   CRM->CTRL |= CRM_CTRL_PLLEN;
   while (!(CRM->CTRL & CRM_CTRL_PLLSTBL));       /* Waits until PLL is stable.   */
 #endif
 
+  CRM->MISC3 |= CRM_MISC3_AUTO_STEP_EN;
+
   /* Clock settings.*/
-#if AT32_HAS_OTG1
-  CRM->CFG = (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_CFG_MASK)  | AT32_USBDIV   | AT32_PLLMUL | AT32_PLLHEXTDIV |
-             AT32_PLLRCS | AT32_ADCDIV | AT32_APB2DIV      | AT32_APB1DIV  | AT32_AHBDIV;
+#if AT32_HAS_USB
+  CRM->CFG = (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_CFG_MASK) | AT32_USBDIV  | AT32_PLLMUL  | AT32_PLLHEXTDIV |
+             AT32_PLLRCS | AT32_PLLRANGE | AT32_ADCDIV    | AT32_APB2DIV | AT32_APB1DIV | AT32_AHBDIV;
   CRM->MISC1 |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_MISC_MASK) >> 11;
 #else
-  CRM->CFG = (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_CFG_MASK)  |                 AT32_PLLMUL | AT32_PLLHEXTDIV |
-             AT32_PLLRCS | AT32_ADCDIV | AT32_APB2DIV      | AT32_APB1DIV  | AT32_AHBDIV;
+  CRM->CFG = (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_CFG_MASK) |                AT32_PLLMUL  | AT32_PLLHEXTDIV |
+             AT32_PLLRCS | AT32_PLLRANGE | AT32_ADCDIV    | AT32_APB2DIV | AT32_APB1DIV | AT32_AHBDIV;
   CRM->MISC1 |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_MISC_MASK) >> 11;
 #endif
-
-  CRM->MISC2 |= CRM_MISC2_AUTO_STEP_EN;
 
   /* Switching to the configured clock source if it is different from HSI.*/
 #if (AT32_SCLKSEL != AT32_SCLKSEL_HSI)
@@ -216,7 +209,7 @@ void at32_clock_init(void) {
   while ((CRM->CFG & CRM_CFG_SCLKSTS) != (AT32_SCLKSEL << 2)); /* Waits selection complete.    */
 #endif
 
-  CRM->MISC2 &= ~CRM_MISC2_AUTO_STEP_EN;
+  CRM->MISC3 &= ~CRM_MISC3_AUTO_STEP_EN;
   
 #if !AT32_HSI_ENABLED
   CRM->CTRL &= ~CRM_CTRL_HICKEN;

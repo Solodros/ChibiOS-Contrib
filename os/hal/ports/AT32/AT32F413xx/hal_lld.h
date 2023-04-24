@@ -15,8 +15,8 @@
 */
 
 /**
- * @file    AT32F415xx/hal_lld.h
- * @brief   AT32F415xx HAL subsystem low level driver header.
+ * @file    AT32F413xx/hal_lld.h
+ * @brief   AT32F413xx HAL subsystem low level driver header.
  * @pre     This module requires the following macros to be defined in the
  *          @p board.h file:
  *          - AT32_LSECLK.
@@ -42,13 +42,13 @@
  * @name    Platform identification
  * @{
  */
-#define PLATFORM_NAME                          "AT32F415xx"
+#define PLATFORM_NAME                          "AT32F413xx"
 
 /**
  * @brief   Sub-family identifier.
  */
-#if !defined(AT32F415xx) || defined(__DOXYGEN__)
-#define AT32F415xx
+#if !defined(AT32F413xx) || defined(__DOXYGEN__)
+#define AT32F413xx
 #endif
 /** @} */
 
@@ -59,7 +59,7 @@
 /**
  * @brief   Maximum system clock frequency.
  */
-#define AT32_SYSCLK_MAX                        150000000
+#define AT32_SYSCLK_MAX                        200000000
 /**
  * @brief   Maximum HSE clock frequency.
  */
@@ -93,7 +93,7 @@
 /**
  * @brief   Maximum PLL output clock frequency.
  */
-#define AT32_PLLOUT_MAX                        150000000
+#define AT32_PLLOUT_MAX                        200000000
 
 /**
  * @brief   Minimum PLL output clock frequency.
@@ -103,12 +103,12 @@
 /**
  * @brief   Maximum APB1 clock frequency.
  */
-#define AT32_PCLK1_MAX                         75000000
+#define AT32_PCLK1_MAX                         100000000
 
 /**
  * @brief   Maximum APB2 clock frequency.
  */
-#define AT32_PCLK2_MAX                         75000000
+#define AT32_PCLK2_MAX                         100000000
 
 /**
  * @brief   Maximum ADC clock frequency.
@@ -116,8 +116,8 @@
 #define AT32_ADCCLK_MAX                        28000000
 /** @} */
 
-#define AT32_HSICLK                             48000000     /**< High speed internal clock. */
-#define AT32_LSICLK                             40000       /**< Low speed internal clock.  */
+#define AT32_HSICLK                            48000000     /**< High speed internal clock. */
+#define AT32_LSICLK                            40000       /**< Low speed internal clock.  */
 
 /**
  * @name    PWC_CTRL register bits definitions
@@ -200,6 +200,9 @@
 #define AT32_CLKOUT_SEL_PLLDIV4     (12 << 24)  /**< PLL/4 clock on MCO pin.    */
 #define AT32_CLKOUT_SEL_USB         (13 << 24)  /**< USB clock on MCO pin.      */
 #define AT32_CLKOUT_SEL_ADC         (14 << 24)  /**< ADC clock on MCO pin.      */
+
+#define AT32_PLLRANGE_LOW           (0 << 31)   /**< PLLOUT lower than 72MHz.   */
+#define AT32_PLLRANGE_HIGH          (1 << 31)   /**< PLLOUT higher than 72MHz.  */
 /** @} */
 
 /**
@@ -219,7 +222,7 @@
  * @{
  */
 #define AT32_USBCLK_SRC_PLL     0
-#define AT32_USBCLK_SRC_HSI48   1           /**< Deprecated in Si verison C.*/
+#define AT32_USBCLK_SRC_HSI48   1
 /** @} */
 
 /*===========================================================================*/
@@ -295,7 +298,7 @@
  * @brief   Main clock source selection.
  * @note    If the selected clock source is not the PLL then the PLL is not
  *          initialized and started.
- * @note    The default value is calculated for a 144MHz system clock from
+ * @note    The default value is calculated for a 192MHz system clock from
  *          a 8MHz crystal using the PLL.
  */
 #if !defined(AT32_SCLKSEL) || defined(__DOXYGEN__)
@@ -306,7 +309,7 @@
  * @brief   Clock source for the PLL.
  * @note    This setting has only effect if the PLL is selected as the
  *          system clock source.
- * @note    The default value is calculated for a 144MHz system clock from
+ * @note    The default value is calculated for a 192MHz system clock from
  *          a 8MHz crystal using the PLL.
  */
 #if !defined(AT32_PLLRCS) || defined(__DOXYGEN__)
@@ -317,7 +320,7 @@
  * @brief   Crystal PLL pre-divider.
  * @note    This setting has only effect if the PLL is selected as the
  *          system clock source.
- * @note    The default value is calculated for a 144MHz system clock from
+ * @note    The default value is calculated for a 192MHz system clock from
  *          a 8MHz crystal using the PLL.
  */
 #if !defined(AT32_PLLHEXTDIV) || defined(__DOXYGEN__)
@@ -327,16 +330,16 @@
 /**
  * @brief   PLL multiplier value.
  * @note    The allowed range is 2...64.
- * @note    The default value is calculated for a 144MHz system clock from
+ * @note    The default value is calculated for a 192MHz system clock from
  *          a 8MHz crystal using the PLL.
  */
 #if !defined(AT32_PLLMUL_VALUE) || defined(__DOXYGEN__)
-#define AT32_PLLMUL_VALUE                 18
+#define AT32_PLLMUL_VALUE                 24
 #endif
 
 /**
  * @brief   AHB prescaler value.
- * @note    The default value is calculated for a 144MHz system clock from
+ * @note    The default value is calculated for a 192MHz system clock from
  *          a 8MHz crystal using the PLL.
  */
 #if !defined(AT32_AHBDIV) || defined(__DOXYGEN__)
@@ -382,7 +385,7 @@
  * @brief   USB prescaler initialization.
  */
 #if !defined(AT32_USBDIV) || defined(__DOXYGEN__)
-#define AT32_USBDIV                       AT32_USBDIV_DIV3
+#define AT32_USBDIV                       AT32_USBDIV_DIV4
 #endif
 
 /**
@@ -408,8 +411,8 @@
 /*
  * Configuration-related checks.
  */
-#if !defined(AT32F415xx_MCUCONF)
-#error "Using a wrong mcuconf.h file, AT32F415xx_MCUCONF not defined"
+#if !defined(AT32F413xx_MCUCONF)
+#error "Using a wrong mcuconf.h file, AT32F413xx_MCUCONF not defined"
 #endif
 
 /*
@@ -437,9 +440,9 @@
 #error "HSI not enabled, required by AT32_SCLKSEL and AT32_PLLRCS"
 #endif
 
-#if (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_HSI) ||                                   \
-    (((AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLLDIV2) ||                             \
-    (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLLDIV4)) &&                              \
+#if (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_HSI) ||                                 \
+    (((AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLLDIV2) ||                           \
+    (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLLDIV4)) &&                            \
     (AT32_PLLRCS == AT32_PLLRCS_HSI))
 #error "HSI not enabled, required by AT32_CLKOUT_SEL"
 #endif
@@ -467,9 +470,9 @@
 #error "HSE not enabled, required by AT32_SCLKSEL and AT32_PLLRCS"
 #endif
 
-#if (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_HSE) ||                                   \
-    (((AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLLDIV2) ||                             \
-    (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLLDIV4)) &&                              \
+#if (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_HSE) ||                                \
+    (((AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLLDIV2) ||                          \
+    (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLLDIV4)) &&                           \
     (AT32_PLLRCS == AT32_PLLRCS_HSE))
 #error "HSE not enabled, required by AT32_CLKOUT_SEL"
 #endif
@@ -509,9 +512,9 @@
 #endif /* !AT32_LSE_ENABLED */
 
 /* PLL activation conditions.*/
-#if (AT32_SCLKSEL == AT32_SCLKSEL_PLL) ||                                  \
-    (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLLDIV2) ||                        \
-    (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLLDIV4) ||                        \
+#if (AT32_SCLKSEL == AT32_SCLKSEL_PLL) ||                                   \
+    (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLLDIV2) ||                         \
+    (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLLDIV4) ||                         \
     defined(__DOXYGEN__)
 /**
  * @brief   PLL activation flag.
@@ -562,23 +565,6 @@
 #endif
 
 /**
- * @brief   PLL frequency reference.
- */
-#if ((AT32_PLLCLKIN > 3900000) && (AT32_PLLCLKIN < 5000000))
-#define AT32_PLLCLKREF CRM_PLL_FREF_4M
-#elif ((AT32_PLLCLKIN > 5200000) && (AT32_PLLCLKIN < 6250000))
-#define AT32_PLLCLKREF CRM_PLL_FREF_6M
-#elif ((AT32_PLLCLKIN > 7812500) && (AT32_PLLCLKIN < 8330000))
-#define AT32_PLLCLKREF CRM_PLL_FREF_8M
-#elif ((AT32_PLLCLKIN > 8330000) && (AT32_PLLCLKIN < 12500000))
-#define AT32_PLLCLKREF CRM_PLL_FREF_12M
-#elif ((AT32_PLLCLKIN > 15625000) && (AT32_PLLCLKIN < 20830000))
-#define AT32_PLLCLKREF CRM_PLL_FREF_16M
-#elif ((AT32_PLLCLKIN > 20830000) && (AT32_PLLCLKIN < 31255000))
-#define AT32_PLLCLKREF CRM_PLL_FREF_25M
-#endif
-
-/**
  * @brief   PLL output clock frequency.
  */
 #define AT32_PLLCLKOUT             (AT32_PLLCLKIN * AT32_PLLMUL_VALUE)
@@ -586,6 +572,18 @@
 /* PLL output frequency range check.*/
 #if (AT32_PLLCLKOUT < AT32_PLLOUT_MIN) || (AT32_PLLCLKOUT > AT32_PLLOUT_MAX)
 #error "AT32_PLLCLKOUT outside acceptable range (AT32_PLLOUT_MIN...AT32_PLLOUT_MAX)"
+#endif
+
+/**
+ * @brief   PLL output clock frequency range.
+ */
+/* PLL output frequency range check.*/
+#if (AT32_PLLCLKOUT <= 72000000)
+#define AT32_PLLRANGE              AT32_PLLRANGE_LOW
+#elif (AT32_PLLCLKOUT > 72000000)
+#define AT32_PLLRANGE              AT32_PLLRANGE_HIGH
+#else
+#error "invalid AT32_PLLCLKOUT value specified"
 #endif
 
 /**
@@ -724,7 +722,6 @@
  */
 #if (AT32_USBCLK_SRC == AT32_USBCLK_SRC_HSI48) || defined(__DOXYGEN__)
 #define AT32_USBCLK                48000000
-#warning "Note that USB clock should not use HSI48 in Si verion C"
 #elif (AT32_USBCLK_SRC == AT32_USBCLK_SRC_PLL) 
 #if (AT32_USBDIV == AT32_USBDIV_DIV1P5) || defined(__DOXYGEN__)
 #define AT32_USBCLK                ((AT32_PLLCLKOUT * 2) / 3)
@@ -757,27 +754,12 @@
 #endif
 
 /**
- * @brief   Timers 1, 8, 9, 10, 11 clock.
+ * @brief   Timers 1, 9, 10, 11 clock.
  */
 #if (AT32_APB2DIV == AT32_APB2DIV_DIV1) || defined(__DOXYGEN__)
 #define AT32_TIMCLK2               (AT32_PCLK2 * 1)
 #else
 #define AT32_TIMCLK2               (AT32_PCLK2 * 2)
-#endif
-
-/**
- * @brief   Flash settings.
- */
-#if (AT32_HCLK <= 32000000) || defined(__DOXYGEN__)
-#define AT32_FLASHBITS             0x00000000
-#elif (AT32_HCLK <= 64000000)
-#define AT32_FLASHBITS             0x00000001
-#elif (AT32_HCLK <= 96000000)
-#define AT32_FLASHBITS             0x00000002
-#elif (AT32_HCLK <= 128000000)
-#define AT32_FLASHBITS             0x00000003
-#elif (AT32_HCLK <= 150000000)
-#define AT32_FLASHBITS             0x00000004
 #endif
 
 /* Various helpers.*/

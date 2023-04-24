@@ -1,7 +1,7 @@
 /**
   **************************************************************************
-  * @file     at32f415.h
-  * @brief    at32f415 header file
+  * @file     at32f413.h
+  * @brief    at32f413 header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
@@ -22,8 +22,8 @@
   **************************************************************************
   */
 
-#ifndef __AT32F415xx_H
-#define __AT32F415xx_H
+#ifndef __AT32F413_H
+#define __AT32F413_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -37,7 +37,7 @@ extern "C" {
   * @{
   */
 
-/** @addtogroup AT32F415
+/** @addtogroup AT32F413
   * @{
   */
 
@@ -50,39 +50,36 @@ extern "C" {
   *      devices, you can define the device in your toolchain compiler preprocessor.
   */
 
-#if !defined (AT32F415RCT7)   && !defined (AT32F415RCT7_7) && !defined (AT32F415CCT7)   && \
-    !defined (AT32F415CCU7)   && !defined (AT32F415KCU7_4) && !defined (AT32F415RBT7)   && \
-    !defined (AT32F415RBT7_7) && !defined (AT32F415CBT7)   && !defined (AT32F415CBU7)   && \
-    !defined (AT32F415KBU7_4) && !defined (AT32F415R8T7)   && !defined (AT32F415R8T7_7) && \
-    !defined (AT32F415C8T7)   && !defined (AT32F415K8U7_4)
+#if !defined (AT32F413KBU7_4) && !defined (AT32F413KCU7_4) && !defined (AT32F413CBU7) && \
+    !defined (AT32F413CCU7)   && !defined (AT32F413C8T7)   && !defined (AT32F413CBT7) && \
+    !defined (AT32F413CCT7)   && !defined (AT32F413RBT7)   && !defined (AT32F413RCT7) && \
+    !defined (AT32FEBKC8T7)   && !defined (AT32F413TBU7)
 
-    #error "Please select first the target device used in your application (in at32f415.h file)"
+    #error "Please select first the target device used in your application (in at32f413.h file)"
 #endif
 
-#if defined (AT32F415RCT7)   || defined (AT32F415RCT7_7) || defined (AT32F415CCT7)   || \
-    defined (AT32F415CCU7)   || defined (AT32F415KCU7_4) || defined (AT32F415RBT7)   || \
-    defined (AT32F415RBT7_7) || defined (AT32F415CBT7)   || defined (AT32F415CBU7)   || \
-    defined (AT32F415KBU7_4) || defined (AT32F415R8T7)   || defined (AT32F415R8T7_7) || \
-    defined (AT32F415C8T7)   || defined (AT32F415K8U7_4)
+#if defined (AT32F413KBU7_4) || defined (AT32F413KCU7_4) || defined (AT32F413CBU7) || \
+    defined (AT32F413CCU7)   || defined (AT32F413C8T7)   || defined (AT32F413CBT7) || \
+    defined (AT32F413CCT7)   || defined (AT32F413RBT7)   || defined (AT32F413RCT7) || \
+    defined (AT32FEBKC8T7)   || defined (AT32F413TBU7)
 
-    #define AT32F415xx
+    #define AT32F413xx
 #endif
 
-#if defined (AT32F415RCT7)   || defined (AT32F415RCT7_7) || defined (AT32F415RBT7)   || \
-    defined (AT32F415RBT7_7) || defined (AT32F415R8T7)   || defined (AT32F415R8T7_7)
+#if defined (AT32F413RBT7)   || defined (AT32F413RCT7)
 
-    #define AT32F415Rx
+    #define AT32F413Rx
 #endif
 
-#if defined (AT32F415CCT7)   || defined (AT32F415CCU7)   || defined (AT32F415CBT7)   || \
-    defined (AT32F415CBU7)   || defined (AT32F415C8T7)
+#if defined (AT32F413CBU7)   || defined (AT32F413CCU7)   || defined (AT32F413C8T7) || \
+    defined (AT32F413CBT7)   || defined (AT32F413CCT7)
 
-    #define AT32F415Cx
+    #define AT32F413Cx
 #endif
 
-#if defined (AT32F415KCU7_4) || defined (AT32F415KBU7_4) || defined (AT32F415K8U7_4)
+#if defined (AT32F413KBU7_4) || defined (AT32F413KCU7_4)
 
-    #define AT32F415Kx
+    #define AT32F413Kx
 #endif
 
 #ifndef USE_STDPERIPH_DRIVER
@@ -100,16 +97,16 @@ extern "C" {
 #endif
 
 /**
-  * @brief at32f415 standard peripheral library version number
+  * @brief at32f413 standard peripheral library version number
   */
-#define __AT32F415_LIBRARY_VERSION_MAJOR    (0x02) /*!< [31:24] major version */
-#define __AT32F415_LIBRARY_VERSION_MIDDLE   (0x00) /*!< [23:16] middle version */
-#define __AT32F415_LIBRARY_VERSION_MINOR    (0x09) /*!< [15:8]  minor version */
-#define __AT32F415_LIBRARY_VERSION_RC       (0x00) /*!< [7:0]  release candidate */
-#define __AT32F415_LIBRARY_VERSION          ((__AT32F415_LIBRARY_VERSION_MAJOR << 24)  | \
-                                             (__AT32F415_LIBRARY_VERSION_MIDDLE << 16) | \
-                                             (__AT32F415_LIBRARY_VERSION_MINOR << 8)   | \
-                                             (__AT32F415_LIBRARY_VERSION_RC))
+#define __AT32F413_LIBRARY_VERSION_MAJOR    (0x02) /*!< [31:24] major version */
+#define __AT32F413_LIBRARY_VERSION_MIDDLE   (0x00) /*!< [23:16] middle version */
+#define __AT32F413_LIBRARY_VERSION_MINOR    (0x09) /*!< [15:8]  minor version */
+#define __AT32F413_LIBRARY_VERSION_RC       (0x00) /*!< [7:0]  release candidate */
+#define __AT32F413_LIBRARY_VERSION          ((__AT32F413_LIBRARY_VERSION_MAJOR << 24)  | \
+                                             (__AT32F413_LIBRARY_VERSION_MIDDLE << 16) | \
+                                             (__AT32F413_LIBRARY_VERSION_MINOR << 8)   | \
+                                             (__AT32F413_LIBRARY_VERSION_RC))
 
 /**
   * @}
@@ -126,10 +123,10 @@ extern "C" {
 #define __MPU_PRESENT             1        /*!< mpu present                                  */
 #define __NVIC_PRIO_BITS          4        /*!< at32 uses 4 bits for the priority levels     */
 #define __Vendor_SysTickConfig    0        /*!< set to 1 if different systick config is used */
-#define __FPU_PRESENT             0U       /*!< fpu present                                  */
+#define __FPU_PRESENT             1U       /*!< fpu present                                  */
 
 /**
-  * @brief at32f415 interrupt number definition, according to the selected device
+  * @brief at32f413 interrupt number definition, according to the selected device
   *        in @ref Library_configuration_section
   */
 typedef enum IRQn
@@ -149,8 +146,8 @@ typedef enum IRQn
     /******  at32 specific interrupt numbers *********************************************************/
     WWDT_IRQn                   = 0,      /*!< window watchdog timer interrupt                      */
     PVM_IRQn                    = 1,      /*!< pvm through exint line detection interrupt           */
-    TAMP_STAMP_IRQn             = 2,      /*!< tamper and timestamp interrupts through the exint line */
-    ERTC_WKUP_IRQn              = 3,      /*!< ertc wakeup through the exint line                   */
+    TAMPER_IRQn                 = 2,      /*!< tamper interrupt                                     */
+    RTC_IRQn                    = 3,      /*!< rtc global interrupt                                 */
     FLASH_IRQn                  = 4,      /*!< flash global interrupt                               */
     CRM_IRQn                    = 5,      /*!< crm global interrupt                                 */
     EXINT0_IRQn                 = 6,      /*!< external line0 interrupt                             */
@@ -166,9 +163,9 @@ typedef enum IRQn
     DMA1_Channel6_IRQn          = 16,     /*!< dma1 channel 6 global interrupt                      */
     DMA1_Channel7_IRQn          = 17,     /*!< dma1 channel 7 global interrupt                      */
 
-    ADC1_IRQn                   = 18,     /*!< adc1 global interrupt                                */
-    CAN1_TX_IRQn                = 19,     /*!< can1 tx interrupts                                   */
-    CAN1_RX0_IRQn               = 20,     /*!< can1 rx0 interrupts                                  */
+    ADC1_2_IRQn                 = 18,     /*!< adc1 and adc2 global interrupt                       */
+    USBFS_H_CAN1_TX_IRQn        = 19,     /*!< usb device high priority or can1 tx interrupts       */
+    USBFS_L_CAN1_RX0_IRQn       = 20,     /*!< usb device low priority or can1 rx0 interrupts       */
     CAN1_RX1_IRQn               = 21,     /*!< can1 rx1 interrupt                                   */
     CAN1_SE_IRQn                = 22,     /*!< can1 se interrupt                                    */
     EXINT9_5_IRQn               = 23,     /*!< external line[9:5] interrupts                        */
@@ -189,8 +186,12 @@ typedef enum IRQn
     USART2_IRQn                 = 38,     /*!< usart2 global interrupt                              */
     USART3_IRQn                 = 39,     /*!< usart3 global interrupt                              */
     EXINT15_10_IRQn             = 40,     /*!< external line[15:10] interrupts                      */
-    ERTCAlarm_IRQn              = 41,     /*!< ertc alarm through exint line interrupt              */
-    OTGFS1_WKUP_IRQn            = 42,     /*!< otgfs1 wakeup from suspend through exint line interrupt */
+    RTCAlarm_IRQn               = 41,     /*!< rtc alarm through exint line interrupt               */
+    USBFSWakeUp_IRQn            = 42,     /*!< usb device wakeup from suspend through exint line interrupt */
+    TMR8_BRK_IRQn               = 43,     /*!< tmr8 brake interrupt                                 */
+    TMR8_OVF_IRQn               = 44,     /*!< tmr8 overflow interrupt                              */
+    TMR8_TRG_HALL_IRQn          = 45,     /*!< tmr8 trigger and hall interrupt                      */
+    TMR8_CH_IRQn                = 46,     /*!< tmr8 channel interrupt                               */
     SDIO1_IRQn                  = 49,     /*!< sdio1 global interrupt                               */
     TMR5_GLOBAL_IRQn            = 50,     /*!< tmr5 global interrupt                                */
     UART4_IRQn                  = 52,     /*!< uart4 global interrupt                               */
@@ -199,9 +200,13 @@ typedef enum IRQn
     DMA2_Channel2_IRQn          = 57,     /*!< dma2 channel 2 global interrupt                      */
     DMA2_Channel3_IRQn          = 58,     /*!< dma2 channel 3 global interrupt                      */
     DMA2_Channel4_5_IRQn        = 59,     /*!< dma2 channel 4 and channel 5 global interrupt        */
-    OTGFS1_IRQn                 = 67,     /*!< otgfs1 global interrupt                              */
-    CMP1_IRQn                   = 70,     /*!< comparator1 global interrupt                         */
-    CMP2_IRQn                   = 71,     /*!< comparator2 global interrupt                         */
+    CAN2_TX_IRQn                = 68,     /*!< can2 tx interrupt                                    */
+    CAN2_RX0_IRQn               = 69,     /*!< can2 rx0 interrupt                                   */
+    CAN2_RX1_IRQn               = 70,     /*!< can2 rx1 interrupt                                   */
+    CAN2_SE_IRQn                = 71,     /*!< can2 se interrupt                                    */
+    ACC_IRQn                    = 72,     /*!< acc interrupt                                        */
+    USBFS_MAPH_IRQn             = 73,     /*!< usb map hp interrupt                                 */
+    USBFS_MAPL_IRQn             = 74,     /*!< usb map lp interrupt                                 */
     DMA2_Channel6_7_IRQn        = 75,     /*!< dma2 channel 6 and channel 7 global interrupt        */
 
 } IRQn_Type;
@@ -264,7 +269,7 @@ typedef enum {RESET = 0, SET = !RESET} flag_status;
 /**
   * @brief confirm state
   */
-// typedef enum {FALSE = 0, TRUE = !FALSE} confirm_state;
+typedef enum {FALSE = 0, TRUE = !FALSE} confirm_state;
 
 /**
   * @brief error status
@@ -314,26 +319,27 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 
 /*****************  Bit definition for CRM_APB2RST register  ***************/
 #define CRM_APB2RST_IOMUXRST             (0x1U << 0)
-#define CRM_APB2RST_EXINTRST             (0x1U << 1)
 #define CRM_APB2RST_GPIOARST             (0x1U << 2)
 #define CRM_APB2RST_GPIOBRST             (0x1U << 3)
 #define CRM_APB2RST_GPIOCRST             (0x1U << 4)
 #define CRM_APB2RST_GPIODRST             (0x1U << 5)
 #define CRM_APB2RST_GPIOFRST             (0x1U << 7)
 #define CRM_APB2RST_ADC1RST              (0x1U << 9)
+#define CRM_APB2RST_ADC2RST              (0x1U << 10)
 #define CRM_APB2RST_TMR1RST              (0x1U << 11)
 #define CRM_APB2RST_SPI1RST              (0x1U << 12)
+#define CRM_APB2RST_TMR8RST              (0x1U << 13)
 #define CRM_APB2RST_USART1RST            (0x1U << 14)
 #define CRM_APB2RST_TMR9RST              (0x1U << 19)
 #define CRM_APB2RST_TMR10RST             (0x1U << 20)
 #define CRM_APB2RST_TMR11RST             (0x1U << 21)
+#define CRM_APB2RST_ACCRST               (0x1U << 22)
 
 /*****************  Bit definition for CRM_APB1RST register  ***************/
 #define CRM_APB1RST_TMR2RST              (0x1U << 0)
 #define CRM_APB1RST_TMR3RST              (0x1U << 1)
 #define CRM_APB1RST_TMR4RST              (0x1U << 2)
 #define CRM_APB1RST_TMR5RST              (0x1U << 3)
-#define CRM_APB1RST_CMPRST               (0x1U << 9)
 #define CRM_APB1RST_WWDTRST              (0x1U << 11)
 #define CRM_APB1RST_SPI2RST              (0x1U << 14)
 #define CRM_APB1RST_USART2RST            (0x1U << 17)
@@ -342,8 +348,11 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1RST_UART5RST             (0x1U << 20)
 #define CRM_APB1RST_I2C1RST              (0x1U << 21)
 #define CRM_APB1RST_I2C2RST              (0x1U << 22)
+#define CRM_APB1RST_USBRST               (0x1U << 23)
 #define CRM_APB1RST_CANRST               (0x1U << 25)
+#define CRM_APB1RST_BPRRST               (0x1U << 27)
 #define CRM_APB1RST_PWCRST               (0x1U << 28)
+#define CRM_APB1RST_CAN2RST              (0x1U << 31)
 
 /******************  Bit definition for CRM_AHBEN register  ****************/
 #define CRM_AHBEN_DMA1EN                 (0x1U << 0)
@@ -352,7 +361,6 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_AHBEN_FLASHEN                (0x1U << 4)
 #define CRM_AHBEN_CRCEN                  (0x1U << 6)
 #define CRM_AHBEN_SDIO1EN                (0x1U << 10)
-#define CRM_AHBEN_OTGFS1EN               (0x1U << 12)
 
 /*****************  Bit definition for CRM_APB2EN register  ****************/
 #define CRM_APB2EN_IOMUXEN               (0x1U << 0)
@@ -362,19 +370,21 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB2EN_GPIODEN               (0x1U << 5)
 #define CRM_APB2EN_GPIOFEN               (0x1U << 7)
 #define CRM_APB2EN_ADC1EN                (0x1U << 9)
+#define CRM_APB2EN_ADC2EN                (0x1U << 10)
 #define CRM_APB2EN_TMR1EN                (0x1U << 11)
 #define CRM_APB2EN_SPI1EN                (0x1U << 12)
+#define CRM_APB2EN_TMR8EN                (0x1U << 13)
 #define CRM_APB2EN_USART1EN              (0x1U << 14)
 #define CRM_APB2EN_TMR9EN                (0x1U << 19)
 #define CRM_APB2EN_TMR10EN               (0x1U << 20)
 #define CRM_APB2EN_TMR11EN               (0x1U << 21)
+#define CRM_APB2EN_ACCEN                 (0x1U << 22)
 
 /*****************  Bit definition for CRM_APB1EN register  ****************/
 #define CRM_APB1EN_TMR2EN                (0x1U << 0)
 #define CRM_APB1EN_TMR3EN                (0x1U << 1)
 #define CRM_APB1EN_TMR4EN                (0x1U << 2)
 #define CRM_APB1EN_TMR5EN                (0x1U << 3)
-#define CRM_APB1EN_CMPEN                 (0x1U << 9)
 #define CRM_APB1EN_WWDTEN                (0x1U << 11)
 #define CRM_APB1EN_SPI2EN                (0x1U << 14)
 #define CRM_APB1EN_USART2EN              (0x1U << 17)
@@ -383,19 +393,22 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1EN_UART5EN               (0x1U << 20)
 #define CRM_APB1EN_I2C1EN                (0x1U << 21)
 #define CRM_APB1EN_I2C2EN                (0x1U << 22)
+#define CRM_APB1EN_USBEN                 (0x1U << 23)
 #define CRM_APB1EN_CANEN                 (0x1U << 25)
+#define CRM_APB1EN_BPREN                 (0x1U << 27)
 #define CRM_APB1EN_PWCEN                 (0x1U << 28)
+#define CRM_APB1EN_CAN2EN                (0x1U << 31)
 
 /******************  Bit definition for CRM_BPDC register  *****************/
 #define CRM_BPDC_LEXTEN                  (0x1U << 0)
 #define CRM_BPDC_LEXTSTBL                (0x1U << 1)
 #define CRM_BPDC_LEXTBYPS                (0x1U << 2)
-#define CRM_BPDC_ERTCSEL                 (0x3U << 8)
-#define CRM_BPDC_ERTCSEL_LEXT            (0x1U << 8)
-#define CRM_BPDC_ERTCSEL_LICK            (0x2U << 8)
-#define CRM_BPDC_ERTCSEL_HEXT_128        (0x3U << 8)
-#define CRM_BPDC_ERTCEN                  (0x1U << 15)
-#define CRM_BPDC_BDRST                   (0x1U << 16)
+#define CRM_BPDC_RTCSEL                  (0x3U << 8)
+#define CRM_BPDC_RTCSEL_LEXT             (0x1U << 8)
+#define CRM_BPDC_RTCSEL_LICK             (0x2U << 8)
+#define CRM_BPDC_RTCSEL_HEXT_128         (0x3U << 8)
+#define CRM_BPDC_RTCEN                   (0x1U << 15)
+#define CRM_BPDC_BPDRST                  (0x1U << 16)
 
 /******************  Bit definition for CRM_CTRLSTS register  **************/
 #define CRM_CTRLSTS_LICKEN               (0x1U << 0)
@@ -408,31 +421,17 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_CTRLSTS_WWDTRSTF             (0x1U << 30)
 #define CRM_CTRLSTS_LPRSTF               (0x1U << 31)
 
-/******************  Bit definition for CRM_AHBRST register  ***************/
-#define CRM_AHBRST_OTGFS1RST             (0x1U << 12)
-
-/******************  Bit definition for CRM_PLL register  ******************/
-#define CRM_PLL_FREF                     (0x7U << 24)
-#define CRM_PLL_FREF_4M                  (0x0U << 24)
-#define CRM_PLL_FREF_6M                  (0x1U << 24)
-#define CRM_PLL_FREF_8M                  (0x2U << 24)
-#define CRM_PLL_FREF_12M                 (0x3U << 24)
-#define CRM_PLL_FREF_16M                 (0x4U << 24)
-#define CRM_PLL_FREF_25M                 (0x5U << 24)
-#define CRM_PLL_PLLCFGEN                 (0x1U << 31)
-
 /******************  Bit definition for CRM_MISC1 register  ****************/
-#define CRM_MISC1_CLKFMC_SRC             (0x1U << 20)
+#define CRM_MISC1_USBBUFS                (0x1U << 24)
 #define CRM_MISC1_HICKDIV                (0x1U << 25)
 
-/******************  Bit definition for CRM_OTG_EXTCTRL register  **********/
-#define CRM_OTG_EXTCTRL_USBDIV_RST       (0x1U << 30)
-#define CRM_OTG_EXTCTRL_EP3_RMPEN        (0x1U << 31)
-
 /******************  Bit definition for CRM_MISC2 register  ****************/
-#define CRM_MISC2_AUTO_STEP_EN           (0x3U << 4)
-#define CRM_MISC2_HICK_TO_USB            (0x1U << 8)
-#define CRM_MISC2_HICK_TO_SCLK           (0x1U << 9)
+#define CRM_MISC2_CLK_TO_TMR             (0x1U << 16)
+
+/******************  Bit definition for CRM_MISC3 register  ****************/
+#define CRM_MISC3_AUTO_STEP_EN           (0x3U << 4)
+#define CRM_MISC3_HICK_TO_USB            (0x1U << 8)
+#define CRM_MISC3_HICK_TO_SCLK           (0x1U << 9)
 
 /******************  Bit definition for PWC_CTRL register  *****************/
 #define PWC_CTRL_PVMEN                   (0x1U << 4)
@@ -703,23 +702,63 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define IOMUX_REMAP_TMR3_MUX_NOREMAP        (0x0U << 10)    /*!< CH1/PA6,CH2/PA7,CH3/PB0,CH4/PB1 */
 #define IOMUX_REMAP_TMR3_MUX_PARTIALREMAP   (0x2U << 10)    /*!< CH1/PB4,CH2/PB5,CH3/PB0,CH4/PB1 */
 #define IOMUX_REMAP_TMR3_MUX_FULLREMAP      (0x3U << 10)    /*!< CH1/PC6,CH2/PC7,CH3/PC8,CH4/PC9 */
-#define IOMUX_REMAP_CAN_MUX                 (0x3U << 13)    
-#define IOMUX_REMAP_CAN_MUX_NOREMAP         (0x0U << 13)    /*!< RX/PA11,TX/PA12 */
-#define IOMUX_REMAP_CAN_MUX_FULLREMAP       (0x2U << 13)    /*!< RX/PB8,TX/PB9 */
+#define IOMUX_REMAP_CAN1_MUX                (0x3U << 13)    
+#define IOMUX_REMAP_CAN1_MUX_NOREMAP        (0x0U << 13)    /*!< RX/PA11,TX/PA12 */
+#define IOMUX_REMAP_CAN1_MUX_FULLREMAP      (0x2U << 13)    /*!< RX/PB8,TX/PB9 */
 #define IOMUX_REMAP_PD01_MUX                (0x1U << 15)    /*!< Port D0/Port D1 mapping on OSC_IN/OSC_OUT */
 #define IOMUX_REMAP_TMR5CH4_MUX             (0x1U << 16)    /*!< TIM5 Channel4 Internal Remap */
 #define IOMUX_REMAP_ADC1_ETP_MUX            (0x1U << 17)    /*!< ADC 1 External Trigger Injected Conversion remapping */
 #define IOMUX_REMAP_ADC1_ETO_MUX            (0x1U << 18)    /*!< ADC 1 External Trigger Regular Conversion remapping */
+#define IOMUX_REMAP_ADC2_ETP_MUX            (0x1U << 19)    /*!< ADC 2 External Trigger Injected Conversion remapping */
+#define IOMUX_REMAP_ADC2_ETO_MUX            (0x1U << 20)    /*!< ADC 2 External Trigger Regular Conversion remapping */
 #define IOMUX_REMAP_SWJTAG_MUX              (0x7U << 24)  
 #define IOMUX_REMAP_SWJTAG_MUX_RESET        (0x0U << 24)    /*!< Full SWJ (JTAG-DP + SW-DP) : Reset State */
 #define IOMUX_REMAP_SWJTAG_MUX_NOJNTRST     (0x1U << 24)    /*!< Full SWJ (JTAG-DP + SW-DP) but without JNTRST */
 #define IOMUX_REMAP_SWJTAG_MUX_JTAGDISABLE  (0x2U << 24)    /*!< JTAG-DP Disabled and SW-DP Enabled */
 #define IOMUX_REMAP_SWJTAG_MUX_DISABLE      (0x4U << 24)    /*!< JTAG-DP Disabled and SW-DP Disabled */
 
+/******************  Bit definition for IOMUX_REMAP2 register  ************/
+#define IOMUX_REMAP2_EXT_SPIM_EN_MUX        (0x1U << 21)
+
+/******************  Bit definition for IOMUX_REMAP3 register  ************/
+#define IOMUX_REMAP3_TMR9_GMUX              (0xFU << 0)
+#define IOMUX_REMAP3_TMR9_GMUX_NOREMAP      (0x0U << 0)     /*!< TMR9 CH1/PA2 CH2/PA3 */
+#define IOMUX_REMAP3_TMR9_GMUX_FULLREMAP    (0x2U << 0)     /*!< TMR9 CH1/PB14 CH2/PB15 */
+#define IOMUX_REMAP3_TMR10_GMUX             (0xFU << 4)
+#define IOMUX_REMAP3_TMR10_GMUX_NOREMAP     (0x0U << 4)     /*!< TMR10 CH1/PB8 */
+#define IOMUX_REMAP3_TMR10_GMUX_FULLREMAP   (0x2U << 4)     /*!< TMR10 CH1/PA6 */
+#define IOMUX_REMAP3_TMR11_GMUX             (0xFU << 8)
+#define IOMUX_REMAP3_TMR11_GMUX_NOREMAP     (0x0U << 8)     /*!< TMR11 CH1/PB9 */
+#define IOMUX_REMAP3_TMR11_GMUX_FULLREMAP   (0x2U << 8)     /*!< TMR11 CH1/PA7 */
+
+/******************  Bit definition for IOMUX_REMAP4 register  ************/
+#define IOMUX_REMAP4_TMR5_GMUX              (0x7U << 16)
+#define IOMUX_REMAP4_TMR5_GMUX_NOREMAP      (0x0U << 16)    /*!< TMR5 CH1/PA0 CH2/PA1 */
+#define IOMUX_REMAP4_TMR5_GMUX_FULLREMAP    (0x1U << 16)    /*!< TMR5 CH1/PF4 CH2/PF5 */
+
+/******************  Bit definition for IOMUX_REMAP5 register  ************/
+#define IOMUX_REMAP5_I2C1_GMUX               (0xFU << 4)
+#define IOMUX_REMAP5_I2C1_GMUX_NOREMAP       (0x0U << 4)    /*!< SCL/PB6,SDA/PB7 SMBA/PB5 */
+#define IOMUX_REMAP5_I2C1_GMUX_PARTIALREMAP  (0x1U << 4)    /*!< SCL/PB8,SDA/PB9 SMBA/PB5 */
+#define IOMUX_REMAP5_I2C1_GMUX_FULLREMAP     (0x3U << 4)    /*!< SCL/PF6,SDA/PF7 SMBA/PB5 */
+#define IOMUX_REMAP5_I2C2_GMUX               (0xFU << 8)
+#define IOMUX_REMAP5_I2C2_GMUX_NOREMAP       (0x0U << 8)    /*!< SCL/PB10,SDA/PB11 SMBA/PB12 */
+#define IOMUX_REMAP5_I2C2_GMUX_PARTIALREMAP1 (0x1U << 8)    /*!< SCL/PF6,SDA/PF7 SMBA/PA9 */
+#define IOMUX_REMAP5_I2C2_GMUX_PARTIALREMAP2 (0x2U << 8)    /*!< SCL/PA8,SDA/PC9 SMBA/PA9 */
+#define IOMUX_REMAP5_I2C2_GMUX_FULLREMAP     (0x3U << 8)    /*!< SCL/PA8,SDA/PB4 SMBA/PA9 */
+#define IOMUX_REMAP5_SPI1_GMUX               (0xFU << 16)
+#define IOMUX_REMAP5_SPI1_GMUX_NOREMAP       (0x0U << 16)   /*!< CS/PA4,SCK/PA5,MISO/PA6,MOSI/PA7,MCK/PB0 */
+#define IOMUX_REMAP5_SPI1_GMUX_FULLREMAP     (0x1U << 16)   /*!< CS/PA15,SCK/PB3,MISO/PB4,MOSI/PB5,MCK/PB6 */
+#define IOMUX_REMAP5_SPI2_GMUX               (0xFU << 20)
+#define IOMUX_REMAP5_SPI2_GMUX_NOREMAP       (0x0U << 20)   /*!< CS/PB12,SCK/PB13,MISO/PB14,MOSI/PB15,MCK/PB0 */
+#define IOMUX_REMAP5_SPI2_GMUX_FULLREMAP     (0x1U << 20)   /*!< CS/PA15,SCK/PB3,MISO/PB4,MOSI/PB5,MCK/PC7 */
+
 /******************  Bit definition for DEBUG_CTRL register  **************/
 #define DEBUG_CTRL_SLEEP                 (0x1U << 0)
 #define DEBUG_CTRL_DEEPSLEEP             (0x1U << 1)
 #define DEBUG_CTRL_STANDBY               (0x1U << 2)
+#define DEBUG_CTRL_TRACE_IOEN            (0x1U << 5)
+#define DEBUG_CTRL_TRACE_MODE            (0x3U << 6)
 #define DEBUG_CTRL_WDT_PAUSE             (0x1U << 8)
 #define DEBUG_CTRL_WWDT_PAUSE            (0x1U << 9)
 #define DEBUG_CTRL_TMR1_PAUSE            (0x1U << 10)
@@ -729,7 +768,9 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define DEBUG_CTRL_CAN1_PAUSE            (0x1U << 14)
 #define DEBUG_CTRL_I2C1_SMBUS_TIMEOUT    (0x1U << 15)
 #define DEBUG_CTRL_I2C2_SMBUS_TIMEOUT    (0x1U << 16)
+#define DEBUG_CTRL_TMR8_PAUSE            (0x1U << 17)
 #define DEBUG_CTRL_TMR5_PAUSE            (0x1U << 18)
+#define DEBUG_CTRL_CAN2_PAUSE            (0x1U << 21)
 #define DEBUG_CTRL_TMR9_PAUSE            (0x1U << 28)
 #define DEBUG_CTRL_TMR10_PAUSE           (0x1U << 29)
 #define DEBUG_CTRL_TMR11_PAUSE           (0x1U << 30)
@@ -743,6 +784,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define USD_BASE                         ((uint32_t)0x1FFFF800)
 #define SRAM_BASE                        ((uint32_t)0x20000000)
 #define PERIPH_BASE                      ((uint32_t)0x40000000)
+#define XMC_REG_BASE                     ((uint32_t)0xA0000000)
 #define DEBUG_BASE                       ((uint32_t)0xE0042000)
 
 #define APB1PERIPH_BASE                  (PERIPH_BASE + 0x00000)
@@ -754,8 +796,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define TMR3_BASE                        (APB1PERIPH_BASE + 0x0400)
 #define TMR4_BASE                        (APB1PERIPH_BASE + 0x0800)
 #define TMR5_BASE                        (APB1PERIPH_BASE + 0x0C00)
-#define CMP_BASE                         (APB1PERIPH_BASE + 0x2400)
-#define ERTC_BASE                        (APB1PERIPH_BASE + 0x2800)
+#define RTC_BASE                         (APB1PERIPH_BASE + 0x2800)
 #define WWDT_BASE                        (APB1PERIPH_BASE + 0x2C00)
 #define WDT_BASE                         (APB1PERIPH_BASE + 0x3000)
 #define SPI2_BASE                        (APB1PERIPH_BASE + 0x3800)
@@ -765,7 +806,10 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define UART5_BASE                       (APB1PERIPH_BASE + 0x5000)
 #define I2C1_BASE                        (APB1PERIPH_BASE + 0x5400)
 #define I2C2_BASE                        (APB1PERIPH_BASE + 0x5800)
+#define USBFS_BASE                       (APB1PERIPH_BASE + 0x5C00)
 #define CAN1_BASE                        (APB1PERIPH_BASE + 0x6400)
+#define CAN2_BASE                        (APB1PERIPH_BASE + 0x6800)
+#define BPR_BASE                         (APB1PERIPH_BASE + 0x6C00)
 #define PWC_BASE                         (APB1PERIPH_BASE + 0x7000)
 /* apb2 bus base address */
 #define IOMUX_BASE                       (APB2PERIPH_BASE + 0x0000)
@@ -776,12 +820,15 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define GPIOD_BASE                       (APB2PERIPH_BASE + 0x1400)
 #define GPIOF_BASE                       (APB2PERIPH_BASE + 0x1C00)
 #define ADC1_BASE                        (APB2PERIPH_BASE + 0x2400)
+#define ADC2_BASE                        (APB2PERIPH_BASE + 0x2800)
 #define TMR1_BASE                        (APB2PERIPH_BASE + 0x2C00)
 #define SPI1_BASE                        (APB2PERIPH_BASE + 0x3000)
+#define TMR8_BASE                        (APB2PERIPH_BASE + 0x3400)
 #define USART1_BASE                      (APB2PERIPH_BASE + 0x3800)
 #define TMR9_BASE                        (APB2PERIPH_BASE + 0x4C00)
 #define TMR10_BASE                       (APB2PERIPH_BASE + 0x5000)
 #define TMR11_BASE                       (APB2PERIPH_BASE + 0x5400)
+#define ACC_BASE                         (APB2PERIPH_BASE + 0x5800)
 #define SDIO1_BASE                       (APB2PERIPH_BASE + 0x8000)
 /* ahb bus base address */
 #define DMA1_BASE                        (AHBPERIPH_BASE + 0x0000)
@@ -803,14 +850,13 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_BASE                         (AHBPERIPH_BASE + 0x1000)
 #define FLASH_REG_BASE                   (AHBPERIPH_BASE + 0x2000)
 #define CRC_BASE                         (AHBPERIPH_BASE + 0x3000)
-#define OTGFS1_BASE                      (PERIPH_BASE + 0x10000000)
 
 #define FLASHSIZE_BASE                   ((uint32_t)0x1FFFF7E0U)    /*!< FLASH Size register base address */
 #define UID_BASE                         ((uint32_t)0x1FFFF7E8U)    /*!< Unique device ID register base address */
-
 /**
   * @}
   */
+
 /**
   * @brief type define exint register all
   */
@@ -905,14 +951,9 @@ typedef struct
   __IO uint32_t CTRLSTS;
 
   /**
-    * @brief crm ahbrst register, offset:0x28
+    * @brief crm reserved1 register, offset:0x28~0x2C
     */
-  __IO uint32_t AHBRST;
-
-  /**
-    * @brief crm pll register, offset:0x2C
-    */
-  __IO uint32_t PLL;
+  __IO uint32_t RESERVED1[2];
 
   /**
     * @brief crm misc1 register, offset:0x30
@@ -920,26 +961,32 @@ typedef struct
   __IO uint32_t MISC1;
 
   /**
-    * @brief crm reserved2 register, offset:0x40~0x34
+    * @brief crm reserved2 register, offset:0x4C~0x34
     */
-  __IO uint32_t RESERVED2[4];
+  __IO uint32_t RESERVED2[7];
 
   /**
-    * @brief crm otg_extctrl register, offset:0x44
-    */
-  __IO uint32_t OTG_EXTCTRL;
-
-  /**
-    * @brief crm reserved3 register, offset:0x50~0x48
-    */
-  __IO uint32_t RESERVED3[3];
-
-  /**
-    * @brief crm misc2 register, offset:0x54
+    * @brief crm misc2 register, offset:0x50
     */
   __IO uint32_t MISC2;
 
+  /**
+    * @brief crm misc3 register, offset:0x54
+    */
+  __IO uint32_t MISC3;
+
+  /**
+    * @brief crm reserved3 register, offset:0x58
+    */
+  __IO uint32_t RESERVED3;
+
+  /**
+    * @brief crm intmap register, offset:0x5C
+    */
+  __IO uint32_t INTMAP;
+
 } CRM_TypeDef;
+
 
 /**
   * @brief type define pwc register all
@@ -1009,76 +1056,143 @@ typedef struct
   __IO uint32_t EPPS;
 
   /**
-    * @brief flash reserved2 register, offset:0x70~0x24
+    * @brief flash reserved2 register, offset:0x80~0x24
     */
-  __IO uint32_t RESERVED2[20];
+  __IO uint32_t RESERVED2[24];
 
   /**
-    * @brief flash slib_sts0 register, offset:0x74
+    * @brief flash unlock3 register, offset:0x84
+    */
+  __IO uint32_t UNLOCK3;
+
+  /**
+    * @brief flash select register, offset:0x88
+    */
+  __IO uint32_t SELECT;
+
+  /**
+    * @brief flash sts3 register, offset:0x8C
+    */
+  __IO uint32_t STS3;
+
+  /**
+    * @brief flash ctrl3 register, offset:0x90
+    */
+  __IO uint32_t CTRL3;
+
+  /**
+    * @brief flash addr3 register, offset:0x94
+    */
+  __IO uint32_t ADDR3;
+
+  /**
+    * @brief flash da register, offset:0x98
+    */
+  __IO uint32_t DA;
+
+  /**
+    * @brief flash reserved5 register, offset:0xC8~0x9C
+    */
+  __IO uint32_t RESERVED5[12];
+
+  /**
+    * @brief flash slib_sts0 register, offset:0xCC
     */
   __IO uint32_t SLIB_STS0;
 
   /**
-    * @brief flash slib_sts1 register, offset:0x78
+    * @brief flash slib_sts1 register, offset:0xD0
     */
   __IO uint32_t SLIB_STS1;
 
   /**
-    * @brief flash slib_pwd_clr register, offset:0x7C
+    * @brief flash slib_pwd_clr register, offset:0xD4
     */
   __IO uint32_t SLIB_PWD_CLR;
 
   /**
-    * @brief flash slib_misc_sts register, offset:0x80
+    * @brief flash slib_misc_sts register, offset:0xD8
     */
   __IO uint32_t SLIB_MISC_STS;
 
   /**
-    * @brief flash crc_addr register, offset:0x84
-    */
-  __IO uint32_t CRC_ADDR;
-
-  /**
-    * @brief flash crc_ctrl register, offset:0x88
-    */
-  __IO uint32_t CRC_CTRL;
-
-  /**
-    * @brief flash crc_chkr register, offset:0x8C
-    */
-  __IO uint32_t CRC_CHKR;
-
-  /**
-    * @brief flash reserved3 register, offset:0x15C~0x90
-    */
-  __IO uint32_t RESERVED3[52];
-
-  /**
-    * @brief flash slib_set_pwd register, offset:0x160
+    * @brief flash slib_set_pwd register, offset:0xDC
     */
   __IO uint32_t SLIB_SET_PWD;
 
   /**
-    * @brief flash slib_set_range register, offset:0x164
+    * @brief flash slib_set_range register, offset:0xE0
     */
-  __IO uint32_t SLIB_GET_RANGE;
+  __IO uint32_t SLIB_SET_RANGE;
 
   /**
-    * @brief flash em_slib_set register, offset:0x168
+    * @brief flash reserved6 register, offset:0xEC~0xE4
     */
-  __IO uint32_t EM_SLIB_SET;
+  __IO uint32_t RESERVED6[3];
 
   /**
-    * @brief flash btm_mode_set register, offset:0x16C
-    */
-  __IO uint32_t BTM_MODE_SET;
-
-  /**
-    * @brief flash slib_unlock register, offset:0x170
+    * @brief flash slib_unlock register, offset:0xF0
     */
   __IO uint32_t SLIB_UNLOCK;
 
+  /**
+    * @brief flash crc_ctrl register, offset:0xF4
+    */
+  __IO uint32_t CRC_CTRL;
+
+  /**
+    * @brief flash crc_chkr register, offset:0xF8
+    */
+  __IO uint32_t CRC_CHKR;
+
 } FLASH_TypeDef;
+
+/**
+  * @brief type define bpr register all
+  */
+typedef struct
+{
+  /**
+    * @brief reserved, offset:0x00
+    */
+  __IO uint32_t RESERVED1;
+
+  /**
+    * @brief bpr dt1 register, offset:0x04
+    */
+  __IO uint32_t DT1[10];
+
+  /**
+    * @brief bpr rtccal register, offset:0x2C
+    */
+  __IO uint32_t RTCCAL;
+
+  /**
+    * @brief bpr ctrl register, offset:0x30
+    */
+  __IO uint32_t CTRL;
+
+  /**
+    * @brief bpr ctrlsts register, offset:0x34
+    */
+  __IO uint32_t CTRLSTS;
+
+  /**
+    * @brief reserved, offset:0x38
+    */
+  __IO uint32_t RESERVED2;
+
+  /**
+    * @brief reserved, offset:0x3C
+    */
+  __IO uint32_t RESERVED3;
+
+  /**
+    * @brief bpr dt11-42 register, offset:0x40
+    */
+  __IO uint32_t DT2[32];
+
+} BPR_TypeDef;
 
 /**
   * @brief type define gpio register all
@@ -1624,6 +1738,7 @@ typedef struct
 #define CRM                               ((CRM_TypeDef *) CRM_BASE)
 #define PWC                               ((PWC_TypeDef *) PWC_BASE)
 #define FLASH                             ((FLASH_TypeDef *) FLASH_REG_BASE)
+#define BPR                               ((BPR_TypeDef *) BPR_BASE)
 #define GPIOA                             ((GPIO_TypeDef *) GPIOA_BASE)
 #define GPIOB                             ((GPIO_TypeDef *) GPIOB_BASE)
 #define GPIOC                             ((GPIO_TypeDef *) GPIOC_BASE)
@@ -1635,6 +1750,7 @@ typedef struct
 #define TMR3                              ((TMR_TypeDef *) TMR3_BASE)
 #define TMR4                              ((TMR_TypeDef *) TMR4_BASE)
 #define TMR5                              ((TMR_TypeDef *) TMR5_BASE)
+#define TMR8                              ((TMR_TypeDef *) TMR8_BASE)
 #define TMR9                              ((TMR_TypeDef *) TMR9_BASE)
 #define TMR10                             ((TMR_TypeDef *) TMR10_BASE)
 #define TMR11                             ((TMR_TypeDef *) TMR11_BASE)
@@ -1656,6 +1772,7 @@ typedef struct
 #define DMA2_Channel6                     ((DMA_Channel_TypeDef *) DMA2_CHANNEL6_BASE)
 #define DMA2_Channel7                     ((DMA_Channel_TypeDef *) DMA2_CHANNEL7_BASE)
 #define ADC1                              ((ADC_TypeDef *) ADC1_BASE)
+#define ADC1                              ((ADC_TypeDef *) ADC2_BASE)
 #define I2C1                              ((I2C_TypeDef *) I2C1_BASE)
 #define I2C2                              ((I2C_TypeDef *) I2C2_BASE)
 #define USART1                            ((USART_TypeDef *) USART1_BASE)
@@ -1672,18 +1789,24 @@ typedef struct
 #define FLASH_UNLOCK_KEY1                ((uint32_t)0x45670123)   /*!< flash operation unlock order key1 */
 #define FLASH_UNLOCK_KEY2                ((uint32_t)0xCDEF89AB)   /*!< flash operation unlock order key2 */
 #define FAP_RELIEVE_KEY                  ((uint16_t)0x00A5)       /*!< flash fap relieve key val */
-#define FAP_HIGH_LEVEL_KEY               ((uint16_t)0x00CC)       /*!< flash fap high level enable key val */
 #define SLIB_UNLOCK_KEY                  ((uint32_t)0xA35F6D24)   /*!< flash slib operation unlock order key */
 
-#define FLASH_OBF_FLAG                   ((uint32_t)0x00000001)   /*!< flash operate busy flag */
-#define FLASH_ODF_FLAG                   ((uint32_t)0x00000020)   /*!< flash operate done flag */
-#define FLASH_PRGMERR_FLAG               ((uint32_t)0x00000004)   /*!< flash program error flag */
-#define FLASH_EPPERR_FLAG                ((uint32_t)0x00000010)   /*!< flash erase/program protection error flag */
+#define FLASH_OBF_FLAG                   ((uint32_t)0x00000001)   /*!< flash bank1 operate busy flag */
+#define FLASH_ODF_FLAG                   ((uint32_t)0x00000020)   /*!< flash bank1 operate done flag */
+#define FLASH_PRGMERR_FLAG               ((uint32_t)0x00000004)   /*!< flash bank1 program error flag */
+#define FLASH_EPPERR_FLAG                ((uint32_t)0x00000010)   /*!< flash bank1 erase/program protection error flag */
+#define FLASH_SPIM_OBF_FLAG              ((uint32_t)0x20000001)   /*!< flash spim operate busy flag */
+#define FLASH_SPIM_ODF_FLAG              ((uint32_t)0x20000020)   /*!< flash spim operate done flag */
+#define FLASH_SPIM_PRGMERR_FLAG          ((uint32_t)0x20000004)   /*!< flash spim program error flag */
+#define FLASH_SPIM_EPPERR_FLAG           ((uint32_t)0x20000010)   /*!< flash spim erase/program protection error flag */
 #define FLASH_USDERR_FLAG                ((uint32_t)0x40000001)   /*!< flash user system data error flag */
 
+#define USB_PACKET_BUFFER_ADDRESS         0x40006000 /*!< usb buffer address */
+#define USB_PACKET_BUFFER_ADDRESS_EX      0x40007800 /*!< usb buffer extend address */
 /**
   * @}
   */
+ 
 
 #ifdef __cplusplus
 }
