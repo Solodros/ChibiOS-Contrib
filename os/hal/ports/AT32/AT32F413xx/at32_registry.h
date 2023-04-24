@@ -362,7 +362,7 @@
 #define AT32_TIM5_IS_32BITS                 TRUE
 #define AT32_TIM5_CHANNELS                  4
 
-if defined(AT32F413xC)
+#if defined(AT32F413xC)
 #define AT32_HAS_TIM8                       TRUE
 #define AT32_TIM8_IS_32BITS                 FALSE
 #define AT32_TIM8_CHANNELS                  4
@@ -559,7 +559,7 @@ if defined(AT32F413xC)
 #define AT32_TIM5_IS_32BITS                 TRUE
 #define AT32_TIM5_CHANNELS                  4
 
-if defined(AT32F413xC)
+#if defined(AT32F413xC)
 #define AT32_HAS_TIM8                       TRUE
 #define AT32_TIM8_IS_32BITS                 FALSE
 #define AT32_TIM8_CHANNELS                  4

@@ -267,11 +267,6 @@ typedef __I uint8_t  vuc8;    /*!< read only */
 typedef enum {RESET = 0, SET = !RESET} flag_status;
 
 /**
-  * @brief confirm state
-  */
-typedef enum {FALSE = 0, TRUE = !FALSE} confirm_state;
-
-/**
   * @brief error status
   */
 typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
@@ -1772,7 +1767,7 @@ typedef struct
 #define DMA2_Channel6                     ((DMA_Channel_TypeDef *) DMA2_CHANNEL6_BASE)
 #define DMA2_Channel7                     ((DMA_Channel_TypeDef *) DMA2_CHANNEL7_BASE)
 #define ADC1                              ((ADC_TypeDef *) ADC1_BASE)
-#define ADC1                              ((ADC_TypeDef *) ADC2_BASE)
+#define ADC2                              ((ADC_TypeDef *) ADC2_BASE)
 #define I2C1                              ((I2C_TypeDef *) I2C1_BASE)
 #define I2C2                              ((I2C_TypeDef *) I2C2_BASE)
 #define USART1                            ((USART_TypeDef *) USART1_BASE)
