@@ -307,6 +307,97 @@
 #if !defined(AT32_UART_DMA_ERROR_HOOK) || defined(__DOXYGEN__)
 #define AT32_UART_DMA_ERROR_HOOK(uartp)    osalSysHalt("DMA failure")
 #endif
+
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+/**
+ * @brief   USART1 DMA MUX setting.
+ */
+#if !defined(AT32_UART_USART1_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_UART_USART1_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_UART_USART1_RX_DMAMUX_CHANNEL    0
+#define AT32_UART_USART1_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   USART2 DMA MUX setting.
+ */
+#if !defined(AT32_UART_USART2_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_UART_USART2_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_UART_USART2_RX_DMAMUX_CHANNEL    0
+#define AT32_UART_USART2_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   USART3 DMA MUX setting.
+ */
+#if !defined(AT32_UART_USART3_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_UART_USART3_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_UART_USART3_RX_DMAMUX_CHANNEL    0
+#define AT32_UART_USART3_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   UART4 DMA MUX setting.
+ */
+#if !defined(AT32_UART_UART4_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_UART_UART4_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_UART_UART4_RX_DMAMUX_CHANNEL    0
+#define AT32_UART_UART4_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   UART5 DMA MUX setting.
+ */
+#if !defined(AT32_UART_UART5_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_UART_UART5_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_UART_UART5_RX_DMAMUX_CHANNEL    0
+#define AT32_UART_UART5_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   USART6 DMA MUX setting.
+ */
+#if !defined(AT32_UART_USART6_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_UART_USART6_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_UART_USART6_RX_DMAMUX_CHANNEL    0
+#define AT32_UART_USART6_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   UART7 DMA MUX setting.
+ */
+#if !defined(AT32_UART_UART7_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_UART_UART7_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_UART_UART7_RX_DMAMUX_CHANNEL    0
+#define AT32_UART_UART7_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   UART8 DMA MUX setting.
+ */
+#if !defined(AT32_UART_UART8_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_UART_UART8_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_UART_UART8_RX_DMAMUX_CHANNEL    0
+#define AT32_UART_UART8_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   UART9 DMA MUX setting.
+ */
+#if !defined(AT32_UART_UART9_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_UART_UART9_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_UART_UART9_RX_DMAMUX_CHANNEL    0
+#define AT32_UART_UART9_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   UART10 DMA MUX setting.
+ */
+#if !defined(AT32_UART_UART10_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_UART_UART10_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_UART_UART10_RX_DMAMUX_CHANNEL    0
+#define AT32_UART_UART10_TX_DMAMUX_CHANNEL    1
+#endif
 /** @} */
 
 /*===========================================================================*/
@@ -330,22 +421,10 @@
 #error "UART4 not present in the selected device"
 #endif
 
-#if !defined(AT32F2XX) && !defined(AT32F4XX) && !defined(AT32L151xE)  && \
-    !defined(AT32L152xE) && !defined(AT32L162xE)
-#error "UART4 DMA access not supported in this platform"
-#endif
-#endif /* AT32_UART_USE_UART4 */
-
 #if AT32_UART_USE_UART5
 #if !AT32_HAS_UART5
 #error "UART5 not present in the selected device"
 #endif
-
-#if !defined(AT32F2XX) && !defined(AT32F4XX) && !defined(AT32L151xE)  && \
-    !defined(AT32L152xE) && !defined(AT32L162xE)
-#error "UART5 DMA access not supported in this platform"
-#endif
-#endif /* AT32_UART_USE_UART5 */
 
 #if AT32_UART_USE_USART6 && !AT32_HAS_USART6
 #error "USART6 not present in the selected device"
@@ -475,9 +554,6 @@
 #error "Invalid DMA priority assigned to UART10"
 #endif
 
-/* The following checks are only required when there is a DMA able to
-   reassign streams to different channels.*/
-#if AT32_ADVANCED_DMA
 /* Check on the presence of the DMA streams settings in mcuconf.h.*/
 #if AT32_UART_USE_USART1 && (!defined(AT32_UART_USART1_RX_DMA_STREAM) ||  \
                               !defined(AT32_UART_USART1_TX_DMA_STREAM))
@@ -601,7 +677,6 @@
                            AT32_USART6_TX_DMA_MSK)
 #error "invalid DMA stream associated to USART6 TX"
 #endif
-#endif /* AT32_ADVANCED_DMA */
 
 #if AT32_UART_USE_UART7 &&                                                 \
     !AT32_DMA_IS_VALID_ID(AT32_UART_UART7_RX_DMA_STREAM,                  \

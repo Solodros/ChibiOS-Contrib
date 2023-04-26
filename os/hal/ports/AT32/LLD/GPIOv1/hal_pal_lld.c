@@ -30,10 +30,8 @@
 /* Driver local definitions.                                                 */
 /*===========================================================================*/
 
-#define APB2_EN_MASK  (CRM_APB2EN_GPIOAEN | CRM_APB2EN_GPIOBEN |            \
-                       CRM_APB2EN_GPIOCEN | CRM_APB2EN_GPIODEN |            \
-                       CRM_APB2EN_GPIOFEN | CRM_APB2EN_IOMUXEN)
-
+#define APB2_EN_MASK  (CRM_APB2EN_GPIOAEN | CRM_APB2EN_GPIOBEN |  \
+                       CRM_APB2EN_GPIODEN | CRM_APB2EN_IOMUXEN)
 
 /*===========================================================================*/
 /* Driver exported variables.                                                */
@@ -84,6 +82,18 @@ void _pal_lld_init(const PALConfig *config) {
    * Enables the GPIO related clocks.
    */
   crmEnableAPB2(APB2_EN_MASK, true);
+#if AT32_HAS_GPIOC || defined(__DOXYGEN__)
+  crmEnableAPB2(CRM_APB2EN_GPIOCEN, true);
+#endif
+#if AT32_HAS_GPIOE || defined(__DOXYGEN__)
+  crmEnableAPB2(CRM_APB2EN_GPIOEEN, true);
+#endif
+#if AT32_HAS_GPIOF || defined(__DOXYGEN__)
+  crmEnableAPB2(CRM_APB2EN_GPIOFEN, true);
+#endif
+#if AT32_HAS_GPIOG || defined(__DOXYGEN__)
+  crmEnableAPB2(CRM_APB2EN_GPIOGEN, true);
+#endif
 
   /*
    * Initial GPIO setup.
@@ -96,17 +106,33 @@ void _pal_lld_init(const PALConfig *config) {
   GPIOB->CFGHR = config->PBData.cfghr;
   GPIOB->CFGLR = config->PBData.cfglr;
 
+#if AT32_HAS_GPIOC || defined(__DOXYGEN__)
   GPIOC->ODT = config->PCData.odt;
   GPIOC->CFGHR = config->PCData.cfghr;
   GPIOC->CFGLR = config->PCData.cfglr;
+#endif
 
   GPIOD->ODT = config->PDData.odt;
   GPIOD->CFGHR = config->PDData.cfghr;
   GPIOD->CFGLR = config->PDData.cfglr;
 
+#if AT32_HAS_GPIOE || defined(__DOXYGEN__)
+  GPIOE->ODT = config->PEData.odt;
+  GPIOE->CFGHR = config->PEData.cfghr;
+  GPIOE->CFGLR = config->PEData.cfglr;
+#endif
+
+#if AT32_HAS_GPIOF || defined(__DOXYGEN__)
   GPIOF->ODT = config->PFData.odt;
   GPIOF->CFGHR = config->PFData.cfghr;
   GPIOF->CFGLR = config->PFData.cfglr;
+#endif
+
+#if AT32_HAS_GPIOG || defined(__DOXYGEN__)
+  GPIOG->ODT = config->PGData.odt;
+  GPIOG->CFGHR = config->PGData.cfghr;
+  GPIOG->CFGLR = config->PGData.cfglr;
+#endif
 }
 
 /**

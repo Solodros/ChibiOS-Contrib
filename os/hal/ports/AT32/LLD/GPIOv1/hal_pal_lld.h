@@ -123,12 +123,26 @@ typedef struct {
   at32_gpio_setup_t    PAData;
   /** @brief Port B setup data.*/
   at32_gpio_setup_t    PBData;
+#if AT32_HAS_GPIOC || defined(__DOXYGEN__)
   /** @brief Port C setup data.*/
   at32_gpio_setup_t    PCData;
+#endif
+#if AT32_HAS_GPIOD || defined(__DOXYGEN__)
   /** @brief Port D setup data.*/
   at32_gpio_setup_t    PDData;
+#endif
+#if AT32_HAS_GPIOE || defined(__DOXYGEN__)
+  /** @brief Port D setup data.*/
+  at32_gpio_setup_t    PEData;
+#endif
+#if AT32_HAS_GPIOF || defined(__DOXYGEN__)
   /** @brief Port F setup data.*/
   at32_gpio_setup_t    PFData;
+#endif
+#if AT32_HAS_GPIOG || defined(__DOXYGEN__)
+  /** @brief Port G setup data.*/
+  at32_gpio_setup_t    PGData;
+#endif
 } PALConfig;
 
 /**
@@ -199,10 +213,25 @@ typedef uint32_t iopadid_t;
 #endif
 
 /**
+ * @brief   GPIO port E identifier.
+ */
+#if AT32_HAS_GPIOE || defined(__DOXYGEN__)
+#define IOPORT5         GPIOE
+#endif
+
+
+/**
  * @brief   GPIO port F identifier.
  */
 #if AT32_HAS_GPIOF || defined(__DOXYGEN__)
-#define IOPORT5         GPIOF
+#define IOPORT6         GPIOF
+#endif
+
+/**
+ * @brief   GPIO port G identifier.
+ */
+#if AT32_HAS_GPIOG || defined(__DOXYGEN__)
+#define IOPORT7         GPIOG
 #endif
 
 /*===========================================================================*/

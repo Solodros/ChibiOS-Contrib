@@ -39,7 +39,11 @@
  */
 /* ADC attributes.*/
 #define AT32_HAS_ADC1                       TRUE
+#define AT32_ADC1_DMA_MSK                   (AT32_DMA_STREAM_ID_MSK(1, 1))
+#define AT32_ADC1_DMA_CHN                   0x00000000
 #define AT32_HAS_ADC2                       TRUE
+#define AT32_ADC2_DMA_MSK                   (AT32_DMA_STREAM_ID_MSK(1, 1))
+#define AT32_ADC2_DMA_CHN                   0x00000000
 
 /* CAN attributes.*/
 #define AT32_HAS_CAN1                       TRUE
@@ -52,7 +56,7 @@
 
 /* DMA attributes.*/
 #define AT32_ADVANCED_DMA                   FALSE
-#define AT32_DMA_SUPPORTS_DMAMUX            FALSE
+#define AT32_DMA_SUPPORTS_DMAMUX            TRUE
 #define AT32_DMA_SUPPORTS_CSELR             FALSE
 
 #define AT32_DMA1_NUM_CHANNELS              7
@@ -209,7 +213,7 @@
 
 /* IWDG attributes.*/
 #define AT32_HAS_IWDG                      TRUE
-#define AT32_IWDG_IS_WINDOWED              FALSE
+#define AT32_IWDG_IS_WINDOWED              TRUE
 
 /* FSMC attributes.*/
 #define AT32_HAS_FSMC                      FALSE
@@ -220,14 +224,18 @@
 
 #endif /* defined(AT32F413Kx) */
 
-#if defined(AT32F413Cx)
+#if defined(AT32F413Cx) || defined(__DOXYGEN__)
 /**
  * @name    AT32F413Cx capabilities
  * @{
  */
 /* ADC attributes.*/
 #define AT32_HAS_ADC1                       TRUE
+#define AT32_ADC1_DMA_MSK                   (AT32_DMA_STREAM_ID_MSK(1, 1))
+#define AT32_ADC1_DMA_CHN                   0x00000000
 #define AT32_HAS_ADC2                       TRUE
+#define AT32_ADC2_DMA_MSK                   (AT32_DMA_STREAM_ID_MSK(1, 1))
+#define AT32_ADC2_DMA_CHN                   0x00000000
 
 /* CAN attributes.*/
 #define AT32_HAS_CAN1                       TRUE
@@ -240,7 +248,7 @@
 
 /* DMA attributes.*/
 #define AT32_ADVANCED_DMA                   FALSE
-#define AT32_DMA_SUPPORTS_DMAMUX            FALSE
+#define AT32_DMA_SUPPORTS_DMAMUX            TRUE
 #define AT32_DMA_SUPPORTS_CSELR             FALSE
 
 #define AT32_DMA1_NUM_CHANNELS              7
@@ -405,7 +413,7 @@
 
 /* IWDG attributes.*/
 #define AT32_HAS_IWDG                      TRUE
-#define AT32_IWDG_IS_WINDOWED              FALSE
+#define AT32_IWDG_IS_WINDOWED              TRUE
 
 /* FSMC attributes.*/
 #define AT32_HAS_FSMC                      FALSE
@@ -417,14 +425,18 @@
 
 #endif /* defined(AT32F413Cx) */
 
-#if defined(AT32F413Rx)
+#if defined(AT32F413Rx) || defined(__DOXYGEN__)
 /**
  * @name    AT32F413Rx capabilities
  * @{
  */
 /* ADC attributes.*/
 #define AT32_HAS_ADC1                       TRUE
+#define AT32_ADC1_DMA_MSK                   (AT32_DMA_STREAM_ID_MSK(1, 1))
+#define AT32_ADC1_DMA_CHN                   0x00000000
 #define AT32_HAS_ADC2                       TRUE
+#define AT32_ADC2_DMA_MSK                   (AT32_DMA_STREAM_ID_MSK(1, 1))
+#define AT32_ADC2_DMA_CHN                   0x00000000
 
 /* CAN attributes.*/
 #define AT32_HAS_CAN1                       TRUE
@@ -437,7 +449,7 @@
 
 /* DMA attributes.*/
 #define AT32_ADVANCED_DMA                   FALSE
-#define AT32_DMA_SUPPORTS_DMAMUX            FALSE
+#define AT32_DMA_SUPPORTS_DMAMUX            TRUE
 #define AT32_DMA_SUPPORTS_CSELR             FALSE
 
 #define AT32_DMA1_NUM_CHANNELS              7
@@ -605,7 +617,7 @@
 
 /* IWDG attributes.*/
 #define AT32_HAS_IWDG                      TRUE
-#define AT32_IWDG_IS_WINDOWED              FALSE
+#define AT32_IWDG_IS_WINDOWED              TRUE
 
 /* FSMC attributes.*/
 #define AT32_HAS_FSMC                      FALSE

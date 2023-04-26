@@ -304,6 +304,10 @@
 #include "at32_dmamux.h"
 #endif
 
+#if !defined(AT32_DMA_USE_DMAMUX) || defined(__DOXYGEN__)
+#define AT32_DMA_USE_DMAMUX         FALSE
+#endif
+
 /*===========================================================================*/
 /* Driver data structures and types.                                         */
 /*===========================================================================*/
@@ -327,8 +331,6 @@ typedef struct {
                                              the same ISR.                  */
 #if (AT32_DMA_SUPPORTS_CSELR == TRUE) || defined(__DOXYGEN__)
   volatile uint32_t     *cselr;         /**< @brief Associated CSELR reg.   */
-#elif AT32_DMA_SUPPORTS_DMAMUX == TRUE
-  DMAMUX_Channel_TypeDef *mux;          /**< @brief Associated DMA mux.     */
 #else
   uint8_t               dummy;          /**< @brief Filler.                 */
 #endif
@@ -543,7 +545,7 @@ extern "C" {
   void dmaStreamFree(const at32_dma_stream_t *dmastp);
   void dmaServeInterrupt(const at32_dma_stream_t *dmastp);
 #if AT32_DMA_SUPPORTS_DMAMUX == TRUE
-  void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t per);
+  void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t channel, uint32_t per);
 #endif
 #ifdef __cplusplus
 }

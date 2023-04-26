@@ -142,8 +142,6 @@
 #define AT32_I2C_DMA_ERROR_HOOK(i2cp)      osalSysHalt("DMA failure")
 #endif
 
-#if AT32_ADVANCED_DMA || defined(__DOXYGEN__)
-
 /**
  * @brief   DMA stream used for I2C1 RX operations.
  * @note    This option is only available on platforms with enhanced DMA.
@@ -192,17 +190,34 @@
 #define AT32_I2C_I2C3_TX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 4)
 #endif
 
-#else /* !AT32_ADVANCED_DMA */
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+/**
+ * @brief   I2C1 DMA MUX setting.
+ */
+#if !defined(AT32_I2C_I2C1_RX_DMAMUX_CHANNEL) \
+    !defined(AT32_I2C_I2C1_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C1_RX_DMAMUX_CHANNEL    0
+#define AT32_I2C_I2C1_TX_DMAMUX_CHANNEL    1
+#endif
 
-/* Fixed streams for platforms using the old DMA peripheral, the values are
-   valid for both AT32F1xx and AT32L1xx.*/
-#define AT32_I2C_I2C1_RX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 7)
-#define AT32_I2C_I2C1_TX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 6)
-#define AT32_I2C_I2C2_RX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 5)
-#define AT32_I2C_I2C2_TX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 4)
+/**
+ * @brief   I2C2 DMA MUX setting.
+ */
+#if !defined(AT32_I2C_I2C2_RX_DMAMUX_CHANNEL) \
+    !defined(AT32_I2C_I2C2_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C2_RX_DMAMUX_CHANNEL    0
+#define AT32_I2C_I2C2_TX_DMAMUX_CHANNEL    1
+#endif
 
-#endif /* !AT32_ADVANCED_DMA*/
-
+/**
+ * @brief   I2C3 DMA MUX setting.
+ */
+#if !defined(AT32_I2C_I2C3_RX_DMAMUX_CHANNEL) \
+    !defined(AT32_I2C_I2C3_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C3_RX_DMAMUX_CHANNEL    0
+#define AT32_I2C_I2C3_TX_DMAMUX_CHANNEL    1
+#endif
+#endif
 /** @} */
 
 /*===========================================================================*/
@@ -257,57 +272,57 @@
 #error "Invalid DMA priority assigned to I2C3"
 #endif
 
-/* The following checks are only required when there is a DMA able to
-   reassign streams to different channels.*/
-#if AT32_ADVANCED_DMA
-/* Check on the presence of the DMA streams settings in mcuconf.h.*/
-#if AT32_I2C_USE_I2C1 && (!defined(AT32_I2C_I2C1_RX_DMA_STREAM) ||        \
+#if AT32_I2C_USE_I2C1 && (!defined(AT32_I2C_I2C1_RX_DMA_STREAM) ||         \
                            !defined(AT32_I2C_I2C1_TX_DMA_STREAM))
 #error "I2C1 DMA streams not defined"
 #endif
 
-#if AT32_I2C_USE_I2C2 && (!defined(AT32_I2C_I2C2_RX_DMA_STREAM) ||        \
+#if AT32_I2C_USE_I2C2 && (!defined(AT32_I2C_I2C2_RX_DMA_STREAM) ||         \
                            !defined(AT32_I2C_I2C2_TX_DMA_STREAM))
 #error "I2C2 DMA streams not defined"
 #endif
 
+#if AT32_I2C_USE_I2C3 && (!defined(AT32_I2C_I2C3_RX_DMA_STREAM) ||         \
+                           !defined(AT32_I2C_I2C3_TX_DMA_STREAM))
+#error "I2C3 DMA streams not defined"
+#endif
+
 /* Check on the validity of the assigned DMA channels.*/
 #if AT32_I2C_USE_I2C1 &&                                                   \
-    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C1_RX_DMA_STREAM,                    \
+    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C1_RX_DMA_STREAM,                     \
                            AT32_I2C1_RX_DMA_MSK)
 #error "invalid DMA stream associated to I2C1 RX"
 #endif
 
 #if AT32_I2C_USE_I2C1 &&                                                   \
-    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C1_TX_DMA_STREAM,                    \
+    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C1_TX_DMA_STREAM,                     \
                            AT32_I2C1_TX_DMA_MSK)
 #error "invalid DMA stream associated to I2C1 TX"
 #endif
 
 #if AT32_I2C_USE_I2C2 &&                                                   \
-    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C2_RX_DMA_STREAM,                    \
+    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C2_RX_DMA_STREAM,                     \
                            AT32_I2C2_RX_DMA_MSK)
 #error "invalid DMA stream associated to I2C2 RX"
 #endif
 
 #if AT32_I2C_USE_I2C2 &&                                                   \
-    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C2_TX_DMA_STREAM,                    \
+    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C2_TX_DMA_STREAM,                     \
                            AT32_I2C2_TX_DMA_MSK)
 #error "invalid DMA stream associated to I2C2 TX"
 #endif
 
 #if AT32_I2C_USE_I2C3 &&                                                   \
-    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C3_RX_DMA_STREAM,                    \
+    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C3_RX_DMA_STREAM,                     \
                            AT32_I2C3_RX_DMA_MSK)
 #error "invalid DMA stream associated to I2C3 RX"
 #endif
 
 #if AT32_I2C_USE_I2C3 &&                                                   \
-    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C3_TX_DMA_STREAM,                    \
+    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C3_TX_DMA_STREAM,                     \
                            AT32_I2C3_TX_DMA_MSK)
 #error "invalid DMA stream associated to I2C3 TX"
 #endif
-#endif /* AT32_ADVANCED_DMA */
 
 #if !defined(AT32_DMA_REQUIRED)
 #define AT32_DMA_REQUIRED

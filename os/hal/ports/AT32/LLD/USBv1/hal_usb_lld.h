@@ -108,14 +108,14 @@
 #if AT32_USB_USB1_IRQ_REMAP
 #if (!defined(AT32_USB_USB1_MAPHP_IRQ_PRIORITY) &&                           \
      (AT32_USB1_MAPHP_NUMBER != AT32_USB1_MAPLP_NUMBER)) || defined(__DOXYGEN__)
-#define AT32_USB_USB1_MAPHP_IRQ_PRIORITY      13
+#define AT32_USB_USB1_MAPHP_IRQ_PRIORITY   13
 #endif
 
 /**
  * @brief   USB1 MAP interrupt priority level setting.
  */
 #if !defined(AT32_USB_USB1_MAPLP_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_USB_USB1_MAPLP_IRQ_PRIORITY      14
+#define AT32_USB_USB1_MAPLP_IRQ_PRIORITY   14
 #endif
 #endif
 

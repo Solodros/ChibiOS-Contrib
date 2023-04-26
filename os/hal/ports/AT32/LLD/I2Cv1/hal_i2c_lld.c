@@ -578,7 +578,10 @@ void i2c_lld_start(I2CDriver *i2cp) {
                                     (at32_dmaisr_t)i2c_lld_serve_tx_end_irq,
                                     (void *)i2cp);
       osalDbgAssert(i2cp->dmatx != NULL, "unable to allocate stream");
-
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(i2cp->dmarx, AT32_I2C_I2C1_RX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C1_RX);
+      dmaSetRequestSource(i2cp->dmatx, AT32_I2C_I2C1_TX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C1_TX);
+#endif
       crmEnableI2C1(true);
       nvicEnableVector(I2C1_EVT_IRQn, AT32_I2C_I2C1_IRQ_PRIORITY);
       nvicEnableVector(I2C1_ERR_IRQn, AT32_I2C_I2C1_IRQ_PRIORITY);
@@ -604,7 +607,10 @@ void i2c_lld_start(I2CDriver *i2cp) {
                                     (at32_dmaisr_t)i2c_lld_serve_tx_end_irq,
                                     (void *)i2cp);
       osalDbgAssert(i2cp->dmatx != NULL, "unable to allocate stream");
-
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(i2cp->dmarx, AT32_I2C_I2C2_RX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C2_RX);
+      dmaSetRequestSource(i2cp->dmatx, AT32_I2C_I2C2_TX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C2_TX);
+#endif
       crmEnableI2C2(true);
       nvicEnableVector(I2C2_EVT_IRQn, AT32_I2C_I2C2_IRQ_PRIORITY);
       nvicEnableVector(I2C2_ERR_IRQn, AT32_I2C_I2C2_IRQ_PRIORITY);
@@ -630,7 +636,10 @@ void i2c_lld_start(I2CDriver *i2cp) {
                                     (at32_dmaisr_t)i2c_lld_serve_tx_end_irq,
                                     (void *)i2cp);
       osalDbgAssert(i2cp->dmatx != NULL, "unable to allocate stream");
-
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(i2cp->dmarx, AT32_I2C_I2C3_RX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C3_RX);
+      dmaSetRequestSource(i2cp->dmatx, AT32_I2C_I2C3_TX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C3_TX);
+#endif
       crmEnableI2C3(true);
       nvicEnableVector(I2C3_EVT_IRQn, AT32_I2C_I2C3_IRQ_PRIORITY);
       nvicEnableVector(I2C3_ERR_IRQn, AT32_I2C_I2C3_IRQ_PRIORITY);

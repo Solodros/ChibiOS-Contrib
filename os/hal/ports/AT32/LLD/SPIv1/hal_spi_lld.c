@@ -464,9 +464,9 @@ msg_t spi_lld_start(SPIDriver *spip) {
       }
       crmEnableSPI1(true);
       crmResetSPI1();
-#if AT32_DMA_SUPPORTS_DMAMUX
-      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX1_SPI1_RX);
-      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX1_SPI1_TX);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(spip->dmarx, AT32_SPI_SPI1_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI1_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI1_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI1_TX);
 #endif
     }
 #endif
@@ -482,9 +482,9 @@ msg_t spi_lld_start(SPIDriver *spip) {
       }
       crmEnableSPI2(true);
       crmResetSPI2();
-#if AT32_DMA_SUPPORTS_DMAMUX
-      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX1_SPI2_RX);
-      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX1_SPI2_TX);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(spip->dmarx, AT32_SPI_SPI2_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI2_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI2_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI2_TX);
 #endif
     }
 #endif
@@ -500,9 +500,9 @@ msg_t spi_lld_start(SPIDriver *spip) {
       }
       crmEnableSPI3(true);
       crmResetSPI3();
-#if AT32_DMA_SUPPORTS_DMAMUX
-      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX1_SPI3_RX);
-      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX1_SPI3_TX);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(spip->dmarx, AT32_SPI_SPI3_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI3_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI3_TX_DMAMUX_CHANNEL,AT32_DMAMUX_SPI3_TX);
 #endif
     }
 #endif
@@ -518,9 +518,9 @@ msg_t spi_lld_start(SPIDriver *spip) {
       }
       crmEnableSPI4(true);
       crmResetSPI4();
-#if AT32_DMA_SUPPORTS_DMAMUX
-      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX1_SPI4_RX);
-      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX1_SPI4_TX);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(spip->dmarx, AT32_SPI_SPI4_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI4_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI4_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI4_TX);
 #endif
     }
 #endif
@@ -536,9 +536,9 @@ msg_t spi_lld_start(SPIDriver *spip) {
       }
       crmEnableSPI5(true);
       crmResetSPI5();
-#if AT32_DMA_SUPPORTS_DMAMUX
-      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX1_SPI5_RX);
-      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX1_SPI5_TX);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(spip->dmarx, AT32_SPI_SPI5_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI5_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI5_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI5_TX);
 #endif
     }
 #endif
@@ -554,9 +554,9 @@ msg_t spi_lld_start(SPIDriver *spip) {
       }
       crmEnableSPI6(true);
       crmResetSPI6();
-#if AT32_DMA_SUPPORTS_DMAMUX
-      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX1_SPI6_RX);
-      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX1_SPI6_TX);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(spip->dmarx, AT32_SPI_SPI6_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI6_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI6_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI6_TX);
 #endif
     }
 #endif

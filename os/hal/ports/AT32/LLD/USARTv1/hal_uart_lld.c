@@ -695,6 +695,10 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CR_PL(AT32_UART_USART1_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CR_CHSEL(USART1_TX_DMA_CHANNEL) |
                           AT32_DMA_CR_PL(AT32_UART_USART1_DMA_PRIORITY);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(uartp->dmarx, AT32_UART_USART1_RX_DMAMUX_CHANNEL, AT32_DMAMUX_USART1_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_UART_USART1_TX_DMAMUX_CHANNEL, AT32_DMAMUX_USART1_TX);
+#endif
     }
 #endif
 
@@ -717,6 +721,10 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CR_PL(AT32_UART_USART2_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CR_CHSEL(USART2_TX_DMA_CHANNEL) |
                           AT32_DMA_CR_PL(AT32_UART_USART2_DMA_PRIORITY);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(uartp->dmarx, AT32_UART_USART2_RX_DMAMUX_CHANNEL, AT32_DMAMUX_USART2_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_UART_USART2_TX_DMAMUX_CHANNEL, AT32_DMAMUX_USART2_TX);
+#endif
     }
 #endif
 
@@ -739,6 +747,10 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CR_PL(AT32_UART_USART3_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CR_CHSEL(USART3_TX_DMA_CHANNEL) |
                           AT32_DMA_CR_PL(AT32_UART_USART3_DMA_PRIORITY);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(uartp->dmarx, AT32_UART_USART3_RX_DMAMUX_CHANNEL, AT32_DMAMUX_USART3_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_UART_USART3_TX_DMAMUX_CHANNEL, AT32_DMAMUX_USART3_TX);
+#endif
     }
 #endif
 
@@ -767,6 +779,10 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CR_PL(AT32_UART_UART4_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CR_CHSEL(UART4_TX_DMA_CHANNEL) |
                           AT32_DMA_CR_PL(AT32_UART_UART4_DMA_PRIORITY);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(uartp->dmarx, AT32_UART_UART4_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART4_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_UART_UART4_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART4_TX);
+#endif
     }
 #endif
 
@@ -795,6 +811,10 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CR_PL(AT32_UART_UART5_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CR_CHSEL(UART5_TX_DMA_CHANNEL) |
                           AT32_DMA_CR_PL(AT32_UART_UART5_DMA_PRIORITY);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(uartp->dmarx, AT32_UART_UART5_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART5_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_UART_UART5_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART5_TX);
+#endif
     }
 #endif
 
@@ -817,6 +837,10 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CR_PL(AT32_UART_USART6_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CR_CHSEL(USART6_TX_DMA_CHANNEL) |
                           AT32_DMA_CR_PL(AT32_UART_USART6_DMA_PRIORITY);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(uartp->dmarx, AT32_UART_USART6_RX_DMAMUX_CHANNEL, AT32_DMAMUX_USART6_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_UART_USART6_TX_DMAMUX_CHANNEL, AT32_DMAMUX_USART6_TX);
+#endif
     }
 #endif
 
@@ -845,6 +869,10 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CR_PL(AT32_UART_UART7_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CR_CHSEL(UART7_TX_DMA_CHANNEL) |
                           AT32_DMA_CR_PL(AT32_UART_UART7_DMA_PRIORITY);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(uartp->dmarx, AT32_UART_UART7_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART7_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_UART_UART7_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART7_TX);
+#endif
     }
 #endif
 
@@ -873,6 +901,10 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CR_PL(AT32_UART_UART8_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CR_CHSEL(UART8_TX_DMA_CHANNEL) |
                           AT32_DMA_CR_PL(AT32_UART_UART8_DMA_PRIORITY);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(uartp->dmarx, AT32_UART_UART8_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART8_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_UART_UART8_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART8_TX);
+#endif
     }
 #endif
 
@@ -901,6 +933,10 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CR_PL(AT32_UART_UART9_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CR_CHSEL(UART9_TX_DMA_CHANNEL) |
                           AT32_DMA_CR_PL(AT32_UART_UART9_DMA_PRIORITY);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(uartp->dmarx, AT32_UART_UART9_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART9_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_UART_UART9_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART9_TX);
+#endif     
     }
 #endif
 
@@ -929,6 +965,10 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CR_PL(AT32_UART_UART10_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CR_CHSEL(UART10_TX_DMA_CHANNEL) |
                           AT32_DMA_CR_PL(AT32_UART_UART10_DMA_PRIORITY);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(uartp->dmarx, AT32_UART_UART10_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART10_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_UART_UART10_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART10_TX);
+#endif
     }
 #endif
 

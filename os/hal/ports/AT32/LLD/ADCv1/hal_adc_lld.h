@@ -61,6 +61,7 @@
 #define ADC_CHANNEL_IN15        15  /**< @brief External analog input 15.   */
 #define ADC_CHANNEL_SENSOR      16  /**< @brief Internal temperature sensor.*/
 #define ADC_CHANNEL_VREFINT     17  /**< @brief Internal reference.         */
+#define ADC_CHANNEL_VSS         18  /**< @brief Internal reference.         */
 /** @} */
 
 /**
@@ -107,6 +108,81 @@
 #if !defined(AT32_ADC_ADC1_IRQ_PRIORITY) || defined(__DOXYGEN__)
 #define AT32_ADC_ADC1_IRQ_PRIORITY         5
 #endif
+
+/**
+ * @brief   ADC1 DMA MUX setting.
+ */
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if !defined(AT32_ADC_ADC1_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC1_DMAMUX_CHANNEL       0
+#endif
+#endif
+/** @} */
+
+/**
+ * @brief   ADC2 driver enable switch.
+ * @details If set to @p TRUE the support for ADC2 is included.
+ * @note    The default is @p TRUE.
+ */
+#if !defined(AT32_ADC_USE_ADC2) || defined(__DOXYGEN__)
+#define AT32_ADC_USE_ADC2                  FALSE
+#endif
+
+/**
+ * @brief   ADC2 DMA priority (0..3|lowest..highest).
+ */
+#if !defined(AT32_ADC_ADC2_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC2_DMA_PRIORITY         2
+#endif
+
+/**
+ * @brief   ADC2 interrupt priority level setting.
+ */
+#if !defined(AT32_ADC_ADC2_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC2_IRQ_PRIORITY         5
+#endif
+
+/**
+ * @brief   ADC2 DMA MUX setting.
+ */
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if !defined(AT32_ADC_ADC2_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC2_DMAMUX_CHANNEL       0
+#endif
+#endif
+/** @} */
+
+/**
+ * @brief   ADC3 driver enable switch.
+ * @details If set to @p TRUE the support for ADC3 is included.
+ * @note    The default is @p TRUE.
+ */
+#if !defined(AT32_ADC_USE_ADC3) || defined(__DOXYGEN__)
+#define AT32_ADC_USE_ADC3                  FALSE
+#endif
+
+/**
+ * @brief   ADC3 DMA priority (0..3|lowest..highest).
+ */
+#if !defined(AT32_ADC_ADC3_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC3_DMA_PRIORITY         2
+#endif
+
+/**
+ * @brief   ADC3 interrupt priority level setting.
+ */
+#if !defined(AT32_ADC_ADC3_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC3_IRQ_PRIORITY         5
+#endif
+
+/**
+ * @brief   ADC3 DMA MUX setting.
+ */
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if !defined(AT32_ADC_ADC3_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC3_DMAMUX_CHANNEL       0
+#endif
+#endif
 /** @} */
 
 /*===========================================================================*/
@@ -117,9 +193,18 @@
 #error "ADC1 not present in the selected device"
 #endif
 
-#if !AT32_ADC_USE_ADC1
+#if AT32_ADC_USE_ADC2 && !AT32_HAS_ADC2
+#error "ADC2 not present in the selected device"
+#endif
+
+#if AT32_ADC_USE_ADC3 && !AT32_HAS_ADC3
+#error "ADC3 not present in the selected device"
+#endif
+
+#if !AT32_ADC_USE_ADC1 || !AT32_ADC_USE_ADC2 || !AT32_ADC_USE_ADC3
 #error "ADC driver activated but no ADC peripheral assigned"
 #endif
+
 
 #if !defined(AT32_DMA_REQUIRED)
 #define AT32_DMA_REQUIRED
@@ -263,6 +348,14 @@ typedef enum {
 
 #if AT32_ADC_USE_ADC1 && !defined(__DOXYGEN__)
 extern ADCDriver ADCD1;
+#endif
+
+#if AT32_ADC_USE_ADC2 && !defined(__DOXYGEN__)
+extern ADCDriver ADCD2;
+#endif
+
+#if AT32_ADC_USE_ADC3 && !defined(__DOXYGEN__)
+extern ADCDriver ADCD3;
 #endif
 
 #ifdef __cplusplus

@@ -234,6 +234,62 @@
 #if !defined(AT32_SPI_DMA_ERROR_HOOK) || defined(__DOXYGEN__)
 #define AT32_SPI_DMA_ERROR_HOOK(spip)      osalSysHalt("DMA failure")
 #endif
+
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+/**
+ * @brief   SPI1 DMA MUX setting.
+ */
+#if !defined(AT32_SPI_SPI1_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_SPI_SPI1_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI1_RX_DMAMUX_CHANNEL    0
+#define AT32_SPI_SPI1_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   SPI2 DMA MUX setting.
+ */
+#if !defined(AT32_SPI_SPI2_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_SPI_SPI2_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI2_RX_DMAMUX_CHANNEL    0
+#define AT32_SPI_SPI2_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   SPI3 DMA MUX setting.
+ */
+#if !defined(AT32_SPI_SPI3_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_SPI_SPI3_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI3_RX_DMAMUX_CHANNEL    0
+#define AT32_SPI_SPI3_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   SPI4 DMA MUX setting.
+ */
+#if !defined(AT32_SPI_SPI4_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_SPI_SPI4_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI4_RX_DMAMUX_CHANNEL    0
+#define AT32_SPI_SPI4_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   SPI5 DMA MUX setting.
+ */
+#if !defined(AT32_SPI_SPI5_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_SPI_SPI5_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI5_RX_DMAMUX_CHANNEL    0
+#define AT32_SPI_SPI5_TX_DMAMUX_CHANNEL    1
+#endif
+
+/**
+ * @brief   SPI6 DMA MUX setting.
+ */
+#if !defined(AT32_SPI_SPI6_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_SPI_SPI6_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI6_RX_DMAMUX_CHANNEL    0
+#define AT32_SPI_SPI6_TX_DMAMUX_CHANNEL    1
+#endif
+#endif
 /** @} */
 
 /*===========================================================================*/
@@ -299,9 +355,6 @@
 #error "Invalid IRQ priority assigned to SPI6"
 #endif
 
-/* The following checks are only required when there is a DMA able to
-   reassign streams to different channels.*/
-#if AT32_ADVANCED_DMA
 /* Check on the presence of the DMA streams settings in mcuconf.h.*/
 #if AT32_SPI_USE_SPI1 && (!defined(AT32_SPI_SPI1_RX_DMA_STREAM) ||        \
                            !defined(AT32_SPI_SPI1_TX_DMA_STREAM))
@@ -393,7 +446,6 @@
     !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI6_TX_DMA_STREAM, AT32_SPI6_TX_DMA_MSK)
 #error "invalid DMA stream associated to SPI6 TX"
 #endif
-#endif /* AT32_ADVANCED_DMA */
 
 #if !defined(AT32_DMA_REQUIRED)
 #define AT32_DMA_REQUIRED

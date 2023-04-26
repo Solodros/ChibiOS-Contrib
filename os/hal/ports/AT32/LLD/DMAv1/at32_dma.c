@@ -81,28 +81,7 @@
 #define DMA2_CH7_VARIANT            __DMA2_CSELR
 #define DMA2_CH8_VARIANT            __DMA2_CSELR
 
-#elif AT32_DMA_SUPPORTS_DMAMUX == TRUE
-
-#define DMAMUX1_CHANNEL(id)         (DMAMUX1_BASE + ((id) * 4U))
-
-#define DMA1_CH1_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(0))
-#define DMA1_CH2_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(1))
-#define DMA1_CH3_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(2))
-#define DMA1_CH4_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(3))
-#define DMA1_CH5_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(4))
-#define DMA1_CH6_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(5))
-#define DMA1_CH7_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(6))
-#define DMA1_CH8_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(7))
-#define DMA2_CH1_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(0 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH2_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(1 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH3_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(2 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH4_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(3 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH5_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(4 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH6_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(5 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH7_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(6 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH8_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(7 + AT32_DMA1_NUM_CHANNELS))
-
-#else /* !(AT32_DMA_SUPPORTS_DMAMUX == TRUE) */
+#else 
 
 #define DMA1_CH1_VARIANT            0
 #define DMA1_CH2_VARIANT            0
@@ -119,7 +98,7 @@
 #define DMA2_CH6_VARIANT            0
 #define DMA2_CH7_VARIANT            0
 
-#endif /* !(AT32_DMA_SUPPORTS_DMAMUX == TRUE) */
+#endif
 
 /*
  * Default ISR collision masks.
@@ -803,11 +782,16 @@ void dmaServeInterrupt(const at32_dma_stream_t *dmastp) {
  *
  * @special
  */
-void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t per) {
+void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t channel, uint32_t per) {
 
   osalDbgCheck(per < 256U);
 
-  dmastp->mux->CTRL = per;
+  dmastp->dma->SRC_SEL1 |= DMA_SRC_SEL1_DMA_FLEX_EN;
+  if (channel < 5) {
+    dmastp->dma->SRC_SEL0 |= (per << ((channel - 1) * 8));
+  } else {
+    dmastp->dma->SRC_SEL1 |= (per << ((channel - 5) * 8));
+  }
 }
 #endif
 

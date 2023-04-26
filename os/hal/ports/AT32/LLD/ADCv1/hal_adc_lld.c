@@ -29,7 +29,20 @@
 /*===========================================================================*/
 /* Driver local definitions.                                                 */
 /*===========================================================================*/
+#if AT32_HAS_ADC1
+#define ADC1_DMA_CHANNEL                                                    \
+  AT32_DMA_GETCHANNEL(AT32_ADC_ADC1_DMA_STREAM, AT32_ADC1_DMA_CHN)
+#endif
 
+#if AT32_HAS_ADC2
+#define ADC2_DMA_CHANNEL                                                    \
+  AT32_DMA_GETCHANNEL(AT32_ADC_ADC2_DMA_STREAM, AT32_ADC2_DMA_CHN)
+#endif
+
+#if AT32_HAS_ADC3
+#define ADC3_DMA_CHANNEL                                                    \
+  AT32_DMA_GETCHANNEL(AT32_ADC_ADC3_DMA_STREAM, AT32_ADC3_DMA_CHN)
+#endif
 /*===========================================================================*/
 /* Driver exported variables.                                                */
 /*===========================================================================*/
@@ -37,6 +50,16 @@
 /** @brief ADC1 driver identifier.*/
 #if AT32_ADC_USE_ADC1 || defined(__DOXYGEN__)
 ADCDriver ADCD1;
+#endif
+
+/** @brief ADC2 driver identifier.*/
+#if AT32_ADC_USE_ADC2 || defined(__DOXYGEN__)
+ADCDriver ADCD2;
+#endif
+
+/** @brief ADC3 driver identifier.*/
+#if AT32_ADC_USE_ADC3 || defined(__DOXYGEN__)
+ADCDriver ADCD3;
 #endif
 
 /*===========================================================================*/
@@ -93,7 +116,8 @@ void adc_lld_init(void) {
   adcObjectInit(&ADCD1);
   ADCD1.adc = ADC1;
   ADCD1.dmastp  = NULL;
-  ADCD1.dmamode = AT32_DMA_CR_PL(AT32_ADC_ADC1_DMA_PRIORITY) |
+  ADCD1.dmamode = AT32_DMA_CR_CHSEL(ADC1_DMA_CHANNEL) |
+                  AT32_DMA_CR_PL(AT32_ADC_ADC1_DMA_PRIORITY) |
                   AT32_DMA_CR_MSIZE_HWORD | AT32_DMA_CR_PSIZE_HWORD |
                   AT32_DMA_CR_MINC        | AT32_DMA_CR_TCIE        |
                   AT32_DMA_CR_TEIE;
@@ -115,6 +139,64 @@ void adc_lld_init(void) {
   ADC1->CTRL2 = 0;
   crmDisableADC1();
 #endif
+
+#if AT32_ADC_USE_ADC2
+  /* Driver initialization.*/
+  adcObjectInit(&ADCD2);
+  ADCD2.adc = ADC2;
+  ADCD2.dmastp  = NULL;
+  ADCD2.dmamode = AT32_DMA_CR_CHSEL(ADC2_DMA_CHANNEL) |
+                  AT32_DMA_CR_PL(AT32_ADC_ADC2_DMA_PRIORITY) |
+                  AT32_DMA_CR_MSIZE_HWORD | AT32_DMA_CR_PSIZE_HWORD |
+                  AT32_DMA_CR_MINC        | AT32_DMA_CR_TCIE        |
+                  AT32_DMA_CR_TEIE;
+
+  /* Temporary activation.*/
+  crmEnableADC2(true);
+  ADC2->CTRL1 = 0;
+  ADC2->CTRL2 = ADC_CTRL2_ADCEN;
+
+  /* Reset calibration just to be safe.*/
+  ADC2->CTRL2 = ADC_CTRL2_ADCEN | ADC_CTRL2_ADCALINIT;
+  while ((ADC2->CTRL2 & ADC_CTRL2_ADCALINIT) != 0);
+
+  /* Calibration.*/
+  ADC2->CTRL2 = ADC_CTRL2_ADCEN | ADC_CTRL2_ADCAL;
+  while ((ADC2->CTRL2 & ADC_CTRL2_ADCAL) != 0);
+
+  /* Return the ADC in low power mode.*/
+  ADC2->CTRL2 = 0;
+  crmDisableADC2();
+#endif
+
+#if AT32_ADC_USE_ADC3
+  /* Driver initialization.*/
+  adcObjectInit(&ADCD3);
+  ADCD3.adc = ADC3;
+  ADCD3.dmastp  = NULL;
+  ADCD3.dmamode = AT32_DMA_CR_CHSEL(ADC3_DMA_CHANNEL) |
+                  AT32_DMA_CR_PL(AT32_ADC_ADC3_DMA_PRIORITY) |
+                  AT32_DMA_CR_MSIZE_HWORD | AT32_DMA_CR_PSIZE_HWORD |
+                  AT32_DMA_CR_MINC        | AT32_DMA_CR_TCIE        |
+                  AT32_DMA_CR_TEIE;
+
+  /* Temporary activation.*/
+  crmEnableADC3(true);
+  ADC3->CTRL1 = 0;
+  ADC3->CTRL2 = ADC_CTRL2_ADCEN;
+
+  /* Reset calibration just to be safe.*/
+  ADC3->CTRL2 = ADC_CTRL2_ADCEN | ADC_CTRL2_ADCALINIT;
+  while ((ADC3->CTRL2 & ADC_CTRL2_ADCALINIT) != 0);
+
+  /* Calibration.*/
+  ADC3->CTRL2 = ADC_CTRL2_ADCEN | ADC_CTRL2_ADCAL;
+  while ((ADC3->CTRL2 & ADC_CTRL2_ADCAL) != 0);
+
+  /* Return the ADC in low power mode.*/
+  ADC3->CTRL2 = 0;
+  crmDisableADC3();
+#endif
 }
 
 /**
@@ -130,16 +212,48 @@ void adc_lld_start(ADCDriver *adcp) {
   if (adcp->state == ADC_STOP) {
 #if AT32_ADC_USE_ADC1
     if (&ADCD1 == adcp) {
-      adcp->dmastp = dmaStreamAllocI(AT32_DMA_STREAM_ID(1, 1),
+      adcp->dmastp = dmaStreamAllocI(AT32_ADC_ADC1_DMA_STREAM,
                                      AT32_ADC_ADC1_IRQ_PRIORITY,
                                      (at32_dmaisr_t)adc_lld_serve_rx_interrupt,
                                      (void *)adcp);
       osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
       dmaStreamSetPeripheral(adcp->dmastp, &ADC1->ODT);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC1_DMAMUX_CHANNEL, AT32_DMAMUX_ADC1);
+#endif
       crmEnableADC1(true);
     }
 #endif
 
+#if AT32_ADC_USE_ADC2
+    if (&ADCD2 == adcp) {
+      adcp->dmastp = dmaStreamAllocI(AT32_ADC_ADC2_DMA_STREAM,
+                                     AT32_ADC_ADC2_IRQ_PRIORITY,
+                                     (at32_dmaisr_t)adc_lld_serve_rx_interrupt,
+                                     (void *)adcp);
+      osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
+      dmaStreamSetPeripheral(adcp->dmastp, &ADC2->ODT);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC2_DMAMUX_CHANNEL, AT32_DMAMUX_ADC2);
+#endif
+      crmEnableADC2(true);
+    }
+#endif
+
+#if AT32_ADC_USE_ADC3
+    if (&ADCD3 == adcp) {
+      adcp->dmastp = dmaStreamAllocI(AT32_ADC_ADC3_DMA_STREAM,
+                                     AT32_ADC_ADC3_IRQ_PRIORITY,
+                                     (at32_dmaisr_t)adc_lld_serve_rx_interrupt,
+                                     (void *)adcp);
+      osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
+      dmaStreamSetPeripheral(adcp->dmastp, &ADC3->ODT);
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC3_DMAMUX_CHANNEL, AT32_DMAMUX_ADC3);
+#endif
+      crmEnableADC3(true);
+    }
+#endif
     /* ADC setup, the calibration procedure has already been performed
        during initialization.*/
     adcp->adc->CTRL1 = 0;
@@ -167,6 +281,30 @@ void adc_lld_stop(ADCDriver *adcp) {
       adcp->dmastp = NULL;
 
       crmDisableADC1();
+    }
+#endif
+
+#if AT32_ADC_USE_ADC2
+    if (&ADCD2 == adcp) {
+      ADC2->CTRL1 = 0;
+      ADC2->CTRL2 = 0;
+
+      dmaStreamFreeI(adcp->dmastp);
+      adcp->dmastp = NULL;
+
+      crmDisableADC2();
+    }
+#endif
+
+#if AT32_ADC_USE_ADC3
+    if (&ADCD3 == adcp) {
+      ADC3->CTRL1 = 0;
+      ADC3->CTRL2 = 0;
+
+      dmaStreamFreeI(adcp->dmastp);
+      adcp->dmastp = NULL;
+
+      crmDisableADC3();
     }
 #endif
   }
