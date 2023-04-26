@@ -17,7 +17,7 @@
 /**
  * @file    DMAv1/at32_dma.h
  * @brief   DMA helper driver header.
- * @note    This driver uses the new naming convention used for the AT32F2xx
+ * @note    This driver uses the new naming convention used for the AT32F4xx
  *          so the "DMA channels" are referred as "DMA streams".
  *
  * @addtogroup AT32_DMA

@@ -716,7 +716,7 @@ void i2c_lld_stop(I2CDriver *i2cp) {
 
 /**
  * @brief   Receives data via the I2C bus as master.
- * @details Number of receiving bytes must be more than 1 on AT32F1x. This is
+ * @details Number of receiving bytes must be more than 1 on AT32F4x. This is
  *          hardware restriction.
  *
  * @param[in] i2cp      pointer to the @p I2CDriver object
@@ -799,7 +799,7 @@ msg_t i2c_lld_master_receive_timeout(I2CDriver *i2cp, i2caddr_t addr,
 
 /**
  * @brief   Transmits data via the I2C bus as master.
- * @details Number of receiving bytes must be 0 or more than 1 on AT32F1x.
+ * @details Number of receiving bytes must be 0 or more than 1 on AT32F4x.
  *          This is hardware restriction.
  *
  * @param[in] i2cp      pointer to the @p I2CDriver object
@@ -830,7 +830,7 @@ msg_t i2c_lld_master_transmit_timeout(I2CDriver *i2cp, i2caddr_t addr,
   systime_t start, end;
   msg_t msg;
 
-#if defined(AT32F1XX_I2C)
+#if defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F40x)
   osalDbgCheck((rxbytes == 0) || ((rxbytes > 1) && (rxbuf != NULL)));
 #endif
 
