@@ -491,6 +491,9 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define DMA_CTRL_CHPL_HIGHEST            (0x3U << 12)
 #define DMA_CTRL_M2M                     (0x1U << 14)
 
+/******************  Bit definition for DMA_SRC_SEL1 register  *************/
+#define DMA_SRC_SEL1_DMA_FLEX_EN         (0x1U << 24)
+
 /******************  Bit definition for ADC_CTRL1 register  ***************/
 #define ADC_CTRL1_SQEN                   (0x1U << 8)
 
@@ -545,139 +548,139 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define I2C_CLKCTRL_SPEEDMODE            (0x1U << 15)
 
 /*******************  Bit definition for USART_STS register  **************/
-#define USART_STS_PERR                    (0x1U << 0)                   
-#define USART_STS_FERR                    (0x1U << 1)                   
-#define USART_STS_NERR                    (0x1U << 2)                   
-#define USART_STS_ROERR                   (0x1U << 3)                   
-#define USART_STS_IDLEF                   (0x1U << 4)                  
-#define USART_STS_RDBF                    (0x1U << 5)
-#define USART_STS_TDC                     (0x1U << 6)
-#define USART_STS_TDBE                    (0x1U << 7)
-#define USART_STS_BFF                     (0x1U << 8)
-#define USART_STS_CTSCF                   (0x1U << 9)
+#define USART_STS_PERR                   (0x1U << 0)                   
+#define USART_STS_FERR                   (0x1U << 1)                   
+#define USART_STS_NERR                   (0x1U << 2)                   
+#define USART_STS_ROERR                  (0x1U << 3)                   
+#define USART_STS_IDLEF                  (0x1U << 4)                  
+#define USART_STS_RDBF                   (0x1U << 5)
+#define USART_STS_TDC                    (0x1U << 6)
+#define USART_STS_TDBE                   (0x1U << 7)
+#define USART_STS_BFF                    (0x1U << 8)
+#define USART_STS_CTSCF                  (0x1U << 9)
 
 /*******************  Bit definition for USART_DT register  ***************/
-#define USART_DT_DT                       (0x1FF << 0)
+#define USART_DT_DT                      (0x1FF << 0)
 
 /******************  Bit definition for USART_CTRL1 register  *************/
-#define USART_CTRL1_SBF                   (0x1U << 0)
-#define USART_CTRL1_RM                    (0x1U << 1)
-#define USART_CTRL1_REN                   (0x1U << 2)
-#define USART_CTRL1_TEN                   (0x1U << 3)
-#define USART_CTRL1_IDLEIEN               (0x1U << 4)
-#define USART_CTRL1_RDBFIEN               (0x1U << 5)
-#define USART_CTRL1_TDCIEN                (0x1U << 6)
-#define USART_CTRL1_TDBEIEN               (0x1U << 7)
-#define USART_CTRL1_PERRIEN               (0x1U << 8)
-#define USART_CTRL1_PSEL                  (0x1U << 9)
-#define USART_CTRL1_PEN                   (0x1U << 10)
-#define USART_CTRL1_WUM                   (0x1U << 11)
-#define USART_CTRL1_DBN                   (0x1U << 12)
-#define USART_CTRL1_UEN                   (0x1U << 13)
+#define USART_CTRL1_SBF                  (0x1U << 0)
+#define USART_CTRL1_RM                   (0x1U << 1)
+#define USART_CTRL1_REN                  (0x1U << 2)
+#define USART_CTRL1_TEN                  (0x1U << 3)
+#define USART_CTRL1_IDLEIEN              (0x1U << 4)
+#define USART_CTRL1_RDBFIEN              (0x1U << 5)
+#define USART_CTRL1_TDCIEN               (0x1U << 6)
+#define USART_CTRL1_TDBEIEN              (0x1U << 7)
+#define USART_CTRL1_PERRIEN              (0x1U << 8)
+#define USART_CTRL1_PSEL                 (0x1U << 9)
+#define USART_CTRL1_PEN                  (0x1U << 10)
+#define USART_CTRL1_WUM                  (0x1U << 11)
+#define USART_CTRL1_DBN                  (0x1U << 12)
+#define USART_CTRL1_UEN                  (0x1U << 13)
 
 /******************  Bit definition for USART_CTRL2 register  *************/
-#define USART_CTRL2_ID                    (0xFU << 0)
-#define USART_CTRL2_BFBN                  (0x1U << 5)
-#define USART_CTRL2_BFIEN                 (0x1U << 6)
-#define USART_CTRL2_LBCP                  (0x1U << 8)
-#define USART_CTRL2_CLKPHA                (0x1U << 9)
-#define USART_CTRL2_CLKPOL                (0x1U << 10)
-#define USART_CTRL2_CLKEN                 (0x1U << 11)
-#define USART_CTRL2_STOPBN                (0x3U << 12)
-#define USART_CTRL2_STOP_0                (0x1U << 12)           
-#define USART_CTRL2_STOP_1                (0x1U << 13)  
-#define USART_CTRL2_STOPBN_1_BITS         (0x0U << 12)
-#define USART_CTRL2_STOPBN_0P5_BITS       (0x1U << 12)
-#define USART_CTRL2_STOPBN_2_BITS         (0x2U << 12)
-#define USART_CTRL2_STOPBN_1P5_BITS       (0x3U << 12)
-#define USART_CTRL2_LINEN                 (0x1U << 14)
+#define USART_CTRL2_ID                   (0xFU << 0)
+#define USART_CTRL2_BFBN                 (0x1U << 5)
+#define USART_CTRL2_BFIEN                (0x1U << 6)
+#define USART_CTRL2_LBCP                 (0x1U << 8)
+#define USART_CTRL2_CLKPHA               (0x1U << 9)
+#define USART_CTRL2_CLKPOL               (0x1U << 10)
+#define USART_CTRL2_CLKEN                (0x1U << 11)
+#define USART_CTRL2_STOPBN               (0x3U << 12)
+#define USART_CTRL2_STOP_0               (0x1U << 12)           
+#define USART_CTRL2_STOP_1               (0x1U << 13)  
+#define USART_CTRL2_STOPBN_1_BITS        (0x0U << 12)
+#define USART_CTRL2_STOPBN_0P5_BITS      (0x1U << 12)
+#define USART_CTRL2_STOPBN_2_BITS        (0x2U << 12)
+#define USART_CTRL2_STOPBN_1P5_BITS      (0x3U << 12)
+#define USART_CTRL2_LINEN                (0x1U << 14)
 
 /******************  Bit definition for USART_CTRL3 register  *************/
-#define USART_CTRL3_ERRIEN                (0x1U << 0)
-#define USART_CTRL3_IRDAEN                (0x1U << 1)
-#define USART_CTRL3_IRDALP                (0x1U << 2)
-#define USART_CTRL3_SLBEN                 (0x1U << 3)
-#define USART_CTRL3_SCNACKEN              (0x1U << 4)
-#define USART_CTRL3_SCMEN                 (0x1U << 5)
-#define USART_CTRL3_DMAREN                (0x1U << 6)
-#define USART_CTRL3_DMATEN                (0x1U << 7)
-#define USART_CTRL3_RTSEN                 (0x1U << 8)
-#define USART_CTRL3_CTSEN                 (0x1U << 9)
-#define USART_CTRL3_CTSCFIEN              (0x1U << 10)
+#define USART_CTRL3_ERRIEN               (0x1U << 0)
+#define USART_CTRL3_IRDAEN               (0x1U << 1)
+#define USART_CTRL3_IRDALP               (0x1U << 2)
+#define USART_CTRL3_SLBEN                (0x1U << 3)
+#define USART_CTRL3_SCNACKEN             (0x1U << 4)
+#define USART_CTRL3_SCMEN                (0x1U << 5)
+#define USART_CTRL3_DMAREN               (0x1U << 6)
+#define USART_CTRL3_DMATEN               (0x1U << 7)
+#define USART_CTRL3_RTSEN                (0x1U << 8)
+#define USART_CTRL3_CTSEN                (0x1U << 9)
+#define USART_CTRL3_CTSCFIEN             (0x1U << 10)
 
 /*******************  Bit definition for SPI_CTRL1 register  **************/
-#define SPI_CTRL1_CLKPHA                  (0x1U << 0)
-#define SPI_CTRL1_CLKPOL                  (0x1U << 1)
-#define SPI_CTRL1_MSTEN                   (0x1U << 2)
-#define SPI_CTRL1_MDIV                    (0x7U << 3)
-#define SPI_CTRL1_MDIV_2                  (0x0U << 3)
-#define SPI_CTRL1_MDIV_4                  (0x1U << 3)
-#define SPI_CTRL1_MDIV_8                  (0x2U << 3)
-#define SPI_CTRL1_MDIV_16                 (0x3U << 3)
-#define SPI_CTRL1_MDIV_32                 (0x4U << 3)
-#define SPI_CTRL1_MDIV_64                 (0x5U << 3)
-#define SPI_CTRL1_MDIV_128                (0x6U << 3)
-#define SPI_CTRL1_MDIV_256                (0x7U << 3)
-#define SPI_CTRL1_MDIV_512                (0x0U << 3)
-#define SPI_CTRL1_MDIV_1024               (0x1U << 3)
-#define SPI_CTRL1_SPIEN                   (0x1U << 6)
-#define SPI_CTRL1_LTF                     (0x1U << 7)
-#define SPI_CTRL1_SWCSIL                  (0x1U << 8)
-#define SPI_CTRL1_SWCSEN                  (0x1U << 9)
-#define SPI_CTRL1_ORA                     (0x1U << 10)
-#define SPI_CTRL1_FBN                     (0x1U << 11)
-#define SPI_CTRL1_NTC                     (0x1U << 12)
-#define SPI_CTRL1_CCEN                    (0x1U << 13)
-#define SPI_CTRL1_SLBTD                   (0x1U << 14)
-#define SPI_CTRL1_SLBEN                   (0x1U << 15)
+#define SPI_CTRL1_CLKPHA                 (0x1U << 0)
+#define SPI_CTRL1_CLKPOL                 (0x1U << 1)
+#define SPI_CTRL1_MSTEN                  (0x1U << 2)
+#define SPI_CTRL1_MDIV                   (0x7U << 3)
+#define SPI_CTRL1_MDIV_2                 (0x0U << 3)
+#define SPI_CTRL1_MDIV_4                 (0x1U << 3)
+#define SPI_CTRL1_MDIV_8                 (0x2U << 3)
+#define SPI_CTRL1_MDIV_16                (0x3U << 3)
+#define SPI_CTRL1_MDIV_32                (0x4U << 3)
+#define SPI_CTRL1_MDIV_64                (0x5U << 3)
+#define SPI_CTRL1_MDIV_128               (0x6U << 3)
+#define SPI_CTRL1_MDIV_256               (0x7U << 3)
+#define SPI_CTRL1_MDIV_512               (0x0U << 3)
+#define SPI_CTRL1_MDIV_1024              (0x1U << 3)
+#define SPI_CTRL1_SPIEN                  (0x1U << 6)
+#define SPI_CTRL1_LTF                    (0x1U << 7)
+#define SPI_CTRL1_SWCSIL                 (0x1U << 8)
+#define SPI_CTRL1_SWCSEN                 (0x1U << 9)
+#define SPI_CTRL1_ORA                    (0x1U << 10)
+#define SPI_CTRL1_FBN                    (0x1U << 11)
+#define SPI_CTRL1_NTC                    (0x1U << 12)
+#define SPI_CTRL1_CCEN                   (0x1U << 13)
+#define SPI_CTRL1_SLBTD                  (0x1U << 14)
+#define SPI_CTRL1_SLBEN                  (0x1U << 15)
 
 /*******************  Bit definition for SPI_CTRL2 register  **************/
-#define SPI_CTRL2_DMAREN                  (0x1U << 0)
-#define SPI_CTRL2_DMATEN                  (0x1U << 1)
-#define SPI_CTRL2_HWCSOE                  (0x1U << 2)
-#define SPI_CTRL2_ERRIE                   (0x1U << 5)
-#define SPI_CTRL2_RDBFIE                  (0x1U << 6)
-#define SPI_CTRL2_TDBEIE                  (0x1U << 7)
-#define SPI_CTRL2_MDIV                    (0x1U << 8)
-#define SPI_CTRL2_MDIV_512_1024           (0x1U << 8)
+#define SPI_CTRL2_DMAREN                 (0x1U << 0)
+#define SPI_CTRL2_DMATEN                 (0x1U << 1)
+#define SPI_CTRL2_HWCSOE                 (0x1U << 2)
+#define SPI_CTRL2_ERRIE                  (0x1U << 5)
+#define SPI_CTRL2_RDBFIE                 (0x1U << 6)
+#define SPI_CTRL2_TDBEIE                 (0x1U << 7)
+#define SPI_CTRL2_MDIV                   (0x1U << 8)
+#define SPI_CTRL2_MDIV_512_1024          (0x1U << 8)
 
 /*******************  Bit definition for SPI_STS register  ********************/
-#define SPI_STS_RDBF                       (0x1U << 0)
-#define SPI_STS_TDBE                       (0x1U << 1)
-#define SPI_STS_ACS                        (0x1U << 2)
-#define SPI_STS_TUERR                      (0x1U << 3)
-#define SPI_STS_CCERR                      (0x1U << 4)
-#define SPI_STS_MMERR                      (0x1U << 5)
-#define SPI_STS_ROERR                      (0x1U << 6)
-#define SPI_STS_BF                         (0x1U << 7)
+#define SPI_STS_RDBF                     (0x1U << 0)
+#define SPI_STS_TDBE                     (0x1U << 1)
+#define SPI_STS_ACS                      (0x1U << 2)
+#define SPI_STS_TUERR                    (0x1U << 3)
+#define SPI_STS_CCERR                    (0x1U << 4)
+#define SPI_STS_MMERR                    (0x1U << 5)
+#define SPI_STS_ROERR                    (0x1U << 6)
+#define SPI_STS_BF                       (0x1U << 7)
 
 /*******************  Bit definition for SPI_I2SCTRL register  *****************/
-#define SPI_I2SCTRL_I2SCBN                 (0x1U << 0)
-#define SPI_I2SCTRL_I2SDBN                 (0x3U << 1)
-#define SPI_I2SCTRL_I2SDBN_16BITS          (0x0U << 1)
-#define SPI_I2SCTRL_I2SDBN_24BITS          (0x1U << 1)
-#define SPI_I2SCTRL_I2SDBN_32BITS          (0x2U << 1)
-#define SPI_I2SCTRL_I2SDBN_NONE            (0x3U << 1)
-#define SPI_I2SCTRL_I2SCLKPOL              (0x1U << 3)
-#define SPI_I2SCTRL_STDSEL                 (0x3U << 4)
-#define SPI_I2SCTRL_STDSEL_PHILIPS         (0x0U << 4)
-#define SPI_I2SCTRL_STDSEL_MSB             (0x1U << 4)
-#define SPI_I2SCTRL_STDSEL_LSB             (0x2U << 4)
-#define SPI_I2SCTRL_STDSEL_PCM             (0x3U << 4)
-#define SPI_I2SCTRL_PCMFSSEL               (0x1U << 7)
-#define SPI_I2SCTRL_OPERSEL                (0x3U << 8)
-#define SPI_I2SCTRL_OPERSEL_ST             (0x0U << 8)
-#define SPI_I2SCTRL_OPERSEL_SR             (0x1U << 8)
-#define SPI_I2SCTRL_OPERSEL_HT             (0x2U << 8)
-#define SPI_I2SCTRL_OPERSEL_HR             (0x3U << 8)
-#define SPI_I2SCTRL_I2SEN                  (0x1U << 10)
-#define SPI_I2SCTRL_I2SMSEL                (0x1U << 11)
+#define SPI_I2SCTRL_I2SCBN               (0x1U << 0)
+#define SPI_I2SCTRL_I2SDBN               (0x3U << 1)
+#define SPI_I2SCTRL_I2SDBN_16BITS        (0x0U << 1)
+#define SPI_I2SCTRL_I2SDBN_24BITS        (0x1U << 1)
+#define SPI_I2SCTRL_I2SDBN_32BITS        (0x2U << 1)
+#define SPI_I2SCTRL_I2SDBN_NONE          (0x3U << 1)
+#define SPI_I2SCTRL_I2SCLKPOL            (0x1U << 3)
+#define SPI_I2SCTRL_STDSEL               (0x3U << 4)
+#define SPI_I2SCTRL_STDSEL_PHILIPS       (0x0U << 4)
+#define SPI_I2SCTRL_STDSEL_MSB           (0x1U << 4)
+#define SPI_I2SCTRL_STDSEL_LSB           (0x2U << 4)
+#define SPI_I2SCTRL_STDSEL_PCM           (0x3U << 4)
+#define SPI_I2SCTRL_PCMFSSEL             (0x1U << 7)
+#define SPI_I2SCTRL_OPERSEL              (0x3U << 8)
+#define SPI_I2SCTRL_OPERSEL_ST           (0x0U << 8)
+#define SPI_I2SCTRL_OPERSEL_SR           (0x1U << 8)
+#define SPI_I2SCTRL_OPERSEL_HT           (0x2U << 8)
+#define SPI_I2SCTRL_OPERSEL_HR           (0x3U << 8)
+#define SPI_I2SCTRL_I2SEN                (0x1U << 10)
+#define SPI_I2SCTRL_I2SMSEL              (0x1U << 11)
 
 /*******************  Bit definition for SPI_I2SCLKP register  ************/
-#define SPI_I2SCLKP_I2SDIV_1               (0xFFU << 0)
-#define SPI_I2SCLKP_I2SODD                 (0x1U << 8)
-#define SPI_I2SCLKP_I2SMCLKOE              (0x1U << 9)
-#define SPI_I2SCLKP_I2SDIV_2               (0x3U << 10)
+#define SPI_I2SCLKP_I2SDIV_1             (0xFFU << 0)
+#define SPI_I2SCLKP_I2SODD               (0x1U << 8)
+#define SPI_I2SCLKP_I2SMCLKOE            (0x1U << 9)
+#define SPI_I2SCLKP_I2SDIV_2             (0x3U << 10)
 
 /******************  Bit definition for IOMUX_REMAP register  *************/
 #define IOMUX_REMAP_SPI1_MUX                ((0x1U << 0) | (0x1U << 31))
@@ -706,7 +709,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define IOMUX_REMAP_CAN_MUX                 (0x3U << 13)    
 #define IOMUX_REMAP_CAN_MUX_NOREMAP         (0x0U << 13)    /*!< RX/PA11,TX/PA12 */
 #define IOMUX_REMAP_CAN_MUX_FULLREMAP       (0x2U << 13)    /*!< RX/PB8,TX/PB9 */
-#define IOMUX_REMAP_PD01_MUX                (0x1U << 15)    /*!< Port D0/Port D1 mapping on OSC_IN/OSC_OUT */
+#define IOMUX_REMAP_PD01_MUX                (0x1U << 15)    /*!< Port D0/Port D1 mapping on HEXT_IN/HEXT_OUT */
 #define IOMUX_REMAP_TMR5CH4_MUX             (0x1U << 16)    /*!< TIM5 Channel4 Internal Remap */
 #define IOMUX_REMAP_ADC1_ETP_MUX            (0x1U << 17)    /*!< ADC 1 External Trigger Injected Conversion remapping */
 #define IOMUX_REMAP_ADC1_ETO_MUX            (0x1U << 18)    /*!< ADC 1 External Trigger Regular Conversion remapping */
@@ -715,6 +718,98 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define IOMUX_REMAP_SWJTAG_MUX_NOJNTRST     (0x1U << 24)    /*!< Full SWJ (JTAG-DP + SW-DP) but without JNTRST */
 #define IOMUX_REMAP_SWJTAG_MUX_JTAGDISABLE  (0x2U << 24)    /*!< JTAG-DP Disabled and SW-DP Enabled */
 #define IOMUX_REMAP_SWJTAG_MUX_DISABLE      (0x4U << 24)    /*!< JTAG-DP Disabled and SW-DP Disabled */
+
+/******************  Bit definition for IOMUX_REMAP2 register  ************/
+#define IOMUX_REMAP2_CMP_MUX                (0x3U << 26)
+#define IOMUX_REMAP2_CMP_MUX_NOREMAP        (0x0U << 26)    /*!< CMP1_OUT/PA0,CMP2_OUT/PA2 */
+#define IOMUX_REMAP2_CMP_MUX_PARTIALREMAP2  (0x1U << 26)    /*!< CMP1_OUT/PA6,CMP2_OUT/PA7 */
+#define IOMUX_REMAP2_CMP_MUX_FULLREMAP      (0x2U << 26)    /*!< CMP1_OUT/PA11,CMP2_OUT/PA12 */
+
+/******************  Bit definition for IOMUX_REMAP3 register  ************/
+#define IOMUX_REMAP3_TMR9_GMUX              (0xFU << 0)
+#define IOMUX_REMAP3_TMR9_GMUX_NOREMAP      (0x0U << 0)     /*!< TMR9 CH1/PA2 CH2/PA3 */
+#define IOMUX_REMAP3_TMR9_GMUX_FULLREMAP    (0x2U << 0)     /*!< TMR9 CH1/PB14 CH2/PB15 */
+#define IOMUX_REMAP3_TMR10_GMUX             (0xFU << 4)
+#define IOMUX_REMAP3_TMR10_GMUX_NOREMAP     (0x0U << 4)     /*!< TMR10 CH1/PB8 */
+#define IOMUX_REMAP3_TMR10_GMUX_FULLREMAP   (0x2U << 4)     /*!< TMR10 CH1/PA6 */
+#define IOMUX_REMAP3_TMR11_GMUX             (0xFU << 8)
+#define IOMUX_REMAP3_TMR11_GMUX_NOREMAP     (0x0U << 8)     /*!< TMR11 CH1/PB9 */
+#define IOMUX_REMAP3_TMR11_GMUX_FULLREMAP   (0x2U << 8)     /*!< TMR11 CH1/PA7 */
+
+/******************  Bit definition for IOMUX_REMAP4 register  ************/
+#define IOMUX_REMAP4_TMR1_GMUX               (0xFU << 0)
+#define IOMUX_REMAP4_TMR1_GMUX_NOREMAP       (0x0U << 0)    /*!< TMR1 EXT/PA12,CH1/PA8,CH2/PA9,CH3/PA10,CH4/PA11,BRK/PB12,CH1C/PB13,CH2C/PB14,CH3C/PB15 */
+#define IOMUX_REMAP4_TMR1_GMUX_PARTIALREMAP1 (0x1U << 0)    /*!< TMR1 EXT/PA12,CH1/PA8,CH2/PA9,CH3/PA10,CH4/PA11,BRK/PA6,CH1C/PA7,CH2C/PB0,CH3C/PB1 */
+#define IOMUX_REMAP4_TMR1_GMUX_FULLREMAP     (0x2U << 0)    /*!< TMR1 EXT/PA0,CH1/PC6,CH2/PC7,CH3/PC8,CH4/PC9,BRK/PA6,CH1C/PA7,CH2C/PB0,CH3C/PB1 */
+#define IOMUX_REMAP4_TMR2_GMUX               (0x7U << 4)
+#define IOMUX_REMAP4_TMR2_GMUX_NOREMAP       (0x0U << 4)    /*!< TMR2 CH1_EXT/PA0 CH2/PA1 CH3/PA2 CH4/PA3 */
+#define IOMUX_REMAP4_TMR2_GMUX_PARTIALREMAP1 (0x1U << 4)    /*!< TMR2 CH1_EXT/PA15 CH2/PB3 CH3/PA2 CH4/PA3 */
+#define IOMUX_REMAP4_TMR2_GMUX_PARTIALREMAP2 (0x2U << 4)    /*!< TMR2 CH1_EXT/PA0 CH2/PA1 CH3/PB10 CH4/PB11 */
+#define IOMUX_REMAP4_TMR2_GMUX_FULLREMAP     (0x3U << 4)    /*!< TMR2 CH1_EXT/PA15 CH2/PB3 CH3/PB10 CH4/PB11 */
+#define IOMUX_REMAP4_TMR3_GMUX               (0xFU << 8)
+#define IOMUX_REMAP4_TMR3_GMUX_NOREMAP       (0x0U << 8)    /*!< TMR3 CH1/PA6 CH2/PA7 CH3/PB0 CH4/PB1 */
+#define IOMUX_REMAP4_TMR3_GMUX_PARTIALREMAP  (0x2U << 8)    /*!< TMR3 CH1/PB4 CH2/PB5 CH3/PB0 CH4/PB1 */
+#define IOMUX_REMAP4_TMR3_GMUX_FULLREMAP     (0x3U << 8)    /*!< TMR3 CH1/PC6 CH2/PC7 CH3/PC8 CH4/PC9 */
+#define IOMUX_REMAP4_TMR5_GMUX               (0x7U << 16)
+#define IOMUX_REMAP4_TMR5_GMUX_NOREMAP       (0x0U << 16)   /*!< TMR5 CH1/PA0 CH2/PA1 CH3/PA2 CH4/PA3 */
+#define IOMUX_REMAP4_TMR5_GMUX_FULLREMAP     (0x1U << 16)   /*!< TMR5 CH1/PF4 CH2/PF5 CH3/PA2 CH4/PA3 */
+#define IOMUX_REMAP4_TMR5CH4_GMUX            (0x1U << 19)
+#define IOMUX_REMAP4_TMR5CH4_GMUX_NOREMAP    (0x0U << 19)   /*!< TMR5 CH4/PA3 */
+#define IOMUX_REMAP4_TMR5CH4_GMUX_FULLREMAP  (0x1U << 19)   /*!< TMR5 CH4/LICK */
+
+/******************  Bit definition for IOMUX_REMAP5 register  ************/
+#define IOMUX_REMAP5_I2C1_GMUX               (0xFU << 4)
+#define IOMUX_REMAP5_I2C1_GMUX_NOREMAP       (0x0U << 4)    /*!< SCL/PB6,SDA/PB7 SMBA/PB5 */
+#define IOMUX_REMAP5_I2C1_GMUX_PARTIALREMAP  (0x1U << 4)    /*!< SCL/PB8,SDA/PB9 SMBA/PB5 */
+#define IOMUX_REMAP5_I2C1_GMUX_FULLREMAP     (0x2U << 4)    /*!< SCL/PF6,SDA/PF7 SMBA/PB5 */
+#define IOMUX_REMAP5_I2C2_GMUX               (0xFU << 8)
+#define IOMUX_REMAP5_I2C2_GMUX_NOREMAP       (0x0U << 8)    /*!< SCL/PB10,SDA/PB11 SMBA/PB12 */
+#define IOMUX_REMAP5_I2C2_GMUX_PARTIALREMAP1 (0x1U << 8)    /*!< SCL/PA8,SDA/PC9 SMBA/PA9 */
+#define IOMUX_REMAP5_I2C2_GMUX_PARTIALREMAP2 (0x2U << 8)    /*!< SCL/PA8,SDA/PB4 SMBA/PA9 */
+#define IOMUX_REMAP5_I2C2_GMUX_FULLREMAP     (0x3U << 8)    /*!< SCL/PF6,SDA/PF7 SMBA/PA9 */
+#define IOMUX_REMAP5_SPI1_GMUX               (0xFU << 16)
+#define IOMUX_REMAP5_SPI1_GMUX_NOREMAP       (0x0U << 16)   /*!< CS/PA4,SCK/PA5,MISO/PA6,MOSI/PA7,MCK/PB0 */
+#define IOMUX_REMAP5_SPI1_GMUX_FULLREMAP     (0x1U << 16)   /*!< CS/PA15,SCK/PB3,MISO/PB4,MOSI/PB5,MCK/PB6 */
+#define IOMUX_REMAP5_SPI2_GMUX               (0xFU << 20)
+#define IOMUX_REMAP5_SPI2_GMUX_NOREMAP       (0x0U << 20)   /*!< CS/PB12,SCK/PB13,MISO/PB14,MOSI/PB15,MCK/PB0 */
+#define IOMUX_REMAP5_SPI2_GMUX_FULLREMAP     (0x1U << 20)   /*!< CS/PA15,SCK/PB3,MISO/PB4,MOSI/PB5,MCK/PC7 */
+
+/******************  Bit definition for IOMUX_REMAP6 register  ************/
+#define IOMUX_REMAP6_CAN1_GMUX                (0xFU << 0)
+#define IOMUX_REMAP6_CAN1_GMUX_NOREMAP        (0x0U << 0)    /*!< RX/PA11,TX/PA12 */
+#define IOMUX_REMAP6_CAN1_GMUX_FULLREMAP      (0x2U << 0)    /*!< RX/PB8,TX/PB9   */
+#define IOMUX_REMAP6_SDIO1_GMUX               (0xFU << 8)
+#define IOMUX_REMAP6_SDIO1_GMUX_NOREMAP       (0x0U << 8)    /*!< D0/PC8 D1/PC9 D2/PC10 D3/PC11 D4/PB8 D5/PB9 D6/PC6 D7/PC7 CK/PC12 CMD/PD2 */
+#define IOMUX_REMAP6_SDIO1_GMUX_PARTIALREMAP1 (0x4U << 8)    /*!< D0/PC0 D1/PC1 D2/PC2 D3/PC3 D4/PA4 D5/PA5 D6/PA6 D7/PA7 CK/PC4 CMD/PC5 */
+#define IOMUX_REMAP6_SDIO1_GMUX_PARTIALREMAP2 (0x5U << 8)    /*!< D0/PA4 D1/PA5 D2/PA6 D3/PA7 CK/PC4 CMD/PC5 */
+#define IOMUX_REMAP6_SDIO1_GMUX_PARTIALREMAP3 (0x6U << 8)    /*!< D0/PC0 D1/PC1 D2/PC2 D3/PC3 D4/PA4 D5/PA5 D6/PA6 D7/PA7 CK/PA2 CMD/PA3 */
+#define IOMUX_REMAP6_SDIO1_GMUX_FULLREMAP     (0x7U << 8)    /*!< D0/PA4 D1/PA5 D2/PA6 D3/PA7 CK/PA2 CMD/PA3 */
+#define IOMUX_REMAP6_USART1_GMUX              (0xFU << 16)
+#define IOMUX_REMAP6_USART1_GMUX_NOREMAP      (0x0U << 16)   /*!< TX/PA9 RX/PA10  */
+#define IOMUX_REMAP6_USART1_GMUX_FULLREMAP    (0x1U << 16)   /*!< TX/PB6 RX/PB7   */
+#define IOMUX_REMAP6_USART3_GMUX              (0xFU << 24)
+#define IOMUX_REMAP6_USART3_GMUX_NOREMAP      (0x0U << 24)   /*!< TX/PB10,RX/PB11,CK/PB12,CTS/PB13,RTS/PB14  */
+#define IOMUX_REMAP6_USART3_GMUX_PARTIALREMAP (0x1U << 24)   /*!< TX/PC10,RX/PC11,CK/PC12,CTS/PB13,RTS/PB14  */
+#define IOMUX_REMAP6_USART3_GMUX_FULLREMAP    (0x2U << 24)   /*!< TX/PA7,RX/PA6,CK/PA5,CTS/PB1,RTS/PB0  */
+#define IOMUX_REMAP6_UART4_GMUX               (0xFU << 28)
+#define IOMUX_REMAP6_UART4_GMUX_NOREMAP       (0x0U << 28)   /*!< TX/PC10 RX/PC11  */
+#define IOMUX_REMAP6_UART4_GMUX_FULLREMAP     (0x2U << 28)   /*!< TX/PF4 RX/PF5    */
+
+/******************  Bit definition for IOMUX_REMAP7 register  ************/
+#define IOMUX_REMAP7_ADC1_ETP_GMUX            (0x1U << 4)
+#define IOMUX_REMAP7_ADC1_ETP_GMUX_NOREMAP    (0x0U << 4)    
+#define IOMUX_REMAP7_ADC1_ETP_GMUX_FULLREMAP  (0x1U << 4)    /*!< ADC1 抢占转换外部触发连接到 TMR1 通道 4 */
+#define IOMUX_REMAP7_ADC1_ETO_GMUX            (0x1U << 5)
+#define IOMUX_REMAP7_ADC1_ETO_GMUX_NOREMAP    (0x0U << 5)    /*!< ADC1 普通转换外部触发连接到 EXINT11 */
+#define IOMUX_REMAP7_ADC1_ETO_GMUX_FULLREMAP  (0x1U << 5)    /*!< ADC1 普通转换外部触发连接到 TMR1_TRGO */
+#define IOMUX_REMAP7_SWJTAG_GMUX              (0x7U << 16)  
+#define IOMUX_REMAP7_SWJTAG_GMUX_RESET        (0x0U << 16)   /*!< Full SWJ (JTAG-DP + SW-DP) : Reset State */
+#define IOMUX_REMAP7_SWJTAG_GMUX_NOJNTRST     (0x1U << 16)   /*!< Full SWJ (JTAG-DP + SW-DP) but without JNTRST */
+#define IOMUX_REMAP7_SWJTAG_GMUX_JTAGDISABLE  (0x2U << 16)   /*!< JTAG-DP Disabled and SW-DP Enabled */
+#define IOMUX_REMAP7_SWJTAG_GMUX_DISABLE      (0x4U << 16)   /*!< JTAG-DP Disabled and SW-DP Disabled */
+#define IOMUX_REMAP7_PD01_GMUX                (0x1U << 20)   /*!< Port D0/Port D1 mapping on HEXT_IN/HEXT_OUT */
+#define IOMUX_REMAP7_PD01_GMUX_NOREMAP        (0x0U << 20)   /*!< NO REMAP */
+#define IOMUX_REMAP7_PD01_GMUX_FULLREMAP      (0x1U << 20)   /*!< Port D0/Port D1 mapping on HEXT_IN/HEXT_OUT */
 
 /******************  Bit definition for DEBUG_CTRL register  **************/
 #define DEBUG_CTRL_SLEEP                 (0x1U << 0)
