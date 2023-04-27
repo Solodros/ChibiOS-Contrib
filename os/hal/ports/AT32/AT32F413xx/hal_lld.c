@@ -123,9 +123,9 @@ void hal_lld_init(void) {
   irqInit();
 
   /* Programmable voltage detector enable.*/
-#if AT32_PVD_ENABLE
+#if AT32_PVM_ENABLE
   PWC->CTRL |= PWC_CTRL_PVMEN | (AT32_PVM & AT32_PVM_MASK);
-#endif /* AT32_PVD_ENABLE */
+#endif /* AT32_PVM_ENABLE */
 }
 
 void at32_clock_reset(void)

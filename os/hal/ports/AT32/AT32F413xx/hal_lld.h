@@ -124,14 +124,14 @@
  * @{
  */
 #define AT32_PVM_MASK               (7 << 5)    /**< PVM bits mask.             */
-#define AT32_PVM_LEV0               (0 << 5)    /**< PVD level 0.               */
-#define AT32_PVM_LEV1               (1 << 5)    /**< PVD level 1.               */
-#define AT32_PVM_LEV2               (2 << 5)    /**< PVD level 2.               */
-#define AT32_PVM_LEV3               (3 << 5)    /**< PVD level 3.               */
-#define AT32_PVM_LEV4               (4 << 5)    /**< PVD level 4.               */
-#define AT32_PVM_LEV5               (5 << 5)    /**< PVD level 5.               */
-#define AT32_PVM_LEV6               (6 << 5)    /**< PVD level 6.               */
-#define AT32_PVM_LEV7               (7 << 5)    /**< PVD level 7.               */
+#define AT32_PVM_LEV0               (0 << 5)    /**< PVM level 0.               */
+#define AT32_PVM_LEV1               (1 << 5)    /**< PVM level 1.               */
+#define AT32_PVM_LEV2               (2 << 5)    /**< PVM level 2.               */
+#define AT32_PVM_LEV3               (3 << 5)    /**< PVM level 3.               */
+#define AT32_PVM_LEV4               (4 << 5)    /**< PVM level 4.               */
+#define AT32_PVM_LEV5               (5 << 5)    /**< PVM level 5.               */
+#define AT32_PVM_LEV6               (6 << 5)    /**< PVM level 6.               */
+#define AT32_PVM_LEV7               (7 << 5)    /**< PVM level 7.               */
 
 /**
  * @name    CRM_CFG register bits definitions
@@ -171,8 +171,8 @@
 #define AT32_ADCDIV_DIV4            (1 << 14)   /**< PPRE2 divided by 4.        */
 #define AT32_ADCDIV_DIV6            (2 << 14)   /**< PPRE2 divided by 6.        */
 #define AT32_ADCDIV_DIV8            (3 << 14)   /**< PPRE2 divided by 8.        */
-#define AT32_ADCDIV_DIV12           ((1 << 14) | (1 << 28))   /**< PPRE2 divided by 16.       */
-#define AT32_ADCDIV_DIV16           ((1 << 14) | (3 << 28))   /**< PPRE2 divided by 16.       */
+#define AT32_ADCDIV_DIV12           ((1 << 14) | (1 << 28))   /**< PPRE2 divided by 12.       */
+#define AT32_ADCDIV_DIV16           ((3 << 14) | (1 << 28))   /**< PPRE2 divided by 16.       */
 
 #define AT32_PLLRCS_HSI             (0 << 16)   /**< PLL clock source is HSI.   */
 #define AT32_PLLRCS_HSE             (1 << 16)   /**< PLL clock source is HSE.   */

@@ -76,7 +76,7 @@
 #define AT32_EXTI4_HANDLER                 Vector68
 #define AT32_EXTI5_9_HANDLER               Vector9C
 #define AT32_EXTI10_15_HANDLER             VectorE0
-#define AT32_EXTI16_HANDLER                Vector44    /* PVD              */
+#define AT32_EXTI16_HANDLER                Vector44    /* PVM              */
 #define AT32_EXTI17_HANDLER                VectorE4    /* ERTC ALARM       */
 #define AT32_EXTI18_HANDLER                VectorE8    /* OTG FS WAKEUP    */
 #define AT32_EXTI19_HANDLER                Vector158   /* CMP1             */

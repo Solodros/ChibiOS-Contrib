@@ -559,6 +559,9 @@ void usb_lld_init(void) {
 #if AT32_USBRAM_USE_EXTENDED_RAM
   CRM->MISC1 |= CRM_MISC1_USBBUFS;
 #endif
+#if AT32_USB_USB1_IRQ_REMAP
+  CRM->INTMAP |= CRM_INTMAP_USBINTMAP;
+#endif
 }
 
 /**

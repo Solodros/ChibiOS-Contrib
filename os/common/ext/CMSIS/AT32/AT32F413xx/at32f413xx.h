@@ -428,6 +428,9 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_MISC3_HICK_TO_USB            (0x1U << 8)
 #define CRM_MISC3_HICK_TO_SCLK           (0x1U << 9)
 
+/******************  Bit definition for CRM_INTMAP register  ***************/
+#define CRM_INTMAP_USBINTMAP             (0x1U << 0)
+
 /******************  Bit definition for PWC_CTRL register  *****************/
 #define PWC_CTRL_PVMEN                   (0x1U << 4)
 #define PWC_CTRL_BPWEN                   (0x1U << 8)

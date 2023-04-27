@@ -114,7 +114,7 @@
  */
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
 #if !defined(AT32_ADC_ADC1_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC1_DMAMUX_CHANNEL       0
+#define AT32_ADC_ADC1_DMAMUX_CHANNEL       1
 #endif
 #endif
 /** @} */
@@ -147,7 +147,7 @@
  */
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
 #if !defined(AT32_ADC_ADC2_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC2_DMAMUX_CHANNEL       0
+#define AT32_ADC_ADC2_DMAMUX_CHANNEL       1
 #endif
 #endif
 /** @} */
@@ -180,7 +180,7 @@
  */
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
 #if !defined(AT32_ADC_ADC3_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC3_DMAMUX_CHANNEL       0
+#define AT32_ADC_ADC3_DMAMUX_CHANNEL       1
 #endif
 #endif
 /** @} */
