@@ -273,6 +273,8 @@
 #define AT32_HAS_USB                       TRUE
 #define AT32_USB_ACCESS_SCHEME_2x16        FALSE
 #define AT32_USB_PMA_MAX_SIZE              1280
+#define AT32_USB_HAS_BCDR                  FALSE
+#define AT32_USB_HAS_CFG                   TRUE
 
 /* IWDG attributes.*/
 #define AT32_HAS_IWDG                      TRUE
@@ -528,6 +530,8 @@
 #define AT32_HAS_USB                       TRUE
 #define AT32_USB_ACCESS_SCHEME_2x16        FALSE
 #define AT32_USB_PMA_MAX_SIZE              1280
+#define AT32_USB_HAS_BCDR                  FALSE
+#define AT32_USB_HAS_CFG                   TRUE
 
 /* IWDG attributes.*/
 #define AT32_HAS_IWDG                      TRUE
@@ -783,6 +787,8 @@
 #define AT32_HAS_USB                       TRUE
 #define AT32_USB_ACCESS_SCHEME_2x16        FALSE
 #define AT32_USB_PMA_MAX_SIZE              1280
+#define AT32_USB_HAS_BCDR                  FALSE
+#define AT32_USB_HAS_CFG                   TRUE
 
 /* IWDG attributes.*/
 #define AT32_HAS_IWDG                      TRUE
@@ -1038,6 +1044,8 @@
 #define AT32_HAS_USB                       TRUE
 #define AT32_USB_ACCESS_SCHEME_2x16        FALSE
 #define AT32_USB_PMA_MAX_SIZE              1280
+#define AT32_USB_HAS_BCDR                  FALSE
+#define AT32_USB_HAS_CFG                   TRUE
 
 /* IWDG attributes.*/
 #define AT32_HAS_IWDG                      TRUE

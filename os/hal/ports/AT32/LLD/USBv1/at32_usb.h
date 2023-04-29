@@ -83,6 +83,16 @@ typedef struct {
    */
   volatile uint32_t             BCDR;
 #endif
+#if AT32_USB_HAS_CFG
+  /*
+   * @brief   Reserved space
+   */
+  volatile uint32_t             _r20;
+  /*
+   * @brief   CFG Register 
+   */
+  volatile uint32_t             CFG;
+#endif
 } at32_usb_t;
 
 /**
@@ -157,7 +167,7 @@ typedef struct {
   #define AT32_USBRAM_BASE     USB_PACKET_BUFFER_ADDRESS_EX
 #endif
 // AT32F413xx specified USB RAM size
-#if defined(AT32F413xx)
+#if defined(AT32F413xx) || defined(AT32F40x)
 #if (AT32_CAN_USE_CAN1 && AT32_CAN_USE_CAN2)
   #define AT32_USB_PMA_SIZE    768
 #elif AT32_CAN_USE_CAN1 || AT32_CAN_USE_CAN2

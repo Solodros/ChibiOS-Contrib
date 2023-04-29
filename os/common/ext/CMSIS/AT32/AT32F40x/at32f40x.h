@@ -1007,6 +1007,9 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 /******************  Bit definition for USBFS_CTRL register  **************/
 #define USBFS_CTRL_GRESUME               (0x1U << 4)
 
+/******************  Bit definition for USBFS_CFG register  **************/
+#define USBFS_CFG_PUO                    (0x1U << 1)
+
 /******************  Bit definition for DEBUG_CTRL register  **************/
 #define DEBUG_CTRL_SLEEP                 (0x1U << 0)
 #define DEBUG_CTRL_DEEPSLEEP             (0x1U << 1)

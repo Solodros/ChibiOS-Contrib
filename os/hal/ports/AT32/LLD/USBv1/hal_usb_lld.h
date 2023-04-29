@@ -526,6 +526,26 @@ struct USBDriver {
 #endif
 #endif /* AT32_USB_HAS_BCDR */
 
+#if AT32_USB_HAS_CFG || defined(__DOXYGEN__)
+/**
+ * @brief   Connects the USB device.
+ *
+ * @notapi
+ */
+#if !defined(usb_lld_connect_bus)
+#define usb_lld_connect_bus(usbp) (AT32_USB->CFG &= ~USB_CFG_PUO)
+#endif
+
+/**
+ * @brief   Disconnect the USB device.
+ *
+ * @notapi
+ */
+#if !defined(usb_lld_disconnect_bus)
+#define usb_lld_disconnect_bus(usbp) (AT32_USB->CNTR |= USB_CFG_PUO)
+#endif
+#endif /* AT32_USB_HAS_CFG */
+
 #if defined(AT32F413xx)
 #if !defined(usb_lld_connect_bus)
 #define usb_lld_connect_bus(usbp) (AT32_USB->CNTR &= ~CNTR_PDWN)

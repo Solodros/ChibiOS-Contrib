@@ -329,7 +329,7 @@
 #endif
 
 /* Check clock range. */
-#if defined(AT32F415xx) || defined(AT32F413xx)
+#if defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F40x)
 #if !(I2C_CLK_FREQ >= 2) && (I2C_CLK_FREQ <= 120)
 #error "I2C peripheral clock frequency out of range."
 #endif
