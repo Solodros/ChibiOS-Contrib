@@ -37,9 +37,9 @@
 
 #define AT32_FLASH_GET_BANK(addr, bank)                                           \
 do {                                                                              \
-  if ((addr >= FLASH_BANK1_START_ADDR) && (add <= FLASH_BANK1_END_ADDR)) {        \
+  if ((addr >= FLASH_BANK1_START_ADDR) && (addr <= FLASH_BANK1_END_ADDR)) {        \
     bank = FLASH_BANK_1;                                                          \
-  } else if ((addr >= FLASH_BANK2_START_ADDR) && (add <= FLASH_BANK2_END_ADDR)) { \
+  } else if ((addr >= FLASH_BANK2_START_ADDR) && (addr <= FLASH_BANK2_END_ADDR)) { \
     bank = FLASH_BANK_2;                                                          \
   } else {                                                                        \
     bank = FLASH_BANK_SPIM;                                                       \
@@ -274,7 +274,7 @@ flash_error_t efl_lld_read(void *instance, flash_offset_t offset,
                            size_t n, uint8_t *rp) {
   EFlashDriver *devp = (EFlashDriver *)instance;
   flash_error_t err = FLASH_NO_ERROR;
-  uint32_t addr = efl_lld_descriptor.address + offset;
+  uint32_t addr = (uint32_t)(efl_lld_descriptor.address + offset);
   flash_bank_t bank;
 
   osalDbgCheck((instance != NULL) && (rp != NULL) && (n > 0U));
@@ -325,7 +325,7 @@ flash_error_t efl_lld_program(void *instance, flash_offset_t offset,
                               size_t n, const uint8_t *pp) {
   EFlashDriver *devp = (EFlashDriver *)instance;
   flash_error_t err = FLASH_NO_ERROR;
-  uint32_t addr = efl_lld_descriptor.address + offset;
+  uint32_t addr = (uint32_t)(efl_lld_descriptor.address + offset);
   flash_bank_t bank;
 
   osalDbgCheck((instance != NULL) && (pp != NULL) && (n > 0U));
@@ -462,7 +462,7 @@ flash_error_t efl_lld_start_erase_all(void *instance) {
 flash_error_t efl_lld_start_erase_sector(void *instance,
                                          flash_sector_t sector) {
   EFlashDriver *devp = (EFlashDriver *)instance;
-  uint32_t addr = efl_lld_descriptor.address + sector * AT32_FLASH_SECTOR_SIZE;
+  uint32_t addr = (uint32_t)(efl_lld_descriptor.address + sector * AT32_FLASH_SECTOR_SIZE);
   flash_bank_t bank;
   osalDbgCheck(instance != NULL);
   osalDbgCheck(sector < efl_lld_descriptor.sectors_count);
