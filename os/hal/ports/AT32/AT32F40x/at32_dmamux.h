@@ -36,7 +36,7 @@
 #define AT32_DMAMUX_ADC1          1
 #define AT32_DMAMUX_ADC3          3
 #define AT32_DMAMUX_DAC1          5
-#define AT32_DMAMUX_DAC1          6
+#define AT32_DMAMUX_DAC2          6
 #define AT32_DMAMUX_SPI1_RX       9
 #define AT32_DMAMUX_SPI1_TX       10
 #define AT32_DMAMUX_SPI2_RX       11

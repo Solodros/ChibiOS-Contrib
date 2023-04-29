@@ -87,7 +87,7 @@ typedef struct {
   /*
    * @brief   Reserved space
    */
-  volatile uint32_t             _r20;
+  volatile uint32_t             _r1;
   /*
    * @brief   CFG Register 
    */
