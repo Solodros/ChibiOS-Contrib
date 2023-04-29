@@ -126,12 +126,7 @@
 
 /* I2C attributes.*/
 #define AT32_HAS_I2C1                       TRUE
-#define AT32_I2C_I2C1_RX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 7)
-#define AT32_I2C_I2C1_TX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 6)
-
 #define AT32_HAS_I2C2                       TRUE
-#define AT32_I2C_I2C2_RX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 5)
-#define AT32_I2C_I2C2_TX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 4)
 
 /* RTC attributes.*/
 #define AT32_HAS_RTC                        TRUE
@@ -146,14 +141,10 @@
 #define AT32_HAS_SPI1                       TRUE
 #define AT32_SPI1_SUPPORTS_I2S              TRUE
 #define AT32_SPI1_I2S_FULLDUPLEX            FALSE
-#define AT32_SPI_SPI1_RX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 2)
-#define AT32_SPI_SPI1_TX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 3)
 
 #define AT32_HAS_SPI2                       TRUE
 #define AT32_SPI2_SUPPORTS_I2S              TRUE
 #define AT32_SPI2_I2S_FULLDUPLEX            FALSE
-#define AT32_SPI_SPI2_RX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 4)
-#define AT32_SPI_SPI2_TX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 5)
 
 /* TIM attributes.*/
 #define AT32_TIM_MAX_CHANNELS               4
@@ -198,15 +189,8 @@
 
 /* USART attributes.*/
 #define AT32_HAS_USART1                    TRUE
-#define AT32_UART_USART1_RX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 5)
-#define AT32_UART_USART1_TX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 4)
-
 #define AT32_HAS_USART2                    TRUE
-#define AT32_UART_USART2_RX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 6)
-#define AT32_UART_USART2_TX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 7)
-
 #define AT32_HAS_USART3                    FALSE
-
 #define AT32_HAS_UART4                     FALSE
 #define AT32_HAS_UART5                     FALSE
 
@@ -322,12 +306,7 @@
 
 /* I2C attributes.*/
 #define AT32_HAS_I2C1                       TRUE
-#define AT32_I2C_I2C1_RX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 7)
-#define AT32_I2C_I2C1_TX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 6)
-
 #define AT32_HAS_I2C2                       TRUE
-#define AT32_I2C_I2C2_RX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 5)
-#define AT32_I2C_I2C2_TX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 4)
 
 /* RTC attributes.*/
 #define AT32_HAS_RTC                        TRUE
@@ -342,14 +321,10 @@
 #define AT32_HAS_SPI1                       TRUE
 #define AT32_SPI1_SUPPORTS_I2S              TRUE
 #define AT32_SPI1_I2S_FULLDUPLEX            FALSE
-#define AT32_SPI_SPI1_RX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 2)
-#define AT32_SPI_SPI1_TX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 3)
 
 #define AT32_HAS_SPI2                       TRUE
 #define AT32_SPI2_SUPPORTS_I2S              TRUE
 #define AT32_SPI2_I2S_FULLDUPLEX            FALSE
-#define AT32_SPI_SPI2_RX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 4)
-#define AT32_SPI_SPI2_TX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 5)
 
 /* TIM attributes.*/
 #define AT32_TIM_MAX_CHANNELS               4
@@ -400,17 +375,8 @@
 
 /* USART attributes.*/
 #define AT32_HAS_USART1                    TRUE
-#define AT32_UART_USART1_RX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 5)
-#define AT32_UART_USART1_TX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 4)
-
 #define AT32_HAS_USART2                    TRUE
-#define AT32_UART_USART2_RX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 6)
-#define AT32_UART_USART2_TX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 7)
-
 #define AT32_HAS_USART3                    TRUE
-#define AT32_UART_USART3_RX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 3)
-#define AT32_UART_USART3_TX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 2)
-
 #define AT32_HAS_UART4                     FALSE
 #define AT32_HAS_UART5                     FALSE
 
@@ -527,12 +493,7 @@
 
 /* I2C attributes.*/
 #define AT32_HAS_I2C1                       TRUE
-#define AT32_I2C_I2C1_RX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 7)
-#define AT32_I2C_I2C1_TX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 6)
-
 #define AT32_HAS_I2C2                       TRUE
-#define AT32_I2C_I2C2_RX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 5)
-#define AT32_I2C_I2C2_TX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 4)
 
 /* RTC attributes.*/
 #define AT32_HAS_RTC                        TRUE
@@ -547,14 +508,10 @@
 #define AT32_HAS_SPI1                       TRUE
 #define AT32_SPI1_SUPPORTS_I2S              TRUE
 #define AT32_SPI1_I2S_FULLDUPLEX            FALSE
-#define AT32_SPI_SPI1_RX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 2)
-#define AT32_SPI_SPI1_TX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 3)
 
 #define AT32_HAS_SPI2                       TRUE
 #define AT32_SPI2_SUPPORTS_I2S              TRUE
 #define AT32_SPI2_I2S_FULLDUPLEX            FALSE
-#define AT32_SPI_SPI2_RX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 4)
-#define AT32_SPI_SPI2_TX_DMA_STREAM         AT32_DMA_STREAM_ID(1, 5)
 
 /* TIM attributes.*/
 #define AT32_TIM_MAX_CHANNELS               4
@@ -605,21 +562,9 @@
 
 /* USART attributes.*/
 #define AT32_HAS_USART1                    TRUE
-#define AT32_UART_USART1_RX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 5)
-#define AT32_UART_USART1_TX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 4)
-
 #define AT32_HAS_USART2                    TRUE
-#define AT32_UART_USART2_RX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 6)
-#define AT32_UART_USART2_TX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 7)
-
 #define AT32_HAS_USART3                    TRUE
-#define AT32_UART_USART3_RX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 3)
-#define AT32_UART_USART3_TX_DMA_STREAM     AT32_DMA_STREAM_ID(1, 2)
-
 #define AT32_HAS_UART4                     TRUE
-#define AT32_UART_UART4_RX_DMA_STREAM      AT32_DMA_STREAM_ID(2, 3)
-#define AT32_UART_UART4_TX_DMA_STREAM      AT32_DMA_STREAM_ID(2, 5)
-
 #define AT32_HAS_UART5                     TRUE
 
 /* USB attributes.*/
