@@ -54,6 +54,14 @@
   AT32_DMA_GETCHANNEL(AT32_I2S_SPI3_TX_DMA_STREAM,                        \
                        AT32_SPI3_TX_DMA_CHN)
 
+#define I2S4_RX_DMA_CHANNEL                                                 \
+  AT32_DMA_GETCHANNEL(AT32_I2S_SPI4_RX_DMA_STREAM,                        \
+                       AT32_SPI4_RX_DMA_CHN)
+
+#define I2S4_TX_DMA_CHANNEL                                                 \
+  AT32_DMA_GETCHANNEL(AT32_I2S_SPI4_TX_DMA_STREAM,                        \
+                       AT32_SPI4_TX_DMA_CHN)
+
 /*
  * Static I2S settings for I2S1.
  */
@@ -111,6 +119,25 @@
 #endif
 #endif /* !AT32_I2S_IS_MASTER(AT32_I2S_SPI3_MODE) */
 
+/*
+ * Static I2S settings for I2S4.
+ */
+#if !AT32_I2S_IS_MASTER(AT32_I2S_SPI4_MODE)
+#if AT32_I2S_TX_ENABLED(AT32_I2S_SPI4_MODE)
+#define AT32_I2S4_CFGR_CFG                 SPI_I2SCTRL_OPERSEL_ST
+#endif
+#if AT32_I2S_RX_ENABLED(AT32_I2S_SPI4_MODE)
+#define AT32_I2S4_CFGR_CFG                 SPI_I2SCTRL_OPERSEL_SR
+#endif
+#else /* !AT32_I2S_IS_MASTER(AT32_I2S_SPI4_MODE) */
+#if AT32_I2S_TX_ENABLED(AT32_I2S_SPI4_MODE)
+#define AT32_I2S4_CFGR_CFG                 SPI_I2SCTRL_OPERSEL_HT
+#endif
+#if AT32_I2S_RX_ENABLED(AT32_I2S_SPI4_MODE)
+#define AT32_I2S4_CFGR_CFG                 SPI_I2SCTRL_OPERSEL_HR
+#endif
+#endif /* !AT32_I2S_IS_MASTER(AT32_I2S_SPI4_MODE) */
+
 /*===========================================================================*/
 /* Driver exported variables.                                                */
 /*===========================================================================*/
@@ -130,6 +157,11 @@ I2SDriver I2SD2;
 I2SDriver I2SD3;
 #endif
 
+/** @brief I2S4 driver identifier.*/
+#if AT32_I2S_USE_SPI4 || defined(__DOXYGEN__)
+I2SDriver I2SD4;
+#endif
+
 /*===========================================================================*/
 /* Driver local variables and types.                                         */
 /*===========================================================================*/
@@ -140,7 +172,8 @@ I2SDriver I2SD3;
 
 #if AT32_I2S_RX_ENABLED(AT32_I2S_SPI1_MODE) ||                            \
     AT32_I2S_RX_ENABLED(AT32_I2S_SPI2_MODE) ||                            \
-    AT32_I2S_RX_ENABLED(AT32_I2S_SPI3_MODE) || defined(__DOXYGEN__)
+    AT32_I2S_RX_ENABLED(AT32_I2S_SPI3_MODE) ||                            \
+    AT32_I2S_RX_ENABLED(AT32_I2S_SPI4_MODE) ||defined(__DOXYGEN__)
 /**
  * @brief   Shared end-of-rx service routine.
  *
@@ -173,7 +206,8 @@ static void i2s_lld_serve_rx_interrupt(I2SDriver *i2sp, uint32_t flags) {
 
 #if AT32_I2S_TX_ENABLED(AT32_I2S_SPI1_MODE) ||                            \
     AT32_I2S_TX_ENABLED(AT32_I2S_SPI2_MODE) ||                            \
-    AT32_I2S_TX_ENABLED(AT32_I2S_SPI3_MODE) || defined(__DOXYGEN__)
+    AT32_I2S_TX_ENABLED(AT32_I2S_SPI3_MODE) ||                            \
+    AT32_I2S_TX_ENABLED(AT32_I2S_SPI4_MODE) || defined(__DOXYGEN__)
 /**
  * @brief   Shared end-of-tx service routine.
  *
@@ -332,6 +366,44 @@ void i2s_lld_init(void) {
   I2SD3.txdmamode = 0;
 #endif
 #endif
+
+#if AT32_I2S_USE_SPI4
+  i2sObjectInit(&I2SD4);
+  I2SD4.spi       = SPI4;
+  I2SD4.cfg       = AT32_I2S4_CFGR_CFG;
+  I2SD4.dmarx     = NULL;
+  I2SD4.dmatx     = NULL;
+#if AT32_I2S_RX_ENABLED(AT32_I2S_SPI4_MODE)
+  I2SD4.rxdmamode = AT32_DMA_CR_CHSEL(I2S4_RX_DMA_CHANNEL) |
+                    AT32_DMA_CR_PL(AT32_I2S_SPI4_DMA_PRIORITY) |
+                    AT32_DMA_CR_PSIZE_HWORD |
+                    AT32_DMA_CR_MSIZE_HWORD |
+                    AT32_DMA_CR_DIR_P2M |
+                    AT32_DMA_CR_MINC |
+                    AT32_DMA_CR_CIRC |
+                    AT32_DMA_CR_HTIE |
+                    AT32_DMA_CR_TCIE |
+                    AT32_DMA_CR_DMEIE |
+                    AT32_DMA_CR_TEIE;
+#else
+  I2SD4.rxdmamode = 0;
+#endif
+#if AT32_I2S_TX_ENABLED(AT32_I2S_SPI4_MODE)
+  I2SD4.txdmamode = AT32_DMA_CR_CHSEL(I2S4_TX_DMA_CHANNEL) |
+                    AT32_DMA_CR_PL(AT32_I2S_SPI4_DMA_PRIORITY) |
+                    AT32_DMA_CR_PSIZE_HWORD |
+                    AT32_DMA_CR_MSIZE_HWORD |
+                    AT32_DMA_CR_DIR_M2P |
+                    AT32_DMA_CR_MINC |
+                    AT32_DMA_CR_CIRC |
+                    AT32_DMA_CR_HTIE |
+                    AT32_DMA_CR_TCIE |
+                    AT32_DMA_CR_DMEIE |
+                    AT32_DMA_CR_TEIE;
+#else
+  I2SD4.txdmamode = 0;
+#endif
+#endif
 }
 
 /**
@@ -444,6 +516,39 @@ void i2s_lld_start(I2SDriver *i2sp) {
 #endif
     }
 #endif
+
+#if AT32_I2S_USE_SPI4
+    if (&I2SD4 == i2sp) {
+
+      /* Enabling I2S unit clock.*/
+      crmEnableSPI4(true);
+
+#if AT32_I2S_RX_ENABLED(AT32_I2S_SPI4_MODE)
+      i2sp->dmarx = dmaStreamAllocI(AT32_I2S_SPI4_RX_DMA_STREAM,
+                                    AT32_I2S_SPI4_IRQ_PRIORITY,
+                                    (at32_dmaisr_t)i2s_lld_serve_rx_interrupt,
+                                    (void *)i2sp);
+      osalDbgAssert(i2sp->dmarx != NULL, "unable to allocate stream");
+
+      /* CRs settings are done here because those never changes until
+         the driver is stopped.*/
+      i2sp->spi->CTRL1 = 0;
+      i2sp->spi->CTRL2 = SPI_CTRL2_DMAREN;
+#endif
+#if AT32_I2S_TX_ENABLED(AT32_I2S_SPI4_MODE)
+      i2sp->dmatx = dmaStreamAllocI(AT32_I2S_SPI4_TX_DMA_STREAM,
+                                    AT32_I2S_SPI4_IRQ_PRIORITY,
+                                    (at32_dmaisr_t)i2s_lld_serve_tx_interrupt,
+                                    (void *)i2sp);
+      osalDbgAssert(i2sp->dmatx != NULL, "unable to allocate stream");
+
+      /* CRs settings are done here because those never changes until
+         the driver is stopped.*/
+      i2sp->spi->CTRL1 = 0;
+      i2sp->spi->CTRL2 = SPI_CTRL2_DMATEN;
+#endif
+    }
+#endif
   }
 
   /* I2S (re)configuration.*/
@@ -487,6 +592,11 @@ void i2s_lld_stop(I2SDriver *i2sp) {
 #if AT32_I2S_USE_SPI3
     if (&I2SD3 == i2sp)
       crmDisableSPI3();
+#endif
+
+#if AT32_I2S_USE_SPI4
+    if (&I2SD4 == i2sp)
+      crmDisableSPI4();
 #endif
   }
 }

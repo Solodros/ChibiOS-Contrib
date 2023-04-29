@@ -88,6 +88,15 @@
 #endif
 
 /**
+ * @brief   I2S4 driver enable switch.
+ * @details If set to @p TRUE the support for I2S4 is included.
+ * @note    The default is @p TRUE.
+ */
+#if !defined(AT32_I2S_USE_SPI4) || defined(__DOXYGEN__)
+#define AT32_I2S_USE_SPI4                  FALSE
+#endif
+
+/**
  * @brief   I2S1 mode.
  */
 #if !defined(AT32_I2S_SPI1_MODE) || defined(__DOXYGEN__)
@@ -108,6 +117,14 @@
  */
 #if !defined(AT32_I2S_SPI3_MODE) || defined(__DOXYGEN__)
 #define AT32_I2S_SPI3_MODE                 (AT32_I2S_MODE_MASTER |        \
+                                             AT32_I2S_MODE_RX)
+#endif
+
+/**
+ * @brief   I2S4 mode.
+ */
+#if !defined(AT32_I2S_SI4_MODE) || defined(__DOXYGEN__)
+#define AT32_I2S_SI4_MODE                 (AT32_I2S_MODE_MASTER |        \
                                              AT32_I2S_MODE_RX)
 #endif
 
@@ -133,6 +150,13 @@
 #endif
 
 /**
+ * @brief   I2S4 interrupt priority level setting.
+ */
+#if !defined(AT32_I2S_SI4_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_I2S_SI4_IRQ_PRIORITY         10
+#endif
+
+/**
  * @brief   I2S1 DMA priority (0..3|lowest..highest).
  */
 #if !defined(AT32_I2S_SPI1_DMA_PRIORITY) || defined(__DOXYGEN__)
@@ -151,6 +175,13 @@
  */
 #if !defined(AT32_I2S_SPI3_DMA_PRIORITY) || defined(__DOXYGEN__)
 #define AT32_I2S_SPI3_DMA_PRIORITY         1
+#endif
+
+/**
+ * @brief   I2S4 DMA priority (0..3|lowest..highest).
+ */
+#if !defined(AT32_I2S_SPI4_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_I2S_SPI4_DMA_PRIORITY         1
 #endif
 
 /**
@@ -177,6 +208,10 @@
 #error "SPI3 does not support I2S mode"
 #endif
 
+#if AT32_I2S_USE_SPI4 && !AT32_SPI4_SUPPORTS_I2S
+#error "SPI4 does not support I2S mode"
+#endif
+
 #if AT32_I2S_RX_ENABLED(AT32_I2S_SPI1_MODE) &&                            \
     AT32_I2S_TX_ENABLED(AT32_I2S_SPI1_MODE)
 #error "I2S1 RX and TX mode not supported in this driver implementation"
@@ -192,6 +227,11 @@
 #error "I2S3 RX and TX mode not supported in this driver implementation"
 #endif
 
+#if AT32_I2S_RX_ENABLED(AT32_I2S_SPI4_MODE) &&                            \
+    AT32_I2S_TX_ENABLED(AT32_I2S_SPI4_MODE)
+#error "I2S4 RX and TX mode not supported in this driver implementation"
+#endif
+
 #if AT32_I2S_USE_SPI1 && !AT32_HAS_SPI1
 #error "SPI1 not present in the selected device"
 #endif
@@ -204,7 +244,11 @@
 #error "SPI3 not present in the selected device"
 #endif
 
-#if !AT32_I2S_USE_SPI1 && !AT32_I2S_USE_SPI2 && !AT32_I2S_USE_SPI3
+#if AT32_I2S_USE_SPI4 && !AT32_HAS_SPI4
+#error "SPI4 not present in the selected device"
+#endif
+
+#if !AT32_I2S_USE_SPI1 && !AT32_I2S_USE_SPI2 && !AT32_I2S_USE_SPI3 && !AT32_I2S_USE_SPI4
 #error "I2S driver activated but no SPI peripheral assigned"
 #endif
 
@@ -223,6 +267,11 @@
 #error "Invalid IRQ priority assigned to SPI3"
 #endif
 
+#if AT32_I2S_USE_SPI4 &&                                                   \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_I2S_SPI4_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to SPI4"
+#endif
+
 #if AT32_I2S_USE_SPI1 &&                                                   \
     !AT32_DMA_IS_VALID_PRIORITY(AT32_I2S_SPI1_DMA_PRIORITY)
 #error "Invalid DMA priority assigned to SPI1"
@@ -236,6 +285,11 @@
 #if AT32_I2S_USE_SPI3 &&                                                   \
     !AT32_DMA_IS_VALID_PRIORITY(AT32_I2S_SPI3_DMA_PRIORITY)
 #error "Invalid DMA priority assigned to SPI3"
+#endif
+
+#if AT32_I2S_USE_SPI4 &&                                                   \
+    !AT32_DMA_IS_VALID_PRIORITY(AT32_I2S_SPI4_DMA_PRIORITY)
+#error "Invalid DMA priority assigned to SPI4"
 #endif
 
 /* The following checks are only required when there is a DMA able to
@@ -255,6 +309,11 @@
 #if AT32_I2S_USE_SPI3 && (!defined(AT32_I2S_SPI3_RX_DMA_STREAM) ||        \
                            !defined(AT32_I2S_SPI3_TX_DMA_STREAM))
 #error "SPI3 DMA streams not defined"
+#endif
+
+#if AT32_I2S_USE_SPI4 && (!defined(AT32_I2S_SPI4_RX_DMA_STREAM) ||        \
+                           !defined(AT32_I2S_SPI4_TX_DMA_STREAM))
+#error "SPI4 DMA streams not defined"
 #endif
 
 /* Check on the validity of the assigned DMA channels.*/
@@ -286,6 +345,16 @@
 #if AT32_I2S_USE_SPI3 &&                                                   \
     !AT32_DMA_IS_VALID_ID(AT32_I2S_SPI3_TX_DMA_STREAM, AT32_SPI3_TX_DMA_MSK)
 #error "invalid DMA stream associated to SPI3 TX"
+#endif
+
+#if AT32_I2S_USE_SPI4 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_I2S_SPI4_RX_DMA_STREAM, AT32_SPI4_RX_DMA_MSK)
+#error "invalid DMA stream associated to SPI4 RX"
+#endif
+
+#if AT32_I2S_USE_SPI4 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_I2S_SPI4_TX_DMA_STREAM, AT32_SPI4_TX_DMA_MSK)
+#error "invalid DMA stream associated to SPI4 TX"
 #endif
 #endif /* AT32_ADVANCED_DMA */
 
@@ -350,6 +419,10 @@ extern I2SDriver I2SD2;
 
 #if AT32_I2S_USE_SPI3 && !defined(__DOXYGEN__)
 extern I2SDriver I2SD3;
+#endif
+
+#if AT32_I2S_USE_SPI4 && !defined(__DOXYGEN__)
+extern I2SDriver I2SD4;
 #endif
 
 #ifdef __cplusplus

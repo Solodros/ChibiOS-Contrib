@@ -15,8 +15,8 @@
 */
 
 /**
- * @file    AT32F413xx/hal_lld.c
- * @brief   AT32F413xx HAL subsystem low level driver source.
+ * @file    AT32F40x/hal_lld.c
+ * @brief   AT32F40x HAL subsystem low level driver source.
  *
  * @addtogroup HAL
  * @{
@@ -184,8 +184,11 @@ void at32_clock_init(void) {
   /*FIXME: need to improve flexible pll config*/
 #if AT32_ACTIVATE_PLL
   /* PLL activation.*/
-  CRM->CFG  |= AT32_PLLMUL | AT32_PLLHEXTDIV | AT32_PLLRCS | AT32_PLLRANGE;
-  CRM->CTRL |= CRM_CTRL_PLLEN;
+  CRM->CFG   |= AT32_PLLMUL | AT32_PLLHEXTDIV | AT32_PLLRCS | AT32_PLLRANGE;
+#if AT32_PLLHEXTDIV == AT32_PLLHEXTDIV_DIV
+  CRM->MISC3 |= AT32_HEXTDIV;
+#endif
+  CRM->CTRL  |= CRM_CTRL_PLLEN;
   while (!(CRM->CTRL & CRM_CTRL_PLLSTBL));       /* Waits until PLL is stable.   */
 #endif
 

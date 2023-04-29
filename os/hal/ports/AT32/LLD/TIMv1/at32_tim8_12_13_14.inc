@@ -35,15 +35,15 @@
 #error "AT32_HAS_TIM8 not defined in registry"
 #endif
 
-#if (!defined(AT32_HAS_TIM12) && !defined(AT32_HAS_TIM8))
+#if !defined(AT32_HAS_TIM12)
 #error "AT32_HAS_TIM12 not defined in registry"
 #endif
 
-#if (!defined(AT32_HAS_TIM13) && !defined(AT32_HAS_TIM8))
+#if !defined(AT32_HAS_TIM13)
 #error "AT32_HAS_TIM13 not defined in registry"
 #endif
 
-#if (!defined(AT32_HAS_TIM14) && !defined(AT32_HAS_TIM8))
+#if !defined(AT32_HAS_TIM14)
 #error "AT32_HAS_TIM14 not defined in registry"
 #endif
 

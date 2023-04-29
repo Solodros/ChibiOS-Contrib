@@ -1239,7 +1239,7 @@ typedef struct
   /**
     * @brief iomux reserved1 register, offset:0x18
     */
-  __IO uint32_t REVERSED1;
+  __IO uint32_t RESERVED1;
 
   /**
     * @brief iomux remap register 2, offset:0x1C

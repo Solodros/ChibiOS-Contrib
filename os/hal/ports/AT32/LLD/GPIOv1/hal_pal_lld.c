@@ -101,37 +101,58 @@ void _pal_lld_init(const PALConfig *config) {
   GPIOA->ODT = config->PAData.odt;
   GPIOA->CFGHR = config->PAData.cfghr;
   GPIOA->CFGLR = config->PAData.cfglr;
+#if AT32_GPIO_HAS_HDRV || defined(__DOXYGEN__)
+  GPIOA->HDRV = config->PAData.hdrv;
+#endif
 
   GPIOB->ODT = config->PBData.odt;
   GPIOB->CFGHR = config->PBData.cfghr;
   GPIOB->CFGLR = config->PBData.cfglr;
+#if AT32_GPIO_HAS_HDRV || defined(__DOXYGEN__)
+  GPIOB->HDRV = config->PBData.hdrv;
+#endif
 
 #if AT32_HAS_GPIOC || defined(__DOXYGEN__)
   GPIOC->ODT = config->PCData.odt;
   GPIOC->CFGHR = config->PCData.cfghr;
   GPIOC->CFGLR = config->PCData.cfglr;
+#if AT32_GPIO_HAS_HDRV || defined(__DOXYGEN__)
+  GPIOC->HDRV = config->PCData.hdrv;
+#endif
 #endif
 
   GPIOD->ODT = config->PDData.odt;
   GPIOD->CFGHR = config->PDData.cfghr;
   GPIOD->CFGLR = config->PDData.cfglr;
+#if AT32_GPIO_HAS_HDRV || defined(__DOXYGEN__)
+  GPIOD->HDRV = config->PDData.hdrv;
+#endif
 
 #if AT32_HAS_GPIOE || defined(__DOXYGEN__)
   GPIOE->ODT = config->PEData.odt;
   GPIOE->CFGHR = config->PEData.cfghr;
   GPIOE->CFGLR = config->PEData.cfglr;
+#if AT32_GPIO_HAS_HDRV || defined(__DOXYGEN__)
+  GPIOE->HDRV = config->PEData.hdrv;
+#endif
 #endif
 
 #if AT32_HAS_GPIOF || defined(__DOXYGEN__)
   GPIOF->ODT = config->PFData.odt;
   GPIOF->CFGHR = config->PFData.cfghr;
   GPIOF->CFGLR = config->PFData.cfglr;
+#if AT32_GPIO_HAS_HDRV || defined(__DOXYGEN__)
+  GPIOF->HDRV = config->PFData.hdrv;
+#endif
 #endif
 
 #if AT32_HAS_GPIOG || defined(__DOXYGEN__)
   GPIOG->ODT = config->PGData.odt;
   GPIOG->CFGHR = config->PGData.cfghr;
   GPIOG->CFGLR = config->PGData.cfglr;
+#if AT32_GPIO_HAS_HDRV || defined(__DOXYGEN__)
+  GPIOG->HDRV = config->PGData.hdrv;
+#endif
 #endif
 }
 
