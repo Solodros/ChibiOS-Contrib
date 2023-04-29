@@ -1,168 +1,85 @@
 /*
-*****************************************************************************
-**
-**  File        : AT32F407xE_FLASH.ld
-**
-**  Abstract    : Linker script for AT32F407xE Device with
-**                512KByte FLASH, 96KByte RAM
-**
-**                Set heap size, stack size and stack location according
-**                to application requirements.
-**
-**                Set memory bank area and size if external memory is used.
-**
-**  Target      : Artery Tek AT32
-**
-**  Environment : Arm gcc toolchain
-**
-*****************************************************************************
+    COPYRIGHT(C) 2023, Artery
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 */
 
-/* Entry Point */
-ENTRY(Reset_Handler)
-
-/* Highest address of the user mode stack */
-_estack = 0x20018000;    /* end of RAM */
-
-/* Generate a link error if heap and stack don't fit into RAM */
-_Min_Heap_Size = 0x200;      /* required amount of heap  */
-_Min_Stack_Size = 0x400; /* required amount of stack */
-
-/* Specify the memory areas */
+/*
+ * AT32F407 memory setup.
+ */
 MEMORY
 {
-FLASH (rx)      : ORIGIN = 0x08000000, LENGTH = 512K
-RAM (xrw)       : ORIGIN = 0x20000000, LENGTH = 96K
-SPIM (rx)       : ORIGIN = 0x08400000, LENGTH = 16384K
+    flash0 (rx) : org = 0x08000000, len = 512k
+    flash1 (rx) : org = 0x00000000, len = 0
+    flash2 (rx) : org = 0x00000000, len = 0
+    flash3 (rx) : org = 0x00000000, len = 0
+    flash4 (rx) : org = 0x00000000, len = 0
+    flash5 (rx) : org = 0x00000000, len = 0
+    flash6 (rx) : org = 0x00000000, len = 0
+    flash7 (rx) : org = 0x00000000, len = 0
+    ram0   (wx) : org = 0x20000000, len = 96k
+    ram1   (wx) : org = 0x00000000, len = 0
+    ram2   (wx) : org = 0x00000000, len = 0
+    ram3   (wx) : org = 0x00000000, len = 0
+    ram4   (wx) : org = 0x00000000, len = 0
+    ram5   (wx) : org = 0x00000000, len = 0
+    ram6   (wx) : org = 0x00000000, len = 0
+    ram7   (wx) : org = 0x00000000, len = 0
 }
 
-/* Define output sections */
-SECTIONS
-{
-  /* The startup code goes first into FLASH */
-  .isr_vector :
-  {
-    . = ALIGN(4);
-    KEEP(*(.isr_vector)) /* Startup code */
-    . = ALIGN(4);
-  } >FLASH
+/* For each data/text section two region are defined, a virtual region
+   and a load region (_LMA suffix).*/
 
-  /* The program code and other data goes into FLASH */
-  .text :
-  {
-    . = ALIGN(4);
-    *(.text)           /* .text sections (code) */
-    *(.text*)          /* .text* sections (code) */
-    *(.glue_7)         /* glue arm to thumb code */
-    *(.glue_7t)        /* glue thumb to arm code */
-    *(.eh_frame)
+/* Flash region to be used for exception vectors.*/
+REGION_ALIAS("VECTORS_FLASH", flash0);
+REGION_ALIAS("VECTORS_FLASH_LMA", flash0);
 
-    KEEP (*(.init))
-    KEEP (*(.fini))
+/* Flash region to be used for constructors and destructors.*/
+REGION_ALIAS("XTORS_FLASH", flash0);
+REGION_ALIAS("XTORS_FLASH_LMA", flash0);
 
-    . = ALIGN(4);
-    _etext = .;        /* define a global symbols at end of code */
-  } >FLASH
+/* Flash region to be used for code text.*/
+REGION_ALIAS("TEXT_FLASH", flash0);
+REGION_ALIAS("TEXT_FLASH_LMA", flash0);
 
-  /* Constant data goes into FLASH */
-  .rodata :
-  {
-    . = ALIGN(4);
-    *(.rodata)         /* .rodata sections (constants, strings, etc.) */
-    *(.rodata*)        /* .rodata* sections (constants, strings, etc.) */
-    . = ALIGN(4);
-  } >FLASH
+/* Flash region to be used for read only data.*/
+REGION_ALIAS("RODATA_FLASH", flash0);
+REGION_ALIAS("RODATA_FLASH_LMA", flash0);
 
-  .ARM.extab   : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >FLASH
-  .ARM : {
-    __exidx_start = .;
-    *(.ARM.exidx*)
-    __exidx_end = .;
-  } >FLASH
+/* Flash region to be used for various.*/
+REGION_ALIAS("VARIOUS_FLASH", flash0);
+REGION_ALIAS("VARIOUS_FLASH_LMA", flash0);
 
-  .preinit_array     :
-  {
-    PROVIDE_HIDDEN (__preinit_array_start = .);
-    KEEP (*(.preinit_array*))
-    PROVIDE_HIDDEN (__preinit_array_end = .);
-  } >FLASH
-  .init_array :
-  {
-    PROVIDE_HIDDEN (__init_array_start = .);
-    KEEP (*(SORT(.init_array.*)))
-    KEEP (*(.init_array*))
-    PROVIDE_HIDDEN (__init_array_end = .);
-  } >FLASH
-  .fini_array :
-  {
-    PROVIDE_HIDDEN (__fini_array_start = .);
-    KEEP (*(SORT(.fini_array.*)))
-    KEEP (*(.fini_array*))
-    PROVIDE_HIDDEN (__fini_array_end = .);
-  } >FLASH
+/* Flash region to be used for RAM(n) initialization data.*/
+REGION_ALIAS("RAM_INIT_FLASH_LMA", flash0);
 
-  /* used by the startup to initialize data */
-  _sidata = LOADADDR(.data);
+/* RAM region to be used for Main stack. This stack accommodates the processing
+   of all exceptions and interrupts.*/
+REGION_ALIAS("MAIN_STACK_RAM", ram0);
 
-  /* Initialized data sections goes into RAM, load LMA copy after code */
-  .data : 
-  {
-    . = ALIGN(4);
-    _sdata = .;        /* create a global symbol at data start */
-    *(.data)           /* .data sections */
-    *(.data*)          /* .data* sections */
+/* RAM region to be used for the process stack. This is the stack used by
+   the main() function.*/
+REGION_ALIAS("PROCESS_STACK_RAM", ram0);
 
-    . = ALIGN(4);
-    _edata = .;        /* define a global symbol at data end */
-  } >RAM AT> FLASH
+/* RAM region to be used for data segment.*/
+REGION_ALIAS("DATA_RAM", ram0);
+REGION_ALIAS("DATA_RAM_LMA", flash0);
 
-  _spim_init_base = LOADADDR(.spim);
-  _spim_init_length = SIZEOF(.spim);
-  
-  .spim :
-  {
-    . = ALIGN(4);
-    _spim_start = .;        /* create a global symbol at spim start */
-    *(.spim)                /* .spim sections */
-    *(.spim*)               /* .spim* sections */
-    . = ALIGN(4);
-    _spim_end = .;         /* define a global symbols at end of spim */
-  } >SPIM
+/* RAM region to be used for BSS segment.*/
+REGION_ALIAS("BSS_RAM", ram0);
 
-  /* Uninitialized data section */
-  . = ALIGN(4);
-  .bss :
-  {
-    /* This is used by the startup in order to initialize the .bss secion */
-    _sbss = .;         /* define a global symbol at bss start */
-    __bss_start__ = _sbss;
-    *(.bss)
-    *(.bss*)
-    *(COMMON)
+/* RAM region to be used for the default heap.*/
+REGION_ALIAS("HEAP_RAM", ram0);
 
-    . = ALIGN(4);
-    _ebss = .;         /* define a global symbol at bss end */
-    __bss_end__ = _ebss;
-  } >RAM
-
-  /* User_heap_stack section, used to check that there is enough RAM left */
-  ._user_heap_stack :
-  {
-    . = ALIGN(8);
-    PROVIDE ( end = . );
-    PROVIDE ( _end = . );
-    . = . + _Min_Heap_Size;
-    . = . + _Min_Stack_Size;
-    . = ALIGN(8);
-  } >RAM
-
-  /* Remove information from the standard libraries */
-  /DISCARD/ :
-  {
-    libc.a ( * )
-    libm.a ( * )
-    libgcc.a ( * )
-  }
-
-  .ARM.attributes 0 : { *(.ARM.attributes) }
-}
+/* Generic rules inclusion.*/
+INCLUDE rules.ld

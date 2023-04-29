@@ -15,7 +15,7 @@
 */
 
 /*
- * AT32F403A memory setup.
+ * AT32F407 memory setup.
  */
 MEMORY
 {
