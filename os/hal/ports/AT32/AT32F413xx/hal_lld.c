@@ -139,6 +139,7 @@ void at32_clock_reset(void)
 
   /* reset clkout[3], usbbufs, hickdiv, clkoutdiv */
   CRM->MISC1 = 0;
+  CRM->MISC3 = 0;
 
   /* disable all interrupts enable and clear pending bits  */
   CRM->CLKINT = 0x009F0000;
