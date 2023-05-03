@@ -542,7 +542,7 @@ struct USBDriver {
  * @notapi
  */
 #if !defined(usb_lld_disconnect_bus)
-#define usb_lld_disconnect_bus(usbp) (AT32_USB->CNTR |= USBFS_CFG_PUO)
+#define usb_lld_disconnect_bus(usbp) (AT32_USB->CFG |= USBFS_CFG_PUO)
 #endif
 #endif /* AT32_USB_HAS_CFG */
 
