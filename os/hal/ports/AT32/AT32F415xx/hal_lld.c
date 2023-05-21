@@ -63,17 +63,17 @@ static void hal_lld_backup_domain_init(void) {
     CRM->BPDC = 0;
   }
 
-  /* If enabled then the LSE is started.*/
-#if AT32_LSE_ENABLED
-#if defined(AT32_LSE_BYPASS)
-  /* LSE Bypass.*/
+  /* If enabled then the LEXT is started.*/
+#if AT32_LEXT_ENABLED
+#if defined(AT32_LEXT_BYPASS)
+  /* LEXT Bypass.*/
   CRM->BPDC |= CRM_BPDC_LEXTEN | CRM_BPDC_LEXTBYPS;
 #else
-  /* No LSE Bypass.*/
+  /* No LEXT Bypass.*/
   CRM->BPDC |= CRM_BPDC_LEXTEN;
 #endif
-  while ((CRM->BPDC & CRM_BPDC_LEXTSTBL) == 0);  /* Waits until LSE is stable.   */
-#endif /* AT32_LSE_ENABLED */
+  while ((CRM->BPDC & CRM_BPDC_LEXTSTBL) == 0);  /* Waits until LEXT is stable.   */
+#endif /* AT32_LEXT_ENABLED */
 
 #if AT32_RTCSEL != AT32_RTCSEL_NOCLOCK
   /* If the backup domain hasn't been initialized yet then proceed with
@@ -152,74 +152,78 @@ void at32_clock_reset(void)
  */
 void at32_clock_init(void) {
 #if !AT32_NO_INIT
-  /* HSI setup, it enforces the reset situation in order to handle possible
+  /* HICK setup, it enforces the reset situation in order to handle possible
      problems with JTAG probes and re-initializations.*/
-  CRM->CTRL |= CRM_CTRL_HICKEN;                                 /* Make sure HSI is ON.         */
-  while((CRM->CTRL & CRM_CTRL_HICKSTBL) == 0);                  /* Wait until HSI is stable.    */
-  CRM->CTRL &= CRM_CTRL_HICKTRIM | CRM_CTRL_HICKEN;             /* CR Reset value.              */
-  CRM->CFG  |= CRM_CFG_SCLK_HICK;                                /* CFGR reset value.            */
-  while ((CRM->CFG & CRM_CFG_SCLKSTS) != CRM_CFG_SCLKSTS_HICK); /* Waits until HSI is selected. */
+  CRM->CTRL |= CRM_CTRL_HICKEN;                                 /* Make sure HICK is ON.         */
+  while((CRM->CTRL & CRM_CTRL_HICKSTBL) == 0);                  /* Wait until HICK is stable.    */
+  CRM->CTRL &= CRM_CTRL_HICKTRIM | CRM_CTRL_HICKEN;             /* CTRL Reset value.             */
+  CRM->CFG  |= CRM_CFG_SCLK_HICK;                               /* CFG reset value.              */
+  while ((CRM->CFG & CRM_CFG_SCLKSTS) != CRM_CFG_SCLKSTS_HICK); /* Waits until HICK is selected. */
+
+  /* Registers finally cleared to reset values.*/
   at32_clock_reset();
-  /* Flash setup and final clock selection.   */
+
+  /* Flash setup and final clock selection.*/
   FLASH->PSR = AT32_FLASHBITS;
   
-#if AT32_HSE_ENABLED
-#if defined(AT32_HSE_BYPASS)
-  /* HSE Bypass.*/
+#if AT32_HEXT_ENABLED
+#if defined(AT32_HEXT_BYPASS)
+  /* HEXT Bypass.*/
   CRM->CTRL |= CRM_CTRL_HEXTEN | CRM_CTRL_HEXTBYPS;
 #endif
-  /* HSE activation.*/
+  /* HEXT activation.*/
   CRM->CTRL |= CRM_CTRL_HEXTEN;
-  while (!(CRM->CTRL & CRM_CTRL_HEXTSTBL));           /* Waits until HSE is stable.   */
+  while (!(CRM->CTRL & CRM_CTRL_HEXTSTBL));           /* Waits until HEXT is stable.   */
 #endif
 
-#if AT32_LSI_ENABLED
-  /* LSI activation.*/
+#if AT32_LICK_ENABLED
+  /* LICK activation.*/
   CRM->CTRLSTS |= CRM_CTRLSTS_LICKEN;
-  while ((CRM->CTRLSTS & CRM_CTRLSTS_LICKSTBL) == 0); /* Waits until LSI is stable.   */
+  while ((CRM->CTRLSTS & CRM_CTRLSTS_LICKSTBL) == 0); /* Waits until LICK is stable.   */
 #endif
 
-#if AT32_HAS_OTG1
-#if (AT32_USBCLK_SRC == AT32_USBCLK_SRC_HSI48)        /* USB use HSI.                 */
+#if (AT32_USBCLK_SRC == AT32_USBCLK_SRC_HICK48)       /* USB use HICK.                 */
   CRM->MISC1 |= CRM_MISC1_HICKDIV;
   CRM->MISC2 |= CRM_MISC2_HICK_TO_USB | CRM_MISC2_HICK_TO_SCLK;
 #endif
-#endif
 
-  /*FIXME: need to improve flexible pll config*/
 #if AT32_ACTIVATE_PLL
   /* PLL activation.*/
-  CRM->CFG  |= AT32_PLLMUL | AT32_PLLHEXTDIV | AT32_PLLRCS;
+#if (AT32_PLL_CONFIG == AT32_PLL_CONFIG_SOLID)
+  /* Solid PLL config*/
+  CRM->CFG  |= AT32_PLLMULT | AT32_PLLHEXTDIV | AT32_PLLRCS;
 #ifdef AT32_PLLCLKREF
   CRM->PLL  |= AT32_PLLCLKREF;
 #endif
+#else
+  /* Flexible PLL config*/
+  CRM->CFG  |= AT32_PLLHEXTDIV | AT32_PLLRCS;
+  CRM->PLL  |= AT32_PLL_FR | AT32_PLL_MS | AT32_PLL_NS | AT32_PLL_PLLCFGEN;
+#endif
+
   CRM->CTRL |= CRM_CTRL_PLLEN;
-  while (!(CRM->CTRL & CRM_CTRL_PLLSTBL));       /* Waits until PLL is stable.   */
+  while (!(CRM->CTRL & CRM_CTRL_PLLSTBL));            /* Waits until PLL is stable.    */
 #endif
 
   /* Clock settings.*/
-#if AT32_HAS_OTG1
-  CRM->CFG = (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_CFG_MASK)  | AT32_USBDIV   | AT32_PLLMUL | AT32_PLLHEXTDIV |
-             AT32_PLLRCS | AT32_ADCDIV | AT32_APB2DIV      | AT32_APB1DIV  | AT32_AHBDIV;
+  CRM->CFG   |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_CFG_MASK) | AT32_USBDIV  | AT32_ADCDIV | 
+                AT32_APB2DIV                                 | AT32_APB1DIV | AT32_AHBDIV;
   CRM->MISC1 |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_MISC_MASK) >> 11;
-#else
-  CRM->CFG = (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_CFG_MASK)  |                 AT32_PLLMUL | AT32_PLLHEXTDIV |
-             AT32_PLLRCS | AT32_ADCDIV | AT32_APB2DIV      | AT32_APB1DIV  | AT32_AHBDIV;
-  CRM->MISC1 |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_MISC_MASK) >> 11;
-#endif
 
+  /* PLL Auto Step activation.*/
   CRM->MISC2 |= CRM_MISC2_AUTO_STEP_EN;
 
-  /* Switching to the configured clock source if it is different from HSI.*/
-#if (AT32_SCLKSEL != AT32_SCLKSEL_HSI)
+  /* Switching to the configured clock source if it is different from HICK.*/
+#if (AT32_SCLKSEL != AT32_SCLKSEL_HICK)
   /* Switches clock source.*/
   CRM->CFG |= AT32_SCLKSEL;
   while ((CRM->CFG & CRM_CFG_SCLKSTS) != (AT32_SCLKSEL << 2)); /* Waits selection complete.    */
 #endif
 
+  /* PLL Auto Step inactivation.*/
   CRM->MISC2 &= ~CRM_MISC2_AUTO_STEP_EN;
   
-#if !AT32_HSI_ENABLED
+#if !AT32_HICK_ENABLED
   CRM->CTRL &= ~CRM_CTRL_HICKEN;
 #endif
 #endif /* !AT32_NO_INIT */
