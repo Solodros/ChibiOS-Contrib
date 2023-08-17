@@ -153,31 +153,6 @@ static void reset_ep0(USBDriver *usbp) {
   usbp->epc[0]->in_state->stalled = false;
 }
 
-#if 0
-/**
- * @brief   Reset specified endpoint.
- */
-static void reset_endpoint(USBDriver *usbp, usbep_t ep, bool is_in) {
-  const USBEndpointConfig *epcp = usbp->epc[ep];
-
-  if (is_in) {
-    USBInEndpointState *in_state = epcp->in_state;
-    if (in_state) {
-      in_state->active = false;
-      in_state->stalled = false;
-      in_state->next_pid = 0U;
-    }
-  } else {
-    USBOutEndpointState *out_state = epcp->out_state;
-    if (out_state) {
-      out_state->active = false;
-      out_state->stalled = false;
-      out_state->next_pid = 0U;
-    }
-  }
-}
-#endif
-
 /**
  * @brief   Prepare buffer for receiving data.
  */
@@ -426,15 +401,22 @@ OSAL_IRQ_HANDLER(RP_USBCTRL_IRQ_HANDLER) {
     _usb_wakeup(usbp);
   }
 
-#if RP_USB_USE_SOF_INTR == TRUE
   /* SOF handling.*/
   if (ints & USB_INTS_DEV_SOF) {
+    /* SOF interrupt was used to detect resume of the USB bus after issuing a
+     * remote wake up of the host, therefore we disable it again. */
+    if (usbp->config->sof_cb == NULL) {
+      USB->INTE &= ~USB_INTE_DEV_SOF;
+    }
+    if (usbp->state == USB_SUSPENDED) {
+      _usb_wakeup(usbp);
+    }
+
     _usb_isr_invoke_sof_cb(usbp);
 
     /* Clear SOF flag by reading SOF_RD */
     (void)USB->SOFRD;
   }
-#endif /* RP_USB_USE_SOF_INTR */
 
   /* Endpoint events handling.*/
   if (ints & USB_INTS_BUFF_STATUS) {
@@ -534,12 +516,14 @@ void usb_lld_start(USBDriver *usbp) {
                   USB_INTE_DEV_SUSPEND |
                   USB_INTE_BUS_RESET |
                   USB_INTE_BUFF_STATUS;
+
+      if (usbp->config->sof_cb != NULL) {
+        USB->INTE |= USB_INTE_DEV_SOF;
+      }
+
 #if RP_USB_USE_ERROR_DATA_SEQ_INTR == TRUE
       USB->INTE |= USB_INTE_ERROR_DATA_SEQ;
 #endif /* RP_USB_USE_ERROR_DATA_SEQ_INTR */
-#if RP_USB_USE_SOF_INTR == TRUE
-      USB->INTE |= USB_INTE_DEV_SOF;
-#endif /* RP_USB_USE_SOF_INTR */
 
       /* Enable USB interrupt. */
       nvicEnableVector(RP_USBCTRL_IRQ_NUMBER, RP_IRQ_USB0_PRIORITY);
@@ -689,16 +673,8 @@ void usb_lld_init_endpoint(USBDriver *usbp, usbep_t ep) {
  * @notapi
  */
 void usb_lld_disable_endpoints(USBDriver *usbp) {
-  /* Ignore zero */
   for (uint8_t ep = 1; ep <= USB_ENDOPOINTS_NUMBER; ep++) {
-    usbp->epc[ep]->in_state->active = false;
-    usbp->epc[ep]->in_state->stalled = false;
-    usbp->epc[ep]->in_state->next_pid = 0;
     EP_CTRL(ep).IN &= ~USB_EP_EN;
-
-    usbp->epc[ep]->out_state->active = false;
-    usbp->epc[ep]->out_state->stalled = false;
-    usbp->epc[ep]->out_state->next_pid = 0;
     EP_CTRL(ep).OUT &= ~USB_EP_EN;
   }
 }
