@@ -21,12 +21,12 @@
 
 /**
  * @file        AT32F415xx/cmparams.h
- * @brief       ARM Cortex-M3 parameters for the Westberry AT32F415xx
+ * @brief       ARM Cortex-M3 parameters for the ArteryTek AT32F415xx
  *
- * @defgroup    ARMCMx_AT32F415xx Westberry AT32F415xx Specific Parameters
+ * @defgroup    ARMCMx_AT32F415xx ArteryTek AT32F415xx Specific Parameters
  * @ingroup     ARMCMx_SPECIFIC
  * @details     This file contains the Cortex-M4 specific parameters for the
- *              Westberry AT32F415xx platform.
+ *              ArteryTek AT32F415xx platform.
  * @{
  */
 

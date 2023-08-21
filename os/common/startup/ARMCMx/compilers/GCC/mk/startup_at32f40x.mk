@@ -1,4 +1,4 @@
-# List of the ChibiOS generic AT32F413xx startup and CMSIS files.
+# List of the ChibiOS generic AT32F40x startup and CMSIS files.
 STARTUPSRC = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/crt1.c 
 
 STARTUPASM = $(CHIBIOS)/os/common/startup/ARMCMx/compilers/GCC/crt0_v7m.S \

@@ -681,7 +681,7 @@
 #define AT32_PLLFRCLK              (AT32_PLLCLKIN * AT32_PLL_NS_VALUE)
 #define AT32_PLLCLKOUT             (AT32_PLLFRCLK / AT32_PLL_FR_VALUE)
 /* PLL FR frequency range check.*/
-#if (AT32_PLLCLKIN < AT32_PLLFR_MIN) || (AT32_PLLCLKIN > AT32_PLLFR_MAX)
+#if (AT32_PLLFRCLK < AT32_PLLFR_MIN) || (AT32_PLLFRCLK > AT32_PLLFR_MAX)
 #error "AT32_PLLFRCLK outside acceptable range (AT32_PLLFR_MIN...AT32_PLLFR_MAX)"
 #endif
 #else
