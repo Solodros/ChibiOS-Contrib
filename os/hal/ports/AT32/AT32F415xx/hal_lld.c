@@ -198,7 +198,7 @@ void at32_clock_init(void) {
 #else
   /* Flexible PLL config*/
   CRM->CFG  |= AT32_PLLHEXTDIV | AT32_PLLRCS;
-  CRM->PLL  |= AT32_PLL_FR | AT32_PLL_MS | AT32_PLL_NS | AT32_PLL_PLLCFGEN;
+  CRM->PLL  = AT32_PLL_FR | AT32_PLL_MS | AT32_PLL_NS | AT32_PLL_PLLCFGEN;
 #endif
 
   CRM->CTRL |= CRM_CTRL_PLLEN;
