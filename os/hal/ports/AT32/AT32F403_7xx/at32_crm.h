@@ -15,12 +15,12 @@
 */
 
 /**
- * @file    AT32F40x/at32_crm.h
+ * @file    AT32F403_7xx/at32_crm.h
  * @brief   CRM helper driver header.
  * @note    This file requires definitions from the AT header file
- *          @p AT32F40x.h.
+ *          @p at32f403_7xx.h.
  *
- * @addtogroup AT32F40x_CRM
+ * @addtogroup AT32F403_7xx_CRM
  * @{
  */
 

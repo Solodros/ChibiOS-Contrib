@@ -15,10 +15,10 @@
 */
 
 /**
- * @file    AT32F40x/at32_isr.h
- * @brief   AT32F40x ISR handler header.
+ * @file    AT32F403_7xx/at32_isr.h
+ * @brief   AT32F403_7xx ISR handler header.
  *
- * @addtogroup AT32F40x_ISR
+ * @addtogroup AT32F403_7xx_ISR
  * @{
  */
 

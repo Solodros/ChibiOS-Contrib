@@ -21,7 +21,7 @@
 
 /**
  * @file        AT32F415xx/cmparams.h
- * @brief       ARM Cortex-M3 parameters for the ArteryTek AT32F415xx
+ * @brief       ARM Cortex-M4 parameters for the ArteryTek AT32F415xx
  *
  * @defgroup    ARMCMx_AT32F415xx ArteryTek AT32F415xx Specific Parameters
  * @ingroup     ARMCMx_SPECIFIC

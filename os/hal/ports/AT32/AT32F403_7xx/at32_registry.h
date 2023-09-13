@@ -15,8 +15,8 @@
 */
 
 /**
- * @file    AT32F40x/at32_registry.h
- * @brief   AT32F40x capabilities registry.
+ * @file    AT32F403_7xx/at32_registry.h
+ * @brief   AT32F403_7xx capabilities registry.
  *
  * @addtogroup HAL
  * @{
@@ -25,8 +25,8 @@
 #ifndef AT32_REGISTRY_H
 #define AT32_REGISTRY_H
 
-#if !defined(AT32F40x)
-#error "unsupported or unrecognized AT32F40x member"
+#if !defined(AT32F403_7xx)
+#error "unsupported or unrecognized AT32F403_7xx member"
 #endif
 
 /*===========================================================================*/

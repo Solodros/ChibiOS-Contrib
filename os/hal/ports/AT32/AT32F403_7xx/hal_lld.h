@@ -15,8 +15,8 @@
 */
 
 /**
- * @file    AT32F40x/hal_lld.h
- * @brief   AT32F40x HAL subsystem low level driver header.
+ * @file    AT32F403_7xx/hal_lld.h
+ * @brief   AT32F403_7xx HAL subsystem low level driver header.
  * @pre     This module requires the following macros to be defined in the
  *          @p board.h file:
  *          - AT32_LEXTCLK.
@@ -42,13 +42,13 @@
  * @name    Platform identification
  * @{
  */
-#define PLATFORM_NAME                          "AT32F40x"
+#define PLATFORM_NAME                          "AT32F403_7xx"
 
 /**
  * @brief   Sub-family identifier.
  */
-#if !defined(AT32F40x) || defined(__DOXYGEN__)
-#define AT32F40x
+#if !defined(AT32F403_7xx) || defined(__DOXYGEN__)
+#define AT32F403_7xx
 #endif
 /** @} */
 

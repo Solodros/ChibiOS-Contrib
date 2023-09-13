@@ -16,7 +16,7 @@
 
 /**
  * @file    hal_efl_lld.h
- * @brief   AT32F40x Embedded Flash subsystem low level driver header.
+ * @brief   AT32F403_7xx Embedded Flash subsystem low level driver header.
  *
  * @addtogroup HAL_EFL
  * @{

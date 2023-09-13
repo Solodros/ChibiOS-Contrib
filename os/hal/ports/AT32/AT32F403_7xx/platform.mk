@@ -1,12 +1,12 @@
 # Required platform files.
 PLATFORMSRC_CONTRIB += $(CHIBIOS)/os/hal/ports/common/ARMCMx/nvic.c \
-                       $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/AT32F40x/hal_lld.c \
-			                 $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/AT32F40x/at32_isr.c \
-                       $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/AT32F40x/hal_efl_lld.c
+                       $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/AT32F403_7xx/hal_lld.c \
+			                 $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/AT32F403_7xx/at32_isr.c \
+                       $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/AT32F403_7xx/hal_efl_lld.c
 
 # Required include directories.
 PLATFORMINC_CONTRIB += $(CHIBIOS)/os/hal/ports/common/ARMCMx \
-               $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/AT32F40x
+               $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/AT32F403_7xx
 
 
 ifeq ($(USE_SMART_BUILD),yes)

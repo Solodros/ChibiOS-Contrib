@@ -22,8 +22,8 @@
   **************************************************************************
   */
 
-#ifndef __AT32F40X_H
-#define __AT32F40X_H
+#ifndef __AT32F403_7_H
+#define __AT32F403_7_H
 
 #ifdef __cplusplus
 extern "C" {

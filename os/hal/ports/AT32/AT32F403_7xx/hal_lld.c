@@ -15,8 +15,8 @@
 */
 
 /**
- * @file    AT32F40x/hal_lld.c
- * @brief   AT32F40x HAL subsystem low level driver source.
+ * @file    AT32F403_7xx/hal_lld.c
+ * @brief   AT32F403_7xx HAL subsystem low level driver source.
  *
  * @addtogroup HAL
  * @{

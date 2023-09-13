@@ -20,13 +20,13 @@
 */
 
 /**
- * @file        AT32F40x/cmparams.h
- * @brief       ARM Cortex-M3 parameters for the ArteryTek AT32F40x
+ * @file        AT32F403_7/cmparams.h
+ * @brief       ARM Cortex-M4 parameters for the ArteryTek AT32F403_7
  *
- * @defgroup    ARMCMx_AT32F40x ArteryTek AT32F40x Specific Parameters
+ * @defgroup    ARMCMx_AT32F403_7 ArteryTek AT32F403_7 Specific Parameters
  * @ingroup     ARMCMx_SPECIFIC
  * @details     This file contains the Cortex-M4 specific parameters for the
- *              ArteryTek AT32F40x platform.
+ *              ArteryTek AT32F403_7 platform.
  * @{
  */
 
@@ -64,14 +64,14 @@
    asm module.*/
 #if !defined(_FROM_ASM_)
 
-#if !defined (AT32F40x)
+#if !defined (AT32F403_7xx)
     #include "board.h"
 #endif
 
 /* Including the device CMSIS header. Note, we are not using the definitions
    from this header because we need this file to be usable also from
    assembler source files. We verify that the info matches instead.*/
-#include "at32f40x.h"
+#include "at32f403_7xx.h"
 
 #if CORTEX_MODEL != __CORTEX_M
 #error "CMSIS __CORTEX_M mismatch"
