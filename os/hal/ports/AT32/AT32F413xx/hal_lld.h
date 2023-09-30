@@ -753,18 +753,18 @@
  * @brief   Timers 2, 3, 4, 5 clock.
  */
 #if (AT32_APB1DIV == AT32_APB1DIV_DIV1) || defined(__DOXYGEN__)
-#define AT32_TIMCLK1               (AT32_PCLK1 * 1)
+#define AT32_TMRCLK1               (AT32_PCLK1 * 1)
 #else
-#define AT32_TIMCLK1               (AT32_PCLK1 * 2)
+#define AT32_TMRCLK1               (AT32_PCLK1 * 2)
 #endif
 
 /**
  * @brief   Timers 1, 9, 10, 11 clock.
  */
 #if (AT32_APB2DIV == AT32_APB2DIV_DIV1) || defined(__DOXYGEN__)
-#define AT32_TIMCLK2               (AT32_PCLK2 * 1)
+#define AT32_TMRCLK2               (AT32_PCLK2 * 1)
 #else
-#define AT32_TIMCLK2               (AT32_PCLK2 * 2)
+#define AT32_TMRCLK2               (AT32_PCLK2 * 2)
 #endif
 
 /* Various helpers.*/
@@ -773,7 +773,7 @@
 #include "at32_isr.h"
 #include "at32_crm.h"
 #include "at32_dma.h"
-#include "at32_tim.h"
+#include "at32_tmr.h"
 
 #ifdef __cplusplus
 extern "C" {

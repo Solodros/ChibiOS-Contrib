@@ -634,7 +634,7 @@
  */
 #if ((AT32_PLL_NS_VALUE >= 31) && (AT32_PLL_NS_VALUE <= 500)) ||              \
     defined(__DOXYGEN__)
-#define AT32_PLL_NS                (AT32_PLL_NS_VALUE << 8)
+#define AT32_PLL_NS                ((AT32_PLL_NS_VALUE << 8) & AT32_PLL_NS_MASK)
 #else
 #error "invalid AT32_PLL_NS_VALUE value specified"
 #endif
@@ -644,7 +644,7 @@
  */
 #if ((AT32_PLL_MS_VALUE >= 1) && (AT32_PLL_MS_VALUE <= 15)) ||                \
     defined(__DOXYGEN__)
-#define AT32_PLL_MS                (AT32_PLL_MS_VALUE << 4)
+#define AT32_PLL_MS                ((AT32_PLL_MS_VALUE << 4) & AT32_PLL_MS_MASK)
 #else
 #error "invalid AT32_PLL_MS_VALUE value specified"
 #endif
@@ -878,18 +878,18 @@
  * @brief   Timers 2, 3, 4, 5 clock.
  */
 #if (AT32_APB1DIV == AT32_APB1DIV_DIV1) || defined(__DOXYGEN__)
-#define AT32_TIMCLK1               (AT32_PCLK1 * 1)
+#define AT32_TMRCLK1               (AT32_PCLK1 * 1)
 #else
-#define AT32_TIMCLK1               (AT32_PCLK1 * 2)
+#define AT32_TMRCLK1               (AT32_PCLK1 * 2)
 #endif
 
 /**
  * @brief   Timers 1, 8, 9, 10, 11 clock.
  */
 #if (AT32_APB2DIV == AT32_APB2DIV_DIV1) || defined(__DOXYGEN__)
-#define AT32_TIMCLK2               (AT32_PCLK2 * 1)
+#define AT32_TMRCLK2               (AT32_PCLK2 * 1)
 #else
-#define AT32_TIMCLK2               (AT32_PCLK2 * 2)
+#define AT32_TMRCLK2               (AT32_PCLK2 * 2)
 #endif
 
 /**
@@ -913,7 +913,7 @@
 #include "at32_isr.h"
 #include "at32_crm.h"
 #include "at32_dma.h"
-#include "at32_tim.h"
+#include "at32_tmr.h"
 
 #ifdef __cplusplus
 extern "C" {

@@ -168,64 +168,64 @@
 #define AT32_SPI4_SUPPORTS_I2S              TRUE
 #define AT32_SPI4_I2S_FULLDUPLEX            FALSE
 
-/* TIM attributes.*/
-#define AT32_TIM_MAX_CHANNELS               4
+/* TMR attributes.*/
+#define AT32_TMR_MAX_CHANNELS               4
 
-#define AT32_HAS_TIM1                       TRUE
-#define AT32_TIM1_IS_32BITS                 FALSE
-#define AT32_TIM1_CHANNELS                  4
+#define AT32_HAS_TMR1                       TRUE
+#define AT32_TMR1_IS_32BITS                 FALSE
+#define AT32_TMR1_CHANNELS                  4
 
-#define AT32_HAS_TIM2                       TRUE
-#define AT32_TIM2_IS_32BITS                 TRUE
-#define AT32_TIM2_CHANNELS                  4
+#define AT32_HAS_TMR2                       TRUE
+#define AT32_TMR2_IS_32BITS                 TRUE
+#define AT32_TMR2_CHANNELS                  4
 
-#define AT32_HAS_TIM3                       TRUE
-#define AT32_TIM3_IS_32BITS                 FALSE
-#define AT32_TIM3_CHANNELS                  4
+#define AT32_HAS_TMR3                       TRUE
+#define AT32_TMR3_IS_32BITS                 FALSE
+#define AT32_TMR3_CHANNELS                  4
 
-#define AT32_HAS_TIM4                       TRUE
-#define AT32_TIM4_IS_32BITS                 FALSE
-#define AT32_TIM4_CHANNELS                  4
+#define AT32_HAS_TMR4                       TRUE
+#define AT32_TMR4_IS_32BITS                 FALSE
+#define AT32_TMR4_CHANNELS                  4
 
-#define AT32_HAS_TIM5                       TRUE
-#define AT32_TIM5_IS_32BITS                 TRUE
-#define AT32_TIM5_CHANNELS                  4
+#define AT32_HAS_TMR5                       TRUE
+#define AT32_TMR5_IS_32BITS                 TRUE
+#define AT32_TMR5_CHANNELS                  4
 
-#define AT32_HAS_TIM6                       TRUE
-#define AT32_TIM6_IS_32BITS                 FALSE
-#define AT32_TIM6_CHANNELS                  0
+#define AT32_HAS_TMR6                       TRUE
+#define AT32_TMR6_IS_32BITS                 FALSE
+#define AT32_TMR6_CHANNELS                  0
 
-#define AT32_HAS_TIM7                       TRUE
-#define AT32_TIM7_IS_32BITS                 FALSE
-#define AT32_TIM7_CHANNELS                  0
+#define AT32_HAS_TMR7                       TRUE
+#define AT32_TMR7_IS_32BITS                 FALSE
+#define AT32_TMR7_CHANNELS                  0
 
-#define AT32_HAS_TIM8                       TRUE
-#define AT32_TIM8_IS_32BITS                 FALSE
-#define AT32_TIM8_CHANNELS                  4
+#define AT32_HAS_TMR8                       TRUE
+#define AT32_TMR8_IS_32BITS                 FALSE
+#define AT32_TMR8_CHANNELS                  4
 
-#define AT32_HAS_TIM9                       TRUE
-#define AT32_TIM9_IS_32BITS                 FALSE
-#define AT32_TIM9_CHANNELS                  2
+#define AT32_HAS_TMR9                       TRUE
+#define AT32_TMR9_IS_32BITS                 FALSE
+#define AT32_TMR9_CHANNELS                  2
 
-#define AT32_HAS_TIM10                      TRUE
-#define AT32_TIM10_IS_32BITS                FALSE
-#define AT32_TIM10_CHANNELS                 1
+#define AT32_HAS_TMR10                      TRUE
+#define AT32_TMR10_IS_32BITS                FALSE
+#define AT32_TMR10_CHANNELS                 1
 
-#define AT32_HAS_TIM11                      TRUE
-#define AT32_TIM11_IS_32BITS                FALSE
-#define AT32_TIM11_CHANNELS                 1
+#define AT32_HAS_TMR11                      TRUE
+#define AT32_TMR11_IS_32BITS                FALSE
+#define AT32_TMR11_CHANNELS                 1
 
-#define AT32_HAS_TIM12                      TRUE
-#define AT32_TIM12_IS_32BITS                FALSE
-#define AT32_TIM12_CHANNELS                 2
+#define AT32_HAS_TMR12                      TRUE
+#define AT32_TMR12_IS_32BITS                FALSE
+#define AT32_TMR12_CHANNELS                 2
 
-#define AT32_HAS_TIM13                      TRUE
-#define AT32_TIM13_IS_32BITS                FALSE
-#define AT32_TIM13_CHANNELS                 1
+#define AT32_HAS_TMR13                      TRUE
+#define AT32_TMR13_IS_32BITS                FALSE
+#define AT32_TMR13_CHANNELS                 1
 
-#define AT32_HAS_TIM14                      TRUE
-#define AT32_TIM14_IS_32BITS                FALSE
-#define AT32_TIM14_CHANNELS                 1
+#define AT32_HAS_TMR14                      TRUE
+#define AT32_TMR14_IS_32BITS                FALSE
+#define AT32_TMR14_CHANNELS                 1
 
 /* USART attributes.*/
 #define AT32_HAS_USART1                    TRUE
@@ -393,64 +393,64 @@
 #define AT32_SPI4_SUPPORTS_I2S              TRUE
 #define AT32_SPI4_I2S_FULLDUPLEX            FALSE
 
-/* TIM attributes.*/
-#define AT32_TIM_MAX_CHANNELS               4
+/* TMR attributes.*/
+#define AT32_TMR_MAX_CHANNELS               4
 
-#define AT32_HAS_TIM1                       TRUE
-#define AT32_TIM1_IS_32BITS                 FALSE
-#define AT32_TIM1_CHANNELS                  4
+#define AT32_HAS_TMR1                       TRUE
+#define AT32_TMR1_IS_32BITS                 FALSE
+#define AT32_TMR1_CHANNELS                  4
 
-#define AT32_HAS_TIM2                       TRUE
-#define AT32_TIM2_IS_32BITS                 TRUE
-#define AT32_TIM2_CHANNELS                  4
+#define AT32_HAS_TMR2                       TRUE
+#define AT32_TMR2_IS_32BITS                 TRUE
+#define AT32_TMR2_CHANNELS                  4
 
-#define AT32_HAS_TIM3                       TRUE
-#define AT32_TIM3_IS_32BITS                 FALSE
-#define AT32_TIM3_CHANNELS                  4
+#define AT32_HAS_TMR3                       TRUE
+#define AT32_TMR3_IS_32BITS                 FALSE
+#define AT32_TMR3_CHANNELS                  4
 
-#define AT32_HAS_TIM4                       TRUE
-#define AT32_TIM4_IS_32BITS                 FALSE
-#define AT32_TIM4_CHANNELS                  4
+#define AT32_HAS_TMR4                       TRUE
+#define AT32_TMR4_IS_32BITS                 FALSE
+#define AT32_TMR4_CHANNELS                  4
 
-#define AT32_HAS_TIM5                       TRUE
-#define AT32_TIM5_IS_32BITS                 TRUE
-#define AT32_TIM5_CHANNELS                  4
+#define AT32_HAS_TMR5                       TRUE
+#define AT32_TMR5_IS_32BITS                 TRUE
+#define AT32_TMR5_CHANNELS                  4
 
-#define AT32_HAS_TIM6                       TRUE
-#define AT32_TIM6_IS_32BITS                 FALSE
-#define AT32_TIM6_CHANNELS                  0
+#define AT32_HAS_TMR6                       TRUE
+#define AT32_TMR6_IS_32BITS                 FALSE
+#define AT32_TMR6_CHANNELS                  0
 
-#define AT32_HAS_TIM7                       TRUE
-#define AT32_TIM7_IS_32BITS                 FALSE
-#define AT32_TIM7_CHANNELS                  0
+#define AT32_HAS_TMR7                       TRUE
+#define AT32_TMR7_IS_32BITS                 FALSE
+#define AT32_TMR7_CHANNELS                  0
 
-#define AT32_HAS_TIM8                       TRUE
-#define AT32_TIM8_IS_32BITS                 FALSE
-#define AT32_TIM8_CHANNELS                  4
+#define AT32_HAS_TMR8                       TRUE
+#define AT32_TMR8_IS_32BITS                 FALSE
+#define AT32_TMR8_CHANNELS                  4
 
-#define AT32_HAS_TIM9                       TRUE
-#define AT32_TIM9_IS_32BITS                 FALSE
-#define AT32_TIM9_CHANNELS                  2
+#define AT32_HAS_TMR9                       TRUE
+#define AT32_TMR9_IS_32BITS                 FALSE
+#define AT32_TMR9_CHANNELS                  2
 
-#define AT32_HAS_TIM10                      TRUE
-#define AT32_TIM10_IS_32BITS                FALSE
-#define AT32_TIM10_CHANNELS                 1
+#define AT32_HAS_TMR10                      TRUE
+#define AT32_TMR10_IS_32BITS                FALSE
+#define AT32_TMR10_CHANNELS                 1
 
-#define AT32_HAS_TIM11                      TRUE
-#define AT32_TIM11_IS_32BITS                FALSE
-#define AT32_TIM11_CHANNELS                 1
+#define AT32_HAS_TMR11                      TRUE
+#define AT32_TMR11_IS_32BITS                FALSE
+#define AT32_TMR11_CHANNELS                 1
 
-#define AT32_HAS_TIM12                      TRUE
-#define AT32_TIM12_IS_32BITS                FALSE
-#define AT32_TIM12_CHANNELS                 2
+#define AT32_HAS_TMR12                      TRUE
+#define AT32_TMR12_IS_32BITS                FALSE
+#define AT32_TMR12_CHANNELS                 2
 
-#define AT32_HAS_TIM13                      TRUE
-#define AT32_TIM13_IS_32BITS                FALSE
-#define AT32_TIM13_CHANNELS                 1
+#define AT32_HAS_TMR13                      TRUE
+#define AT32_TMR13_IS_32BITS                FALSE
+#define AT32_TMR13_CHANNELS                 1
 
-#define AT32_HAS_TIM14                      TRUE
-#define AT32_TIM14_IS_32BITS                FALSE
-#define AT32_TIM14_CHANNELS                 1
+#define AT32_HAS_TMR14                      TRUE
+#define AT32_TMR14_IS_32BITS                FALSE
+#define AT32_TMR14_CHANNELS                 1
 
 /* USART attributes.*/
 #define AT32_HAS_USART1                    TRUE
@@ -618,64 +618,64 @@
 #define AT32_SPI4_SUPPORTS_I2S              TRUE
 #define AT32_SPI4_I2S_FULLDUPLEX            FALSE
 
-/* TIM attributes.*/
-#define AT32_TIM_MAX_CHANNELS               4
+/* TMR attributes.*/
+#define AT32_TMR_MAX_CHANNELS               4
 
-#define AT32_HAS_TIM1                       TRUE
-#define AT32_TIM1_IS_32BITS                 FALSE
-#define AT32_TIM1_CHANNELS                  4
+#define AT32_HAS_TMR1                       TRUE
+#define AT32_TMR1_IS_32BITS                 FALSE
+#define AT32_TMR1_CHANNELS                  4
 
-#define AT32_HAS_TIM2                       TRUE
-#define AT32_TIM2_IS_32BITS                 TRUE
-#define AT32_TIM2_CHANNELS                  4
+#define AT32_HAS_TMR2                       TRUE
+#define AT32_TMR2_IS_32BITS                 TRUE
+#define AT32_TMR2_CHANNELS                  4
 
-#define AT32_HAS_TIM3                       TRUE
-#define AT32_TIM3_IS_32BITS                 FALSE
-#define AT32_TIM3_CHANNELS                  4
+#define AT32_HAS_TMR3                       TRUE
+#define AT32_TMR3_IS_32BITS                 FALSE
+#define AT32_TMR3_CHANNELS                  4
 
-#define AT32_HAS_TIM4                       TRUE
-#define AT32_TIM4_IS_32BITS                 FALSE
-#define AT32_TIM4_CHANNELS                  4
+#define AT32_HAS_TMR4                       TRUE
+#define AT32_TMR4_IS_32BITS                 FALSE
+#define AT32_TMR4_CHANNELS                  4
 
-#define AT32_HAS_TIM5                       TRUE
-#define AT32_TIM5_IS_32BITS                 TRUE
-#define AT32_TIM5_CHANNELS                  4
+#define AT32_HAS_TMR5                       TRUE
+#define AT32_TMR5_IS_32BITS                 TRUE
+#define AT32_TMR5_CHANNELS                  4
 
-#define AT32_HAS_TIM6                       TRUE
-#define AT32_TIM6_IS_32BITS                 FALSE
-#define AT32_TIM6_CHANNELS                  0
+#define AT32_HAS_TMR6                       TRUE
+#define AT32_TMR6_IS_32BITS                 FALSE
+#define AT32_TMR6_CHANNELS                  0
 
-#define AT32_HAS_TIM7                       TRUE
-#define AT32_TIM7_IS_32BITS                 FALSE
-#define AT32_TIM7_CHANNELS                  0
+#define AT32_HAS_TMR7                       TRUE
+#define AT32_TMR7_IS_32BITS                 FALSE
+#define AT32_TMR7_CHANNELS                  0
 
-#define AT32_HAS_TIM8                       TRUE
-#define AT32_TIM8_IS_32BITS                 FALSE
-#define AT32_TIM8_CHANNELS                  4
+#define AT32_HAS_TMR8                       TRUE
+#define AT32_TMR8_IS_32BITS                 FALSE
+#define AT32_TMR8_CHANNELS                  4
 
-#define AT32_HAS_TIM9                       TRUE
-#define AT32_TIM9_IS_32BITS                 FALSE
-#define AT32_TIM9_CHANNELS                  2
+#define AT32_HAS_TMR9                       TRUE
+#define AT32_TMR9_IS_32BITS                 FALSE
+#define AT32_TMR9_CHANNELS                  2
 
-#define AT32_HAS_TIM10                      TRUE
-#define AT32_TIM10_IS_32BITS                FALSE
-#define AT32_TIM10_CHANNELS                 1
+#define AT32_HAS_TMR10                      TRUE
+#define AT32_TMR10_IS_32BITS                FALSE
+#define AT32_TMR10_CHANNELS                 1
 
-#define AT32_HAS_TIM11                      TRUE
-#define AT32_TIM11_IS_32BITS                FALSE
-#define AT32_TIM11_CHANNELS                 1
+#define AT32_HAS_TMR11                      TRUE
+#define AT32_TMR11_IS_32BITS                FALSE
+#define AT32_TMR11_CHANNELS                 1
 
-#define AT32_HAS_TIM12                      TRUE
-#define AT32_TIM12_IS_32BITS                FALSE
-#define AT32_TIM12_CHANNELS                 2
+#define AT32_HAS_TMR12                      TRUE
+#define AT32_TMR12_IS_32BITS                FALSE
+#define AT32_TMR12_CHANNELS                 2
 
-#define AT32_HAS_TIM13                      TRUE
-#define AT32_TIM13_IS_32BITS                FALSE
-#define AT32_TIM13_CHANNELS                 1
+#define AT32_HAS_TMR13                      TRUE
+#define AT32_TMR13_IS_32BITS                FALSE
+#define AT32_TMR13_CHANNELS                 1
 
-#define AT32_HAS_TIM14                      TRUE
-#define AT32_TIM14_IS_32BITS                FALSE
-#define AT32_TIM14_CHANNELS                 1
+#define AT32_HAS_TMR14                      TRUE
+#define AT32_TMR14_IS_32BITS                FALSE
+#define AT32_TMR14_CHANNELS                 1
 
 /* USART attributes.*/
 #define AT32_HAS_USART1                    TRUE
@@ -844,64 +844,64 @@
 #define AT32_SPI4_SUPPORTS_I2S              TRUE
 #define AT32_SPI4_I2S_FULLDUPLEX            FALSE
 
-/* TIM attributes.*/
-#define AT32_TIM_MAX_CHANNELS               4
+/* TMR attributes.*/
+#define AT32_TMR_MAX_CHANNELS               4
 
-#define AT32_HAS_TIM1                       TRUE
-#define AT32_TIM1_IS_32BITS                 FALSE
-#define AT32_TIM1_CHANNELS                  4
+#define AT32_HAS_TMR1                       TRUE
+#define AT32_TMR1_IS_32BITS                 FALSE
+#define AT32_TMR1_CHANNELS                  4
 
-#define AT32_HAS_TIM2                       TRUE
-#define AT32_TIM2_IS_32BITS                 TRUE
-#define AT32_TIM2_CHANNELS                  4
+#define AT32_HAS_TMR2                       TRUE
+#define AT32_TMR2_IS_32BITS                 TRUE
+#define AT32_TMR2_CHANNELS                  4
 
-#define AT32_HAS_TIM3                       TRUE
-#define AT32_TIM3_IS_32BITS                 FALSE
-#define AT32_TIM3_CHANNELS                  4
+#define AT32_HAS_TMR3                       TRUE
+#define AT32_TMR3_IS_32BITS                 FALSE
+#define AT32_TMR3_CHANNELS                  4
 
-#define AT32_HAS_TIM4                       TRUE
-#define AT32_TIM4_IS_32BITS                 FALSE
-#define AT32_TIM4_CHANNELS                  4
+#define AT32_HAS_TMR4                       TRUE
+#define AT32_TMR4_IS_32BITS                 FALSE
+#define AT32_TMR4_CHANNELS                  4
 
-#define AT32_HAS_TIM5                       TRUE
-#define AT32_TIM5_IS_32BITS                 TRUE
-#define AT32_TIM5_CHANNELS                  4
+#define AT32_HAS_TMR5                       TRUE
+#define AT32_TMR5_IS_32BITS                 TRUE
+#define AT32_TMR5_CHANNELS                  4
 
-#define AT32_HAS_TIM6                       TRUE
-#define AT32_TIM6_IS_32BITS                 FALSE
-#define AT32_TIM6_CHANNELS                  0
+#define AT32_HAS_TMR6                       TRUE
+#define AT32_TMR6_IS_32BITS                 FALSE
+#define AT32_TMR6_CHANNELS                  0
 
-#define AT32_HAS_TIM7                       TRUE
-#define AT32_TIM7_IS_32BITS                 FALSE
-#define AT32_TIM7_CHANNELS                  0
+#define AT32_HAS_TMR7                       TRUE
+#define AT32_TMR7_IS_32BITS                 FALSE
+#define AT32_TMR7_CHANNELS                  0
 
-#define AT32_HAS_TIM8                       TRUE
-#define AT32_TIM8_IS_32BITS                 FALSE
-#define AT32_TIM8_CHANNELS                  4
+#define AT32_HAS_TMR8                       TRUE
+#define AT32_TMR8_IS_32BITS                 FALSE
+#define AT32_TMR8_CHANNELS                  4
 
-#define AT32_HAS_TIM9                       TRUE
-#define AT32_TIM9_IS_32BITS                 FALSE
-#define AT32_TIM9_CHANNELS                  2
+#define AT32_HAS_TMR9                       TRUE
+#define AT32_TMR9_IS_32BITS                 FALSE
+#define AT32_TMR9_CHANNELS                  2
 
-#define AT32_HAS_TIM10                      TRUE
-#define AT32_TIM10_IS_32BITS                FALSE
-#define AT32_TIM10_CHANNELS                 1
+#define AT32_HAS_TMR10                      TRUE
+#define AT32_TMR10_IS_32BITS                FALSE
+#define AT32_TMR10_CHANNELS                 1
 
-#define AT32_HAS_TIM11                      TRUE
-#define AT32_TIM11_IS_32BITS                FALSE
-#define AT32_TIM11_CHANNELS                 1
+#define AT32_HAS_TMR11                      TRUE
+#define AT32_TMR11_IS_32BITS                FALSE
+#define AT32_TMR11_CHANNELS                 1
 
-#define AT32_HAS_TIM12                      TRUE
-#define AT32_TIM12_IS_32BITS                FALSE
-#define AT32_TIM12_CHANNELS                 2
+#define AT32_HAS_TMR12                      TRUE
+#define AT32_TMR12_IS_32BITS                FALSE
+#define AT32_TMR12_CHANNELS                 2
 
-#define AT32_HAS_TIM13                      TRUE
-#define AT32_TIM13_IS_32BITS                FALSE
-#define AT32_TIM13_CHANNELS                 1
+#define AT32_HAS_TMR13                      TRUE
+#define AT32_TMR13_IS_32BITS                FALSE
+#define AT32_TMR13_CHANNELS                 1
 
-#define AT32_HAS_TIM14                      TRUE
-#define AT32_TIM14_IS_32BITS                FALSE
-#define AT32_TIM14_CHANNELS                 1
+#define AT32_HAS_TMR14                      TRUE
+#define AT32_TMR14_IS_32BITS                FALSE
+#define AT32_TMR14_CHANNELS                 1
 
 /* USART attributes.*/
 #define AT32_HAS_USART1                    TRUE

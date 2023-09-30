@@ -33,15 +33,15 @@
  * @name    ISRs suppressed in standard drivers
  * @{
  */
-#define AT32_TIM1_SUPPRESS_ISR
-#define AT32_TIM2_SUPPRESS_ISR
-#define AT32_TIM3_SUPPRESS_ISR
-#define AT32_TIM4_SUPPRESS_ISR
-#define AT32_TIM5_SUPPRESS_ISR
-#define AT32_TIM8_SUPPRESS_ISR
-#define AT32_TIM9_SUPPRESS_ISR
-#define AT32_TIM10_SUPPRESS_ISR
-#define AT32_TIM11_SUPPRESS_ISR
+#define AT32_TMR1_SUPPRESS_ISR
+#define AT32_TMR2_SUPPRESS_ISR
+#define AT32_TMR3_SUPPRESS_ISR
+#define AT32_TMR4_SUPPRESS_ISR
+#define AT32_TMR5_SUPPRESS_ISR
+#define AT32_TMR8_SUPPRESS_ISR
+#define AT32_TMR9_SUPPRESS_ISR
+#define AT32_TMR10_SUPPRESS_ISR
+#define AT32_TMR11_SUPPRESS_ISR
 
 #define AT32_USART1_SUPPRESS_ISR
 #define AT32_USART2_SUPPRESS_ISR
@@ -137,33 +137,33 @@
 #define AT32_SDIO_NUMBER                   49
 
 /*
- * TIM units.
+ * TMR units.
  */
-#define AT32_TIM1_BRK_TIM9_HANDLER         VectorA0
-#define AT32_TIM1_UP_TIM10_HANDLER         VectorA4
-#define AT32_TIM1_TRGCO_TIM11_HANDLER      VectorA8
-#define AT32_TIM1_CC_HANDLER               VectorAC
-#define AT32_TIM2_HANDLER                  VectorB0
-#define AT32_TIM3_HANDLER                  VectorB4
-#define AT32_TIM4_HANDLER                  VectorB8
-#define AT32_TIM5_HANDLER                  Vector108
-#define AT32_TIM8_BRK_TIM12_HANDLER        VectorEC
-#define AT32_TIM8_UP_TIM13_HANDLER         VectorF0
-#define AT32_TIM8_TRGCO_TIM14_HANDLER      VectorF4
-#define AT32_TIM8_CC_HANDLER               VectorF8
+#define AT32_TMR1_BRK_TMR9_HANDLER         VectorA0
+#define AT32_TMR1_OVF_TMR10_HANDLER        VectorA4
+#define AT32_TMR1_TRG_HALL_TMR11_HANDLER   VectorA8
+#define AT32_TMR1_CH_HANDLER               VectorAC
+#define AT32_TMR2_HANDLER                  VectorB0
+#define AT32_TMR3_HANDLER                  VectorB4
+#define AT32_TMR4_HANDLER                  VectorB8
+#define AT32_TMR5_HANDLER                  Vector108
+#define AT32_TMR8_BRK_TMR12_HANDLER        VectorEC
+#define AT32_TMR8_OVF_TMR13_HANDLER        VectorF0
+#define AT32_TMR8_TRG_HALL_TMR14_HANDLER   VectorF4
+#define AT32_TMR8_CH_HANDLER               VectorF8
 
-#define AT32_TIM1_BRK_TIM9_NUMBER          24
-#define AT32_TIM1_UP_TIM10_NUMBER          25
-#define AT32_TIM1_TRGCO_TIM11_NUMBER       26
-#define AT32_TIM1_CC_NUMBER                27
-#define AT32_TIM2_NUMBER                   28
-#define AT32_TIM3_NUMBER                   29
-#define AT32_TIM4_NUMBER                   30
-#define AT32_TIM5_NUMBER                   50
-#define AT32_TIM8_BRK_TIM12_NUMBER         43
-#define AT32_TIM8_UP_TIM13_NUMBER          44
-#define AT32_TIM8_TRGCO_TIM14_NUMBER       45
-#define AT32_TIM8_CC_NUMBER                46
+#define AT32_TMR1_BRK_TMR9_NUMBER          24
+#define AT32_TMR1_OVF_TMR10_NUMBER         25
+#define AT32_TMR1_TRG_HALL_TMR11_NUMBER    26
+#define AT32_TMR1_CH_NUMBER                27
+#define AT32_TMR2_NUMBER                   28
+#define AT32_TMR3_NUMBER                   29
+#define AT32_TMR4_NUMBER                   30
+#define AT32_TMR5_NUMBER                   50
+#define AT32_TMR8_BRK_TMR12_NUMBER         43
+#define AT32_TMR8_OVF_TMR13_NUMBER         44
+#define AT32_TMR8_TRG_HALL_TMR14_NUMBER    45
+#define AT32_TMR8_CH_NUMBER                46
 
 /*
  * USART units.
@@ -183,8 +183,8 @@
 /*
  * ACC units.
  */
-#define AT32_ACC_HANDLER                  Vector160
-#define AT32_ACC_NUMBER                   72
+#define AT32_ACC_HANDLER                   Vector160
+#define AT32_ACC_NUMBER                    72
 
 /** @} */
 

@@ -282,14 +282,14 @@ OSAL_IRQ_HANDLER(AT32_EXTI19_HANDLER) {
 #endif
 #endif
 
-#include "at32_tim1_9_10_11.inc"
-#include "at32_tim2.inc"
-#include "at32_tim3.inc"
-#include "at32_tim4.inc"
-#include "at32_tim5.inc"
-#include "at32_tim6.inc"
-#include "at32_tim7.inc"
-#include "at32_tim8_12_13_14.inc"
+#include "at32_tmr1_9_10_11.inc"
+#include "at32_tmr2.inc"
+#include "at32_tmr3.inc"
+#include "at32_tmr4.inc"
+#include "at32_tmr5.inc"
+#include "at32_tmr6.inc"
+#include "at32_tmr7.inc"
+#include "at32_tmr8_12_13_14.inc"
 
 #include "at32_usart1.inc"
 #include "at32_usart2.inc"
@@ -324,14 +324,14 @@ void irqInit(void) {
   nvicEnableVector(AT32_EXTI18_NUMBER, AT32_IRQ_EXTI18_PRIORITY);
 #endif
 
-  tim1_tim9_tim10_tim11_irq_init();
-  tim2_irq_init();
-  tim3_irq_init();
-  tim4_irq_init();
-  tim5_irq_init();
-  tim6_irq_init();
-  tim7_irq_init();
-  tim8_tim12_tim13_tim14_irq_init();
+  tmr1_tmr9_tmr10_tmr11_irq_init();
+  tmr2_irq_init();
+  tmr3_irq_init();
+  tmr4_irq_init();
+  tmr5_irq_init();
+  tmr6_irq_init();
+  tmr7_irq_init();
+  tmr8_tmr12_tmr13_tmr14_irq_init();
 
   usart1_irq_init();
   usart2_irq_init();
@@ -363,14 +363,14 @@ void irqDeinit(void) {
   nvicDisableVector(AT32_EXTI18_NUMBER);
 #endif
 
-  tim1_tim9_tim10_tim11_irq_deinit();
-  tim2_irq_deinit();
-  tim3_irq_deinit();
-  tim4_irq_deinit();
-  tim5_irq_deinit();
-  tim6_irq_deinit();
-  tim7_irq_deinit();
-  tim8_tim12_tim13_tim14_irq_deinit();
+  tmr1_tmr9_tmr10_tmr11_irq_deinit();
+  tmr2_irq_deinit();
+  tmr3_irq_deinit();
+  tmr4_irq_deinit();
+  tmr5_irq_deinit();
+  tmr6_irq_deinit();
+  tmr7_irq_deinit();
+  tmr8_tmr12_tmr13_tmr14_irq_deinit();
 
   usart1_irq_deinit();
   usart2_irq_deinit();

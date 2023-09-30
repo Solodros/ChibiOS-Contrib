@@ -9,16 +9,16 @@
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    WITHOUT WARRANTIENS OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
 */
 
 /**
- * @file    TIMv1/at32_tim5.inc
- * @brief   Shared TIM5 handler.
+ * @file    TMRv1/at32_tmr6.inc
+ * @brief   Shared TMR6 handler.
  *
- * @addtogroup AT32_TIM5_HANDLER
+ * @addtogroup AT32_TMR6_HANDLER
  * @{
  */
 
@@ -31,37 +31,37 @@
 /*===========================================================================*/
 
 /* Registry checks for robustness.*/
-#if !defined(AT32_HAS_TIM5)
-#error "AT32_HAS_TIM5 not defined in registry"
+#if !defined(AT32_HAS_TMR6)
+#error "AT32_HAS_TMR6 not defined in registry"
 #endif
 
 /* Driver checks for robustness, undefined USE macros are defaulted to
    FALSE. This makes this module independent from drivers implementation.*/
-#if !defined(AT32_GPT_USE_TIM5)
-#define AT32_GPT_USE_TIM5                  FALSE
+#if !defined(AT32_GPT_USE_TMR6)
+#define AT32_GPT_USE_TMR6                  FALSE
 #endif
-#if !defined(AT32_ICU_USE_TIM5)
-#define AT32_ICU_USE_TIM5                  FALSE
+#if !defined(AT32_ICU_USE_TMR6)
+#define AT32_ICU_USE_TMR6                  FALSE
 #endif
-#if !defined(AT32_PWM_USE_TIM5)
-#define AT32_PWM_USE_TIM5                  FALSE
+#if !defined(AT32_PWM_USE_TMR6)
+#define AT32_PWM_USE_TMR6                  FALSE
 #endif
-#if !defined(AT32_ST_USE_TIM5)
-#define AT32_ST_USE_TIM5                   FALSE
+#if !defined(AT32_ST_USE_TMR6)
+#define AT32_ST_USE_TMR6                   FALSE
 #endif
 
-#if AT32_HAS_TIM5
+#if AT32_HAS_TMR6
 
 /* Priority settings checks.*/
-#if !defined(AT32_IRQ_TIM5_PRIORITY)
-#error "AT32_IRQ_TIM5_PRIORITY not defined in mcuconf.h"
+#if !defined(AT32_IRQ_TMR6_PRIORITY)
+#error "AT32_IRQ_TMR6_PRIORITY not defined in mcuconf.h"
 #endif
 
-#if !OSAL_IRQ_IS_VALID_PRIORITY(AT32_IRQ_TIM5_PRIORITY)
-#error "Invalid IRQ priority assigned to AT32_IRQ_TIM5_PRIORITY"
+#if !OSAL_IRQ_IS_VALID_PRIORITY(AT32_IRQ_TMR6_PRIORITY)
+#error "Invalid IRQ priority assigned to AT32_IRQ_TMR6_PRIORITY"
 #endif
 
-#endif /* AT32_HAS_TIM5 */
+#endif /* AT32_HAS_TMR6 */
 
 /*===========================================================================*/
 /* Driver exported variables.                                                */
@@ -75,15 +75,15 @@
 /* Driver local functions.                                                   */
 /*===========================================================================*/
 
-static inline void tim5_irq_init(void) {
-#if defined(AT32_TIM5_IS_USED)
-  nvicEnableVector(AT32_TIM5_NUMBER, AT32_IRQ_TIM5_PRIORITY);
+static inline void tmr6_irq_init(void) {
+#if defined(AT32_TMR6_IS_USED)
+  nvicEnableVector(AT32_TMR6_NUMBER, AT32_IRQ_TMR6_PRIORITY);
 #endif
 }
 
-static inline void tim5_irq_deinit(void) {
-#if defined(AT32_TIM5_IS_USED)
-  nvicDisableVector(AT32_TIM5_NUMBER);
+static inline void tmr6_irq_deinit(void) {
+#if defined(AT32_TMR6_IS_USED)
+  nvicDisableVector(AT32_TMR6_NUMBER);
 #endif
 }
 
@@ -91,33 +91,33 @@ static inline void tim5_irq_deinit(void) {
 /* Driver interrupt handlers.                                                */
 /*===========================================================================*/
 
-#if defined(AT32_TIM5_IS_USED) || defined(__DOXYGEN__)
+#if defined(AT32_TMR6_IS_USED) || defined(__DOXYGEN__)
 /**
- * @brief   TIM5 interrupt handler.
+ * @brief   TMR6 interrupt handler.
  *
  * @isr
  */
-OSAL_IRQ_HANDLER(AT32_TIM5_HANDLER) {
+OSAL_IRQ_HANDLER(AT32_TMR6_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
 #if HAL_USE_GPT
-#if AT32_GPT_USE_TIM5
-  gpt_lld_serve_interrupt(&GPTD5);
+#if AT32_GPT_USE_TMR6
+  gpt_lld_serve_interrupt(&GPTD6);
 #endif
 #endif
 #if HAL_USE_ICU
-#if AT32_ICU_USE_TIM5
-  icu_lld_serve_interrupt(&ICUD5);
+#if AT32_ICU_USE_TMR6
+  icu_lld_serve_interrupt(&ICUD6);
 #endif
 #endif
 #if HAL_USE_PWM
-#if AT32_PWM_USE_TIM5
-  pwm_lld_serve_interrupt(&PWMD5);
+#if AT32_PWM_USE_TMR6
+  pwm_lld_serve_interrupt(&PWMD6);
 #endif
 #endif
 #if 1
-#if AT32_ST_USE_TIM5
+#if AT32_ST_USE_TMR6
   st_lld_serve_interrupt();
 #endif
 #endif

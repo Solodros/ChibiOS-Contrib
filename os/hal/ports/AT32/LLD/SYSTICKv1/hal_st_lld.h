@@ -47,7 +47,7 @@
 #endif
 
 /**
- * @brief   TIMx unit (by number) to be used for free running operations.
+ * @brief   TMRx unit (by number) to be used for free running operations.
  * @note    You must select a 32 bits timer if a 32 bits @p systick_t type
  *          is required.
  * @note    Timers 2, 3, 4, 5, 9, 10, 11, 12, 13, 14, 15, 16, 17,
@@ -78,64 +78,64 @@
 
 /* This has to go after transition to shared handlers is complete for all
    platforms.*/
-#if !defined(AT32_HAS_TIM2)
-#define AT32_HAS_TIM2                      FALSE
+#if !defined(AT32_HAS_TMR2)
+#define AT32_HAS_TMR2                      FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM3)
-#define AT32_HAS_TIM3                      FALSE
+#if !defined(AT32_HAS_TMR3)
+#define AT32_HAS_TMR3                      FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM4)
-#define AT32_HAS_TIM4                      FALSE
+#if !defined(AT32_HAS_TMR4)
+#define AT32_HAS_TMR4                      FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM5)
-#define AT32_HAS_TIM5                      FALSE
+#if !defined(AT32_HAS_TMR5)
+#define AT32_HAS_TMR5                      FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM9)
-#define AT32_HAS_TIM9                      FALSE
+#if !defined(AT32_HAS_TMR9)
+#define AT32_HAS_TMR9                      FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM10)
-#define AT32_HAS_TIM10                     FALSE
+#if !defined(AT32_HAS_TMR10)
+#define AT32_HAS_TMR10                     FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM11)
-#define AT32_HAS_TIM11                     FALSE
+#if !defined(AT32_HAS_TMR11)
+#define AT32_HAS_TMR11                     FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM12)
-#define AT32_HAS_TIM12                     FALSE
+#if !defined(AT32_HAS_TMR12)
+#define AT32_HAS_TMR12                     FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM13)
-#define AT32_HAS_TIM13                     FALSE
+#if !defined(AT32_HAS_TMR13)
+#define AT32_HAS_TMR13                     FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM14)
-#define AT32_HAS_TIM14                     FALSE
+#if !defined(AT32_HAS_TMR14)
+#define AT32_HAS_TMR14                     FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM15)
-#define AT32_HAS_TIM15                     FALSE
+#if !defined(AT32_HAS_TMR15)
+#define AT32_HAS_TMR15                     FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM16)
-#define AT32_HAS_TIM16                     FALSE
+#if !defined(AT32_HAS_TMR16)
+#define AT32_HAS_TMR16                     FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM17)
-#define AT32_HAS_TIM17                     FALSE
+#if !defined(AT32_HAS_TMR17)
+#define AT32_HAS_TMR17                     FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM21)
-#define AT32_HAS_TIM21                     FALSE
+#if !defined(AT32_HAS_TMR21)
+#define AT32_HAS_TMR21                     FALSE
 #endif
 
-#if !defined(AT32_HAS_TIM22)
-#define AT32_HAS_TIM22                     FALSE
+#if !defined(AT32_HAS_TMR22)
+#define AT32_HAS_TMR22                     FALSE
 #endif
 /* End of checks to be removed.*/
 
@@ -143,470 +143,470 @@
 
 #if AT32_ST_USE_TIMER == 2
 
-#if defined(AT32_TIM2_IS_USED)
-#error "ST requires TIM2 but the timer is already used"
+#if defined(AT32_TMR2_IS_USED)
+#error "ST requires TMR2 but the timer is already used"
 #else
-#define AT32_TIM2_IS_USED
+#define AT32_TMR2_IS_USED
 #endif
 
-#if defined(AT32_TIM2_SUPPRESS_ISR)
+#if defined(AT32_TMR2_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM2
-#define ST_LLD_NUM_ALARMS                  AT32_TIM2_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR2
+#define ST_LLD_NUM_ALARMS                  AT32_TMR2_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   TRUE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   TRUE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 3
 
-#if defined(AT32_TIM3_IS_USED)
-#error "ST requires TIM3 but the timer is already used"
+#if defined(AT32_TMR3_IS_USED)
+#error "ST requires TMR3 but the timer is already used"
 #else
-#define AT32_TIM3_IS_USED
+#define AT32_TMR3_IS_USED
 #endif
 
-#if defined(AT32_TIM3_SUPPRESS_ISR)
+#if defined(AT32_TMR3_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM3
-#define ST_LLD_NUM_ALARMS                  AT32_TIM3_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR3
+#define ST_LLD_NUM_ALARMS                  AT32_TMR3_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   TRUE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   TRUE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 4
 
-#if defined(AT32_TIM4_IS_USED)
-#error "ST requires TIM4 but the timer is already used"
+#if defined(AT32_TMR4_IS_USED)
+#error "ST requires TMR4 but the timer is already used"
 #else
-#define AT32_TIM4_IS_USED
+#define AT32_TMR4_IS_USED
 #endif
 
-#if defined(AT32_TIM4_SUPPRESS_ISR)
+#if defined(AT32_TMR4_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM4
-#define ST_LLD_NUM_ALARMS                  AT32_TIM4_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR4
+#define ST_LLD_NUM_ALARMS                  AT32_TMR4_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   TRUE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   TRUE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 5
 
-#if defined(AT32_TIM5_IS_USED)
-#error "ST requires TIM5 but the timer is already used"
+#if defined(AT32_TMR5_IS_USED)
+#error "ST requires TMR5 but the timer is already used"
 #else
-#define AT32_TIM5_IS_USED
+#define AT32_TMR5_IS_USED
 #endif
 
-#if defined(AT32_TIM5_SUPPRESS_ISR)
+#if defined(AT32_TMR5_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM5
-#define ST_LLD_NUM_ALARMS                  AT32_TIM5_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR5
+#define ST_LLD_NUM_ALARMS                  AT32_TMR5_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   TRUE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   TRUE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 9
 
-#if defined(AT32_TIM9_IS_USED)
-#error "ST requires TIM9 but the timer is already used"
+#if defined(AT32_TMR9_IS_USED)
+#error "ST requires TMR9 but the timer is already used"
 #else
-#define AT32_TIM9_IS_USED
+#define AT32_TMR9_IS_USED
 #endif
 
-#if defined(AT32_TIM9_SUPPRESS_ISR)
+#if defined(AT32_TMR9_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM9
-#define ST_LLD_NUM_ALARMS                  AT32_TIM9_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR9
+#define ST_LLD_NUM_ALARMS                  AT32_TMR9_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   TRUE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   TRUE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 10
 
-#if defined(AT32_TIM10_IS_USED)
-#error "ST requires TIM10 but the timer is already used"
+#if defined(AT32_TMR10_IS_USED)
+#error "ST requires TMR10 but the timer is already used"
 #else
-#define AT32_TIM10_IS_USED
+#define AT32_TMR10_IS_USED
 #endif
 
-#if defined(AT32_TIM10_SUPPRESS_ISR)
+#if defined(AT32_TMR10_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM10
-#define ST_LLD_NUM_ALARMS                  AT32_TIM10_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR10
+#define ST_LLD_NUM_ALARMS                  AT32_TMR10_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  TRUE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  TRUE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 11
 
-#if defined(AT32_TIM11_IS_USED)
-#error "ST requires TIM11 but the timer is already used"
+#if defined(AT32_TMR11_IS_USED)
+#error "ST requires TMR11 but the timer is already used"
 #else
-#define AT32_TIM11_IS_USED
+#define AT32_TMR11_IS_USED
 #endif
 
-#if defined(AT32_TIM11_SUPPRESS_ISR)
+#if defined(AT32_TMR11_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM11
-#define ST_LLD_NUM_ALARMS                  AT32_TIM11_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR11
+#define ST_LLD_NUM_ALARMS                  AT32_TMR11_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  TRUE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  TRUE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 12
 
-#if defined(AT32_TIM12_IS_USED)
-#error "ST requires TIM12 but the timer is already used"
+#if defined(AT32_TMR12_IS_USED)
+#error "ST requires TMR12 but the timer is already used"
 #else
-#define AT32_TIM12_IS_USED
+#define AT32_TMR12_IS_USED
 #endif
 
-#if defined(AT32_TIM12_SUPPRESS_ISR)
+#if defined(AT32_TMR12_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM12
-#define ST_LLD_NUM_ALARMS                  AT32_TIM12_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR12
+#define ST_LLD_NUM_ALARMS                  AT32_TMR12_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  TRUE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  TRUE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 13
 
-#if defined(AT32_TIM13_IS_USED)
-#error "ST requires TIM13 but the timer is already used"
+#if defined(AT32_TMR13_IS_USED)
+#error "ST requires TMR13 but the timer is already used"
 #else
-#define AT32_TIM13_IS_USED
+#define AT32_TMR13_IS_USED
 #endif
 
-#if defined(AT32_TIM13_SUPPRESS_ISR)
+#if defined(AT32_TMR13_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM13
-#define ST_LLD_NUM_ALARMS                  AT32_TIM13_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR13
+#define ST_LLD_NUM_ALARMS                  AT32_TMR13_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  TRUE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  TRUE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 14
 
-#if defined(AT32_TIM14_IS_USED)
-#error "ST requires TIM14 but the timer is already used"
+#if defined(AT32_TMR14_IS_USED)
+#error "ST requires TMR14 but the timer is already used"
 #else
-#define AT32_TIM14_IS_USED
+#define AT32_TMR14_IS_USED
 #endif
 
-#if defined(AT32_TIM14_SUPPRESS_ISR)
+#if defined(AT32_TMR14_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM14
-#define ST_LLD_NUM_ALARMS                  AT32_TIM14_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR14
+#define ST_LLD_NUM_ALARMS                  AT32_TMR14_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  TRUE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  TRUE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 15
 
-#if defined(AT32_TIM15_IS_USED)
-#error "ST requires TIM15 but the timer is already used"
+#if defined(AT32_TMR15_IS_USED)
+#error "ST requires TMR15 but the timer is already used"
 #else
-#define AT32_TIM15_IS_USED
+#define AT32_TMR15_IS_USED
 #endif
 
-#if defined(AT32_TIM15_SUPPRESS_ISR)
+#if defined(AT32_TMR15_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM15
-#define ST_LLD_NUM_ALARMS                  AT32_TIM15_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR15
+#define ST_LLD_NUM_ALARMS                  AT32_TMR15_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  TRUE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  TRUE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 16
 
-#if defined(AT32_TIM16_IS_USED)
-#error "ST requires TIM16 but the timer is already used"
+#if defined(AT32_TMR16_IS_USED)
+#error "ST requires TMR16 but the timer is already used"
 #else
-#define AT32_TIM16_IS_USED
+#define AT32_TMR16_IS_USED
 #endif
 
-#if defined(AT32_TIM16_SUPPRESS_ISR)
+#if defined(AT32_TMR16_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM16
-#define ST_LLD_NUM_ALARMS                  AT32_TIM16_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR16
+#define ST_LLD_NUM_ALARMS                  AT32_TMR16_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  TRUE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  TRUE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 17
 
-#if defined(AT32_TIM17_IS_USED)
-#error "ST requires TIM17 but the timer is already used"
+#if defined(AT32_TMR17_IS_USED)
+#error "ST requires TMR17 but the timer is already used"
 #else
-#define AT32_TIM17_IS_USED
+#define AT32_TMR17_IS_USED
 #endif
 
-#if defined(AT32_TIM17_SUPPRESS_ISR)
+#if defined(AT32_TMR17_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM17
-#define ST_LLD_NUM_ALARMS                  AT32_TIM17_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR17
+#define ST_LLD_NUM_ALARMS                  AT32_TMR17_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  TRUE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  TRUE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 #elif AT32_ST_USE_TIMER == 21
 
-#if defined(AT32_TIM21_IS_USED)
-#error "ST requires TIM21 but the timer is already used"
+#if defined(AT32_TMR21_IS_USED)
+#error "ST requires TMR21 but the timer is already used"
 #else
-#define AT32_TIM21_IS_USED
+#define AT32_TMR21_IS_USED
 #endif
 
-#if defined(AT32_TIM21_SUPPRESS_ISR)
+#if defined(AT32_TMR21_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM21
-#define ST_LLD_NUM_ALARMS                  AT32_TIM21_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR21
+#define ST_LLD_NUM_ALARMS                  AT32_TMR21_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  TRUE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  TRUE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #elif AT32_ST_USE_TIMER == 22
 
-#if defined(AT32_TIM22_IS_USED)
-#error "ST requires TIM22 but the timer is already used"
+#if defined(AT32_TMR22_IS_USED)
+#error "ST requires TMR22 but the timer is already used"
 #else
-#define AT32_TIM22_IS_USED
+#define AT32_TMR22_IS_USED
 #endif
 
-#if defined(AT32_TIM22_SUPPRESS_ISR)
+#if defined(AT32_TMR22_SUPPRESS_ISR)
 #define AT32_SYSTICK_SUPPRESS_ISR
 #endif
 
-#define AT32_ST_TIM                        AT32_TIM22
-#define ST_LLD_NUM_ALARMS                  AT32_TIM22_CHANNELS
+#define AT32_ST_TMR                        AT32_TMR22
+#define ST_LLD_NUM_ALARMS                  AT32_TMR22_CHANNELS
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  TRUE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  TRUE
 
 #else
-#error "AT32_ST_USE_TIMER specifies an unsupported timer"
+#error "AT32_ST_USE_TMRER specifies an unsupported timer"
 #endif
 
 #if (AT32_ST_OVERRIDE_ALARMS < 0) ||                                       \
@@ -622,40 +622,40 @@
 #elif OSAL_ST_MODE == OSAL_ST_MODE_PERIODIC
 
 #define AT32_ST_USE_SYSTICK                TRUE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #else
 
 #define AT32_ST_USE_SYSTICK                FALSE
-#define AT32_ST_USE_TIM2                   FALSE
-#define AT32_ST_USE_TIM3                   FALSE
-#define AT32_ST_USE_TIM4                   FALSE
-#define AT32_ST_USE_TIM5                   FALSE
-#define AT32_ST_USE_TIM9                   FALSE
-#define AT32_ST_USE_TIM10                  FALSE
-#define AT32_ST_USE_TIM11                  FALSE
-#define AT32_ST_USE_TIM12                  FALSE
-#define AT32_ST_USE_TIM13                  FALSE
-#define AT32_ST_USE_TIM14                  FALSE
-#define AT32_ST_USE_TIM15                  FALSE
-#define AT32_ST_USE_TIM16                  FALSE
-#define AT32_ST_USE_TIM17                  FALSE
-#define AT32_ST_USE_TIM21                  FALSE
-#define AT32_ST_USE_TIM22                  FALSE
+#define AT32_ST_USE_TMR2                   FALSE
+#define AT32_ST_USE_TMR3                   FALSE
+#define AT32_ST_USE_TMR4                   FALSE
+#define AT32_ST_USE_TMR5                   FALSE
+#define AT32_ST_USE_TMR9                   FALSE
+#define AT32_ST_USE_TMR10                  FALSE
+#define AT32_ST_USE_TMR11                  FALSE
+#define AT32_ST_USE_TMR12                  FALSE
+#define AT32_ST_USE_TMR13                  FALSE
+#define AT32_ST_USE_TMR14                  FALSE
+#define AT32_ST_USE_TMR15                  FALSE
+#define AT32_ST_USE_TMR16                  FALSE
+#define AT32_ST_USE_TMR17                  FALSE
+#define AT32_ST_USE_TMR21                  FALSE
+#define AT32_ST_USE_TMR22                  FALSE
 
 #endif
 
@@ -695,7 +695,7 @@ extern "C" {
  */
 static inline systime_t st_lld_get_counter(void) {
 
-  return (systime_t)AT32_ST_TIM->CNT;
+  return (systime_t)AT32_ST_TMR->CVAL;
 }
 
 /**
@@ -709,12 +709,12 @@ static inline systime_t st_lld_get_counter(void) {
  */
 static inline void st_lld_start_alarm(systime_t abstime) {
 
-  AT32_ST_TIM->CCR[0] = (uint32_t)abstime;
-  AT32_ST_TIM->SR     = 0;
+  AT32_ST_TMR->CDT[0] = (uint32_t)abstime;
+  AT32_ST_TMR->ISTS   = 0;
 #if ST_LLD_NUM_ALARMS == 1
-  AT32_ST_TIM->DIER   = AT32_TIM_DIER_CC1IE;
+  AT32_ST_TMR->IDEN   = AT32_TMR_IDEN_C1IEN;
 #else
-  AT32_ST_TIM->DIER  |= AT32_TIM_DIER_CC1IE;
+  AT32_ST_TMR->IDEN  |= AT32_TMR_IDEN_C1IEN;
 #endif
 }
 
@@ -726,9 +726,9 @@ static inline void st_lld_start_alarm(systime_t abstime) {
 static inline void st_lld_stop_alarm(void) {
 
 #if ST_LLD_NUM_ALARMS == 1
-  AT32_ST_TIM->DIER = 0U;
+  AT32_ST_TMR->IDEN = 0U;
 #else
- AT32_ST_TIM->DIER &= ~AT32_TIM_DIER_CC1IE;
+  AT32_ST_TMR->IDEN &= ~AT32_TMR_IDEN_C1IEN;
 #endif
 }
 
@@ -741,7 +741,7 @@ static inline void st_lld_stop_alarm(void) {
  */
 static inline void st_lld_set_alarm(systime_t abstime) {
 
-  AT32_ST_TIM->CCR[0] = (uint32_t)abstime;
+  AT32_ST_TMR->CDT[0] = (uint32_t)abstime;
 }
 
 /**
@@ -753,7 +753,7 @@ static inline void st_lld_set_alarm(systime_t abstime) {
  */
 static inline systime_t st_lld_get_alarm(void) {
 
-  return (systime_t)AT32_ST_TIM->CCR[0];
+  return (systime_t)AT32_ST_TMR->CDT[0];
 }
 
 /**
@@ -767,7 +767,7 @@ static inline systime_t st_lld_get_alarm(void) {
  */
 static inline bool st_lld_is_alarm_active(void) {
 
-  return (bool)((AT32_ST_TIM->DIER & AT32_TIM_DIER_CC1IE) != 0);
+  return (bool)((AT32_ST_TMR->IDEN & AT32_TMR_IDEN_C1IEN) != 0);
 }
 
 #if (ST_LLD_NUM_ALARMS > 1) || defined(__DOXYGEN__)
@@ -785,9 +785,9 @@ static inline bool st_lld_is_alarm_active(void) {
  */
 static inline void st_lld_start_alarm_n(unsigned alarm, systime_t abstime) {
 
-  AT32_ST_TIM->CCR[alarm] = (uint32_t)abstime;
-  AT32_ST_TIM->SR         = 0;
-  AT32_ST_TIM->DIER      |= (AT32_TIM_DIER_CC1IE << alarm);
+  AT32_ST_TMR->CDT[alarm] = (uint32_t)abstime;
+  AT32_ST_TMR->ISTS         = 0;
+  AT32_ST_TMR->IDEN      |= (AT32_TMR_IDEN_C1IEN << alarm);
 }
 
 /**
@@ -801,7 +801,7 @@ static inline void st_lld_start_alarm_n(unsigned alarm, systime_t abstime) {
  */
 static inline void st_lld_stop_alarm_n(unsigned alarm) {
 
-  AT32_ST_TIM->DIER &= ~(AT32_TIM_DIER_CC1IE << alarm);
+  AT32_ST_TMR->IDEN &= ~(AT32_TMR_IDEN_C1IEN << alarm);
 }
 
 /**
@@ -816,7 +816,7 @@ static inline void st_lld_stop_alarm_n(unsigned alarm) {
  */
 static inline void st_lld_set_alarm_n(unsigned alarm, systime_t abstime) {
 
-  AT32_ST_TIM->CCR[alarm] = (uint32_t)abstime;
+  AT32_ST_TMR->CDT[alarm] = (uint32_t)abstime;
 }
 
 /**
@@ -831,7 +831,7 @@ static inline void st_lld_set_alarm_n(unsigned alarm, systime_t abstime) {
  */
 static inline systime_t st_lld_get_alarm_n(unsigned alarm) {
 
-  return (systime_t)AT32_ST_TIM->CCR[alarm];
+  return (systime_t)AT32_ST_TMR->CDT[alarm];
 }
 
 /**
@@ -846,7 +846,7 @@ static inline systime_t st_lld_get_alarm_n(unsigned alarm) {
  */
 static inline bool st_lld_is_alarm_active_n(unsigned alarm) {
 
-  return (bool)((AT32_ST_TIM->DIER & (AT32_TIM_DIER_CC1IE << alarm)) != 0);
+  return (bool)((AT32_ST_TMR->IDEN & (AT32_TMR_IDEN_C1IEN << alarm)) != 0);
 }
 #endif /* ST_LLD_NUM_ALARMS > 1 */
 
