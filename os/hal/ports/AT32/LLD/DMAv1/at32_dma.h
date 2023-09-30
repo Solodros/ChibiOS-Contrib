@@ -48,7 +48,7 @@
 /**
  * @brief   Mask of the ISR bits passed to the DMA callback functions.
  */
-#define AT32_DMA_ISR_MASK          0x0E
+#define AT32_DMA_STS_MASK          0x0E
 
 /**
  * @brief   Returns the request line associated to the specified stream.
@@ -204,33 +204,33 @@
 /** @} */
 
 /**
- * @name    CR register constants common to all DMA types
+ * @name    CTRL register constants common to all DMA types
  * @{
  */
-#define AT32_DMA_CCR_RESET_VALUE   0x00000000U
-#define AT32_DMA_CR_EN             DMA_CTRL_CHEN
-#define AT32_DMA_CR_TEIE           DMA_CTRL_DTERRIEN
-#define AT32_DMA_CR_HTIE           DMA_CTRL_HDTIEN 
-#define AT32_DMA_CR_TCIE           DMA_CTRL_FDTIEN
-#define AT32_DMA_CR_DIR_MASK       (DMA_CTRL_DTD | DMA_CTRL_M2M)
-#define AT32_DMA_CR_DIR_P2M        0U
-#define AT32_DMA_CR_DIR_M2P        DMA_CTRL_DTD
-#define AT32_DMA_CR_DIR_M2M        DMA_CTRL_M2M
-#define AT32_DMA_CR_CIRC           DMA_CTRL_LM
-#define AT32_DMA_CR_PINC           DMA_CTRL_PINCM
-#define AT32_DMA_CR_MINC           DMA_CTRL_MINCM
-#define AT32_DMA_CR_PSIZE_MASK     DMA_CTRL_PWIDTH
-#define AT32_DMA_CR_PSIZE_BYTE     0U
-#define AT32_DMA_CR_PSIZE_HWORD    DMA_CTRL_PWIDTH_16BITS
-#define AT32_DMA_CR_PSIZE_WORD     DMA_CTRL_PWIDTH_32BITS
-#define AT32_DMA_CR_MSIZE_MASK     DMA_CTRL_MWIDTH
-#define AT32_DMA_CR_MSIZE_BYTE     0U
-#define AT32_DMA_CR_MSIZE_HWORD    DMA_CTRL_MWIDTH_16BITS
-#define AT32_DMA_CR_MSIZE_WORD     DMA_CTRL_MWIDTH_32BITS
-#define AT32_DMA_CR_SIZE_MASK      (AT32_DMA_CR_PSIZE_MASK |              \
-                                     AT32_DMA_CR_MSIZE_MASK)
-#define AT32_DMA_CR_PL_MASK        DMA_CTRL_CHPL
-#define AT32_DMA_CR_PL(n)          ((n) << 12U)
+#define AT32_DMA_CCTRL_RESET_VALUE   0x00000000U
+#define AT32_DMA_CTRL_CHEN           DMA_CTRL_CHEN
+#define AT32_DMA_CTRL_DTERRIEN       DMA_CTRL_DTERRIEN
+#define AT32_DMA_CTRL_HDTIEN         DMA_CTRL_HDTIEN 
+#define AT32_DMA_CTRL_FDTIEN         DMA_CTRL_FDTIEN
+#define AT32_DMA_CTRL_DTD_MASK       (DMA_CTRL_DTD | DMA_CTRL_M2M)
+#define AT32_DMA_CTRL_DTD_P2M        0U
+#define AT32_DMA_CTRL_DTD_M2P        DMA_CTRL_DTD
+#define AT32_DMA_CTRL_DTD_M2M        DMA_CTRL_M2M
+#define AT32_DMA_CTRL_LM             DMA_CTRL_LM
+#define AT32_DMA_CTRL_PINCM          DMA_CTRL_PINCM
+#define AT32_DMA_CTRL_MINCM          DMA_CTRL_MINCM
+#define AT32_DMA_CTRL_PWIDTH_MASK    DMA_CTRL_PWIDTH
+#define AT32_DMA_CTRL_PWIDTH_BYTE    0U
+#define AT32_DMA_CTRL_PWIDTH_HWORD   DMA_CTRL_PWIDTH_16BITS
+#define AT32_DMA_CTRL_PWIDTH_WORD    DMA_CTRL_PWIDTH_32BITS
+#define AT32_DMA_CTRL_MWIDTH_MASK    DMA_CTRL_MWIDTH
+#define AT32_DMA_CTRL_MWIDTH_BYTE    0U
+#define AT32_DMA_CTRL_MWIDTH_HWORD   DMA_CTRL_MWIDTH_16BITS
+#define AT32_DMA_CTRL_MWIDTH_WORD    DMA_CTRL_MWIDTH_32BITS
+#define AT32_DMA_CTRL_WIDTH_MASK     (AT32_DMA_CTRL_PWIDTH_MASK |              \
+                                     AT32_DMA_CTRL_MWIDTH_MASK)
+#define AT32_DMA_CTRL_CHPL_MASK      DMA_CTRL_CHPL
+#define AT32_DMA_CTRL_CHPL(n)        ((n) << 12U)
 /** @} */
 
 /**
@@ -238,30 +238,30 @@
  * @{
  */
 #if AT32_DMA_SUPPORTS_CSELR || defined(__DOXYGEN__)
-#define AT32_DMA_CR_CHSEL_MASK     (15U << 16U)
-#define AT32_DMA_CR_CHSEL(n)       ((n) << 16U)
+#define AT32_DMA_CTRL_CHSEL_MASK     (15U << 16U)
+#define AT32_DMA_CTRL_CHSEL(n)       ((n) << 16U)
 #else
-#define AT32_DMA_CR_CHSEL_MASK     0U
-#define AT32_DMA_CR_CHSEL(n)       0U
+#define AT32_DMA_CTRL_CHSEL_MASK     0U
+#define AT32_DMA_CTRL_CHSEL(n)       0U
 #endif
 /** @} */
 
 /**
- * @name    CR register constants only found in enhanced DMA
+ * @name    CTRL register constants only found in enhanced DMA
  * @{
  */
-#define AT32_DMA_CR_DMEIE          0U  /**< @brief Ignored by normal DMA.  */
+#define AT32_DMA_CTRL_DMEIEN        0U  /**< @brief Ignored by normal DMA.  */
 /** @} */
 
 /**
  * @name    Status flags passed to the ISR callbacks
  * @{
  */
-#define AT32_DMA_ISR_FEIF          0U
-#define AT32_DMA_ISR_DMEIF         0U
-#define AT32_DMA_ISR_TEIF          (0x1U << 3)
-#define AT32_DMA_ISR_HTIF          (0x1U << 2)
-#define AT32_DMA_ISR_TCIF          (0x1U << 1)
+#define AT32_DMA_STS_FTERRF         0U
+#define AT32_DMA_STS_DMTERRF        0U
+#define AT32_DMA_STS_DTERRF         (0x1U << 3)
+#define AT32_DMA_STS_HDTF           (0x1U << 2)
+#define AT32_DMA_STS_FDTF           (0x1U << 1)
 /** @} */
 
 /*===========================================================================*/
@@ -316,10 +316,10 @@
  * @brief   Type of a DMA callback.
  *
  * @param[in] p         parameter for the registered function
- * @param[in] flags     pre-shifted content of the ISR register, the bits
+ * @param[in] flags     pre-shifted content of the STS register, the bits
  *                      are aligned to bit zero
  */
-typedef void (*at32_dmaisr_t)(void *p, uint32_t flags);
+typedef void (*at32_dmasts_t)(void *p, uint32_t flags);
 
 /**
  * @brief   AT32 DMA stream descriptor structure.
@@ -360,7 +360,7 @@ typedef struct {
  * @special
  */
 #define dmaStreamSetPeripheral(dmastp, addr) {                              \
-  (dmastp)->channel->PADDR = (uint32_t)(addr);                               \
+  (dmastp)->channel->PADDR = (uint32_t)(addr);                              \
 }
 
 /**
@@ -375,7 +375,7 @@ typedef struct {
  * @special
  */
 #define dmaStreamSetMemory0(dmastp, addr) {                                 \
-  (dmastp)->channel->MADDR = (uint32_t)(addr);                               \
+  (dmastp)->channel->MADDR = (uint32_t)(addr);                              \
 }
 
 /**
@@ -423,11 +423,11 @@ typedef struct {
   cselr &= ~(0x0000000FU << (dmastp)->shift);                               \
   cselr |=  (((uint32_t)(mode) >> 16U) << (dmastp)->shift);                 \
   *(dmastp)->cselr = cselr;                                                 \
-  (dmastp)->channel->CTRL  = (uint32_t)(mode);                               \
+  (dmastp)->channel->CTRL  = (uint32_t)(mode);                              \
 }
 #else
 #define dmaStreamSetMode(dmastp, mode) {                                    \
-  (dmastp)->channel->CTRL  = (uint32_t)(mode);                               \
+  (dmastp)->channel->CTRL  = (uint32_t)(mode);                              \
 }
 #endif
 
@@ -442,7 +442,7 @@ typedef struct {
  * @special
  */
 #define dmaStreamEnable(dmastp) {                                           \
-  (dmastp)->channel->CTRL |= AT32_DMA_CR_EN;                                \
+  (dmastp)->channel->CTRL |= AT32_DMA_CTRL_CHEN;                            \
 }
 
 /**
@@ -459,10 +459,10 @@ typedef struct {
  *
  * @special
  */
-#define dmaStreamDisable(dmastp) {                                          \
-  (dmastp)->channel->CTRL &= ~(AT32_DMA_CR_TCIE | AT32_DMA_CR_HTIE |       \
-                              AT32_DMA_CR_TEIE | AT32_DMA_CR_EN);         \
-  dmaStreamClearInterrupt(dmastp);                                          \
+#define dmaStreamDisable(dmastp) {                                            \
+  (dmastp)->channel->CTRL &= ~(AT32_DMA_CTRL_FDTIEN | AT32_DMA_CTRL_HDTIEN |  \
+                              AT32_DMA_CTRL_DTERRIEN | AT32_DMA_CTRL_CHEN);   \
+  dmaStreamClearInterrupt(dmastp);                                            \
 }
 
 /**
@@ -475,8 +475,8 @@ typedef struct {
  *
  * @special
  */
-#define dmaStreamClearInterrupt(dmastp) {                                   \
-  (dmastp)->dma->CLR = AT32_DMA_ISR_MASK << (dmastp)->shift;              \
+#define dmaStreamClearInterrupt(dmastp) {                                 \
+  (dmastp)->dma->CLR = AT32_DMA_STS_MASK << (dmastp)->shift;              \
 }
 
 /**
@@ -489,10 +489,10 @@ typedef struct {
  * @param[in] dmastp    pointer to a at32_dma_stream_t structure
  * @param[in] mode      value to be written in the CCR register, this value
  *                      is implicitly ORed with:
- *                      - @p AT32_DMA_CR_MINC
- *                      - @p AT32_DMA_CR_PINC
- *                      - @p AT32_DMA_CR_DIR_M2M
- *                      - @p AT32_DMA_CR_EN
+ *                      - @p AT32_DMA_CTRL_MINCM
+ *                      - @p AT32_DMA_CTRL_PINCM
+ *                      - @p AT32_DMA_CTRL_DTD_M2M
+ *                      - @p AT32_DMA_CTRL_CHEN
  *                      .
  * @param[in] src       source address
  * @param[in] dst       destination address
@@ -503,8 +503,8 @@ typedef struct {
   dmaStreamSetMemory0(dmastp, dst);                                         \
   dmaStreamSetTransactionSize(dmastp, n);                                   \
   dmaStreamSetMode(dmastp, (mode) |                                         \
-                           AT32_DMA_CR_MINC | AT32_DMA_CR_PINC |          \
-                           AT32_DMA_CR_DIR_M2M | AT32_DMA_CR_EN);         \
+                           AT32_DMA_CTRL_MINCM | AT32_DMA_CTRL_PINCM |      \
+                           AT32_DMA_CTRL_DTD_M2M | AT32_DMA_CTRL_CHEN);     \
 }
 
 /**
@@ -534,18 +534,18 @@ extern "C" {
 #endif
   void dmaInit(void);
   const at32_dma_stream_t *dmaStreamAllocI(uint32_t id,
-                                            uint32_t priority,
-                                            at32_dmaisr_t func,
-                                            void *param);
-  const at32_dma_stream_t *dmaStreamAlloc(uint32_t id,
                                            uint32_t priority,
-                                           at32_dmaisr_t func,
+                                           at32_dmasts_t func,
                                            void *param);
+  const at32_dma_stream_t *dmaStreamAlloc(uint32_t id,
+                                          uint32_t priority,
+                                          at32_dmasts_t func,
+                                          void *param);
   void dmaStreamFreeI(const at32_dma_stream_t *dmastp);
   void dmaStreamFree(const at32_dma_stream_t *dmastp);
   void dmaServeInterrupt(const at32_dma_stream_t *dmastp);
 #if AT32_DMA_SUPPORTS_DMAMUX == TRUE
-  void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t channel, uint32_t per);
+  void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t channel, uint32_t pid);
 #endif
 #ifdef __cplusplus
 }

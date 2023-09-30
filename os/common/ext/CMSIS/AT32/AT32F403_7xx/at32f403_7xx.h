@@ -845,7 +845,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define IOMUX_REMAP_CAN_MUX_FULLREMAP       (0x3U << 13)    /*!< RX/PD0,TX/PD1 */
 #define IOMUX_REMAP_PD01_MUX                (0x1U << 15)    /*!< Port D0/Port D1 No mapping on OSC_IN/OSC_OUT */
 
-#define IOMUX_REMAP_TMR5CH4_MUX             (0x1U << 16)    /*!< TIM5 Channel4 Internal Remap */
+#define IOMUX_REMAP_TMR5CH4_MUX             (0x1U << 16)    /*!< TMR5 Channel4 Internal Remap */
 #define IOMUX_REMAP_ADC1_ETP_MUX            (0x1U << 17)    /*!< ADC 1 External Trigger Injected Conversion remapping */
 #define IOMUX_REMAP_ADC1_ETO_MUX            (0x1U << 18)    /*!< ADC 1 External Trigger Regular Conversion remapping */
 #define IOMUX_REMAP_ADC2_ETP_MUX            (0x1U << 19)    /*!< ADC 2 External Trigger Injected Conversion remapping */

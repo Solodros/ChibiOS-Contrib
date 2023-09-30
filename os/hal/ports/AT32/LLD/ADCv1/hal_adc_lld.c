@@ -79,17 +79,17 @@ ADCDriver ADCD3;
 static void adc_lld_serve_rx_interrupt(ADCDriver *adcp, uint32_t flags) {
 
   /* DMA errors handling.*/
-  if ((flags & AT32_DMA_ISR_TEIF) != 0) {
+  if ((flags & AT32_DMA_STS_DTERRF) != 0) {
     /* DMA, this could help only if the DMA tries to access an unmapped
        address space or violates alignment rules.*/
     _adc_isr_error_code(adcp, ADC_ERR_DMAFAILURE);
   }
   else {
-    if ((flags & AT32_DMA_ISR_TCIF) != 0) {
+    if ((flags & AT32_DMA_STS_FDTF) != 0) {
       /* Transfer complete processing.*/
       _adc_isr_full_code(adcp);
     }
-    else if ((flags & AT32_DMA_ISR_HTIF) != 0) {
+    else if ((flags & AT32_DMA_STS_HDTF) != 0) {
       /* Half transfer processing.*/
       _adc_isr_half_code(adcp);
     }
@@ -116,11 +116,11 @@ void adc_lld_init(void) {
   adcObjectInit(&ADCD1);
   ADCD1.adc = ADC1;
   ADCD1.dmastp  = NULL;
-  ADCD1.dmamode = AT32_DMA_CR_CHSEL(ADC1_DMA_CHANNEL) |
-                  AT32_DMA_CR_PL(AT32_ADC_ADC1_DMA_PRIORITY) |
-                  AT32_DMA_CR_MSIZE_HWORD | AT32_DMA_CR_PSIZE_HWORD |
-                  AT32_DMA_CR_MINC        | AT32_DMA_CR_TCIE        |
-                  AT32_DMA_CR_TEIE;
+  ADCD1.dmamode = AT32_DMA_CTRL_CHSEL(ADC1_DMA_CHANNEL) |
+                  AT32_DMA_CTRL_CHPL(AT32_ADC_ADC1_DMA_PRIORITY) |
+                  AT32_DMA_CTRL_MWIDTH_HWORD | AT32_DMA_CTRL_PWIDTH_HWORD |
+                  AT32_DMA_CTRL_MINCM        | AT32_DMA_CTRL_FDTIEN        |
+                  AT32_DMA_CTRL_DTERRIEN;
 
   /* Temporary activation.*/
   crmEnableADC1(true);
@@ -145,11 +145,11 @@ void adc_lld_init(void) {
   adcObjectInit(&ADCD2);
   ADCD2.adc = ADC2;
   ADCD2.dmastp  = NULL;
-  ADCD2.dmamode = AT32_DMA_CR_CHSEL(ADC2_DMA_CHANNEL) |
-                  AT32_DMA_CR_PL(AT32_ADC_ADC2_DMA_PRIORITY) |
-                  AT32_DMA_CR_MSIZE_HWORD | AT32_DMA_CR_PSIZE_HWORD |
-                  AT32_DMA_CR_MINC        | AT32_DMA_CR_TCIE        |
-                  AT32_DMA_CR_TEIE;
+  ADCD2.dmamode = AT32_DMA_CTRL_CHSEL(ADC2_DMA_CHANNEL) |
+                  AT32_DMA_CTRL_CHPL(AT32_ADC_ADC2_DMA_PRIORITY) |
+                  AT32_DMA_CTRL_MWIDTH_HWORD | AT32_DMA_CTRL_PWIDTH_HWORD |
+                  AT32_DMA_CTRL_MINCM        | AT32_DMA_CTRL_FDTIEN        |
+                  AT32_DMA_CTRL_DTERRIEN;
 
   /* Temporary activation.*/
   crmEnableADC2(true);
@@ -174,11 +174,11 @@ void adc_lld_init(void) {
   adcObjectInit(&ADCD3);
   ADCD3.adc = ADC3;
   ADCD3.dmastp  = NULL;
-  ADCD3.dmamode = AT32_DMA_CR_CHSEL(ADC3_DMA_CHANNEL) |
-                  AT32_DMA_CR_PL(AT32_ADC_ADC3_DMA_PRIORITY) |
-                  AT32_DMA_CR_MSIZE_HWORD | AT32_DMA_CR_PSIZE_HWORD |
-                  AT32_DMA_CR_MINC        | AT32_DMA_CR_TCIE        |
-                  AT32_DMA_CR_TEIE;
+  ADCD3.dmamode = AT32_DMA_CTRL_CHSEL(ADC3_DMA_CHANNEL) |
+                  AT32_DMA_CTRL_CHPL(AT32_ADC_ADC3_DMA_PRIORITY) |
+                  AT32_DMA_CTRL_MWIDTH_HWORD | AT32_DMA_CTRL_PWIDTH_HWORD |
+                  AT32_DMA_CTRL_MINCM        | AT32_DMA_CTRL_FDTIEN        |
+                  AT32_DMA_CTRL_DTERRIEN;
 
   /* Temporary activation.*/
   crmEnableADC3(true);
@@ -214,7 +214,7 @@ void adc_lld_start(ADCDriver *adcp) {
     if (&ADCD1 == adcp) {
       adcp->dmastp = dmaStreamAllocI(AT32_ADC_ADC1_DMA_STREAM,
                                      AT32_ADC_ADC1_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)adc_lld_serve_rx_interrupt,
+                                     (at32_dmasts_t)adc_lld_serve_rx_interrupt,
                                      (void *)adcp);
       osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
       dmaStreamSetPeripheral(adcp->dmastp, &ADC1->ODT);
@@ -229,7 +229,7 @@ void adc_lld_start(ADCDriver *adcp) {
     if (&ADCD2 == adcp) {
       adcp->dmastp = dmaStreamAllocI(AT32_ADC_ADC2_DMA_STREAM,
                                      AT32_ADC_ADC2_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)adc_lld_serve_rx_interrupt,
+                                     (at32_dmasts_t)adc_lld_serve_rx_interrupt,
                                      (void *)adcp);
       osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
       dmaStreamSetPeripheral(adcp->dmastp, &ADC2->ODT);
@@ -244,7 +244,7 @@ void adc_lld_start(ADCDriver *adcp) {
     if (&ADCD3 == adcp) {
       adcp->dmastp = dmaStreamAllocI(AT32_ADC_ADC3_DMA_STREAM,
                                      AT32_ADC_ADC3_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)adc_lld_serve_rx_interrupt,
+                                     (at32_dmasts_t)adc_lld_serve_rx_interrupt,
                                      (void *)adcp);
       osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
       dmaStreamSetPeripheral(adcp->dmastp, &ADC3->ODT);
@@ -324,11 +324,11 @@ void adc_lld_start_conversion(ADCDriver *adcp) {
   /* DMA setup.*/
   mode = adcp->dmamode;
   if (grpp->circular) {
-    mode |= AT32_DMA_CR_CIRC;
+    mode |= AT32_DMA_CTRL_LM;
     if (adcp->depth > 1) {
       /* If circular buffer depth > 1, then the half transfer interrupt
          is enabled in order to allow streaming processing.*/
-      mode |= AT32_DMA_CR_HTIE;
+      mode |= AT32_DMA_CTRL_HDTIEN;
     }
   }
   dmaStreamSetMemory0(adcp->dmastp, adcp->samples);

@@ -214,9 +214,9 @@ static void uart_enter_rx_idle_loop(UARTDriver *uartp) {
   /* RX DMA channel preparation, if the char callback is defined then the
      TCIE interrupt is enabled too.*/
   if (uartp->config->rxchar_cb == NULL)
-    mode = AT32_DMA_CR_DIR_P2M | AT32_DMA_CR_CIRC;
+    mode = AT32_DMA_CTRL_DTD_P2M | AT32_DMA_CTRL_LM;
   else
-    mode = AT32_DMA_CR_DIR_P2M | AT32_DMA_CR_CIRC | AT32_DMA_CR_TCIE;
+    mode = AT32_DMA_CTRL_DTD_P2M | AT32_DMA_CTRL_LM | AT32_DMA_CTRL_FDTIEN;
   dmaStreamSetMemory0(uartp->dmarx, &uartp->rxbuf);
   dmaStreamSetTransactionSize(uartp->dmarx, 1);
   dmaStreamSetMode(uartp->dmarx, uartp->dmarxmode | mode);
@@ -297,7 +297,7 @@ static void uart_lld_serve_rx_end_irq(UARTDriver *uartp, uint32_t flags) {
 
   /* DMA errors handling.*/
 #if defined(AT32_UART_DMA_ERROR_HOOK)
-  if ((flags & (AT32_DMA_ISR_TEIF | AT32_DMA_ISR_DMEIF)) != 0) {
+  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMTERRF)) != 0) {
     AT32_UART_DMA_ERROR_HOOK(uartp);
   }
 #else
@@ -327,7 +327,7 @@ static void uart_lld_serve_tx_end_irq(UARTDriver *uartp, uint32_t flags) {
 
   /* DMA errors handling.*/
 #if defined(AT32_UART_DMA_ERROR_HOOK)
-  if ((flags & (AT32_DMA_ISR_TEIF | AT32_DMA_ISR_DMEIF)) != 0) {
+  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMTERRF)) != 0) {
     AT32_UART_DMA_ERROR_HOOK(uartp);
   }
 #else
@@ -569,8 +569,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD1);
   UARTD1.usart   = USART1;
   UARTD1.clock   = AT32_PCLK2;
-  UARTD1.dmarxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
-  UARTD1.dmatxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
+  UARTD1.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD1.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD1.dmarx   = NULL;
   UARTD1.dmatx   = NULL;
 #endif
@@ -579,8 +579,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD2);
   UARTD2.usart   = USART2;
   UARTD2.clock   = AT32_PCLK1;
-  UARTD2.dmarxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
-  UARTD2.dmatxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
+  UARTD2.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD2.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD2.dmarx   = NULL;
   UARTD2.dmatx   = NULL;
 #endif
@@ -589,8 +589,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD3);
   UARTD3.usart   = USART3;
   UARTD3.clock   = AT32_PCLK1;
-  UARTD3.dmarxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
-  UARTD3.dmatxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
+  UARTD3.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD3.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD3.dmarx   = NULL;
   UARTD3.dmatx   = NULL;
 #endif
@@ -599,8 +599,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD4);
   UARTD4.usart   = UART4;
   UARTD4.clock   = AT32_PCLK1;
-  UARTD4.dmarxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
-  UARTD4.dmatxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
+  UARTD4.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD4.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD4.dmarx   = NULL;
   UARTD4.dmatx   = NULL;
 #endif
@@ -609,8 +609,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD5);
   UARTD5.usart   = UART5;
   UARTD5.clock   = AT32_PCLK1;
-  UARTD5.dmarxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
-  UARTD5.dmatxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
+  UARTD5.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD5.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD5.dmarx   = NULL;
   UARTD5.dmatx   = NULL;
 #endif
@@ -619,8 +619,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD6);
   UARTD6.usart   = USART6;
   UARTD6.clock   = AT32_PCLK2;
-  UARTD6.dmarxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
-  UARTD6.dmatxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
+  UARTD6.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD6.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD6.dmarx   = NULL;
   UARTD6.dmatx   = NULL;
 #endif
@@ -629,8 +629,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD7);
   UARTD7.usart   = UART7;
   UARTD7.clock   = AT32_PCLK1;
-  UARTD7.dmarxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
-  UARTD7.dmatxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
+  UARTD7.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD7.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD7.dmarx   = NULL;
   UARTD7.dmatx   = NULL;
 #endif
@@ -639,8 +639,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD8);
   UARTD8.usart   = UART8;
   UARTD8.clock   = AT32_PCLK1;
-  UARTD8.dmarxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
-  UARTD8.dmatxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
+  UARTD8.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD8.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD8.dmarx   = NULL;
   UARTD8.dmatx   = NULL;
 #endif
@@ -649,8 +649,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD9);
   UARTD9.usart   = UART9;
   UARTD9.clock   = AT32_PCLK2;
-  UARTD9.dmarxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
-  UARTD9.dmatxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
+  UARTD9.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD9.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD9.dmarx   = NULL;
   UARTD9.dmatx   = NULL;
 #endif
@@ -659,8 +659,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD10);
   UARTD10.usart   = UART10;
   UARTD10.clock   = AT32_PCLK2;
-  UARTD10.dmarxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
-  UARTD10.dmatxmode = AT32_DMA_CR_DMEIE | AT32_DMA_CR_TEIE;
+  UARTD10.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD10.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD10.dmarx   = NULL;
   UARTD10.dmatx   = NULL;
 #endif
@@ -680,21 +680,21 @@ void uart_lld_start(UARTDriver *uartp) {
     if (&UARTD1 == uartp) {
       uartp->dmarx = dmaStreamAllocI(AT32_UART_USART1_RX_DMA_STREAM,
                                      AT32_UART_USART1_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_rx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_rx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmarx != NULL, "unable to allocate stream");
       uartp->dmatx = dmaStreamAllocI(AT32_UART_USART1_TX_DMA_STREAM,
                                      AT32_UART_USART1_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_tx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_tx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmatx != NULL, "unable to allocate stream");
 
       crmEnableUSART1(true);
       nvicEnableVector(AT32_USART1_NUMBER, AT32_UART_USART1_IRQ_PRIORITY);
-      uartp->dmarxmode |= AT32_DMA_CR_CHSEL(USART1_RX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_USART1_DMA_PRIORITY);
-      uartp->dmatxmode |= AT32_DMA_CR_CHSEL(USART1_TX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_USART1_DMA_PRIORITY);
+      uartp->dmarxmode |= AT32_DMA_CTRL_CHSEL(USART1_RX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_USART1_DMA_PRIORITY);
+      uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(USART1_TX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_USART1_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_USART1_RX_DMAMUX_CHANNEL, AT32_DMAMUX_USART1_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_USART1_TX_DMAMUX_CHANNEL, AT32_DMAMUX_USART1_TX);
@@ -706,21 +706,21 @@ void uart_lld_start(UARTDriver *uartp) {
     if (&UARTD2 == uartp) {
       uartp->dmarx = dmaStreamAllocI(AT32_UART_USART2_RX_DMA_STREAM,
                                      AT32_UART_USART2_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_rx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_rx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmarx != NULL, "unable to allocate stream");
       uartp->dmatx = dmaStreamAllocI(AT32_UART_USART2_TX_DMA_STREAM,
                                      AT32_UART_USART2_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_tx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_tx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmatx != NULL, "unable to allocate stream");
 
       crmEnableUSART2(true);
       nvicEnableVector(AT32_USART2_NUMBER, AT32_UART_USART2_IRQ_PRIORITY);
-      uartp->dmarxmode |= AT32_DMA_CR_CHSEL(USART2_RX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_USART2_DMA_PRIORITY);
-      uartp->dmatxmode |= AT32_DMA_CR_CHSEL(USART2_TX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_USART2_DMA_PRIORITY);
+      uartp->dmarxmode |= AT32_DMA_CTRL_CHSEL(USART2_RX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_USART2_DMA_PRIORITY);
+      uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(USART2_TX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_USART2_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_USART2_RX_DMAMUX_CHANNEL, AT32_DMAMUX_USART2_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_USART2_TX_DMAMUX_CHANNEL, AT32_DMAMUX_USART2_TX);
@@ -732,21 +732,21 @@ void uart_lld_start(UARTDriver *uartp) {
     if (&UARTD3 == uartp) {
       uartp->dmarx = dmaStreamAllocI(AT32_UART_USART3_RX_DMA_STREAM,
                                      AT32_UART_USART3_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_rx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_rx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmarx != NULL, "unable to allocate stream");
       uartp->dmatx = dmaStreamAllocI(AT32_UART_USART3_TX_DMA_STREAM,
                                      AT32_UART_USART3_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_tx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_tx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmatx != NULL, "unable to allocate stream");
 
       crmEnableUSART3(true);
       nvicEnableVector(AT32_USART3_NUMBER, AT32_UART_USART3_IRQ_PRIORITY);
-      uartp->dmarxmode |= AT32_DMA_CR_CHSEL(USART3_RX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_USART3_DMA_PRIORITY);
-      uartp->dmatxmode |= AT32_DMA_CR_CHSEL(USART3_TX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_USART3_DMA_PRIORITY);
+      uartp->dmarxmode |= AT32_DMA_CTRL_CHSEL(USART3_RX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_USART3_DMA_PRIORITY);
+      uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(USART3_TX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_USART3_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_USART3_RX_DMAMUX_CHANNEL, AT32_DMAMUX_USART3_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_USART3_TX_DMAMUX_CHANNEL, AT32_DMAMUX_USART3_TX);
@@ -764,21 +764,21 @@ void uart_lld_start(UARTDriver *uartp) {
 
       uartp->dmarx = dmaStreamAllocI(AT32_UART_UART4_RX_DMA_STREAM,
                                      AT32_UART_UART4_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_rx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_rx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmarx != NULL, "unable to allocate stream");
       uartp->dmatx = dmaStreamAllocI(AT32_UART_UART4_TX_DMA_STREAM,
                                      AT32_UART_UART4_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_tx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_tx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmatx != NULL, "unable to allocate stream");
 
       crmEnableUART4(true);
       nvicEnableVector(AT32_UART4_NUMBER, AT32_UART_UART4_IRQ_PRIORITY);
-      uartp->dmarxmode |= AT32_DMA_CR_CHSEL(UART4_RX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_UART4_DMA_PRIORITY);
-      uartp->dmatxmode |= AT32_DMA_CR_CHSEL(UART4_TX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_UART4_DMA_PRIORITY);
+      uartp->dmarxmode |= AT32_DMA_CTRL_CHSEL(UART4_RX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_UART4_DMA_PRIORITY);
+      uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(UART4_TX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_UART4_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_UART4_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART4_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_UART4_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART4_TX);
@@ -796,21 +796,21 @@ void uart_lld_start(UARTDriver *uartp) {
 
       uartp->dmarx = dmaStreamAllocI(AT32_UART_UART5_RX_DMA_STREAM,
                                      AT32_UART_UART5_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_rx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_rx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmarx != NULL, "unable to allocate stream");
       uartp->dmatx = dmaStreamAllocI(AT32_UART_UART5_TX_DMA_STREAM,
                                      AT32_UART_UART5_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_tx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_tx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmatx != NULL, "unable to allocate stream");
 
       crmEnableUART5(true);
       nvicEnableVector(AT32_UART5_NUMBER, AT32_UART_UART5_IRQ_PRIORITY);
-      uartp->dmarxmode |= AT32_DMA_CR_CHSEL(UART5_RX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_UART5_DMA_PRIORITY);
-      uartp->dmatxmode |= AT32_DMA_CR_CHSEL(UART5_TX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_UART5_DMA_PRIORITY);
+      uartp->dmarxmode |= AT32_DMA_CTRL_CHSEL(UART5_RX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_UART5_DMA_PRIORITY);
+      uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(UART5_TX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_UART5_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_UART5_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART5_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_UART5_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART5_TX);
@@ -822,21 +822,21 @@ void uart_lld_start(UARTDriver *uartp) {
     if (&UARTD6 == uartp) {
       uartp->dmarx = dmaStreamAllocI(AT32_UART_USART6_RX_DMA_STREAM,
                                      AT32_UART_USART6_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_rx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_rx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmarx != NULL, "unable to allocate stream");
       uartp->dmatx = dmaStreamAllocI(AT32_UART_USART6_TX_DMA_STREAM,
                                      AT32_UART_USART6_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_tx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_tx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmatx != NULL, "unable to allocate stream");
 
       crmEnableUSART6(true);
       nvicEnableVector(AT32_USART6_NUMBER, AT32_UART_USART6_IRQ_PRIORITY);
-      uartp->dmarxmode |= AT32_DMA_CR_CHSEL(USART6_RX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_USART6_DMA_PRIORITY);
-      uartp->dmatxmode |= AT32_DMA_CR_CHSEL(USART6_TX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_USART6_DMA_PRIORITY);
+      uartp->dmarxmode |= AT32_DMA_CTRL_CHSEL(USART6_RX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_USART6_DMA_PRIORITY);
+      uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(USART6_TX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_USART6_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_USART6_RX_DMAMUX_CHANNEL, AT32_DMAMUX_USART6_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_USART6_TX_DMAMUX_CHANNEL, AT32_DMAMUX_USART6_TX);
@@ -854,21 +854,21 @@ void uart_lld_start(UARTDriver *uartp) {
 
       uartp->dmarx = dmaStreamAllocI(AT32_UART_UART7_RX_DMA_STREAM,
                                      AT32_UART_UART7_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_rx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_rx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmarx != NULL, "unable to allocate stream");
       uartp->dmatx = dmaStreamAllocI(AT32_UART_UART7_TX_DMA_STREAM,
                                      AT32_UART_UART7_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_tx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_tx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmatx != NULL, "unable to allocate stream");
 
       crmEnableUART7(true);
       nvicEnableVector(AT32_UART7_NUMBER, AT32_UART_UART7_IRQ_PRIORITY);
-      uartp->dmarxmode |= AT32_DMA_CR_CHSEL(UART7_RX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_UART7_DMA_PRIORITY);
-      uartp->dmatxmode |= AT32_DMA_CR_CHSEL(UART7_TX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_UART7_DMA_PRIORITY);
+      uartp->dmarxmode |= AT32_DMA_CTRL_CHSEL(UART7_RX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_UART7_DMA_PRIORITY);
+      uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(UART7_TX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_UART7_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_UART7_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART7_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_UART7_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART7_TX);
@@ -886,21 +886,21 @@ void uart_lld_start(UARTDriver *uartp) {
 
       uartp->dmarx = dmaStreamAllocI(AT32_UART_UART8_RX_DMA_STREAM,
                                      AT32_UART_UART8_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_rx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_rx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmarx != NULL, "unable to allocate stream");
       uartp->dmatx = dmaStreamAllocI(AT32_UART_UART8_TX_DMA_STREAM,
                                      AT32_UART_UART8_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_tx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_tx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmatx != NULL, "unable to allocate stream");
 
       crmEnableUART8(true);
       nvicEnableVector(AT32_UART8_NUMBER, AT32_UART_UART8_IRQ_PRIORITY);
-      uartp->dmarxmode |= AT32_DMA_CR_CHSEL(UART8_RX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_UART8_DMA_PRIORITY);
-      uartp->dmatxmode |= AT32_DMA_CR_CHSEL(UART8_TX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_UART8_DMA_PRIORITY);
+      uartp->dmarxmode |= AT32_DMA_CTRL_CHSEL(UART8_RX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_UART8_DMA_PRIORITY);
+      uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(UART8_TX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_UART8_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_UART8_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART8_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_UART8_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART8_TX);
@@ -918,21 +918,21 @@ void uart_lld_start(UARTDriver *uartp) {
 
       uartp->dmarx = dmaStreamAllocI(AT32_UART_UART9_RX_DMA_STREAM,
                                      AT32_UART_UART9_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_rx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_rx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmarx != NULL, "unable to allocate stream");
       uartp->dmatx = dmaStreamAllocI(AT32_UART_UART9_TX_DMA_STREAM,
                                      AT32_UART_UART9_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_tx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_tx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmatx != NULL, "unable to allocate stream");
 
       crmEnableUART9(true);
       nvicEnableVector(AT32_UART9_NUMBER, AT32_UART_UART9_IRQ_PRIORITY);
-      uartp->dmarxmode |= AT32_DMA_CR_CHSEL(UART9_RX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_UART9_DMA_PRIORITY);
-      uartp->dmatxmode |= AT32_DMA_CR_CHSEL(UART9_TX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_UART9_DMA_PRIORITY);
+      uartp->dmarxmode |= AT32_DMA_CTRL_CHSEL(UART9_RX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_UART9_DMA_PRIORITY);
+      uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(UART9_TX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_UART9_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_UART9_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART9_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_UART9_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART9_TX);
@@ -950,21 +950,21 @@ void uart_lld_start(UARTDriver *uartp) {
 
       uartp->dmarx = dmaStreamAllocI(AT32_UART_UART10_RX_DMA_STREAM,
                                      AT32_UART_UART10_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_rx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_rx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmarx != NULL, "unable to allocate stream");
       uartp->dmatx = dmaStreamAllocI(AT32_UART_UART10_TX_DMA_STREAM,
                                      AT32_UART_UART10_IRQ_PRIORITY,
-                                     (at32_dmaisr_t)uart_lld_serve_tx_end_irq,
+                                     (at32_dmasts_t)uart_lld_serve_tx_end_irq,
                                      (void *)uartp);
       osalDbgAssert(uartp->dmatx != NULL, "unable to allocate stream");
 
       crmEnableUART9(true);
       nvicEnableVector(AT32_UART10_NUMBER, AT32_UART_UART10_IRQ_PRIORITY);
-      uartp->dmarxmode |= AT32_DMA_CR_CHSEL(UART10_RX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_UART10_DMA_PRIORITY);
-      uartp->dmatxmode |= AT32_DMA_CR_CHSEL(UART10_TX_DMA_CHANNEL) |
-                          AT32_DMA_CR_PL(AT32_UART_UART10_DMA_PRIORITY);
+      uartp->dmarxmode |= AT32_DMA_CTRL_CHSEL(UART10_RX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_UART10_DMA_PRIORITY);
+      uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(UART10_TX_DMA_CHANNEL) |
+                          AT32_DMA_CTRL_CHPL(AT32_UART_UART10_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_UART10_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART10_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_UART10_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART10_TX);
@@ -975,8 +975,8 @@ void uart_lld_start(UARTDriver *uartp) {
     /* Static DMA setup, the transfer size depends on the USART settings,
        it is 16 bits if M=1 and PCE=0 else it is 8 bits.*/
     if ((uartp->config->cr1 & (USART_CTRL1_DBN | USART_CTRL1_PEN)) == USART_CTRL1_DBN) {
-      uartp->dmarxmode |= AT32_DMA_CR_PSIZE_HWORD | AT32_DMA_CR_MSIZE_HWORD;
-      uartp->dmatxmode |= AT32_DMA_CR_PSIZE_HWORD | AT32_DMA_CR_MSIZE_HWORD;
+      uartp->dmarxmode |= AT32_DMA_CTRL_PWIDTH_HWORD | AT32_DMA_CTRL_MWIDTH_HWORD;
+      uartp->dmatxmode |= AT32_DMA_CTRL_PWIDTH_HWORD | AT32_DMA_CTRL_MWIDTH_HWORD;
     }
     dmaStreamSetPeripheral(uartp->dmarx, &uartp->usart->DT);
     dmaStreamSetPeripheral(uartp->dmatx, &uartp->usart->DT);
@@ -1102,8 +1102,8 @@ void uart_lld_start_send(UARTDriver *uartp, size_t n, const void *txbuf) {
   /* TX DMA channel preparation.*/
   dmaStreamSetMemory0(uartp->dmatx, txbuf);
   dmaStreamSetTransactionSize(uartp->dmatx, n);
-  dmaStreamSetMode(uartp->dmatx, uartp->dmatxmode | AT32_DMA_CR_DIR_M2P |
-                                 AT32_DMA_CR_MINC | AT32_DMA_CR_TCIE);
+  dmaStreamSetMode(uartp->dmatx, uartp->dmatxmode | AT32_DMA_CTRL_DTD_M2P |
+                                 AT32_DMA_CTRL_MINCM | AT32_DMA_CTRL_FDTIEN);
 
   /* Only enable TC interrupt if there's a callback attached to it or
      if called from uartSendFullTimeout(). Also we need to clear TC flag
@@ -1158,8 +1158,8 @@ void uart_lld_start_receive(UARTDriver *uartp, size_t n, void *rxbuf) {
   /* RX DMA channel preparation.*/
   dmaStreamSetMemory0(uartp->dmarx, rxbuf);
   dmaStreamSetTransactionSize(uartp->dmarx, n);
-  dmaStreamSetMode(uartp->dmarx, uartp->dmarxmode | AT32_DMA_CR_DIR_P2M |
-                                 AT32_DMA_CR_MINC | AT32_DMA_CR_TCIE);
+  dmaStreamSetMode(uartp->dmarx, uartp->dmarxmode | AT32_DMA_CTRL_DTD_P2M |
+                                 AT32_DMA_CTRL_MINCM | AT32_DMA_CTRL_FDTIEN);
 
   /* Starting transfer.*/
   dmaStreamEnable(uartp->dmarx);

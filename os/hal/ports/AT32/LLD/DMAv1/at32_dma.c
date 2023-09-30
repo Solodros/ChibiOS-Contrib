@@ -244,7 +244,7 @@ static struct {
   /**
    * @brief   Mask of the enabled streams ISRs.
    */
-  uint32_t          isr_mask;
+  uint32_t          sts_mask;
   /**
    * @brief   DMA IRQ redirectors.
    */
@@ -252,11 +252,11 @@ static struct {
     /**
      * @brief   DMA callback function.
      */
-    at32_dmaisr_t    func;
+    at32_dmasts_t    func;
     /**
      * @brief   DMA callback parameter.
      */
-    void              *param;
+    void             *param;
   } streams[AT32_DMA_STREAMS];
 } dma;
 
@@ -537,9 +537,9 @@ void dmaInit(void) {
   int i;
 
   dma.allocated_mask = 0U;
-  dma.isr_mask       = 0U;
+  dma.sts_mask       = 0U;
   for (i = 0; i < AT32_DMA_STREAMS; i++) {
-    _at32_dma_streams[i].channel->CTRL = AT32_DMA_CCR_RESET_VALUE;
+    _at32_dma_streams[i].channel->CTRL = AT32_DMA_CCTRL_RESET_VALUE;
     dma.streams[i].func = NULL;
   }
   DMA1->CLR = 0xFFFFFFFFU;
@@ -571,9 +571,9 @@ void dmaInit(void) {
  * @iclass
  */
 const at32_dma_stream_t *dmaStreamAllocI(uint32_t id,
-                                          uint32_t priority,
-                                          at32_dmaisr_t func,
-                                          void *param) {
+                                         uint32_t priority,
+                                         at32_dmasts_t func,
+                                         void *param) {
   uint32_t i, startid, endid;
 
   osalDbgCheckClassI();
@@ -633,15 +633,15 @@ const at32_dma_stream_t *dmaStreamAllocI(uint32_t id,
       /* Enables the associated IRQ vector if not already enabled and if a
          callback is defined.*/
       if (func != NULL) {
-        if ((dma.isr_mask & dmastp->cmask) == 0U) {
+        if ((dma.sts_mask & dmastp->cmask) == 0U) {
           nvicEnableVector(dmastp->vector, priority);
         }
-        dma.isr_mask |= mask;
+        dma.sts_mask |= mask;
       }
 
       /* Putting the stream in a known state.*/
       dmaStreamDisable(dmastp);
-      dmastp->channel->CTRL = AT32_DMA_CCR_RESET_VALUE;
+      dmastp->channel->CTRL = AT32_DMA_CCTRL_RESET_VALUE;
 
       return dmastp;
     }
@@ -673,9 +673,9 @@ const at32_dma_stream_t *dmaStreamAllocI(uint32_t id,
  * @api
  */
 const at32_dma_stream_t *dmaStreamAlloc(uint32_t id,
-                                         uint32_t priority,
-                                         at32_dmaisr_t func,
-                                         void *param) {
+                                        uint32_t priority,
+                                        at32_dmasts_t func,
+                                        void *param) {
   const at32_dma_stream_t *dmastp;
 
   osalSysLock();
@@ -706,10 +706,10 @@ void dmaStreamFreeI(const at32_dma_stream_t *dmastp) {
 
   /* Marks the stream as not allocated.*/
   dma.allocated_mask &= ~(1U << selfindex);
-  dma.isr_mask &= ~(1U << selfindex);
+  dma.sts_mask &= ~(1U << selfindex);
 
   /* Disables the associated IRQ vector if it is no more in use.*/
-  if ((dma.isr_mask & dmastp->cmask) == 0U) {
+  if ((dma.sts_mask & dmastp->cmask) == 0U) {
     nvicDisableVector(dmastp->vector);
   }
 
@@ -763,7 +763,7 @@ void dmaServeInterrupt(const at32_dma_stream_t *dmastp) {
   uint32_t flags;
   uint32_t selfindex = (uint32_t)dmastp->selfindex;
 
-  flags = (dmastp->dma->STS >> dmastp->shift) & AT32_DMA_ISR_MASK;
+  flags = (dmastp->dma->STS >> dmastp->shift) & AT32_DMA_STS_MASK;
   if (flags & dmastp->channel->CTRL) {
     dmastp->dma->CLR = flags << dmastp->shift;
     if (dma.streams[selfindex].func) {
@@ -778,19 +778,19 @@ void dmaServeInterrupt(const at32_dma_stream_t *dmastp) {
  * @note    This function can be invoked in both ISR or thread context.
  *
  * @param[in] dmastp    pointer to a @p at32_dma_stream_t structure
- * @param[in] per       peripheral identifier
+ * @param[in] pid       peripheral identifier
  *
  * @special
  */
-void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t channel, uint32_t per) {
+void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t channel, uint32_t pid) {
 
-  osalDbgCheck(per < 256U);
+  osalDbgCheck(pid < 256U);
 
   dmastp->dma->SRC_SEL1 |= DMA_SRC_SEL1_DMA_FLEX_EN;
   if (channel < 5) {
-    dmastp->dma->SRC_SEL0 |= (per << ((channel - 1) * 8));
+    dmastp->dma->SRC_SEL0 |= (pid << ((channel - 1) * 8));
   } else {
-    dmastp->dma->SRC_SEL1 |= (per << ((channel - 5) * 8));
+    dmastp->dma->SRC_SEL1 |= (pid << ((channel - 5) * 8));
   }
 }
 #endif
