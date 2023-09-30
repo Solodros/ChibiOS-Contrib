@@ -98,7 +98,7 @@ typedef struct {
   volatile uint32_t MUXH;
   volatile uint32_t CLR;
   volatile uint32_t TOGR;
-  volatile uint32_t RESERVED1[3];
+  volatile uint32_t resvd30[3];
   volatile uint32_t HDRV;
 } at32_gpio_t;
 
