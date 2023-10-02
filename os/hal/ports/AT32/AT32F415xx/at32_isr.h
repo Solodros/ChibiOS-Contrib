@@ -67,37 +67,76 @@
 #define AT32_CAN1_SCE_NUMBER               22
 
 /*
- * EXTI unit.
+ * DMA units.
  */
-#define AT32_EXTI0_HANDLER                 Vector58
-#define AT32_EXTI1_HANDLER                 Vector5C
-#define AT32_EXTI2_HANDLER                 Vector60
-#define AT32_EXTI3_HANDLER                 Vector64
-#define AT32_EXTI4_HANDLER                 Vector68
-#define AT32_EXTI5_9_HANDLER               Vector9C
-#define AT32_EXTI10_15_HANDLER             VectorE0
-#define AT32_EXTI16_HANDLER                Vector44    /* PVM              */
-#define AT32_EXTI17_HANDLER                VectorE4    /* ERTC ALARM       */
-#define AT32_EXTI18_HANDLER                VectorE8    /* OTG FS WAKEUP    */
-#define AT32_EXTI19_HANDLER                Vector158   /* CMP1             */
-#define AT32_EXTI20_HANDLER                Vector15C   /* CMP2             */
-#define AT32_EXTI21_HANDLER                Vector48    /* ERTC TAMPER      */
-#define AT32_EXTI22_HANDLER                Vector4C    /* ERTC WAKEUP      */
+#define AT32_DMA1_CH1_HANDLER              Vector6C
+#define AT32_DMA1_CH2_HANDLER              Vector70
+#define AT32_DMA1_CH3_HANDLER              Vector74
+#define AT32_DMA1_CH4_HANDLER              Vector78
+#define AT32_DMA1_CH5_HANDLER              Vector7C
+#define AT32_DMA1_CH6_HANDLER              Vector80
+#define AT32_DMA1_CH7_HANDLER              Vector84
+#define AT32_DMA2_CH1_HANDLER              Vector120
+#define AT32_DMA2_CH2_HANDLER              Vector124
+#define AT32_DMA2_CH3_HANDLER              Vector128
+#define AT32_DMA2_CH45_HANDLER             Vector12C
+#define AT32_DMA2_CH67_HANDLER             Vector16C
 
-#define AT32_EXTI0_NUMBER                  6
-#define AT32_EXTI1_NUMBER                  7
-#define AT32_EXTI2_NUMBER                  8
-#define AT32_EXTI3_NUMBER                  9
-#define AT32_EXTI4_NUMBER                  10
-#define AT32_EXTI5_9_NUMBER                23
-#define AT32_EXTI10_15_NUMBER              40
-#define AT32_EXTI16_NUMBER                 1
-#define AT32_EXTI17_NUMBER                 41
-#define AT32_EXTI18_NUMBER                 42
-#define AT32_EXTI19_NUMBER                 70
-#define AT32_EXTI20_NUMBER                 71
-#define AT32_EXTI21_NUMBER                 2
-#define AT32_EXTI22_NUMBER                 3
+#define AT32_DMA1_CH1_NUMBER               11
+#define AT32_DMA1_CH2_NUMBER               12
+#define AT32_DMA1_CH3_NUMBER               13
+#define AT32_DMA1_CH4_NUMBER               14
+#define AT32_DMA1_CH5_NUMBER               15
+#define AT32_DMA1_CH6_NUMBER               16
+#define AT32_DMA1_CH7_NUMBER               17
+#define AT32_DMA2_CH1_NUMBER               56
+#define AT32_DMA2_CH2_NUMBER               57
+#define AT32_DMA2_CH3_NUMBER               58
+#define AT32_DMA2_CH45_NUMBER              59
+#define AT32_DMA2_CH67_NUMBER              75
+
+#define AT32_DMA2_CH4_NUMBER               AT32_DMA2_CH45_NUMBER
+#define AT32_DMA2_CH5_NUMBER               AT32_DMA2_CH45_NUMBER
+#define AT32_DMA2_CH6_NUMBER               AT32_DMA2_CH67_NUMBER 
+#define AT32_DMA2_CH7_NUMBER               AT32_DMA2_CH67_NUMBER 
+
+#define DMA2_CH4_CMASK                     0x00000C00U
+#define DMA2_CH5_CMASK                     0x00000C00U
+#define DMA2_CH6_CMASK                     0x00003000U
+#define DMA2_CH7_CMASK                     0x00003000U
+
+/*
+ * EXINT unit.
+ */
+#define AT32_EXINT0_HANDLER                 Vector58
+#define AT32_EXINT1_HANDLER                 Vector5C
+#define AT32_EXINT2_HANDLER                 Vector60
+#define AT32_EXINT3_HANDLER                 Vector64
+#define AT32_EXINT4_HANDLER                 Vector68
+#define AT32_EXINT5_9_HANDLER               Vector9C
+#define AT32_EXINT10_15_HANDLER             VectorE0
+#define AT32_EXINT16_HANDLER                Vector44    /* PVM              */
+#define AT32_EXINT17_HANDLER                VectorE4    /* ERTC ALARM       */
+#define AT32_EXINT18_HANDLER                VectorE8    /* OTG FS WAKEUP    */
+#define AT32_EXINT19_HANDLER                Vector158   /* CMP1             */
+#define AT32_EXINT20_HANDLER                Vector15C   /* CMP2             */
+#define AT32_EXINT21_HANDLER                Vector48    /* ERTC TAMPER      */
+#define AT32_EXINT22_HANDLER                Vector4C    /* ERTC WAKEUP      */
+
+#define AT32_EXINT0_NUMBER                  6
+#define AT32_EXINT1_NUMBER                  7
+#define AT32_EXINT2_NUMBER                  8
+#define AT32_EXINT3_NUMBER                  9
+#define AT32_EXINT4_NUMBER                  10
+#define AT32_EXINT5_9_NUMBER                23
+#define AT32_EXINT10_15_NUMBER              40
+#define AT32_EXINT16_NUMBER                 1
+#define AT32_EXINT17_NUMBER                 41
+#define AT32_EXINT18_NUMBER                 42
+#define AT32_EXINT19_NUMBER                 70
+#define AT32_EXINT20_NUMBER                 71
+#define AT32_EXINT21_NUMBER                 2
+#define AT32_EXINT22_NUMBER                 3
 
 /*
  * I2C units.

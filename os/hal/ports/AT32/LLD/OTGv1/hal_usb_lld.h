@@ -144,7 +144,7 @@
 #error "AT32_OTG_STEPPING not defined in registry"
 #endif
 
-#if (AT32_OTG_STEPPING < 1) || (AT32_OTG_STEPPING > 2)
+#if (AT32_OTG_STEPPING < 1) || (AT32_OTG_STEPPING > 3)
 #error "unsupported AT32_OTG_STEPPING"
 #endif
 

@@ -64,50 +64,14 @@
 #define AT32_DMA_SUPPORTS_CSELR             FALSE
 
 #define AT32_DMA1_NUM_CHANNELS              7
-#define AT32_DMA1_CH1_HANDLER               Vector6C
-#define AT32_DMA1_CH2_HANDLER               Vector70
-#define AT32_DMA1_CH3_HANDLER               Vector74
-#define AT32_DMA1_CH4_HANDLER               Vector78
-#define AT32_DMA1_CH5_HANDLER               Vector7C
-#define AT32_DMA1_CH6_HANDLER               Vector80
-#define AT32_DMA1_CH7_HANDLER               Vector84
-#define AT32_DMA1_CH1_NUMBER                11
-#define AT32_DMA1_CH2_NUMBER                12
-#define AT32_DMA1_CH3_NUMBER                13
-#define AT32_DMA1_CH4_NUMBER                14
-#define AT32_DMA1_CH5_NUMBER                15
-#define AT32_DMA1_CH6_NUMBER                16
-#define AT32_DMA1_CH7_NUMBER                17
-
 #define AT32_DMA2_NUM_CHANNELS              7
-#define AT32_DMA2_CH1_HANDLER               Vector120
-#define AT32_DMA2_CH2_HANDLER               Vector124
-#define AT32_DMA2_CH3_HANDLER               Vector128
-#define AT32_DMA2_CH45_HANDLER              Vector12C
-#define AT32_DMA2_CH67_HANDLER              Vector16C
-
-#define AT32_DMA2_CH1_NUMBER                56
-#define AT32_DMA2_CH2_NUMBER                57
-#define AT32_DMA2_CH3_NUMBER                58
-#define AT32_DMA2_CH45_NUMBER               59
-#define AT32_DMA2_CH67_NUMBER               75
-
-#define AT32_DMA2_CH4_NUMBER                AT32_DMA2_CH45_NUMBER
-#define AT32_DMA2_CH5_NUMBER                AT32_DMA2_CH45_NUMBER
-#define AT32_DMA2_CH6_NUMBER                AT32_DMA2_CH67_NUMBER 
-#define AT32_DMA2_CH7_NUMBER                AT32_DMA2_CH67_NUMBER 
-
-#define DMA2_CH4_CMASK                      0x00000C00U
-#define DMA2_CH5_CMASK                      0x00000C00U
-#define DMA2_CH6_CMASK                      0x00003000U
-#define DMA2_CH7_CMASK                      0x00003000U
 
 /* ETH attributes.*/
 #define AT32_HAS_ETH                        FALSE
 
-/* EXTI attributes.*/
-#define AT32_EXTI_NUM_LINES                 20
-#define AT32_EXTI_IMR_MASK                  0x00000000U
+/* EXINT attributes.*/
+#define AT32_EXINT_NUM_LINES                20
+#define AT32_EXINT_INTEN_MASK               0x00000000U
 
 /* Flash attributes.*/
 #if defined(AT32F40xxG)
@@ -228,36 +192,36 @@
 #define AT32_TMR14_CHANNELS                 1
 
 /* USART attributes.*/
-#define AT32_HAS_USART1                    TRUE
-#define AT32_HAS_USART2                    TRUE
-#define AT32_HAS_USART3                    TRUE
-#define AT32_HAS_UART4                     TRUE
-#define AT32_HAS_UART5                     TRUE
-#define AT32_HAS_USART6                    FALSE
-#define AT32_HAS_UART7                     TRUE
-#define AT32_HAS_UART8                     FALSE
+#define AT32_HAS_USART1                     TRUE
+#define AT32_HAS_USART2                     TRUE
+#define AT32_HAS_USART3                     TRUE
+#define AT32_HAS_UART4                      TRUE
+#define AT32_HAS_UART5                      TRUE
+#define AT32_HAS_USART6                     FALSE
+#define AT32_HAS_UART7                      TRUE
+#define AT32_HAS_UART8                      FALSE
 
 /* USB attributes.*/
-#define AT32_HAS_USB                       TRUE
-#define AT32_USB_ACCESS_SCHEME_2x16        FALSE
-#define AT32_USB_PMA_MAX_SIZE              1280
-#define AT32_USB_HAS_BCDR                  FALSE
-#define AT32_USB_HAS_CFG                   TRUE
+#define AT32_HAS_USB                        TRUE
+#define AT32_USB_ACCESS_SCHEME_2x16         FALSE
+#define AT32_USB_PMA_MAX_SIZE               1280
+#define AT32_USB_HAS_BCDR                   FALSE
+#define AT32_USB_HAS_CFG                    TRUE
 
 /* IWDG attributes.*/
-#define AT32_HAS_IWDG                      TRUE
-#define AT32_IWDG_IS_WINDOWED              TRUE
+#define AT32_HAS_IWDG                       TRUE
+#define AT32_IWDG_IS_WINDOWED               TRUE
 
 /* FSMC attributes.*/
-#define AT32_HAS_XMC                       TRUE
+#define AT32_HAS_XMC                        TRUE
 
 /* CRC attributes.*/
-#define AT32_HAS_CRC                       TRUE
-#define AT32_CRC_PROGRAMMABLE              FALSE
+#define AT32_HAS_CRC                        TRUE
+#define AT32_CRC_PROGRAMMABLE               FALSE
 
 #endif /* defined(AT32F403ACx) */
 
-#if defined(AT32F403ARx) || defined(__DOXYGEN__)
+#if defined(AT32F403ARx)
 /**
  * @name    AT32F403ARx capabilities
  * @{
@@ -288,50 +252,14 @@
 #define AT32_DMA_SUPPORTS_CSELR             FALSE
 
 #define AT32_DMA1_NUM_CHANNELS              7
-#define AT32_DMA1_CH1_HANDLER               Vector6C
-#define AT32_DMA1_CH2_HANDLER               Vector70
-#define AT32_DMA1_CH3_HANDLER               Vector74
-#define AT32_DMA1_CH4_HANDLER               Vector78
-#define AT32_DMA1_CH5_HANDLER               Vector7C
-#define AT32_DMA1_CH6_HANDLER               Vector80
-#define AT32_DMA1_CH7_HANDLER               Vector84
-#define AT32_DMA1_CH1_NUMBER                11
-#define AT32_DMA1_CH2_NUMBER                12
-#define AT32_DMA1_CH3_NUMBER                13
-#define AT32_DMA1_CH4_NUMBER                14
-#define AT32_DMA1_CH5_NUMBER                15
-#define AT32_DMA1_CH6_NUMBER                16
-#define AT32_DMA1_CH7_NUMBER                17
-
 #define AT32_DMA2_NUM_CHANNELS              7
-#define AT32_DMA2_CH1_HANDLER               Vector120
-#define AT32_DMA2_CH2_HANDLER               Vector124
-#define AT32_DMA2_CH3_HANDLER               Vector128
-#define AT32_DMA2_CH45_HANDLER              Vector12C
-#define AT32_DMA2_CH67_HANDLER              Vector16C
-
-#define AT32_DMA2_CH1_NUMBER                56
-#define AT32_DMA2_CH2_NUMBER                57
-#define AT32_DMA2_CH3_NUMBER                58
-#define AT32_DMA2_CH45_NUMBER               59
-#define AT32_DMA2_CH67_NUMBER               75
-
-#define AT32_DMA2_CH4_NUMBER                AT32_DMA2_CH45_NUMBER
-#define AT32_DMA2_CH5_NUMBER                AT32_DMA2_CH45_NUMBER
-#define AT32_DMA2_CH6_NUMBER                AT32_DMA2_CH67_NUMBER 
-#define AT32_DMA2_CH7_NUMBER                AT32_DMA2_CH67_NUMBER 
-
-#define DMA2_CH4_CMASK                      0x00000C00U
-#define DMA2_CH5_CMASK                      0x00000C00U
-#define DMA2_CH6_CMASK                      0x00003000U
-#define DMA2_CH7_CMASK                      0x00003000U
 
 /* ETH attributes.*/
 #define AT32_HAS_ETH                        FALSE
 
-/* EXTI attributes.*/
-#define AT32_EXTI_NUM_LINES                 20
-#define AT32_EXTI_IMR_MASK                  0x00000000U
+/* EXINT attributes.*/
+#define AT32_EXINT_NUM_LINES                20
+#define AT32_EXINT_INTEN_MASK               0x00000000U
 
 /* Flash attributes.*/
 #if defined(AT32F40xxG)
@@ -453,36 +381,36 @@
 #define AT32_TMR14_CHANNELS                 1
 
 /* USART attributes.*/
-#define AT32_HAS_USART1                    TRUE
-#define AT32_HAS_USART2                    TRUE
-#define AT32_HAS_USART3                    TRUE
-#define AT32_HAS_UART4                     TRUE
-#define AT32_HAS_UART5                     TRUE
-#define AT32_HAS_USART6                    TRUE
-#define AT32_HAS_UART7                     TRUE
-#define AT32_HAS_UART8                     TRUE
+#define AT32_HAS_USART1                     TRUE
+#define AT32_HAS_USART2                     TRUE
+#define AT32_HAS_USART3                     TRUE
+#define AT32_HAS_UART4                      TRUE
+#define AT32_HAS_UART5                      TRUE
+#define AT32_HAS_USART6                     TRUE
+#define AT32_HAS_UART7                      TRUE
+#define AT32_HAS_UART8                      TRUE
 
 /* USB attributes.*/
-#define AT32_HAS_USB                       TRUE
-#define AT32_USB_ACCESS_SCHEME_2x16        FALSE
-#define AT32_USB_PMA_MAX_SIZE              1280
-#define AT32_USB_HAS_BCDR                  FALSE
-#define AT32_USB_HAS_CFG                   TRUE
+#define AT32_HAS_USB                        TRUE
+#define AT32_USB_ACCESS_SCHEME_2x16         FALSE
+#define AT32_USB_PMA_MAX_SIZE               1280
+#define AT32_USB_HAS_BCDR                   FALSE
+#define AT32_USB_HAS_CFG                    TRUE
 
 /* IWDG attributes.*/
-#define AT32_HAS_IWDG                      TRUE
-#define AT32_IWDG_IS_WINDOWED              TRUE
+#define AT32_HAS_IWDG                       TRUE
+#define AT32_IWDG_IS_WINDOWED               TRUE
 
 /* FSMC attributes.*/
-#define AT32_HAS_XMC                       TRUE
+#define AT32_HAS_XMC                        TRUE
 
 /* CRC attributes.*/
-#define AT32_HAS_CRC                       TRUE
-#define AT32_CRC_PROGRAMMABLE              FALSE
+#define AT32_HAS_CRC                        TRUE
+#define AT32_CRC_PROGRAMMABLE               FALSE
 
 #endif /* defined(AT32F403ARx) */
 
-#if defined(AT32F403AVx) || defined(__DOXYGEN__)
+#if defined(AT32F403AVx)
 /**
  * @name    AT32F403AVx capabilities
  * @{
@@ -513,50 +441,14 @@
 #define AT32_DMA_SUPPORTS_CSELR             FALSE
 
 #define AT32_DMA1_NUM_CHANNELS              7
-#define AT32_DMA1_CH1_HANDLER               Vector6C
-#define AT32_DMA1_CH2_HANDLER               Vector70
-#define AT32_DMA1_CH3_HANDLER               Vector74
-#define AT32_DMA1_CH4_HANDLER               Vector78
-#define AT32_DMA1_CH5_HANDLER               Vector7C
-#define AT32_DMA1_CH6_HANDLER               Vector80
-#define AT32_DMA1_CH7_HANDLER               Vector84
-#define AT32_DMA1_CH1_NUMBER                11
-#define AT32_DMA1_CH2_NUMBER                12
-#define AT32_DMA1_CH3_NUMBER                13
-#define AT32_DMA1_CH4_NUMBER                14
-#define AT32_DMA1_CH5_NUMBER                15
-#define AT32_DMA1_CH6_NUMBER                16
-#define AT32_DMA1_CH7_NUMBER                17
-
 #define AT32_DMA2_NUM_CHANNELS              7
-#define AT32_DMA2_CH1_HANDLER               Vector120
-#define AT32_DMA2_CH2_HANDLER               Vector124
-#define AT32_DMA2_CH3_HANDLER               Vector128
-#define AT32_DMA2_CH45_HANDLER              Vector12C
-#define AT32_DMA2_CH67_HANDLER              Vector16C
-
-#define AT32_DMA2_CH1_NUMBER                56
-#define AT32_DMA2_CH2_NUMBER                57
-#define AT32_DMA2_CH3_NUMBER                58
-#define AT32_DMA2_CH45_NUMBER               59
-#define AT32_DMA2_CH67_NUMBER               75
-
-#define AT32_DMA2_CH4_NUMBER                AT32_DMA2_CH45_NUMBER
-#define AT32_DMA2_CH5_NUMBER                AT32_DMA2_CH45_NUMBER
-#define AT32_DMA2_CH6_NUMBER                AT32_DMA2_CH67_NUMBER 
-#define AT32_DMA2_CH7_NUMBER                AT32_DMA2_CH67_NUMBER 
-
-#define DMA2_CH4_CMASK                      0x00000C00U
-#define DMA2_CH5_CMASK                      0x00000C00U
-#define DMA2_CH6_CMASK                      0x00003000U
-#define DMA2_CH7_CMASK                      0x00003000U
 
 /* ETH attributes.*/
 #define AT32_HAS_ETH                        FALSE
 
-/* EXTI attributes.*/
-#define AT32_EXTI_NUM_LINES                 20
-#define AT32_EXTI_IMR_MASK                  0x00000000U
+/* EXINT attributes.*/
+#define AT32_EXINT_NUM_LINES                20
+#define AT32_EXINT_INTEN_MASK               0x00000000U
 
 /* Flash attributes.*/
 #if defined(AT32F40xxG)
@@ -678,37 +570,37 @@
 #define AT32_TMR14_CHANNELS                 1
 
 /* USART attributes.*/
-#define AT32_HAS_USART1                    TRUE
-#define AT32_HAS_USART2                    TRUE
-#define AT32_HAS_USART3                    TRUE
-#define AT32_HAS_UART4                     TRUE
-#define AT32_HAS_UART5                     TRUE
-#define AT32_HAS_USART6                    TRUE
-#define AT32_HAS_UART7                     TRUE
-#define AT32_HAS_UART8                     TRUE
+#define AT32_HAS_USART1                     TRUE
+#define AT32_HAS_USART2                     TRUE
+#define AT32_HAS_USART3                     TRUE
+#define AT32_HAS_UART4                      TRUE
+#define AT32_HAS_UART5                      TRUE
+#define AT32_HAS_USART6                     TRUE
+#define AT32_HAS_UART7                      TRUE
+#define AT32_HAS_UART8                      TRUE
 
 
 /* USB attributes.*/
-#define AT32_HAS_USB                       TRUE
-#define AT32_USB_ACCESS_SCHEME_2x16        FALSE
-#define AT32_USB_PMA_MAX_SIZE              1280
-#define AT32_USB_HAS_BCDR                  FALSE
-#define AT32_USB_HAS_CFG                   TRUE
+#define AT32_HAS_USB                        TRUE
+#define AT32_USB_ACCESS_SCHEME_2x16         FALSE
+#define AT32_USB_PMA_MAX_SIZE               1280
+#define AT32_USB_HAS_BCDR                   FALSE
+#define AT32_USB_HAS_CFG                    TRUE
 
 /* IWDG attributes.*/
-#define AT32_HAS_IWDG                      TRUE
-#define AT32_IWDG_IS_WINDOWED              TRUE
+#define AT32_HAS_IWDG                       TRUE
+#define AT32_IWDG_IS_WINDOWED               TRUE
 
 /* FSMC attributes.*/
-#define AT32_HAS_XMC                       TRUE
+#define AT32_HAS_XMC                        TRUE
 
 /* CRC attributes.*/
-#define AT32_HAS_CRC                       TRUE
-#define AT32_CRC_PROGRAMMABLE              FALSE
+#define AT32_HAS_CRC                        TRUE
+#define AT32_CRC_PROGRAMMABLE               FALSE
 
 #endif /* defined(AT32F403AVx) */
 
-#if defined(AT32F407Rx) || defined(AT32F407Vx) || defined(__DOXYGEN__)
+#if defined(AT32F407Rx) || defined(AT32F407Vx)
 /**
  * @name    AT32F407Rx/AT32F407Vx capabilities
  * @{
@@ -739,50 +631,14 @@
 #define AT32_DMA_SUPPORTS_CSELR             FALSE
 
 #define AT32_DMA1_NUM_CHANNELS              7
-#define AT32_DMA1_CH1_HANDLER               Vector6C
-#define AT32_DMA1_CH2_HANDLER               Vector70
-#define AT32_DMA1_CH3_HANDLER               Vector74
-#define AT32_DMA1_CH4_HANDLER               Vector78
-#define AT32_DMA1_CH5_HANDLER               Vector7C
-#define AT32_DMA1_CH6_HANDLER               Vector80
-#define AT32_DMA1_CH7_HANDLER               Vector84
-#define AT32_DMA1_CH1_NUMBER                11
-#define AT32_DMA1_CH2_NUMBER                12
-#define AT32_DMA1_CH3_NUMBER                13
-#define AT32_DMA1_CH4_NUMBER                14
-#define AT32_DMA1_CH5_NUMBER                15
-#define AT32_DMA1_CH6_NUMBER                16
-#define AT32_DMA1_CH7_NUMBER                17
-
 #define AT32_DMA2_NUM_CHANNELS              7
-#define AT32_DMA2_CH1_HANDLER               Vector120
-#define AT32_DMA2_CH2_HANDLER               Vector124
-#define AT32_DMA2_CH3_HANDLER               Vector128
-#define AT32_DMA2_CH45_HANDLER              Vector12C
-#define AT32_DMA2_CH67_HANDLER              Vector16C
-
-#define AT32_DMA2_CH1_NUMBER                56
-#define AT32_DMA2_CH2_NUMBER                57
-#define AT32_DMA2_CH3_NUMBER                58
-#define AT32_DMA2_CH45_NUMBER               59
-#define AT32_DMA2_CH67_NUMBER               75
-
-#define AT32_DMA2_CH4_NUMBER                AT32_DMA2_CH45_NUMBER
-#define AT32_DMA2_CH5_NUMBER                AT32_DMA2_CH45_NUMBER
-#define AT32_DMA2_CH6_NUMBER                AT32_DMA2_CH67_NUMBER 
-#define AT32_DMA2_CH7_NUMBER                AT32_DMA2_CH67_NUMBER 
-
-#define DMA2_CH4_CMASK                      0x00000C00U
-#define DMA2_CH5_CMASK                      0x00000C00U
-#define DMA2_CH6_CMASK                      0x00003000U
-#define DMA2_CH7_CMASK                      0x00003000U
 
 /* ETH attributes.*/
 #define AT32_HAS_ETH                        TRUE
 
-/* EXTI attributes.*/
-#define AT32_EXTI_NUM_LINES                 20
-#define AT32_EXTI_IMR_MASK                  0x00000000U
+/* EXINT attributes.*/
+#define AT32_EXINT_NUM_LINES                20
+#define AT32_EXINT_INTEN_MASK               0x00000000U
 
 /* Flash attributes.*/
 #if defined(AT32F40xxG)
@@ -904,33 +760,32 @@
 #define AT32_TMR14_CHANNELS                 1
 
 /* USART attributes.*/
-#define AT32_HAS_USART1                    TRUE
-#define AT32_HAS_USART2                    TRUE
-#define AT32_HAS_USART3                    TRUE
-#define AT32_HAS_UART4                     TRUE
-#define AT32_HAS_UART5                     TRUE
-#define AT32_HAS_USART6                    TRUE
-#define AT32_HAS_UART7                     TRUE
-#define AT32_HAS_UART8                     TRUE
-
+#define AT32_HAS_USART1                     TRUE
+#define AT32_HAS_USART2                     TRUE
+#define AT32_HAS_USART3                     TRUE
+#define AT32_HAS_UART4                      TRUE
+#define AT32_HAS_UART5                      TRUE
+#define AT32_HAS_USART6                     TRUE
+#define AT32_HAS_UART7                      TRUE
+#define AT32_HAS_UART8                      TRUE
 
 /* USB attributes.*/
-#define AT32_HAS_USB                       TRUE
-#define AT32_USB_ACCESS_SCHEME_2x16        FALSE
-#define AT32_USB_PMA_MAX_SIZE              1280
-#define AT32_USB_HAS_BCDR                  FALSE
-#define AT32_USB_HAS_CFG                   TRUE
+#define AT32_HAS_USB                        TRUE
+#define AT32_USB_ACCESS_SCHEME_2x16         FALSE
+#define AT32_USB_PMA_MAX_SIZE               1280
+#define AT32_USB_HAS_BCDR                   FALSE
+#define AT32_USB_HAS_CFG                    TRUE
 
 /* IWDG attributes.*/
-#define AT32_HAS_IWDG                      TRUE
-#define AT32_IWDG_IS_WINDOWED              TRUE
+#define AT32_HAS_IWDG                       TRUE
+#define AT32_IWDG_IS_WINDOWED               TRUE
 
 /* FSMC attributes.*/
-#define AT32_HAS_XMC                       TRUE
+#define AT32_HAS_XMC                        TRUE
 
 /* CRC attributes.*/
-#define AT32_HAS_CRC                       TRUE
-#define AT32_CRC_PROGRAMMABLE              FALSE
+#define AT32_HAS_CRC                        TRUE
+#define AT32_CRC_PROGRAMMABLE               FALSE
 
 #endif /* defined(AT32F407Rx) || defined(AT32F407Vx) */
 #endif /* AT32_REGISTRY_H */

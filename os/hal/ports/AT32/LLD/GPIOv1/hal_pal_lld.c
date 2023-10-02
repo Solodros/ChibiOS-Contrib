@@ -247,7 +247,7 @@ void _pal_lld_enablepadevent(ioportid_t port,
   osalDbgAssert(((EXINT->POLCFG1 & padmask) == 0U) &&
                 ((EXINT->POLCFG2 & padmask) == 0U), "channel already in use");
 
-  /* Index and mask of the SYSCFG EXINTC register to be used.*/
+  /* Index and mask of the IOMUX EXINTC register to be used.*/
   cidx  = (uint32_t)pad >> 2U;
   coff = ((uint32_t)pad & 3U) * 4U;
   cmask = ~(0xFU << coff);

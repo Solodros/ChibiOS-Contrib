@@ -18,7 +18,7 @@
  * @file    AT32F413xx/at32_crm.h
  * @brief   CRM helper driver header.
  * @note    This file requires definitions from the AT header file
- *          @p AT32F413xx.h.
+ *          @p at32f413xx.h.
  *
  * @addtogroup AT32F413xx_CRM
  * @{
@@ -941,6 +941,6 @@ extern "C" {
 }
 #endif
 
-#endif /* AT32_RCC_H */
+#endif /* AT32_CRM_H */
 
 /** @} */

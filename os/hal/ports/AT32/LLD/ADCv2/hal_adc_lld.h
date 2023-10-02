@@ -15,7 +15,7 @@
 */
 
 /**
- * @file    ADCv1/hal_adc_lld.h
+ * @file    ADCv2/hal_adc_lld.h
  * @brief   AT32 ADC subsystem low level driver header.
  *
  * @addtogroup ADC
@@ -32,11 +32,48 @@
 /*===========================================================================*/
 
 /**
+ * @name    Possible ADC errors mask bits.
+ * @{
+ */
+#define ADC_ERR_DMAFAILURE      1U  /**< DMA operations failure.            */
+#define ADC_ERR_OVERFLOW        2U  /**< ADC overflow condition.            */
+#define ADC_ERR_VM             4U  /**< Watchdog triggered.                */
+/** @} */
+
+/**
+ * @name    Absolute Maximum Ratings
+ * @{
+ */
+/**
+ * @brief   Minimum ADC clock frequency.
+ */
+#define AT32_ADCCLK_MIN        600000
+
+/**
+ * @brief   Maximum ADC clock frequency.
+ */
+#if !defined(AT32_ADCCLK_MAX)
+#if defined(AT32F435_7xx)
+#define AT32_ADCCLK_MAX        80000000
+#else
+#define AT32_ADCCLK_MAX        28000000
+#endif
+#endif
+/** @} */
+
+/**
  * @name    Triggers selection
  * @{
  */
-#define ADC_CTRL2_OCTESEL_SRC(n)   ((n) << 17) /**< @brief Trigger source.     */
-#define ADC_CTRL2_OCTESEL_OCSWTRG  (7 << 17)   /**< @brief Software trigger.   */
+#define ADC_CTRL2_OCETE_MASK      (3U << 28U)
+#define ADC_CTRL2_OCETE_DISABLED  (0U << 28U)
+#define ADC_CTRL2_OCETE_RISING    (1U << 28U)
+#define ADC_CTRL2_OCETE_FALLING   (2U << 28U)
+#define ADC_CTRL2_OCETE_BOTH      (3U << 28U)
+
+#define ADC_CTRL2_OCTESEL_MASK    ((15U << 24U) | (1U << 31))
+#define ADC_CTRL2_OCTESEL_SRC(n)  (((n) << 24U) | \
+                                  (((n) >> 4) << 31))
 /** @} */
 
 /**
@@ -59,23 +96,37 @@
 #define ADC_CHANNEL_IN13        13  /**< @brief External analog input 13.   */
 #define ADC_CHANNEL_IN14        14  /**< @brief External analog input 14.   */
 #define ADC_CHANNEL_IN15        15  /**< @brief External analog input 15.   */
-#define ADC_CHANNEL_SENSOR      16  /**< @brief Internal temperature sensor.*/
-#define ADC_CHANNEL_VINTRV      17  /**< @brief Internal reference.         */
-#define ADC_CHANNEL_VSS         18  /**< @brief Internal reference.         */
+#define ADC_CHANNEL_SENSOR      16  /**< @brief Internal temperature sensor.
+                                         @note Available onADC1 only.       */
+#define ADC_CHANNEL_VINTRV      17  /**< @brief Internal reference.
+                                         @note Available onADC1 only.       */
+#define ADC_CHANNEL_VBAT        18  /**< @brief VBAT.
+                                         @note Available onADC1 only.       */
 /** @} */
 
 /**
  * @name    Sampling rates
  * @{
  */
-#define ADC_SAMPLE_1P5          0   /**< @brief 1.5 cycles sampling time.   */
-#define ADC_SAMPLE_7P5          1   /**< @brief 7.5 cycles sampling time.   */
-#define ADC_SAMPLE_13P5         2   /**< @brief 13.5 cycles sampling time.  */
-#define ADC_SAMPLE_28P5         3   /**< @brief 28.5 cycles sampling time.  */
-#define ADC_SAMPLE_41P5         4   /**< @brief 41.5 cycles sampling time.  */
-#define ADC_SAMPLE_55P5         5   /**< @brief 55.5 cycles sampling time.  */
-#define ADC_SAMPLE_71P5         6   /**< @brief 71.5 cycles sampling time.  */
-#define ADC_SAMPLE_239P5        7   /**< @brief 239.5 cycles sampling time. */
+#if defined(AT32F435_7xx) || defined(__DOXYGEN__)
+#define ADC_SAMPLE_2P5          0   /**< @brief 2.5 cycles sampling time.    */
+#define ADC_SAMPLE_6P5          1   /**< @brief 6.5 cycles sampling time.    */
+#define ADC_SAMPLE_12P5         2   /**< @brief 12.5 cycles sampling time.   */
+#define ADC_SAMPLE_24P5         3   /**< @brief 24.5 cycles sampling time.   */
+#define ADC_SAMPLE_47P5         4   /**< @brief 47.5 cycles sampling time.   */
+#define ADC_SAMPLE_92P5         5   /**< @brief 92.5 cycles sampling time.   */
+#define ADC_SAMPLE_247P5        6   /**< @brief 247.5 cycles sampling time.  */
+#define ADC_SAMPLE_640P5        7   /**< @brief 640.5 cycles sampling time.  */
+#else
+#define ADC_SAMPLE_1P5          0   /**< @brief 1.5 cycles sampling time.    */
+#define ADC_SAMPLE_7P5          1   /**< @brief 7.5 cycles sampling time.    */
+#define ADC_SAMPLE_13P5         2   /**< @brief 13.5 cycles sampling time.   */
+#define ADC_SAMPLE_28P5         3   /**< @brief 28.5 cycles sampling time.   */
+#define ADC_SAMPLE_41P5         4   /**< @brief 41.5 cycles sampling time.   */
+#define ADC_SAMPLE_55P5         5   /**< @brief 55.5 cycles sampling time.   */
+#define ADC_SAMPLE_71P5         6   /**< @brief 71.5 cycles sampling time.   */
+#define ADC_SAMPLE_239P5        7   /**< @brief 239.5 cycles sampling time.  */
+#endif
 /** @} */
 
 /*===========================================================================*/
@@ -87,6 +138,16 @@
  * @{
  */
 /**
+ * @brief   ADC common clock divider.
+ * @note    This setting is influenced by the VDDA voltage and other
+ *          external conditions, please refer to the datasheet for more
+ *          info.
+ */
+#if !defined(AT32_ADC_ADCDIV) || defined(__DOXYGEN__)
+#define AT32_ADC_ADCDIV                    2
+#endif
+
+/**
  * @brief   ADC1 driver enable switch.
  * @details If set to @p TRUE the support for ADC1 is included.
  * @note    The default is @p TRUE.
@@ -94,30 +155,6 @@
 #if !defined(AT32_ADC_USE_ADC1) || defined(__DOXYGEN__)
 #define AT32_ADC_USE_ADC1                  FALSE
 #endif
-
-/**
- * @brief   ADC1 DMA priority (0..3|lowest..highest).
- */
-#if !defined(AT32_ADC_ADC1_DMA_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC1_DMA_PRIORITY         2
-#endif
-
-/**
- * @brief   ADC1 interrupt priority level setting.
- */
-#if !defined(AT32_ADC_ADC1_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC1_IRQ_PRIORITY         5
-#endif
-
-/**
- * @brief   ADC1 DMA MUX setting.
- */
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
-#if !defined(AT32_ADC_ADC1_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC1_DMAMUX_CHANNEL       1
-#endif
-#endif
-/** @} */
 
 /**
  * @brief   ADC2 driver enable switch.
@@ -129,36 +166,47 @@
 #endif
 
 /**
- * @brief   ADC2 DMA priority (0..3|lowest..highest).
- */
-#if !defined(AT32_ADC_ADC2_DMA_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC2_DMA_PRIORITY         2
-#endif
-
-/**
- * @brief   ADC2 interrupt priority level setting.
- */
-#if !defined(AT32_ADC_ADC2_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC2_IRQ_PRIORITY         5
-#endif
-
-/**
- * @brief   ADC2 DMA MUX setting.
- */
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
-#if !defined(AT32_ADC_ADC2_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC2_DMAMUX_CHANNEL       1
-#endif
-#endif
-/** @} */
-
-/**
  * @brief   ADC3 driver enable switch.
  * @details If set to @p TRUE the support for ADC3 is included.
  * @note    The default is @p TRUE.
  */
 #if !defined(AT32_ADC_USE_ADC3) || defined(__DOXYGEN__)
 #define AT32_ADC_USE_ADC3                  FALSE
+#endif
+
+/**
+ * @brief   DMA stream used for ADC1 operations.
+ */
+#if !defined(AT32_ADC_ADC1_DMA_STREAM) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC1_DMA_STREAM           AT32_DMA_STREAM_ID(2, 4)
+#endif
+
+/**
+ * @brief   DMA stream used for ADC2 operations.
+ */
+#if !defined(AT32_ADC_ADC2_DMA_STREAM) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC2_DMA_STREAM           AT32_DMA_STREAM_ID(2, 2)
+#endif
+
+/**
+ * @brief   DMA stream used for ADC3 operations.
+ */
+#if !defined(AT32_ADC_ADC3_DMA_STREAM) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC3_DMA_STREAM           AT32_DMA_STREAM_ID(2, 1)
+#endif
+
+/**
+ * @brief   ADC1 DMA priority (0..3|lowest..highest).
+ */
+#if !defined(AT32_ADC_ADC1_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC1_DMA_PRIORITY         2
+#endif
+
+/**
+ * @brief   ADC2 DMA priority (0..3|lowest..highest).
+ */
+#if !defined(AT32_ADC_ADC2_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC2_DMA_PRIORITY         2
 #endif
 
 /**
@@ -169,20 +217,35 @@
 #endif
 
 /**
- * @brief   ADC3 interrupt priority level setting.
+ * @brief   ADC interrupt priority level setting.
+ * @note    This setting is shared among ADC1, ADC2 and ADC3 because
+ *          all ADCs share the same vector.
  */
-#if !defined(AT32_ADC_ADC3_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC3_IRQ_PRIORITY         5
+#if !defined(AT32_ADC_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_IRQ_PRIORITY              5
 #endif
 
 /**
- * @brief   ADC3 DMA MUX setting.
+ * @brief   ADC1 DMA interrupt priority level setting.
  */
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
-#if !defined(AT32_ADC_ADC3_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC3_DMAMUX_CHANNEL       1
+#if !defined(AT32_ADC_ADC1_DMA_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC1_DMA_IRQ_PRIORITY     5
 #endif
+
+/**
+ * @brief   ADC2 DMA interrupt priority level setting.
+ */
+#if !defined(AT32_ADC_ADC2_DMA_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC2_DMA_IRQ_PRIORITY     5
 #endif
+
+/**
+ * @brief   ADC3 DMA interrupt priority level setting.
+ */
+#if !defined(AT32_ADC_ADC3_DMA_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC3_DMA_IRQ_PRIORITY     5
+#endif
+
 /** @} */
 
 /*===========================================================================*/
@@ -201,10 +264,34 @@
 #error "ADC3 not present in the selected device"
 #endif
 
-#if !AT32_ADC_USE_ADC1 || !AT32_ADC_USE_ADC2 || !AT32_ADC_USE_ADC3
+#if !AT32_ADC_USE_ADC1 && !AT32_ADC_USE_ADC2 && !AT32_ADC_USE_ADC3
 #error "ADC driver activated but no ADC peripheral assigned"
 #endif
 
+#if AT32_ADC_USE_ADC1 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_ADC_ADC1_DMA_STREAM, AT32_ADC1_DMA_MSK)
+#error "invalid DMA stream associated to ADC1"
+#endif
+
+#if AT32_ADC_USE_ADC2 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_ADC_ADC2_DMA_STREAM, AT32_ADC2_DMA_MSK)
+#error "invalid DMA stream associated to ADC2"
+#endif
+
+#if AT32_ADC_USE_ADC3 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_ADC_ADC3_DMA_STREAM, AT32_ADC3_DMA_MSK)
+#error "invalid DMA stream associated to ADC3"
+#endif
+
+#if (AT32_ADC_ADCDIV >= 2) || (AT32_ADC_ADCDIV <= 17) 
+#define AT32_ADCCLK                        (AT32_HCLK / AT32_ADC_ADCDIV)
+#else
+#error "invalid AT32_ADC_ADCDIV value specified"
+#endif
+
+#if (AT32_ADCCLK < AT32_ADCCLK_MIN) || (AT32_ADCCLK > AT32_ADCCLK_MAX) || (AT32_ADCCLK > AT32_PCLK2)
+#error "AT32_ADCCLK outside acceptable range (AT32_ADCCLK_MIN...AT32_ADCCLK_MAX)"
+#endif
 
 #if !defined(AT32_DMA_REQUIRED)
 #define AT32_DMA_REQUIRED
@@ -225,13 +312,9 @@ typedef uint16_t adcsample_t;
 typedef uint16_t adc_channels_num_t;
 
 /**
- * @brief   Possible ADC failure causes.
- * @note    Error codes are architecture dependent and should not relied
- *          upon.
+ * @brief   Type of an ADC error mask.
  */
-typedef enum {
-  ADC_ERR_DMAFAILURE = 0                    /**< DMA operations failure.    */
-} adcerror_t;
+typedef uint32_t adcerror_t;
 
 /*===========================================================================*/
 /* Driver macros.                                                            */
@@ -261,12 +344,16 @@ typedef enum {
 #define adc_lld_configuration_group_fields                                  \
   /* ADC CTRL1 register initialization data.*/                              \
   uint32_t                  ctrl1;                                          \
-  /* ADC CTRL2 register initialization data. */                             \
+  /* ADC CTRL2 register initialization data.*/                              \
   uint32_t                  ctrl2;                                          \
   /* ADC SPT1 register initialization data.*/                               \
   uint32_t                  spt1;                                           \
   /* ADC SPT2 register initialization data.*/                               \
   uint32_t                  spt2;                                           \
+  /* ADC voltage monitoring high boundary.*/                                \
+  uint16_t                  vmhb;                                           \
+  /* ADC voltage monitoring low boundary.*/                                 \
+  uint16_t                  vmlb;                                           \
   /* ADC OSQ1 register initialization data.*/                               \
   uint32_t                  osq1;                                           \
   /* ADC OSQ2 register initialization data.*/                               \
@@ -283,24 +370,24 @@ typedef enum {
  */
 #define ADC_OSQ1_NUM_CH(n)      (((n) - 1) << 20)
 
-#define ADC_OSQ3_OSN1_N(n)       ((n) << 0)  /**< @brief 1st channel in seq. */
-#define ADC_OSQ3_OSN2_N(n)       ((n) << 5)  /**< @brief 2nd channel in seq. */
-#define ADC_OSQ3_OSN3_N(n)       ((n) << 10) /**< @brief 3rd channel in seq. */
-#define ADC_OSQ3_OSN4_N(n)       ((n) << 15) /**< @brief 4th channel in seq. */
-#define ADC_OSQ3_OSN5_N(n)       ((n) << 20) /**< @brief 5th channel in seq. */
-#define ADC_OSQ3_OSN6_N(n)       ((n) << 25) /**< @brief 6th channel in seq. */
+#define ADC_OSQ3_OSN1_N(n)      ((n) << 0)  /**< @brief 1st channel in seq. */
+#define ADC_OSQ3_OSN2_N(n)      ((n) << 5)  /**< @brief 2nd channel in seq. */
+#define ADC_OSQ3_OSN3_N(n)      ((n) << 10) /**< @brief 3rd channel in seq. */
+#define ADC_OSQ3_OSN4_N(n)      ((n) << 15) /**< @brief 4th channel in seq. */
+#define ADC_OSQ3_OSN5_N(n)      ((n) << 20) /**< @brief 5th channel in seq. */
+#define ADC_OSQ3_OSN6_N(n)      ((n) << 25) /**< @brief 6th channel in seq. */
 
-#define ADC_OSQ2_OSN7_N(n)       ((n) << 0)  /**< @brief 7th channel in seq. */
-#define ADC_OSQ2_OSN8_N(n)       ((n) << 5)  /**< @brief 8th channel in seq. */
-#define ADC_OSQ2_OSN9_N(n)       ((n) << 10) /**< @brief 9th channel in seq. */
-#define ADC_OSQ2_OSN10_N(n)      ((n) << 15) /**< @brief 10th channel in seq.*/
-#define ADC_OSQ2_OSN11_N(n)      ((n) << 20) /**< @brief 11th channel in seq.*/
-#define ADC_OSQ2_OSN12_N(n)      ((n) << 25) /**< @brief 12th channel in seq.*/
+#define ADC_OSQ2_OSN7_N(n)      ((n) << 0)  /**< @brief 7th channel in seq. */
+#define ADC_OSQ2_OSN8_N(n)      ((n) << 5)  /**< @brief 8th channel in seq. */
+#define ADC_OSQ2_OSN9_N(n)      ((n) << 10) /**< @brief 9th channel in seq. */
+#define ADC_OSQ2_OSN10_N(n)     ((n) << 15) /**< @brief 10th channel in seq.*/
+#define ADC_OSQ2_OSN11_N(n)     ((n) << 20) /**< @brief 11th channel in seq.*/
+#define ADC_OSQ2_OSN12_N(n)     ((n) << 25) /**< @brief 12th channel in seq.*/
 
-#define ADC_OSQ1_OSN13_N(n)      ((n) << 0)  /**< @brief 13th channel in seq.*/
-#define ADC_OSQ1_OSN14_N(n)      ((n) << 5)  /**< @brief 14th channel in seq.*/
-#define ADC_OSQ1_OSN15_N(n)      ((n) << 10) /**< @brief 15th channel in seq.*/
-#define ADC_OSQ1_OSN16_N(n)      ((n) << 15) /**< @brief 16th channel in seq.*/
+#define ADC_OSQ1_OSN13_N(n)     ((n) << 0)  /**< @brief 13th channel in seq.*/
+#define ADC_OSQ1_OSN14_N(n)     ((n) << 5)  /**< @brief 14th channel in seq.*/
+#define ADC_OSQ1_OSN15_N(n)     ((n) << 10) /**< @brief 15th channel in seq.*/
+#define ADC_OSQ1_OSN16_N(n)     ((n) << 15) /**< @brief 16th channel in seq.*/
 /** @} */
 
 /**
@@ -328,6 +415,21 @@ typedef enum {
                                                  sampling time.          */
 #define ADC_SPT1_CSPT17(n)   ((n) << 21) /**< @brief Voltage Reference
                                                  sampling time.          */
+#define ADC_SPT1_CSPT18(n)   ((n) << 24) /**< @brief VBAT sampling time. */
+/** @} */
+
+/**
+ * @name    Threshold settings helper macros
+ * @{
+ */
+/**
+ * @brief   High voltage monitoring boundary.
+ */
+#define ADC_VMHB(n)              ((n > ADC_VMHB_HB) ? ADC_VMHB_HB : n)
+/**
+ * @brief   Low voltage monitoring boundary.
+ */
+#define ADC_VMHL(n)              ((n > ADC_VMHL_LB) ? ADC_VMHL_LB : n)
 /** @} */
 
 /*===========================================================================*/
@@ -354,6 +456,10 @@ extern "C" {
   void adc_lld_stop(ADCDriver *adcp);
   void adc_lld_start_conversion(ADCDriver *adcp);
   void adc_lld_stop_conversion(ADCDriver *adcp);
+  void adcAT32EnableITSRVEN(void);
+  void adcAT32DisableITSRVEN(void);
+  void adcAT32EnableVBATEN(void);
+  void adcAT32DisableVBATEN(void);
 #ifdef __cplusplus
 }
 #endif

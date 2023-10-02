@@ -265,7 +265,7 @@ static void i2c_lld_serve_interrupt(I2CDriver *i2cp, uint32_t sts) {
     if (i2cp->state == I2C_ACTIVE_TX) {
       /* Transmission phase.*/
       if (((ctrl1 & I2C_CTRL1_TDIEN) != 0U) && ((sts & I2C_STS_TDIS) != 0U)) {
-        dp->TXDR = (uint32_t)*i2cp->txptr;
+        dp->TXDT = (uint32_t)*i2cp->txptr;
         i2cp->txptr++;
         i2cp->txbytes--;
         if (i2cp->txbytes == 0U) {
@@ -276,7 +276,7 @@ static void i2c_lld_serve_interrupt(I2CDriver *i2cp, uint32_t sts) {
     else {
       /* Receive phase.*/
       if (((ctrl1 & I2C_CTRL1_RDIEN) != 0U) && ((sts & I2C_STS_RDBF) != 0U)) {
-        *i2cp->rxptr = (uint8_t)dp->RXDR;
+        *i2cp->rxptr = (uint8_t)dp->RXDT;
         i2cp->rxptr++;
         i2cp->rxbytes--;
         if (i2cp->rxbytes == 0U) {
@@ -687,8 +687,8 @@ void i2c_lld_start(I2CDriver *i2cp) {
 #if AT32_I2C_USE_I2C1
     if (&I2CD1 == i2cp) {
 
-      rccResetI2C1();
-      rccEnableI2C1(true);
+      crmResetI2C1();
+      crmEnableI2C1(true);
 #if AT32_I2C_USE_DMA == TRUE
       {
         i2cp->dmarx = dmaStreamAllocI(AT32_I2C_I2C1_RX_DMA_STREAM,
@@ -707,8 +707,8 @@ void i2c_lld_start(I2CDriver *i2cp) {
         i2cp->txdmamode |= AT32_DMA_CTRL_CHSEL(I2C1_TX_DMA_CHANNEL) |
                            AT32_DMA_CTRL_CHPL(AT32_I2C_I2C1_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX
-        dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX1_I2C1_RX);
-        dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX1_I2C1_TX);
+        dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX_I2C1_RX);
+        dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX_I2C1_TX);
 #endif
       }
 #endif /* AT32_I2C_USE_DMA == TRUE */
@@ -727,8 +727,8 @@ void i2c_lld_start(I2CDriver *i2cp) {
 #if AT32_I2C_USE_I2C2
     if (&I2CD2 == i2cp) {
 
-      rccResetI2C2();
-      rccEnableI2C2(true);
+      crmResetI2C2();
+      crmEnableI2C2(true);
 #if AT32_I2C_USE_DMA == TRUE
       {
         i2cp->dmarx = dmaStreamAllocI(AT32_I2C_I2C2_RX_DMA_STREAM,
@@ -747,8 +747,8 @@ void i2c_lld_start(I2CDriver *i2cp) {
         i2cp->txdmamode |= AT32_DMA_CTRL_CHSEL(I2C2_TX_DMA_CHANNEL) |
                            AT32_DMA_CTRL_CHPL(AT32_I2C_I2C2_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX
-        dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX1_I2C2_RX);
-        dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX1_I2C2_TX);
+        dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX_I2C2_RX);
+        dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX_I2C2_TX);
 #endif
       }
 #endif /* AT32_I2C_USE_DMA == TRUE */
@@ -767,8 +767,8 @@ void i2c_lld_start(I2CDriver *i2cp) {
 #if AT32_I2C_USE_I2C3
     if (&I2CD3 == i2cp) {
 
-      rccResetI2C3();
-      rccEnableI2C3(true);
+      crmResetI2C3();
+      crmEnableI2C3(true);
 #if AT32_I2C_USE_DMA == TRUE
       {
         i2cp->dmarx = dmaStreamAllocI(AT32_I2C_I2C3_RX_DMA_STREAM,
@@ -787,8 +787,8 @@ void i2c_lld_start(I2CDriver *i2cp) {
         i2cp->txdmamode |= AT32_DMA_CTRL_CHSEL(I2C3_TX_DMA_CHANNEL) |
                            AT32_DMA_CTRL_CHPL(AT32_I2C_I2C3_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX
-        dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX1_I2C3_RX);
-        dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX1_I2C3_TX);
+        dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX_I2C3_RX);
+        dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX_I2C3_TX);
 #endif
       }
 #endif /* AT32_I2C_USE_DMA == TRUE */
@@ -807,8 +807,8 @@ void i2c_lld_start(I2CDriver *i2cp) {
 #if AT32_I2C_USE_I2C4
     if (&I2CD4 == i2cp) {
 
-      rccResetI2C4();
-      rccEnableI2C4(true);
+      crmResetI2C4();
+      crmEnableI2C4(true);
 #if AT32_I2C_USE_DMA == TRUE
       {
         i2cp->dmarx = dmaStreamAllocI(AT32_I2C_I2C4_RX_DMA_STREAM,
@@ -827,8 +827,8 @@ void i2c_lld_start(I2CDriver *i2cp) {
         i2cp->txdmamode |= AT32_DMA_CTRL_CHSEL(I2C4_TX_DMA_CHANNEL) |
                            AT32_DMA_CTRL_CHPL(AT32_I2C_I2C4_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX
-        dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX1_I2C4_RX);
-        dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX1_I2C4_TX);
+        dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX_I2C4_RX);
+        dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX_I2C4_TX);
 #endif
       }
 #endif /* AT32_I2C_USE_DMA == TRUE */
@@ -847,16 +847,16 @@ void i2c_lld_start(I2CDriver *i2cp) {
 
 #if AT32_I2C_USE_DMA == TRUE
   /* I2C registers pointed by the DMA.*/
-  dmaStreamSetPeripheral(i2cp->dmarx, &dp->RXDR);
-  dmaStreamSetPeripheral(i2cp->dmatx, &dp->TXDR);
+  dmaStreamSetPeripheral(i2cp->dmarx, &dp->RXDT);
+  dmaStreamSetPeripheral(i2cp->dmatx, &dp->TXDT);
 #endif
 
   /* Reset i2c peripheral, the TCIE bit will be handled separately.*/
   dp->CTRL1 = i2cp->config->ctrl1 |
 #if AT32_I2C_USE_DMA == TRUE
-            I2C_CTRL1_DMATEN | I2C_CTRL1_DMAREN | /* Enable only if using DMA */
+              I2C_CTRL1_DMATEN | I2C_CTRL1_DMAREN | /* Enable only if using DMA */
 #endif
-            I2C_CTRL1_ERRIEN | I2C_CTRL1_ACKFAILIEN;
+              I2C_CTRL1_ERRIEN | I2C_CTRL1_ACKFAILIEN;
 
   /* Setup I2C parameters.*/
   dp->CLKCTRL = i2cp->config->clkctrl;
@@ -897,7 +897,7 @@ void i2c_lld_stop(I2CDriver *i2cp) {
 #error "I2C1 interrupt numbers not defined"
 #endif
 
-      rccDisableI2C1();
+      crmDisableI2C1();
     }
 #endif
 
@@ -912,7 +912,7 @@ void i2c_lld_stop(I2CDriver *i2cp) {
 #error "I2C2 interrupt numbers not defined"
 #endif
 
-      rccDisableI2C2();
+      crmDisableI2C2();
     }
 #endif
 
@@ -927,7 +927,7 @@ void i2c_lld_stop(I2CDriver *i2cp) {
 #error "I2C3 interrupt numbers not defined"
 #endif
 
-      rccDisableI2C3();
+      crmDisableI2C3();
     }
 #endif
 
@@ -942,7 +942,7 @@ void i2c_lld_stop(I2CDriver *i2cp) {
 #error "I2C4 interrupt numbers not defined"
 #endif
 
-      rccDisableI2C4();
+      crmDisableI2C4();
     }
 #endif
   }

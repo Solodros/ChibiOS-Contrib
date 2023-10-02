@@ -291,6 +291,10 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 /**
   * @}
   */
+
+/** @addtogroup Bit_definition
+  * @{
+  */
 /******************  Bit definition for CRM_CTRL register  *****************/
 #define CRM_CTRL_HICKEN                  (0x1U << 0)
 #define CRM_CTRL_HICKSTBL                (0x1U << 1)
@@ -829,6 +833,10 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define DEBUG_CTRL_TMR10_PAUSE           (0x1U << 29)
 #define DEBUG_CTRL_TMR11_PAUSE           (0x1U << 30)
 
+/**
+  * @}
+  */
+
 /** @addtogroup Peripheral_memory_map
   * @{
   */
@@ -906,6 +914,11 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 /**
   * @}
   */
+
+/** @addtogroup Peripheral_type_define
+  * @{
+  */
+
 /**
   * @brief type define exint register all
   */
@@ -1715,6 +1728,11 @@ typedef struct
 /**
   * @}
   */
+
+/** @addtogroup Peripheral_instance
+  * @{
+  */
+
 #define EXINT                             ((EXINT_TypeDef *) EXINT_BASE)
 #define CRM                               ((CRM_TypeDef *) CRM_BASE)
 #define PWC                               ((PWC_TypeDef *) PWC_BASE)
@@ -1764,6 +1782,12 @@ typedef struct
 /**
   * @}
   */
+
+/** @defgroup FLASH_unlock_keys
+  * @brief flash unlock keys
+  * @{
+  */
+
 #define FLASH_UNLOCK_KEY1                ((uint32_t)0x45670123)   /*!< flash operation unlock order key1 */
 #define FLASH_UNLOCK_KEY2                ((uint32_t)0xCDEF89AB)   /*!< flash operation unlock order key2 */
 #define FAP_RELIEVE_KEY                  ((uint16_t)0x00A5)       /*!< flash fap relieve key val */

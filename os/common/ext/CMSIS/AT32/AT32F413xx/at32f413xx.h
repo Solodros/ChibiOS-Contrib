@@ -291,6 +291,10 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 /**
   * @}
   */
+
+/** @addtogroup Bit_definition
+  * @{
+  */
 /******************  Bit definition for CRM_CTRL register  *****************/
 #define CRM_CTRL_HICKEN                  (0x1U << 0)
 #define CRM_CTRL_HICKSTBL                (0x1U << 1)
@@ -846,6 +850,10 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define DEBUG_CTRL_TMR10_PAUSE           (0x1U << 29)
 #define DEBUG_CTRL_TMR11_PAUSE           (0x1U << 30)
 
+/**
+  * @}
+  */
+
 /** @addtogroup Peripheral_memory_map
   * @{
   */
@@ -924,8 +932,13 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 
 #define FLASHSIZE_BASE                   ((uint32_t)0x1FFFF7E0U)    /*!< FLASH Size register base address */
 #define UID_BASE                         ((uint32_t)0x1FFFF7E8U)    /*!< Unique device ID register base address */
+
 /**
   * @}
+  */
+
+/** @addtogroup Peripheral_type_define
+  * @{
   */
 
 /**
@@ -1805,6 +1818,11 @@ typedef struct
 /**
   * @}
   */
+
+/** @addtogroup Peripheral_instance
+  * @{
+  */
+
 #define EXINT                             ((EXINT_TypeDef *) EXINT_BASE)
 #define CRM                               ((CRM_TypeDef *) CRM_BASE)
 #define PWC                               ((PWC_TypeDef *) PWC_BASE)
@@ -1857,6 +1875,12 @@ typedef struct
 /**
   * @}
   */
+
+/** @defgroup FLASH_unlock_keys
+  * @brief flash unlock keys
+  * @{
+  */
+
 #define FLASH_UNLOCK_KEY1                ((uint32_t)0x45670123)   /*!< flash operation unlock order key1 */
 #define FLASH_UNLOCK_KEY2                ((uint32_t)0xCDEF89AB)   /*!< flash operation unlock order key2 */
 #define FAP_RELIEVE_KEY                  ((uint16_t)0x00A5)       /*!< flash fap relieve key val */
@@ -1872,8 +1896,18 @@ typedef struct
 #define FLASH_SPIM_EPPERR_FLAG           ((uint32_t)0x20000010)   /*!< flash spim erase/program protection error flag */
 #define FLASH_USDERR_FLAG                ((uint32_t)0x40000001)   /*!< flash user system data error flag */
 
+/**
+  * @}
+  */
+
+/** @defgroup USB_packet_buffer_address
+  * @brief usb packet buffer address
+  * @{
+  */
+
 #define USB_PACKET_BUFFER_ADDRESS         0x40006000 /*!< usb buffer address */
 #define USB_PACKET_BUFFER_ADDRESS_EX      0x40007800 /*!< usb buffer extend address */
+
 /**
   * @}
   */

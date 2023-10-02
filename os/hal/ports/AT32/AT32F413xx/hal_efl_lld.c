@@ -91,6 +91,7 @@ static inline void at32_flash_clear_status(EFlashDriver *eflp) {
   
   eflp->flash->STS = FLASH_STS_PRGMERR | FLASH_STS_EPPERR;
 }
+
 static inline uint32_t at32_flash_is_busy(EFlashDriver *eflp) {
 
   return (eflp->flash->STS & FLASH_STS_OBF);
@@ -403,8 +404,8 @@ flash_error_t efl_lld_query_erase(void *instance, uint32_t *wait_time) {
     if (at32_flash_is_busy(devp) == 0U) {
 
       /* Disabling the various erase control bits.*/
-      devp->flash->CTRL &= ~(FLASH_CTRL_USDERS | FLASH_CTRL_USDPRGM |
-                           FLASH_CTRL_BANKERS | FLASH_CTRL_SECERS);
+      devp->flash->CTRL &= ~(FLASH_CTRL_USDERS  | FLASH_CTRL_USDPRGM |
+                             FLASH_CTRL_BANKERS | FLASH_CTRL_SECERS);
 
       /* Back to ready state.*/
       devp->state = FLASH_READY;

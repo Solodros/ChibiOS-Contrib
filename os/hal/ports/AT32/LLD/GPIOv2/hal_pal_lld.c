@@ -174,7 +174,7 @@ void _pal_lld_enablepadevent(ioportid_t port,
   cidx  = (uint32_t)pad >> 2U;
   coff  = ((uint32_t)pad & 3U) * 4U;
   cmask = ~(0xFU << coff);
-  SYSCFG->EXINTC[cidx] = (SYSCFG->EXINTC[cidx] & cmask) | (portidx << coff);
+  SCFG->EXINTC[cidx] = (SCFG->EXINTC[cidx] & cmask) | (portidx << coff);
 
   /* Programming edge registers.*/
   if (mode & PAL_EVENT_MODE_RISING_EDGE)
@@ -220,7 +220,7 @@ void _pal_lld_disablepadevent(ioportid_t port, iopadid_t pad) {
     /* Index and mask of the EXINTC register to be used.*/
     cidx  = (uint32_t)pad >> 2U;
     coff  = ((uint32_t)pad & 3U) * 4U;
-    cport = (SYSCFG->EXINTC[cidx] >> coff) & 0xFU;
+    cport = (SCFG->EXINTC[cidx] >> coff) & 0xFU;
 
     osalDbgAssert(cport == portidx, "channel mapped on different port");
 

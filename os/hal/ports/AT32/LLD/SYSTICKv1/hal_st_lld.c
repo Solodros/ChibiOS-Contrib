@@ -52,7 +52,10 @@
 #define ST_NUMBER                           AT32_TMR2_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK1
 #define ST_ENABLE_CLOCK()                   crmEnableTMR2(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR2_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUGMCU_APB1_PAUSE_TMR2_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR2_PAUSE
 #endif
 
 #elif AT32_ST_USE_TIMER == 3
@@ -69,7 +72,11 @@
 #define ST_NUMBER                           AT32_TMR3_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK1
 #define ST_ENABLE_CLOCK()                   crmEnableTMR3(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR3_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUGMCU_APB1_PAUSE_TMR3_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR3_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 4
 
@@ -85,7 +92,11 @@
 #define ST_NUMBER                           AT32_TMR4_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK1
 #define ST_ENABLE_CLOCK()                   crmEnableTMR4(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR4_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUGMCU_APB1_PAUSE_TMR4_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR4_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 5
 
@@ -101,7 +112,11 @@
 #define ST_NUMBER                           AT32_TMR5_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK1
 #define ST_ENABLE_CLOCK()                   crmEnableTMR5(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR5_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUGMCU_APB1_PAUSE_TMR5_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR5_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 9
 
@@ -117,7 +132,11 @@
 #define ST_NUMBER                           AT32_TMR9_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK2
 #define ST_ENABLE_CLOCK()                   crmEnableTMR9(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR9_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUGMCU_APB2_PAUSE_TMR9_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR9_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 10
 
@@ -133,7 +152,11 @@
 #define ST_NUMBER                           AT32_TMR10_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK2
 #define ST_ENABLE_CLOCK()                   crmEnableTMR10(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR10_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUGMCU_APB2_PAUSE_TMR10_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR10_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 11
 
@@ -149,7 +172,11 @@
 #define ST_NUMBER                           AT32_TMR11_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK2
 #define ST_ENABLE_CLOCK()                   crmEnableTMR11(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR11_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUGMCU_APB2_PAUSE_TMR11_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR11_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 12
 
@@ -165,7 +192,11 @@
 #define ST_NUMBER                           AT32_TMR12_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK1
 #define ST_ENABLE_CLOCK()                   crmEnableTMR12(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR12_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUGMCU_APB1_PAUSE_TMR12_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR12_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 13
 
@@ -181,7 +212,11 @@
 #define ST_NUMBER                           AT32_TMR13_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK1
 #define ST_ENABLE_CLOCK()                   crmEnableTMR13(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR13_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUGMCU_APB1_PAUSE_TMR13_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR13_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 14
 
@@ -197,7 +232,11 @@
 #define ST_NUMBER                           AT32_TMR14_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK1
 #define ST_ENABLE_CLOCK()                   crmEnableTMR14(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR14_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUGMCU_APB1_PAUSE_TMR14_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR14_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 15
 
@@ -213,7 +252,11 @@
 #define ST_NUMBER                           AT32_TMR15_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK2
 #define ST_ENABLE_CLOCK()                   crmEnableTMR15(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR15_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUGMCU_APB2_PAUSE_TMR15_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR15_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 16
 
@@ -229,7 +272,11 @@
 #define ST_NUMBER                           AT32_TMR16_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK2
 #define ST_ENABLE_CLOCK()                   crmEnableTMR16(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR16_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUGMCU_APB2_PAUSE_TMR16_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR16_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 17
 
@@ -245,7 +292,11 @@
 #define ST_NUMBER                           AT32_TMR17_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK2
 #define ST_ENABLE_CLOCK()                   crmEnableTMR17(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR17_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUGMCU_APB2_PAUSE_TMR17_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR17_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 21
 
@@ -261,7 +312,11 @@
 #define ST_NUMBER                           AT32_TMR21_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK2
 #define ST_ENABLE_CLOCK()                   crmEnableTMR21(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR21_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUGMCU_APB2_PAUSE_TMR21_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR21_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 22
 
@@ -277,7 +332,11 @@
 #define ST_NUMBER                           AT32_TMR22_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK2
 #define ST_ENABLE_CLOCK()                   crmEnableTMR22(true)
-#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR22_PAUSE
+#if defined (AT32F435_7xx) || defined (AT32F402_5xx)
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUGMCU_APB2_PAUSE_TMR22_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUGMCU_CTRL_TMR22_PAUSE
+#endif
 
 #else
 #error "AT32_ST_USE_TMRER specifies an unsupported timer"
@@ -297,8 +356,8 @@
 
 #define ST_HANDLER                          SysTick_Handler
 
-#if defined(AT32_CORE_CLK)
-#define SYSTICK_CLK                         AT32_CORE_CLK
+#if defined(AT32_SYSTICK_CLK)
+#define SYSTICK_CLK                         AT32_SYSTICK_CLK
 #else
 #define SYSTICK_CLK                         AT32_HCLK
 #endif

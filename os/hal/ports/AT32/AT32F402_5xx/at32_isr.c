@@ -15,10 +15,10 @@
 */
 
 /**
- * @file    AT32F413xx/at32_isr.c
- * @brief   AT32F413xx ISR handler code.
+ * @file    AT32F402_5xx/at32_isr.c
+ * @brief   AT32F402_5xx ISR handler code.
  *
- * @addtogroup AT32F413xx_ISR
+ * @addtogroup AT32F402_5xx_ISR
  * @{
  */
 
@@ -40,9 +40,9 @@
 /* Driver local functions.                                                   */
 /*===========================================================================*/
 
-#define exti_serve_irq(pr, channel) {                                       \
+#define exti_serve_irq(intsts, channel) {                                       \
                                                                             \
-  if ((pr) & (1U << (channel))) {                                           \
+  if ((intsts) & (1U << (channel))) {                                           \
     _pal_isr_code(channel);                                                 \
   }                                                                         \
 }
@@ -59,14 +59,14 @@
  * @isr
  */
 OSAL_IRQ_HANDLER(AT32_EXINT0_HANDLER) {
-  uint32_t pr;
+  uint32_t intsts;
 
   OSAL_IRQ_PROLOGUE();
 
-  pr = EXINT->INTSTS & (1U << 0);
-  EXINT->INTSTS = pr;
+  intsts = EXINT->INTSTS & (1U << 0);
+  EXINT->INTSTS = intsts;
 
-  exti_serve_irq(pr, 0);
+  exti_serve_irq(intsts, 0);
 
   OSAL_IRQ_EPILOGUE();
 }
@@ -79,14 +79,14 @@ OSAL_IRQ_HANDLER(AT32_EXINT0_HANDLER) {
  * @isr
  */
 OSAL_IRQ_HANDLER(AT32_EXINT1_HANDLER) {
-  uint32_t pr;
+  uint32_t intsts;
 
   OSAL_IRQ_PROLOGUE();
 
-  pr = EXINT->INTSTS & (1U << 1);
-  EXINT->INTSTS = pr;
+  intsts = EXINT->INTSTS & (1U << 1);
+  EXINT->INTSTS = intsts;
 
-  exti_serve_irq(pr, 1);
+  exti_serve_irq(intsts, 1);
 
   OSAL_IRQ_EPILOGUE();
 }
@@ -99,14 +99,14 @@ OSAL_IRQ_HANDLER(AT32_EXINT1_HANDLER) {
  * @isr
  */
 OSAL_IRQ_HANDLER(AT32_EXINT2_HANDLER) {
-  uint32_t pr;
+  uint32_t intsts;
 
   OSAL_IRQ_PROLOGUE();
 
-  pr = EXINT->INTSTS & (1U << 2);
-  EXINT->INTSTS = pr;
+  intsts = EXINT->INTSTS & (1U << 2);
+  EXINT->INTSTS = intsts;
 
-  exti_serve_irq(pr, 2);
+  exti_serve_irq(intsts, 2);
 
   OSAL_IRQ_EPILOGUE();
 }
@@ -119,14 +119,14 @@ OSAL_IRQ_HANDLER(AT32_EXINT2_HANDLER) {
  * @isr
  */
 OSAL_IRQ_HANDLER(AT32_EXINT3_HANDLER) {
-  uint32_t pr;
+  uint32_t intsts;
 
   OSAL_IRQ_PROLOGUE();
 
-  pr = EXINT->INTSTS & (1U << 3);
-  EXINT->INTSTS = pr;
+  intsts = EXINT->INTSTS & (1U << 3);
+  EXINT->INTSTS = intsts;
 
-  exti_serve_irq(pr, 3);
+  exti_serve_irq(intsts, 3);
 
   OSAL_IRQ_EPILOGUE();
 }
@@ -139,14 +139,14 @@ OSAL_IRQ_HANDLER(AT32_EXINT3_HANDLER) {
  * @isr
  */
 OSAL_IRQ_HANDLER(AT32_EXINT4_HANDLER) {
-  uint32_t pr;
+  uint32_t intsts;
 
   OSAL_IRQ_PROLOGUE();
 
-  pr = EXINT->INTSTS & (1U << 4);
-  EXINT->INTSTS = pr;
+  intsts = EXINT->INTSTS & (1U << 4);
+  EXINT->INTSTS = intsts;
 
-  exti_serve_irq(pr, 4);
+  exti_serve_irq(intsts, 4);
 
   OSAL_IRQ_EPILOGUE();
 }
@@ -159,18 +159,18 @@ OSAL_IRQ_HANDLER(AT32_EXINT4_HANDLER) {
  * @isr
  */
 OSAL_IRQ_HANDLER(AT32_EXINT5_9_HANDLER) {
-  uint32_t pr;
+  uint32_t intsts;
 
   OSAL_IRQ_PROLOGUE();
 
-  pr = EXINT->INTSTS & ((1U << 5) | (1U << 6) | (1U << 7) | (1U << 8) | (1U << 9));
-  EXINT->INTSTS = pr;
+  intsts = EXINT->INTSTS & ((1U << 5) | (1U << 6) | (1U << 7) | (1U << 8) | (1U << 9));
+  EXINT->INTSTS = intsts;
 
-  exti_serve_irq(pr, 5);
-  exti_serve_irq(pr, 6);
-  exti_serve_irq(pr, 7);
-  exti_serve_irq(pr, 8);
-  exti_serve_irq(pr, 9);
+  exti_serve_irq(intsts, 5);
+  exti_serve_irq(intsts, 6);
+  exti_serve_irq(intsts, 7);
+  exti_serve_irq(intsts, 8);
+  exti_serve_irq(intsts, 9);
 
   OSAL_IRQ_EPILOGUE();
 }
@@ -183,19 +183,19 @@ OSAL_IRQ_HANDLER(AT32_EXINT5_9_HANDLER) {
  * @isr
  */
 OSAL_IRQ_HANDLER(AT32_EXINT10_15_HANDLER) {
-  uint32_t pr;
+  uint32_t intsts;
 
   OSAL_IRQ_PROLOGUE();
 
-  pr = EXINT->INTSTS & ((1U << 10) | (1U << 11) | (1U << 12) | (1U << 13) | (1U << 14) | (1U << 15));
-  EXINT->INTSTS = pr;
+  intsts = EXINT->INTSTS & ((1U << 10) | (1U << 11) | (1U << 12) | (1U << 13) | (1U << 14) | (1U << 15));
+  EXINT->INTSTS = intsts;
 
-  exti_serve_irq(pr, 10);
-  exti_serve_irq(pr, 11);
-  exti_serve_irq(pr, 12);
-  exti_serve_irq(pr, 13);
-  exti_serve_irq(pr, 14);
-  exti_serve_irq(pr, 15);
+  exti_serve_irq(intsts, 10);
+  exti_serve_irq(intsts, 11);
+  exti_serve_irq(intsts, 12);
+  exti_serve_irq(intsts, 13);
+  exti_serve_irq(intsts, 14);
+  exti_serve_irq(intsts, 15);
 
   OSAL_IRQ_EPILOGUE();
 }
@@ -208,14 +208,14 @@ OSAL_IRQ_HANDLER(AT32_EXINT10_15_HANDLER) {
  * @isr
  */
 OSAL_IRQ_HANDLER(AT32_EXINT16_HANDLER) {
-  uint32_t pr;
+  uint32_t intsts;
 
   OSAL_IRQ_PROLOGUE();
 
-  pr = EXINT->INTSTS & (1U << 16);
-  EXINT->INTSTS = pr;
+  intsts = EXINT->INTSTS & (1U << 16);
+  EXINT->INTSTS = intsts;
 
-  exti_serve_irq(pr, 16);
+  exti_serve_irq(intsts, 16);
 
   OSAL_IRQ_EPILOGUE();
 }
@@ -228,14 +228,14 @@ OSAL_IRQ_HANDLER(AT32_EXINT16_HANDLER) {
  * @isr
  */
 OSAL_IRQ_HANDLER(AT32_EXINT17_HANDLER) {
-  uint32_t pr;
+  uint32_t intsts;
 
   OSAL_IRQ_PROLOGUE();
 
-  pr = EXINT->INTSTS & (1U << 17);
-  EXINT->INTSTS = pr;
+  intsts = EXINT->INTSTS & (1U << 17);
+  EXINT->INTSTS = intsts;
 
-  exti_serve_irq(pr, 17);
+  exti_serve_irq(intsts, 17);
 
   OSAL_IRQ_EPILOGUE();
 }
@@ -248,14 +248,75 @@ OSAL_IRQ_HANDLER(AT32_EXINT17_HANDLER) {
  * @isr
  */
 OSAL_IRQ_HANDLER(AT32_EXINT18_HANDLER) {
-  uint32_t pr;
+  uint32_t intsts;
 
   OSAL_IRQ_PROLOGUE();
 
-  pr = EXINT->INTSTS & (1U << 18);
-  EXINT->INTSTS = pr;
+  intsts = EXINT->INTSTS & (1U << 18);
+  EXINT->INTSTS = intsts;
 
-  exti_serve_irq(pr, 18);
+  exti_serve_irq(intsts, 18);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif
+
+
+#if !defined(AT32_DISABLE_EXINT20_HANDLER)
+/**
+ * @brief   EXINT[20] interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_EXINT20_HANDLER) {
+  uint32_t intsts;
+
+  OSAL_IRQ_PROLOGUE();
+
+  intsts = EXINT->INTSTS & (1U << 20);
+  EXINT->INTSTS = intsts;
+
+  exti_serve_irq(intsts, 20);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif
+
+#if !defined(AT32_DISABLE_EXINT21_HANDLER)
+/**
+ * @brief   EXINT[21] interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_EXINT21_HANDLER) {
+  uint32_t intsts;
+
+  OSAL_IRQ_PROLOGUE();
+
+  intsts = EXINT->INTSTS & (1U << 21);
+  EXINT->INTSTS = intsts;
+
+  exti_serve_irq(intsts, 21);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif
+
+#if !defined(AT32_DISABLE_EXINT22_HANDLER)
+/**
+ * @brief   EXINT[22] interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_EXINT22_HANDLER) {
+  uint32_t intsts;
+
+  OSAL_IRQ_PROLOGUE();
+
+  intsts = EXINT->INTSTS & (1U << 22);
+  EXINT->INTSTS = intsts;
+
+  exti_serve_irq(intsts, 22);
 
   OSAL_IRQ_EPILOGUE();
 }
@@ -266,14 +327,19 @@ OSAL_IRQ_HANDLER(AT32_EXINT18_HANDLER) {
 #include "at32_tmr2.inc"
 #include "at32_tmr3.inc"
 #include "at32_tmr4.inc"
-#include "at32_tmr5.inc"
-#include "at32_tmr8_12_13_14.inc"
+#include "at32_tmr6.inc"
+#include "at32_tmr7.inc"
+#include "at32_tmr13.inc"
+#include "at32_tmr14.inc"
 
 #include "at32_usart1.inc"
 #include "at32_usart2.inc"
 #include "at32_usart3.inc"
-#include "at32_uart4.inc"
-#include "at32_uart5.inc"
+#include "at32_usart4.inc"
+#include "at32_usart5.inc"
+#include "at32_usart6.inc"
+#include "at32_uart7.inc"
+#include "at32_uart8.inc"
 
 /*===========================================================================*/
 /* Driver exported functions.                                                */
@@ -297,20 +363,28 @@ void irqInit(void) {
   nvicEnableVector(AT32_EXINT16_NUMBER, AT32_IRQ_EXINT16_PRIORITY);
   nvicEnableVector(AT32_EXINT17_NUMBER, AT32_IRQ_EXINT17_PRIORITY);
   nvicEnableVector(AT32_EXINT18_NUMBER, AT32_IRQ_EXINT18_PRIORITY);
+  nvicEnableVector(AT32_EXINT20_NUMBER, AT32_IRQ_EXINT20_PRIORITY);
+  nvicEnableVector(AT32_EXINT21_NUMBER, AT32_IRQ_EXINT21_PRIORITY);
+  nvicEnableVector(AT32_EXINT22_NUMBER, AT32_IRQ_EXINT22_PRIORITY);
 #endif
 
   tmr1_tmr9_tmr10_tmr11_irq_init();
   tmr2_irq_init();
   tmr3_irq_init();
   tmr4_irq_init();
-  tmr5_irq_init();
-  tmr8_tmr12_tmr13_tmr14_irq_init();
+  tmr6_irq_init();
+  tmr7_irq_init();
+  tmr13_irq_init();
+  tmr14_irq_init();
 
   usart1_irq_init();
   usart2_irq_init();
   usart3_irq_init();
-  uart4_irq_init();
-  uart5_irq_init();
+  usart4_irq_init();
+  usart5_irq_init();
+  usart6_irq_init();
+  uart7_irq_init();
+  uart8_irq_init();
 }
 
 /**
@@ -331,20 +405,28 @@ void irqDeinit(void) {
   nvicDisableVector(AT32_EXINT16_NUMBER);
   nvicDisableVector(AT32_EXINT17_NUMBER);
   nvicDisableVector(AT32_EXINT18_NUMBER);
+  nvicDisableVector(AT32_EXINT20_NUMBER);
+  nvicDisableVector(AT32_EXINT21_NUMBER);
+  nvicDisableVector(AT32_EXINT22_NUMBER);
 #endif
 
   tmr1_tmr9_tmr10_tmr11_irq_deinit();
   tmr2_irq_deinit();
   tmr3_irq_deinit();
   tmr4_irq_deinit();
-  tmr5_irq_deinit();
-  tmr8_tmr12_tmr13_tmr14_irq_deinit();
+  tmr6_irq_deinit();
+  tmr7_irq_deinit();
+  tmr13_irq_deinit();
+  tmr14_irq_deinit();
 
   usart1_irq_deinit();
   usart2_irq_deinit();
   usart3_irq_deinit();
-  uart4_irq_deinit();
-  uart5_irq_deinit();
+  usart4_irq_deinit();
+  usart5_irq_deinit();
+  usart6_irq_deinit();
+  uart7_irq_deinit();
+  uart8_irq_deinit();
 }
 
 /** @} */

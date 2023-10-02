@@ -1191,7 +1191,7 @@ void pwm_lld_enable_periodic_notification(PWMDriver *pwmp) {
   uint32_t iden = pwmp->tmr->IDEN;
 
   /* If the IRQ is not already enabled care must be taken to clear it,
-     it is probably already pending because the tmrer is running.*/
+     it is probably already pending because the timer is running.*/
   if ((iden & AT32_TMR_IDEN_OVFIEN) == 0) {
     pwmp->tmr->ISTS = ~AT32_TMR_ISTS_OVFIF;
     pwmp->tmr->IDEN = iden | AT32_TMR_IDEN_OVFIEN;
@@ -1233,7 +1233,7 @@ void pwm_lld_enable_channel_notification(PWMDriver *pwmp,
 #endif
 
   /* If the IRQ is not already enabled care must be taken to clear it,
-     it is probably already pending because the tmrer is running.*/
+     it is probably already pending because the timer is running.*/
   if ((iden & (2 << channel)) == 0) {
     pwmp->tmr->ISTS = ~(2 << channel);
     pwmp->tmr->IDEN = iden | (2 << channel);

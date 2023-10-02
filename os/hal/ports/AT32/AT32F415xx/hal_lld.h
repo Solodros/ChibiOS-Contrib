@@ -125,6 +125,7 @@
  * @brief   Maximum ADC clock frequency.
  */
 #define AT32_ADCCLK_MAX                        28000000
+/** @} */
 
 /**
  * @name    Internal clock sources
@@ -138,15 +139,16 @@
  * @name    PWC_CTRL register bits definitions
  * @{
  */
-#define AT32_PVM_MASK               (7 << 5)    /**< PVM bits mask.             */
-#define AT32_PVM_LEV0               (0 << 5)    /**< PVM level 0.               */
-#define AT32_PVM_LEV1               (1 << 5)    /**< PVM level 1.               */
-#define AT32_PVM_LEV2               (2 << 5)    /**< PVM level 2.               */
-#define AT32_PVM_LEV3               (3 << 5)    /**< PVM level 3.               */
-#define AT32_PVM_LEV4               (4 << 5)    /**< PVM level 4.               */
-#define AT32_PVM_LEV5               (5 << 5)    /**< PVM level 5.               */
-#define AT32_PVM_LEV6               (6 << 5)    /**< PVM level 6.               */
-#define AT32_PVM_LEV7               (7 << 5)    /**< PVM level 7.               */
+#define AT32_PVMSEL_MASK            (7 << 5)   /**< PVMSEL bits mask.          */
+#define AT32_PVMSEL_LEV0            (0 << 5)   /**< PVM level 0.               */
+#define AT32_PVMSEL_LEV1            (1 << 5)   /**< PVM level 1.               */
+#define AT32_PVMSEL_LEV2            (2 << 5)   /**< PVM level 2.               */
+#define AT32_PVMSEL_LEV3            (3 << 5)   /**< PVM level 3.               */
+#define AT32_PVMSEL_LEV4            (4 << 5)   /**< PVM level 4.               */
+#define AT32_PVMSEL_LEV5            (5 << 5)   /**< PVM level 5.               */
+#define AT32_PVMSEL_LEV6            (6 << 5)   /**< PVM level 6.               */
+#define AT32_PVMSEL_LEV7            (7 << 5)   /**< PVM level 7.               */
+/** @} */
 
 /**
  * @name    CRM_CFG register bits definitions
@@ -270,7 +272,7 @@
  * @{
  */
 /**
- * @brief   Disables the PWR/RCC initialization in the HAL.
+ * @brief   Disables the PWR/CRM initialization in the HAL.
  */
 #if !defined(AT32_NO_INIT) || defined(__DOXYGEN__)
 #define AT32_NO_INIT                       FALSE
@@ -287,7 +289,7 @@
  * @brief   Sets voltage level for programmable voltage detector.
  */
 #if !defined(AT32_PVM) || defined(__DOXYGEN__)
-#define AT32_PVM                           AT32_PVM_LEV0
+#define AT32_PVM                           AT32_PVMSEL_LEV0
 #endif
 
 /**
@@ -316,13 +318,6 @@
  */
 #if !defined(AT32_LEXT_ENABLED) || defined(__DOXYGEN__)
 #define AT32_LEXT_ENABLED                  FALSE
-#endif
-
-/**
- * @brief   Enables or disables the PLL clock source.
- */
-#if !defined(AT32_PLL_ENABLED) || defined(__DOXYGEN__)
-#define AT32_PLL_ENABLED                   TRUE
 #endif
 
 /**

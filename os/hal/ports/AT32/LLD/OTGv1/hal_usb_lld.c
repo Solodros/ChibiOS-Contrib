@@ -53,6 +53,13 @@
 #define GCCFG_INIT_VALUE        (GCCFG_VBDEN | GCCFG_PWRDWN)
 #endif
 
+#elif AT32_OTG_STEPPING == 3
+#if defined(BOARD_OTG_NOVBUSSENS)
+#define GCCFG_INIT_VALUE        (GCCFG_NOVBUSSENS | GCCFG_PWRDWN)
+#else
+#define GCCFG_INIT_VALUE        (GCCFG_VBDEN | GCCFG_PWRDWN)
+#endif
+
 #endif
 
 /*===========================================================================*/

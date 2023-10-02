@@ -1294,6 +1294,6 @@ extern "C" {
 }
 #endif
 
-#endif /* AT32_RCC_H */
+#endif /* AT32_CRM_H */
 
 /** @} */

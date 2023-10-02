@@ -92,6 +92,48 @@ static void hal_lld_backup_domain_init(void) {
 /* Driver interrupt handlers.                                                */
 /*===========================================================================*/
 
+#if defined(AT32_DMA_REQUIRED) || defined(__DOXYGEN__)
+#if defined(AT32_DMA2_CH45_HANDLER) || defined(__DOXYGEN__)
+/**
+ * @brief   DMA2 streams 4 and 5 shared ISR.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_DMA2_CH45_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  /* Check on channel 4 of DMA2. */
+  dmaServeInterrupt(AT32_DMA2_STREAM4);
+
+  /* Check on channel 5 of DMA2. */
+  dmaServeInterrupt(AT32_DMA2_STREAM5);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif /* defined(AT32_DMA2_CH45_HANDLER) */
+
+#if defined(AT32_DMA2_CH67_HANDLER) || defined(__DOXYGEN__)
+/**
+ * @brief   DMA2 streams 6 and 7 shared ISR.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_DMA2_CH67_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  /* Check on channel 6 of DMA2.*/
+  dmaServeInterrupt(AT32_DMA2_STREAM6);
+
+  /* Check on channel 7 of DMA2.*/
+  dmaServeInterrupt(AT32_DMA2_STREAM7);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif /* defined(AT32_DMA2_CH67_HANDLER) */
+#endif /* defined(AT32_DMA_REQUIRED) */
+
 /*===========================================================================*/
 /* Driver exported functions.                                                */
 /*===========================================================================*/
@@ -124,10 +166,13 @@ void hal_lld_init(void) {
 
   /* Programmable voltage detector enable.*/
 #if AT32_PVM_ENABLE
-  PWC->CTRL |= PWC_CTRL_PVMEN | (AT32_PVM & AT32_PVM_MASK);
+  PWC->CTRL |= PWC_CTRL_PVMEN | (AT32_PVM & AT32_PVMSEL_MASK);
 #endif /* AT32_PVM_ENABLE */
 }
 
+/*
+ * Clocks deinitialization for all sub-families.
+ */
 void at32_clock_reset(void)
 {
   /* reset hexten, hextbyps, cfden and pllen bits */
@@ -147,7 +192,7 @@ void at32_clock_reset(void)
 }
 
 /*
- * Clocks initialization for all sub-families except CL.
+ * Clocks initialization for all sub-families.
  */
 void at32_clock_init(void) {
 #if !AT32_NO_INIT
@@ -194,7 +239,7 @@ void at32_clock_init(void) {
 
   /* Clock settings.*/
   CRM->CFG   |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_CFG_MASK) | AT32_USBDIV | 
-               AT32_ADCDIV    | AT32_APB2DIV | AT32_APB1DIV  | AT32_AHBDIV;
+                 AT32_ADCDIV  | AT32_APB2DIV | AT32_APB1DIV  | AT32_AHBDIV;
   CRM->MISC1 |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_MISC_MASK) >> 11;
 
   /* PLL Auto Step activation.*/
