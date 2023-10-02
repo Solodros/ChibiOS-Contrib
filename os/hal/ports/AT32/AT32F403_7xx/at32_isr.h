@@ -135,7 +135,7 @@
 #define AT32_EXINT5_9_HANDLER               Vector9C
 #define AT32_EXINT10_15_HANDLER             VectorE0
 #define AT32_EXINT16_HANDLER                Vector44    /* PVM              */
-#define AT32_EXINT17_HANDLER                VectorE4    /* ERTC ALARM       */
+#define AT32_EXINT17_HANDLER                VectorE4    /* RTC ALARM        */
 #define AT32_EXINT18_HANDLER                VectorE8    /* USB FS WAKEUP    */
 #define AT32_EXINT19_HANDLER                Vector180
 

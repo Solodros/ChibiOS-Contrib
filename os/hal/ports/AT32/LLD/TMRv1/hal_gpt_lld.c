@@ -1089,7 +1089,7 @@ void gpt_lld_start_timer(GPTDriver *gptp, gptcnt_t interval) {
   gptp->tmr->ISTS = 0;                          /* Clear pending IRQs.      */
   if (NULL != gptp->config->callback)
     gptp->tmr->IDEN |= AT32_TMR_IDEN_OVFIEN;    /* Update Event IRQ enabled.*/
-  gptp->tmr->CTRL1 = AT32_TMR_CTRL1_PRBEN | AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_CEN;
+  gptp->tmr->CTRL1 = AT32_TMR_CTRL1_PRBEN | AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_TMREN;
 }
 
 /**
@@ -1124,7 +1124,7 @@ void gpt_lld_polled_delay(GPTDriver *gptp, gptcnt_t interval) {
   gptp->tmr->PR    = (uint32_t)(interval - 1U);   /* Time constant.           */
   gptp->tmr->SWEVT = AT32_TMR_SWEVT_OVFSWTR;      /* Update event.            */
   gptp->tmr->ISTS  = 0;                           /* Clear pending IRQs.      */
-  gptp->tmr->CTRL1 = AT32_TMR_CTRL1_OCMEN | AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_CEN;
+  gptp->tmr->CTRL1 = AT32_TMR_CTRL1_OCMEN | AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_TMREN;
   while (!(gptp->tmr->ISTS & AT32_TMR_ISTS_OVFIF))
     ;
   gptp->tmr->ISTS = 0;                         /* Clear pending IRQs.      */

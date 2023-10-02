@@ -554,6 +554,10 @@
 #error "Invalid DMA priority assigned to UART10"
 #endif
 
+/* The following checks are only required when there is a DMA able to
+   reassign streams to different channels.*/
+#if AT32_ADVANCED_DMA && (!AT32_DMA_SUPPORTS_DMAMUX || (AT32_DMA_SUPPORTS_DMAMUX && !AT32_DMA_USE_DMAMUX))
+
 /* Check on the presence of the DMA streams settings in mcuconf.h.*/
 #if AT32_UART_USE_USART1 && (!defined(AT32_UART_USART1_RX_DMA_STREAM) ||  \
                               !defined(AT32_UART_USART1_TX_DMA_STREAM))
@@ -726,6 +730,8 @@
 #error "invalid DMA stream associated to UART10 TX"
 #endif
 
+#endif /* AT32_ADVANCED_DMA */
+
 #if !defined(AT32_DMA_REQUIRED)
 #define AT32_DMA_REQUIRED
 #endif
@@ -885,17 +891,17 @@ typedef struct hal_uart_config {
    */
   uint32_t                  speed;
   /**
-   * @brief Initialization value for the CR1 register.
+   * @brief Initialization value for the CTRL1 register.
    */
-  uint16_t                  cr1;
+  uint16_t                  ctrl1;
   /**
-   * @brief Initialization value for the CR2 register.
+   * @brief Initialization value for the CTRL2 register.
    */
-  uint16_t                  cr2;
+  uint16_t                  ctrl2;
   /**
-   * @brief Initialization value for the CR3 register.
+   * @brief Initialization value for the CTRL3 register.
    */
-  uint16_t                  cr3;
+  uint16_t                  ctrl3;
 } UARTConfig;
 
 /**

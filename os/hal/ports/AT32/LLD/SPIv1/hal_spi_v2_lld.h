@@ -15,7 +15,7 @@
 */
 
 /**
- * @file    SPIv1/hal_spi_lld.h
+ * @file    SPIv1/hal_spi_v2_lld.h
  * @brief   AT32 SPI subsystem low level driver header.
  *
  * @addtogroup SPI
@@ -386,6 +386,9 @@
 #error "SPI6 BDMA streams not defined"
 #endif
 
+/* Devices without DMAMUX require an additional check.*/
+#if AT32_ADVANCED_DMA && (!AT32_DMA_SUPPORTS_DMAMUX || (AT32_DMA_SUPPORTS_DMAMUX && !AT32_DMA_USE_DMAMUX))
+
 /* Check on the validity of the assigned DMA channels.*/
 #if AT32_SPI_USE_SPI1 &&                                                   \
     !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI1_RX_DMA_STREAM, AT32_SPI1_RX_DMA_MSK)
@@ -447,6 +450,8 @@
 #error "invalid DMA stream associated to SPI6 TX"
 #endif
 
+#endif /* AT32_ADVANCED_DMA */
+
 #if !defined(AT32_DMA_REQUIRED)
 #define AT32_DMA_REQUIRED
 #endif
@@ -469,9 +474,9 @@
   /** DMA type for this instance.*/                                         \
   bool                      is_bdma;                                        \
   /* Receive DMA stream.*/                                                  \
-  const at32_dma_stream_t  *dmarx;                                         \
+  const at32_dma_stream_t  *dmarx;                                          \
   /* Transmit DMA stream.*/                                                 \
-  const at32_dma_stream_t  *dmatx;                                         \
+  const at32_dma_stream_t  *dmatx;                                          \
   /* RX DMA mode bit mask.*/                                                \
   uint32_t                  rxdmamode;                                      \
   /* TX DMA mode bit mask.*/                                                \
@@ -485,10 +490,10 @@
  * @brief   Low level fields of the SPI configuration structure.
  */
 #define spi_lld_config_fields                                               \
-  /* SPI CR1 register initialization data.*/                                \
-  uint16_t                  cr1;                                            \
-  /* SPI CR2 register initialization data.*/                                \
-  uint16_t                  cr2
+  /* SPI CTRL1 register initialization data.*/                              \
+  uint16_t                  ctrl1;                                          \
+  /* SPI CTRL2 register initialization data.*/                              \
+  uint16_t                  ctrl2
 
 /*===========================================================================*/
 /* External declarations.                                                    */

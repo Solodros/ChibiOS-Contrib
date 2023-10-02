@@ -902,7 +902,7 @@ typedef struct {
 /** @} */
 
 #define OTG_FS_ADDR                 OTGFS1_BASE
-#define OTG_HS_ADDR                 0x40040000
+#define OTG_HS_ADDR                 OTGHS_BASE
 
 /**
  * @brief   Accesses to the OTG_FS registers block.

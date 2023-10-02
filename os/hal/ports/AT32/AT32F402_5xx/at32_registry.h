@@ -39,14 +39,8 @@
  */
 /* ADC attributes.*/
 #define AT32_HAS_ADC1                       TRUE
-#define AT32_ADC1_DMA_MSK                   AT32_DMAMUX_ADC1
-#define AT32_ADC1_DMA_CHN                   0x00000000
-
 #define AT32_HAS_ADC2                       FALSE
 #define AT32_HAS_ADC3                       FALSE
-
-#define AT32_ADC_HANDLER                    Vector88
-#define AT32_ADC_NUMBER                     18
 
 /* CAN attributes.*/
 #define AT32_HAS_CAN1                       TRUE
@@ -216,14 +210,8 @@
  */
 /* ADC attributes.*/
 #define AT32_HAS_ADC1                       TRUE
-#define AT32_ADC1_DMA_MSK                   AT32_DMAMUX_ADC1
-#define AT32_ADC1_DMA_CHN                   0x00000000
-
 #define AT32_HAS_ADC2                       FALSE
 #define AT32_HAS_ADC3                       FALSE
-
-#define AT32_ADC_HANDLER                    Vector88
-#define AT32_ADC_NUMBER                     18
 
 /* CAN attributes.*/
 #define AT32_HAS_CAN1                       TRUE
@@ -396,14 +384,8 @@
  */
 /* ADC attributes.*/
 #define AT32_HAS_ADC1                       TRUE
-#define AT32_ADC1_DMA_MSK                   AT32_DMAMUX_ADC1
-#define AT32_ADC1_DMA_CHN                   0x00000000
-
 #define AT32_HAS_ADC2                       FALSE
 #define AT32_HAS_ADC3                       FALSE
-
-#define AT32_ADC_HANDLER                    Vector88
-#define AT32_ADC_NUMBER                     18
 
 /* CAN attributes.*/
 #define AT32_HAS_CAN1                       TRUE

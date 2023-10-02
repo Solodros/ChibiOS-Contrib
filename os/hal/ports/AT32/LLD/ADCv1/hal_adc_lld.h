@@ -201,10 +201,9 @@
 #error "ADC3 not present in the selected device"
 #endif
 
-#if !AT32_ADC_USE_ADC1 || !AT32_ADC_USE_ADC2 || !AT32_ADC_USE_ADC3
+#if !AT32_ADC_USE_ADC1 && !AT32_ADC_USE_ADC2 && !AT32_ADC_USE_ADC3
 #error "ADC driver activated but no ADC peripheral assigned"
 #endif
-
 
 #if !defined(AT32_DMA_REQUIRED)
 #define AT32_DMA_REQUIRED

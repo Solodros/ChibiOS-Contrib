@@ -81,7 +81,7 @@
 typedef struct {
 
   volatile uint32_t CFGR;
-  volatile uint32_t OMODER;
+  volatile uint32_t OMODE;
   volatile uint32_t ODRVR;
   volatile uint32_t PULL;
   volatile uint32_t IDT;

@@ -194,7 +194,7 @@
 /**
  * @brief   I2C1 DMA MUX setting.
  */
-#if !defined(AT32_I2C_I2C1_RX_DMAMUX_CHANNEL) \
+#if !defined(AT32_I2C_I2C1_RX_DMAMUX_CHANNEL) || \
     !defined(AT32_I2C_I2C1_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
 #define AT32_I2C_I2C1_RX_DMAMUX_CHANNEL    1
 #define AT32_I2C_I2C1_TX_DMAMUX_CHANNEL    2
@@ -203,7 +203,7 @@
 /**
  * @brief   I2C2 DMA MUX setting.
  */
-#if !defined(AT32_I2C_I2C2_RX_DMAMUX_CHANNEL) \
+#if !defined(AT32_I2C_I2C2_RX_DMAMUX_CHANNEL) || \
     !defined(AT32_I2C_I2C2_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
 #define AT32_I2C_I2C2_RX_DMAMUX_CHANNEL    1
 #define AT32_I2C_I2C2_TX_DMAMUX_CHANNEL    2
@@ -212,7 +212,7 @@
 /**
  * @brief   I2C3 DMA MUX setting.
  */
-#if !defined(AT32_I2C_I2C3_RX_DMAMUX_CHANNEL) \
+#if !defined(AT32_I2C_I2C3_RX_DMAMUX_CHANNEL) || \
     !defined(AT32_I2C_I2C3_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
 #define AT32_I2C_I2C3_RX_DMAMUX_CHANNEL    1
 #define AT32_I2C_I2C3_TX_DMAMUX_CHANNEL    2
@@ -272,6 +272,10 @@
 #error "Invalid DMA priority assigned to I2C3"
 #endif
 
+/* The following checks are only required when there is a DMA able to
+   reassign streams to different channels.*/
+#if AT32_ADVANCED_DMA && (!AT32_DMA_SUPPORTS_DMAMUX || (AT32_DMA_SUPPORTS_DMAMUX && !AT32_DMA_USE_DMAMUX))
+
 #if AT32_I2C_USE_I2C1 && (!defined(AT32_I2C_I2C1_RX_DMA_STREAM) ||         \
                            !defined(AT32_I2C_I2C1_TX_DMA_STREAM))
 #error "I2C1 DMA streams not defined"
@@ -324,12 +328,14 @@
 #error "invalid DMA stream associated to I2C3 TX"
 #endif
 
+#endif /* AT32_ADVANCED_DMA */
+
 #if !defined(AT32_DMA_REQUIRED)
 #define AT32_DMA_REQUIRED
 #endif
 
 /* Check clock range. */
-#if defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F40x)
+#if defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F403_7xx)
 #if !(I2C_CLK_FREQ >= 2) && (I2C_CLK_FREQ <= 120)
 #error "I2C peripheral clock frequency out of range."
 #endif

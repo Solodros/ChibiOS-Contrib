@@ -74,7 +74,7 @@
 #define AT32_EXINT_INTEN_MASK               0x00000000U
 
 /* Flash attributes.*/
-#if defined(AT32F40xxG)
+#if defined(AT32F403AxG) || defined(AT32F407xG)
 #define AT32_FLASH_NUMBER_OF_BANKS          2
 #else
 #define AT32_FLASH_NUMBER_OF_BANKS          1
@@ -83,7 +83,7 @@
 #define AT32_FLASH_SECTOR_SIZE              2048U
 
 #if !defined(AT32_FLASH_SECTORS_PER_BANK) || defined(__DOXYGEN__)
-#if defined(AT32F40xxG) || defined(AT32F40xxE)
+#if  defined(AT32F403AxG) || defined(AT32F407xG) || defined(AT32F403AxE) || defined(AT32F407xE)
 #define AT32_FLASH_SECTORS_PER_BANK         256 /* Maximum, can be redefined.*/
 #elif 
 #define AT32_FLASH_SECTORS_PER_BANK         128 /* Maximum, can be redefined.*/
@@ -262,7 +262,7 @@
 #define AT32_EXINT_INTEN_MASK               0x00000000U
 
 /* Flash attributes.*/
-#if defined(AT32F40xxG)
+#if defined(AT32F403AxG) || defined(AT32F407xG)
 #define AT32_FLASH_NUMBER_OF_BANKS          2
 #else
 #define AT32_FLASH_NUMBER_OF_BANKS          1
@@ -271,7 +271,7 @@
 #define AT32_FLASH_SECTOR_SIZE              2048U
 
 #if !defined(AT32_FLASH_SECTORS_PER_BANK) || defined(__DOXYGEN__)
-#if defined(AT32F40xxG) || defined(AT32F40xxE)
+#if  defined(AT32F403AxG) || defined(AT32F407xG) || defined(AT32F403AxE) || defined(AT32F407xE)
 #define AT32_FLASH_SECTORS_PER_BANK         256 /* Maximum, can be redefined.*/
 #elif 
 #define AT32_FLASH_SECTORS_PER_BANK         128 /* Maximum, can be redefined.*/
@@ -451,7 +451,7 @@
 #define AT32_EXINT_INTEN_MASK               0x00000000U
 
 /* Flash attributes.*/
-#if defined(AT32F40xxG)
+#if defined(AT32F403AxG) || defined(AT32F407xG)
 #define AT32_FLASH_NUMBER_OF_BANKS          2
 #else
 #define AT32_FLASH_NUMBER_OF_BANKS          1
@@ -460,7 +460,7 @@
 #define AT32_FLASH_SECTOR_SIZE              2048U
 
 #if !defined(AT32_FLASH_SECTORS_PER_BANK) || defined(__DOXYGEN__)
-#if defined(AT32F40xxG) || defined(AT32F40xxE)
+#if  defined(AT32F403AxG) || defined(AT32F407xG) || defined(AT32F403AxE) || defined(AT32F407xE)
 #define AT32_FLASH_SECTORS_PER_BANK         256 /* Maximum, can be redefined.*/
 #elif 
 #define AT32_FLASH_SECTORS_PER_BANK         128 /* Maximum, can be redefined.*/
@@ -641,7 +641,7 @@
 #define AT32_EXINT_INTEN_MASK               0x00000000U
 
 /* Flash attributes.*/
-#if defined(AT32F40xxG)
+#if defined(AT32F403AxG) || defined(AT32F407xG)
 #define AT32_FLASH_NUMBER_OF_BANKS          2
 #else
 #define AT32_FLASH_NUMBER_OF_BANKS          1
@@ -650,7 +650,7 @@
 #define AT32_FLASH_SECTOR_SIZE              2048U
 
 #if !defined(AT32_FLASH_SECTORS_PER_BANK) || defined(__DOXYGEN__)
-#if defined(AT32F40xxG) || defined(AT32F40xxE)
+#if  defined(AT32F403AxG) || defined(AT32F407xG) || defined(AT32F403AxE) || defined(AT32F407xE)
 #define AT32_FLASH_SECTORS_PER_BANK         256 /* Maximum, can be redefined.*/
 #elif 
 #define AT32_FLASH_SECTORS_PER_BANK         128 /* Maximum, can be redefined.*/

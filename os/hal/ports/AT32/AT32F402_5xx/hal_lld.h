@@ -39,6 +39,11 @@
 /*===========================================================================*/
 
 /**
+ * @brief   Requires use of SPIv2 driver model.
+ */
+#define HAL_LLD_SELECT_SPI_V2                  TRUE
+
+/**
  * @name    Platform identification
  * @{
  */
@@ -1064,23 +1069,15 @@
 #error "invalid AT32_LDOOVSEL value specified"
 #endif
 
-/*
- * PLL usb clock frequency check.
+/**
+ * @brief   USB clock.
  */
-#if AT32_CLOCK48_REQUIRED 
-
 #if AT32_PLLU_USB48_SEL == AT32_PLLU_USB48_SEL_PLLU
-#if AT32_PLLUCLK != 48000000
-#error "AT32_PLLUCLK is not 48MHz if usb required"
-#endif
-
+#define AT32_USBCLK                 AT32_PLLUCLK
 #elif AT32_PLLU_USB48_SEL == AT32_PLLU_USB48_SEL_HICK
-
-#if AT32_HICKCLKOUT != 48000000
-#error "AT32_HICKCLKOUT is not 48MHz if usb required"
-#endif
-#endif
-
+#define AT32_USBCLK                 AT32_HICKCLKOUT
+#else
+#error "invalid AT32_PLLU_USB48_SEL value specified"
 #endif
 
 /**

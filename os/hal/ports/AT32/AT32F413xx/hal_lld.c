@@ -236,7 +236,7 @@ void at32_clock_init(void) {
 
   /* Clock settings.*/
   CRM->CFG   |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_CFG_MASK) | AT32_USBDIV | 
-                 AT32_ADCDIV    AT32_APB2DIV | AT32_APB1DIV  | AT32_AHBDIV;
+                 AT32_ADCDIV |  AT32_APB2DIV | AT32_APB1DIV  | AT32_AHBDIV;
   CRM->MISC1 |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_MISC_MASK) >> 11;
 
   /* PLL Auto Step activation.*/

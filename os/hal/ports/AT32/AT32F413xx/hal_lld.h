@@ -39,6 +39,11 @@
 /*===========================================================================*/
 
 /**
+ * @brief   Requires use of SPIv2 driver model.
+ */
+#define HAL_LLD_SELECT_SPI_V2                  TRUE
+
+/**
  * @name    Platform identification
  * @{
  */
@@ -173,12 +178,12 @@
 #define AT32_APB2DIV_DIV8           (6 << 11)   /**< HCLK divided by 8.         */
 #define AT32_APB2DIV_DIV16          (7 << 11)   /**< HCLK divided by 16.        */
 
-#define AT32_ADCDIV_DIV2            (0 << 14)   /**< PPRE2 divided by 2.        */
-#define AT32_ADCDIV_DIV4            (1 << 14)   /**< PPRE2 divided by 4.        */
-#define AT32_ADCDIV_DIV6            (2 << 14)   /**< PPRE2 divided by 6.        */
-#define AT32_ADCDIV_DIV8            (3 << 14)   /**< PPRE2 divided by 8.        */
-#define AT32_ADCDIV_DIV12           ((1 << 14) | (1 << 28))   /**< PPRE2 divided by 12.       */
-#define AT32_ADCDIV_DIV16           ((3 << 14) | (1 << 28))   /**< PPRE2 divided by 16.       */
+#define AT32_ADCDIV_DIV2            (0 << 14)   /**< PCLK divided by 2.         */
+#define AT32_ADCDIV_DIV4            (1 << 14)   /**< PCLK divided by 4.         */
+#define AT32_ADCDIV_DIV6            (2 << 14)   /**< PCLK divided by 6.         */
+#define AT32_ADCDIV_DIV8            (3 << 14)   /**< PCLK divided by 8.         */
+#define AT32_ADCDIV_DIV12           ((1 << 14) | (1 << 28))   /**< PCLK divided by 12.       */
+#define AT32_ADCDIV_DIV16           ((3 << 14) | (1 << 28))   /**< PCLK divided by 16.       */
 
 #define AT32_PLLRCS_HICK            (0 << 16)   /**< PLL clock source is HICK.  */
 #define AT32_PLLRCS_HEXT            (1 << 16)   /**< PLL clock source is HEXT.  */
@@ -194,18 +199,18 @@
 #define AT32_USBDIV_DIV3            ((1 << 27) | (1 << 22))  /**< PLLOUT divided by 3.     */
 #define AT32_USBDIV_DIV4            ((1 << 27) | (2 << 22))  /**< PLLOUT divided by 4.     */
 
-#define AT32_CLKOUT_SEL_CFG_MASK    (7 << 24)   /**< MCO CFG MASK.              */
-#define AT32_CLKOUT_SEL_MISC_MASK   (1 << 27)   /**< MCO MISC MASK.             */
-#define AT32_CLKOUT_SEL_NOCLOCK     (0 << 24)   /**< No clock on MCO pin.       */
-#define AT32_CLKOUT_SEL_LICK        (2 << 24)   /**< LICK on MCO pin.           */
-#define AT32_CLKOUT_SEL_LEXT        (3 << 24)   /**< LEXT on MCO pin.           */
-#define AT32_CLKOUT_SEL_SYSCLK      (4 << 24)   /**< SYSCLK on MCO pin.         */
-#define AT32_CLKOUT_SEL_HICK        (5 << 24)   /**< HICK clock on MCO pin.     */
-#define AT32_CLKOUT_SEL_HEXT        (6 << 24)   /**< HEXT clock on MCO pin.     */
-#define AT32_CLKOUT_SEL_PLLDIV2     (7 << 24)   /**< PLL/2 clock on MCO pin.    */
-#define AT32_CLKOUT_SEL_PLLDIV4     (12 << 24)  /**< PLL/4 clock on MCO pin.    */
-#define AT32_CLKOUT_SEL_USB         (13 << 24)  /**< USB clock on MCO pin.      */
-#define AT32_CLKOUT_SEL_ADC         (14 << 24)  /**< ADC clock on MCO pin.      */
+#define AT32_CLKOUT_SEL_CFG_MASK    (7 << 24)   /**< CLKOUT CFG MASK.           */
+#define AT32_CLKOUT_SEL_MISC_MASK   (1 << 27)   /**< CLKOUT MISC MASK.          */
+#define AT32_CLKOUT_SEL_NOCLOCK     (0 << 24)   /**< No clock on CLKOUT pin.    */
+#define AT32_CLKOUT_SEL_LICK        (2 << 24)   /**< LICK on CLKOUT pin.        */
+#define AT32_CLKOUT_SEL_LEXT        (3 << 24)   /**< LEXT on CLKOUT pin.        */
+#define AT32_CLKOUT_SEL_SYSCLK      (4 << 24)   /**< SYSCLK on CLKOUT pin.      */
+#define AT32_CLKOUT_SEL_HICK        (5 << 24)   /**< HICK clock on CLKOUT pin.  */
+#define AT32_CLKOUT_SEL_HEXT        (6 << 24)   /**< HEXT clock on CLKOUT pin.  */
+#define AT32_CLKOUT_SEL_PLLDIV2     (7 << 24)   /**< PLL/2 clock on CLKOUT pin. */
+#define AT32_CLKOUT_SEL_PLLDIV4     (12 << 24)  /**< PLL/4 clock on CLKOUT pin. */
+#define AT32_CLKOUT_SEL_USB         (13 << 24)  /**< USB clock on CLKOUT pin.   */
+#define AT32_CLKOUT_SEL_ADC         (14 << 24)  /**< ADC clock on CLKOUT pin.   */
 
 #define AT32_PLLRANGE_LOW           (0 << 31)   /**< PLLOUT lower than 72MHz.   */
 #define AT32_PLLRANGE_HIGH          (1 << 31)   /**< PLLOUT higher than 72MHz.  */
@@ -387,7 +392,7 @@
 #endif
 
 /**
- * @brief   MCO pin setting.
+ * @brief   CLKOUT pin setting.
  */
 #if !defined(AT32_CLKOUT_SEL) || defined(__DOXYGEN__)
 #define AT32_CLKOUT_SEL                    AT32_CLKOUT_SEL_NOCLOCK
@@ -530,7 +535,7 @@
 #endif
 
 /**
- * @brief   PLLMUL field.
+ * @brief   PLLMULT field.
  */
 #if ((AT32_PLLMULT_VALUE >= 2) && (AT32_PLLMULT_VALUE <= 15)) ||                \
     defined(__DOXYGEN__)

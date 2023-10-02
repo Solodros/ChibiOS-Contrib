@@ -110,11 +110,11 @@
   AT32_DMA_GETCHANNEL(AT32_UART_UART10_TX_DMA_STREAM,                     \
                        AT32_UART10_TX_DMA_CHN)
 
-#define AT32_UART_CR2_CHECK_MASK                                                        \
+#define AT32_UART_CTRL2_CHECK_MASK                                                      \
   (USART_CTRL2_STOP_0 | USART_CTRL2_CLKEN | USART_CTRL2_CLKPOL | USART_CTRL2_CLKPHA |   \
    USART_CTRL2_LBCP)
 
-#define AT32_UART_CR3_CHECK_MASK                                                        \
+#define AT32_UART_CTRL3_CHECK_MASK                                                      \
   (USART_CTRL3_CTSCFIEN | USART_CTRL3_CTSEN | USART_CTRL3_RTSEN | USART_CTRL3_SCMEN |   \
    USART_CTRL3_SCNACKEN)
 
@@ -183,24 +183,24 @@ UARTDriver UARTD10;
 /**
  * @brief   Status bits translation.
  *
- * @param[in] sr        USART SR register value
+ * @param[in] sts       USART STS register value
  *
  * @return  The error flags.
  */
-static uartflags_t translate_errors(uint16_t sr) {
-  uartflags_t sts = 0;
+static uartflags_t translate_errors(uint16_t sts) {
+  uartflags_t status = 0;
 
-  if (sr & USART_STS_ROERR)
-    sts |= UART_OVERRUN_ERROR;
-  if (sr & USART_STS_PERR)
-    sts |= UART_PARITY_ERROR;
-  if (sr & USART_STS_FERR)
-    sts |= UART_FRAMING_ERROR;
-  if (sr & USART_STS_NERR)
-    sts |= UART_NOISE_ERROR;
-  if (sr & USART_STS_BFF)
-    sts |= UART_BREAK_DETECTED;
-  return sts;
+  if (sts & USART_STS_ROERR)
+    status |= UART_OVERRUN_ERROR;
+  if (sts & USART_STS_PERR)
+    status |= UART_PARITY_ERROR;
+  if (sts & USART_STS_FERR)
+    status |= UART_FRAMING_ERROR;
+  if (sts & USART_STS_NERR)
+    status |= UART_NOISE_ERROR;
+  if (sts & USART_STS_BFF)
+    status |= UART_BREAK_DETECTED;
+  return status;
 }
 
 /**
@@ -249,7 +249,7 @@ static void usart_stop(UARTDriver *uartp) {
  */
 static void usart_start(UARTDriver *uartp) {
   uint32_t fck;
-  uint16_t cr1;
+  uint16_t ctrl1;
   USART_TypeDef *u = uartp->usart;
 
   /* Defensive programming, starting from a clean state.*/
@@ -262,26 +262,26 @@ static void usart_start(UARTDriver *uartp) {
      Fraction is still 4 bits wide, but only lower 3 bits used.
      Mantissa is doubled, but Fraction is left the same.*/
 #if defined(USART_CTRL1_OVER8)
-  if (uartp->config->cr1 & USART_CTRL1_OVER8)
+  if (uartp->config->ctrl1 & USART_CTRL1_OVER8)
     fck = ((fck & ~7) * 2) | (fck & 7);
 #endif
   u->BAUDR = fck;
 
   /* Resetting eventual pending status flags.*/
-  (void)u->STS;  /* SR reset step 1.*/
-  (void)u->DT;  /* SR reset step 2.*/
+  (void)u->STS;  /* STS reset step 1.*/
+  (void)u->DT;   /* STS reset step 2.*/
   u->STS = 0;
 
   /* Note that some bits are enforced because required for correct driver
      operations.*/
-  u->CTRL2 = uartp->config->cr2 | USART_CTRL2_BFIEN;
-  u->CTRL3 = uartp->config->cr3 | USART_CTRL3_DMATEN | USART_CTRL3_DMAREN |
-                                  USART_CTRL3_ERRIEN;
+  u->CTRL2 = uartp->config->ctrl2 | USART_CTRL2_BFIEN;
+  u->CTRL3 = uartp->config->ctrl3 | USART_CTRL3_DMATEN | USART_CTRL3_DMAREN |
+                                    USART_CTRL3_ERRIEN;
 
   /* Mustn't ever set TCIE here - if done, it causes an immediate
      interrupt.*/
-  cr1 = USART_CTRL1_UEN | USART_CTRL1_PERRIEN | USART_CTRL1_TEN | USART_CTRL1_REN;
-  u->CTRL1 = uartp->config->cr1 | cr1;
+  ctrl1 = USART_CTRL1_UEN | USART_CTRL1_PERRIEN | USART_CTRL1_TEN | USART_CTRL1_REN;
+  u->CTRL1 = uartp->config->ctrl1 | ctrl1;
 
   /* Starting the receiver idle loop.*/
   uart_enter_rx_idle_loop(uartp);
@@ -291,7 +291,7 @@ static void usart_start(UARTDriver *uartp) {
  * @brief   RX DMA common service routine.
  *
  * @param[in] uartp     pointer to the @p UARTDriver object
- * @param[in] flags     pre-shifted content of the ISR register
+ * @param[in] flags     pre-shifted content of the STS register
  */
 static void uart_lld_serve_rx_end_irq(UARTDriver *uartp, uint32_t flags) {
 
@@ -321,7 +321,7 @@ static void uart_lld_serve_rx_end_irq(UARTDriver *uartp, uint32_t flags) {
  * @brief   TX DMA common service routine.
  *
  * @param[in] uartp     pointer to the @p UARTDriver object
- * @param[in] flags     pre-shifted content of the ISR register
+ * @param[in] flags     pre-shifted content of the STS register
  */
 static void uart_lld_serve_tx_end_irq(UARTDriver *uartp, uint32_t flags) {
 
@@ -757,10 +757,10 @@ void uart_lld_start(UARTDriver *uartp) {
 #if AT32_UART_USE_UART4
     if (&UARTD4 == uartp) {
 
-      osalDbgAssert((uartp->config->cr2 & AT32_UART_CR2_CHECK_MASK) == 0,
-                    "specified invalid bits in UART4 CR2 register settings");
-      osalDbgAssert((uartp->config->cr3 & AT32_UART_CR3_CHECK_MASK) == 0,
-                    "specified invalid bits in UART4 CR3 register settings");
+      osalDbgAssert((uartp->config->ctrl2 & AT32_UART_CTRL2_CHECK_MASK) == 0,
+                    "specified invalid bits in UART4 CTRL2 register settings");
+      osalDbgAssert((uartp->config->ctrl3 & AT32_UART_CTRL3_CHECK_MASK) == 0,
+                    "specified invalid bits in UART4 CTRL3 register settings");
 
       uartp->dmarx = dmaStreamAllocI(AT32_UART_UART4_RX_DMA_STREAM,
                                      AT32_UART_UART4_IRQ_PRIORITY,
@@ -789,10 +789,10 @@ void uart_lld_start(UARTDriver *uartp) {
 #if AT32_UART_USE_UART5
     if (&UARTD5 == uartp) {
 
-      osalDbgAssert((uartp->config->cr2 & AT32_UART_CR2_CHECK_MASK) == 0,
-                    "specified invalid bits in UART5 CR2 register settings");
-      osalDbgAssert((uartp->config->cr3 & AT32_UART_CR3_CHECK_MASK) == 0,
-                    "specified invalid bits in UART5 CR3 register settings");
+      osalDbgAssert((uartp->config->ctrl2 & AT32_UART_CTRL2_CHECK_MASK) == 0,
+                    "specified invalid bits in UART5 CTRL2 register settings");
+      osalDbgAssert((uartp->config->ctrl3 & AT32_UART_CTRL3_CHECK_MASK) == 0,
+                    "specified invalid bits in UART5 CTRL3 register settings");
 
       uartp->dmarx = dmaStreamAllocI(AT32_UART_UART5_RX_DMA_STREAM,
                                      AT32_UART_UART5_IRQ_PRIORITY,
@@ -847,10 +847,10 @@ void uart_lld_start(UARTDriver *uartp) {
 #if AT32_UART_USE_UART7
     if (&UARTD7 == uartp) {
 
-      osalDbgAssert((uartp->config->cr2 & AT32_UART_CR2_CHECK_MASK) == 0,
-                    "specified invalid bits in UART7 CR2 register settings");
-      osalDbgAssert((uartp->config->cr3 & AT32_UART_CR3_CHECK_MASK) == 0,
-                    "specified invalid bits in UART7 CR3 register settings");
+      osalDbgAssert((uartp->config->ctrl2 & AT32_UART_CTRL2_CHECK_MASK) == 0,
+                    "specified invalid bits in UART7 CTRL2 register settings");
+      osalDbgAssert((uartp->config->ctrl3 & AT32_UART_CTRL3_CHECK_MASK) == 0,
+                    "specified invalid bits in UART7 CTRL3 register settings");
 
       uartp->dmarx = dmaStreamAllocI(AT32_UART_UART7_RX_DMA_STREAM,
                                      AT32_UART_UART7_IRQ_PRIORITY,
@@ -879,10 +879,10 @@ void uart_lld_start(UARTDriver *uartp) {
 #if AT32_UART_USE_UART8
     if (&UARTD8 == uartp) {
 
-      osalDbgAssert((uartp->config->cr2 & AT32_UART_CR2_CHECK_MASK) == 0,
-                    "specified invalid bits in UART8 CR2 register settings");
-      osalDbgAssert((uartp->config->cr3 & AT32_UART_CR3_CHECK_MASK) == 0,
-                    "specified invalid bits in UART8 CR3 register settings");
+      osalDbgAssert((uartp->config->ctrl2 & AT32_UART_CTRL2_CHECK_MASK) == 0,
+                    "specified invalid bits in UART8 CTRL2 register settings");
+      osalDbgAssert((uartp->config->ctrl3 & AT32_UART_CTRL3_CHECK_MASK) == 0,
+                    "specified invalid bits in UART8 CTRL3 register settings");
 
       uartp->dmarx = dmaStreamAllocI(AT32_UART_UART8_RX_DMA_STREAM,
                                      AT32_UART_UART8_IRQ_PRIORITY,
@@ -911,10 +911,10 @@ void uart_lld_start(UARTDriver *uartp) {
 #if AT32_UART_USE_UART9
     if (&UARTD9 == uartp) {
 
-      osalDbgAssert((uartp->config->cr2 & AT32_UART_CR2_CHECK_MASK) == 0,
-                    "specified invalid bits in UART9 CR2 register settings");
-      osalDbgAssert((uartp->config->cr3 & AT32_UART_CR3_CHECK_MASK) == 0,
-                    "specified invalid bits in UART9 CR3 register settings");
+      osalDbgAssert((uartp->config->ctrl2 & AT32_UART_CTRL2_CHECK_MASK) == 0,
+                    "specified invalid bits in UART9 CTRL2 register settings");
+      osalDbgAssert((uartp->config->ctrl3 & AT32_UART_CTRL3_CHECK_MASK) == 0,
+                    "specified invalid bits in UART9 CTRL3 register settings");
 
       uartp->dmarx = dmaStreamAllocI(AT32_UART_UART9_RX_DMA_STREAM,
                                      AT32_UART_UART9_IRQ_PRIORITY,
@@ -943,10 +943,10 @@ void uart_lld_start(UARTDriver *uartp) {
 #if AT32_UART_USE_UART10
     if (&UARTD10 == uartp) {
 
-      osalDbgAssert((uartp->config->cr2 & AT32_UART_CR2_CHECK_MASK) == 0,
-                    "specified invalid bits in UART10 CR2 register settings");
-      osalDbgAssert((uartp->config->cr3 & AT32_UART_CR3_CHECK_MASK) == 0,
-                    "specified invalid bits in UART10 CR3 register settings");
+      osalDbgAssert((uartp->config->ctrl2 & AT32_UART_CTRL2_CHECK_MASK) == 0,
+                    "specified invalid bits in UART10 CTRL2 register settings");
+      osalDbgAssert((uartp->config->ctrl3 & AT32_UART_CTRL3_CHECK_MASK) == 0,
+                    "specified invalid bits in UART10 CTRL3 register settings");
 
       uartp->dmarx = dmaStreamAllocI(AT32_UART_UART10_RX_DMA_STREAM,
                                      AT32_UART_UART10_IRQ_PRIORITY,
@@ -974,7 +974,7 @@ void uart_lld_start(UARTDriver *uartp) {
 
     /* Static DMA setup, the transfer size depends on the USART settings,
        it is 16 bits if M=1 and PCE=0 else it is 8 bits.*/
-    if ((uartp->config->cr1 & (USART_CTRL1_DBN | USART_CTRL1_PEN)) == USART_CTRL1_DBN) {
+    if ((uartp->config->ctrl1 & (USART_CTRL1_DBN | USART_CTRL1_PEN)) == USART_CTRL1_DBN) {
       uartp->dmarxmode |= AT32_DMA_CTRL_PWIDTH_HWORD | AT32_DMA_CTRL_MWIDTH_HWORD;
       uartp->dmatxmode |= AT32_DMA_CTRL_PWIDTH_HWORD | AT32_DMA_CTRL_MWIDTH_HWORD;
     }
@@ -1192,30 +1192,30 @@ size_t uart_lld_stop_receive(UARTDriver *uartp) {
  * @param[in] uartp     pointer to the @p UARTDriver object
  */
 void uart_lld_serve_interrupt(UARTDriver *uartp) {
-  uint16_t sr;
+  uint16_t sts;
   USART_TypeDef *u = uartp->usart;
-  uint32_t cr1 = u->CTRL1;
+  uint32_t ctrl1 = u->CTRL1;
 
-  sr = u->STS;   /* SR reset step 1.*/
-  (void)u->DT;  /* SR reset step 2.*/
+  sts = u->STS;   /* STS reset step 1.*/
+  (void)u->DT;    /* STS reset step 2.*/
 
-  if (sr & (USART_STS_BFF  | USART_STS_ROERR | USART_STS_NERR |
+  if (sts & (USART_STS_BFF  | USART_STS_ROERR | USART_STS_NERR |
             USART_STS_FERR | USART_STS_PERR)) {
     u->STS = ~USART_STS_BFF;
     _uart_rx_error_isr_code(uartp, translate_errors(sr));
   }
 
-  if ((sr & USART_STS_TDC) && (cr1 & USART_CTRL1_TDCIEN)) {
+  if ((sts & USART_STS_TDC) && (ctrl1 & USART_CTRL1_TDCIEN)) {
     /* TC interrupt cleared and disabled.*/
     u->STS = ~USART_STS_TDC;
-    u->CTRL1 = cr1 & ~USART_CTRL1_TDCIEN;
+    u->CTRL1 = ctrl1 & ~USART_CTRL1_TDCIEN;
 
     /* End of transmission, a callback is generated.*/
     _uart_tx2_isr_code(uartp);
   }
 
-  /* Timeout interrupt sources are only checked if enabled in CR1.*/
-  if ((cr1 & USART_CTRL1_IDLEIEN) && (sr & USART_STS_IDLEF)) {
+  /* Timeout interrupt sources are only checked if enabled in CTRL1.*/
+  if ((ctrl1 & USART_CTRL1_IDLEIEN) && (sts & USART_STS_IDLEF)) {
     _uart_timeout_isr_code(uartp);
   }
 }

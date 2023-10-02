@@ -402,17 +402,17 @@ typedef struct hal_serial_config {
   uint32_t                  speed;
   /* End of the mandatory fields.*/
   /**
-   * @brief Initialization value for the CR1 register.
+   * @brief Initialization value for the CTRL1 register.
    */
-  uint16_t                  cr1;
+  uint16_t                  ctrl1;
   /**
-   * @brief Initialization value for the CR2 register.
+   * @brief Initialization value for the CTRL2 register.
    */
-  uint16_t                  cr2;
+  uint16_t                  ctrl2;
   /**
-   * @brief Initialization value for the CR3 register.
+   * @brief Initialization value for the CTRL3 register.
    */
-  uint16_t                  cr3;
+  uint16_t                  ctrl3;
 } SerialConfig;
 
 /**

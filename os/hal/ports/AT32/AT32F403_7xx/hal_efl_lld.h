@@ -36,7 +36,7 @@
 /*===========================================================================*/
 
 /**
- * @name    AT32F40x configuration options
+ * @name    AT32F403_7xx configuration options
  * @{
  */
 /**

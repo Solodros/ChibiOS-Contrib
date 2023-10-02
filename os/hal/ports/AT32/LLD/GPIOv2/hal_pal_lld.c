@@ -106,7 +106,7 @@ void _pal_lld_setgroupmode(ioportid_t port,
       m1 = 1 << bit;
       m2 = 3 << (bit * 2);
       m4 = 15 << ((bit & 7) * 4);
-      port->OMODER = (port->OMODER & ~m1) | omode;
+      port->OMODE  = (port->OMODE & ~m1) | omode;
       port->ODRVR  = (port->ODRVR & ~m2) | odrvr;
       port->PULL   = (port->PULL & ~m2) | pull;
       port->HDRV   = (port->HDRV & ~m1) | hdrv;

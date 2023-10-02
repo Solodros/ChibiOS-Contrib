@@ -118,7 +118,7 @@ static void usart_init(SerialDriver *sdp, const SerialConfig *config) {
   /* Correcting BRR value when oversampling by 8 instead of 16.
      Fraction is still 4 bits wide, but only lower 3 bits used.
      Mantissa is doubled, but Fraction is left the same.*/
-  if (config->cr1 & USART_CTRL1_OVER8)
+  if (config->ctrl1 & USART_CTRL1_OVER8)
     brr = ((brr & ~7) * 2) | (brr & 7);
 #endif
 
@@ -127,18 +127,18 @@ static void usart_init(SerialDriver *sdp, const SerialConfig *config) {
   u->BAUDR = brr;
 
   /* Note that some bits are enforced.*/
-  u->CTRL2 = config->cr2 | USART_CTRL2_BFIEN;
-  u->CTRL3 = config->cr3 | USART_CTRL3_ERRIEN;
-  u->CTRL1 = config->cr1 | USART_CTRL1_UEN | USART_CTRL1_PERRIEN |
-                           USART_CR1_RXNEIE | USART_CTRL1_TEN |
-                           USART_CTRL1_REN;
+  u->CTRL2 = config->ctrl2 | USART_CTRL2_BFIEN;
+  u->CTRL3 = config->ctrl3 | USART_CTRL3_ERRIEN;
+  u->CTRL1 = config->ctrl1 | USART_CTRL1_UEN | USART_CTRL1_PERRIEN |
+                             USART_CTRL1_RDBFIEN | USART_CTRL1_TEN |
+                             USART_CTRL1_REN;
   u->STS = 0;
-  (void)u->STS;  /* SR reset step 1.*/
-  (void)u->DT;  /* SR reset step 2.*/
+  (void)u->STS;  /* STS reset step 1.*/
+  (void)u->DT;   /* STS reset step 2.*/
 
   /* Deciding mask to be applied on the data register on receive, this is
      required in order to mask out the parity bit.*/
-  if ((config->cr1 & (USART_CTRL1_DBN | USART_CTRL1_PEN)) == USART_CTRL1_PEN) {
+  if ((config->ctrl1 & (USART_CTRL1_DBN | USART_CTRL1_PEN)) == USART_CTRL1_PEN) {
     sdp->rxmask = 0x7F;
   }
   else {
@@ -163,20 +163,20 @@ static void usart_deinit(USART_TypeDef *u) {
  * @brief   Error handling routine.
  *
  * @param[in] sdp       pointer to a @p SerialDriver object
- * @param[in] sr        USART SR register value
+ * @param[in] sts       USART STS register value
  */
-static void set_error(SerialDriver *sdp, uint16_t sr) {
-  eventflags_t sts = 0;
+static void set_error(SerialDriver *sdp, uint16_t sts) {
+  eventflags_t status = 0;
 
-  if (sr & USART_STS_ROERR)
-    sts |= SD_OVERRUN_ERROR;
-  if (sr & USART_STS_PERR)
-    sts |= SD_PARITY_ERROR;
-  if (sr & USART_STS_FERR)
-    sts |= SD_FRAMING_ERROR;
-  if (sr & USART_STS_NERR)
-    sts |= SD_NOISE_ERROR;
-  chnAddFlagsI(sdp, sts);
+  if (sts & USART_STS_ROERR)
+    status |= SD_OVERRUN_ERROR;
+  if (sts & USART_STS_PERR)
+    status |= SD_PARITY_ERROR;
+  if (sts & USART_STS_FERR)
+    status |= SD_FRAMING_ERROR;
+  if (sts & USART_STS_NERR)
+    status |= SD_NOISE_ERROR;
+  chnAddFlagsI(sdp, status);
 }
 
 #if AT32_SERIAL_USE_USART1 || defined(__DOXYGEN__)
@@ -728,11 +728,11 @@ void sd_lld_stop(SerialDriver *sdp) {
  */
 void sd_lld_serve_interrupt(SerialDriver *sdp) {
   USART_TypeDef *u = sdp->usart;
-  uint16_t cr1 = u->CTRL1;
-  uint16_t sr = u->STS;
+  uint16_t ctrl1 = u->CTRL1;
+  uint16_t sts = u->STS;
 
   /* Special case, LIN break detection.*/
-  if (sr & USART_STS_BFF) {
+  if (sts & USART_STS_BFF) {
     osalSysLockFromISR();
     chnAddFlagsI(sdp, SD_BREAK_DETECTED);
     u->STS = ~USART_STS_BFF;
@@ -741,28 +741,28 @@ void sd_lld_serve_interrupt(SerialDriver *sdp) {
 
   /* Data available.*/
   osalSysLockFromISR();
-  while (sr & (USART_STS_RDBF | USART_STS_ROERR | USART_STS_NERR | USART_STS_FERR |
+  while (sts & (USART_STS_RDBF | USART_STS_ROERR | USART_STS_NERR | USART_STS_FERR |
                USART_STS_PERR)) {
     uint8_t b;
 
     /* Error condition detection.*/
-    if (sr & (USART_STS_ROERR | USART_STS_NERR | USART_STS_FERR  | USART_STS_PERR))
-      set_error(sdp, sr);
+    if (sts & (USART_STS_ROERR | USART_STS_NERR | USART_STS_FERR  | USART_STS_PERR))
+      set_error(sdp, sts);
     b = (uint8_t)u->DT & sdp->rxmask;
-    if (sr & USART_STS_RDBF)
+    if (sts & USART_STS_RDBF)
       sdIncomingDataI(sdp, b);
-    sr = u->STS;
+    sts = u->STS;
   }
   osalSysUnlockFromISR();
 
   /* Transmission buffer empty.*/
-  if ((cr1 & USART_CTRL1_TDBEIEN) && (sr & USART_STS_TDBE)) {
+  if ((ctrl1 & USART_CTRL1_TDBEIEN) && (sts & USART_STS_TDBE)) {
     msg_t b;
     osalSysLockFromISR();
     b = oqGetI(&sdp->oqueue);
     if (b < MSG_OK) {
       chnAddFlagsI(sdp, CHN_OUTPUT_EMPTY);
-      u->CTRL1 = cr1 & ~USART_CTRL1_TDBEIEN;
+      u->CTRL1 = ctrl1 & ~USART_CTRL1_TDBEIEN;
     }
     else
       u->DT = b;
@@ -770,11 +770,11 @@ void sd_lld_serve_interrupt(SerialDriver *sdp) {
   }
 
   /* Physical transmission end.*/
-  if ((cr1 & USART_CTRL1_TDCIEN) && (sr & USART_STS_TDC)) {
+  if ((ctrl1 & USART_CTRL1_TDCIEN) && (sts & USART_STS_TDC)) {
     osalSysLockFromISR();
     if (oqIsEmptyI(&sdp->oqueue)) {
       chnAddFlagsI(sdp, CHN_TRANSMISSION_END);
-      u->CTRL1 = cr1 & ~USART_CTRL1_TDCIEN;
+      u->CTRL1 = ctrl1 & ~USART_CTRL1_TDCIEN;
     }
     osalSysUnlockFromISR();
   }

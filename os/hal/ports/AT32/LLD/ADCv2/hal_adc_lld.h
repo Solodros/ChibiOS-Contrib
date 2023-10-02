@@ -178,21 +178,21 @@
  * @brief   DMA stream used for ADC1 operations.
  */
 #if !defined(AT32_ADC_ADC1_DMA_STREAM) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC1_DMA_STREAM           AT32_DMA_STREAM_ID(2, 4)
+#define AT32_ADC_ADC1_DMA_STREAM           AT32_DMA_STREAM_ID_ANY
 #endif
 
 /**
  * @brief   DMA stream used for ADC2 operations.
  */
 #if !defined(AT32_ADC_ADC2_DMA_STREAM) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC2_DMA_STREAM           AT32_DMA_STREAM_ID(2, 2)
+#define AT32_ADC_ADC2_DMA_STREAM           AT32_DMA_STREAM_ID_ANY
 #endif
 
 /**
  * @brief   DMA stream used for ADC3 operations.
  */
 #if !defined(AT32_ADC_ADC3_DMA_STREAM) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC3_DMA_STREAM           AT32_DMA_STREAM_ID(2, 1)
+#define AT32_ADC_ADC3_DMA_STREAM           AT32_DMA_STREAM_ID_ANY
 #endif
 
 /**
@@ -252,6 +252,26 @@
 /* Derived constants and error checks.                                       */
 /*===========================================================================*/
 
+/* Registry checks.*/
+#if !defined(AT32_HAS_ADC1) || !defined(AT32_HAS_ADC2) ||                 \
+    !defined(AT32_HAS_ADC3)
+#error "AT32_HAS_ADCx not defined in registry"
+#endif
+
+#if !AT32_DMA_SUPPORTS_DMAMUX
+#if (AT32_ADC_USE_ADC1 && !defined(AT32_ADC1_DMA_MSK)) ||                 \
+    (AT32_ADC_USE_ADC2 && !defined(AT32_ADC2_DMA_MSK)) ||                 \
+    (AT32_ADC_USE_ADC3 && !defined(AT32_ADC3_DMA_MSK))
+#error "AT32_ADCx_DMA_MSK not defined in registry"
+#endif
+
+#if (AT32_ADC_USE_ADC1 && !defined(AT32_ADC1_DMA_CHN)) ||                 \
+    (AT32_ADC_USE_ADC2 && !defined(AT32_ADC2_DMA_CHN)) ||                 \
+    (AT32_ADC_USE_ADC3 && !defined(AT32_ADC3_DMA_CHN))
+#error "AT32_ADCx_DMA_CHN not defined in registry"
+#endif
+#endif /* !AT32_DMA_SUPPORTS_DMAMUX */
+
 #if AT32_ADC_USE_ADC1 && !AT32_HAS_ADC1
 #error "ADC1 not present in the selected device"
 #endif
@@ -268,6 +288,11 @@
 #error "ADC driver activated but no ADC peripheral assigned"
 #endif
 
+#if AT32_DMA_SUPPORTS_DMAMUX
+
+#else /* !AT32_DMA_SUPPORTS_DMAMUX */
+
+/* Check on the validity of the assigned DMA channels.*/
 #if AT32_ADC_USE_ADC1 &&                                                   \
     !AT32_DMA_IS_VALID_ID(AT32_ADC_ADC1_DMA_STREAM, AT32_ADC1_DMA_MSK)
 #error "invalid DMA stream associated to ADC1"
@@ -282,6 +307,8 @@
     !AT32_DMA_IS_VALID_ID(AT32_ADC_ADC3_DMA_STREAM, AT32_ADC3_DMA_MSK)
 #error "invalid DMA stream associated to ADC3"
 #endif
+
+#endif /* !AT32_DMA_SUPPORTS_DMAMUX */
 
 #if (AT32_ADC_ADCDIV >= 2) || (AT32_ADC_ADCDIV <= 17) 
 #define AT32_ADCCLK                        (AT32_HCLK / AT32_ADC_ADCDIV)

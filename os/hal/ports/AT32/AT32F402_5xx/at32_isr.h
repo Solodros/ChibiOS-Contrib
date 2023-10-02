@@ -60,6 +60,12 @@
  * @{
  */
 /*
+ * ADC units.
+ */
+#define AT32_ADC_HANDLER                    Vector88
+#define AT32_ADC_NUMBER                     18
+
+/*
  * CAN units.
  */
 #define AT32_CAN1_TX_HANDLER               Vector8C

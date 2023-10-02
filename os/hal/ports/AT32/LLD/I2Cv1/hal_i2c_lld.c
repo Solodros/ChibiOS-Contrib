@@ -830,7 +830,7 @@ msg_t i2c_lld_master_transmit_timeout(I2CDriver *i2cp, i2caddr_t addr,
   systime_t start, end;
   msg_t msg;
 
-#if defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F40x)
+#if defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F403_7xx)
   osalDbgCheck((rxbytes == 0) || ((rxbytes > 1) && (rxbuf != NULL)));
 #endif
 

@@ -972,7 +972,7 @@ void pwm_lld_start(PWMDriver *pwmp) {
   }
   /* Timer configured and started.*/
   pwmp->tmr->CTRL1 = AT32_TMR_CTRL1_PRBEN | AT32_TMR_CTRL1_OVFS |
-                     AT32_TMR_CTRL1_CEN;
+                     AT32_TMR_CTRL1_TMREN;
 }
 
 /**

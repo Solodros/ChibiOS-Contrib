@@ -167,7 +167,7 @@ typedef struct {
   #define AT32_USBRAM_BASE     USB_PACKET_BUFFER_ADDRESS_EX
 #endif
 // AT32F413xx specified USB RAM size
-#if defined(AT32F413xx) || defined(AT32F40x)
+#if defined(AT32F413xx) || defined(AT32F403_7xx)
 #if (AT32_CAN_USE_CAN1 && AT32_CAN_USE_CAN2)
   #define AT32_USB_PMA_SIZE    768
 #elif AT32_CAN_USE_CAN1 || AT32_CAN_USE_CAN2

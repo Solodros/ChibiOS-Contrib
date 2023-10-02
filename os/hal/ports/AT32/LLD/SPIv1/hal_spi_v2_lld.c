@@ -15,8 +15,8 @@
 */
 
 /**
- * @file    SPIv1/hal_spi_lld.c
- * @brief   AT32 SPI  subsystem low level driver source.
+ * @file    SPIv1/hal_spi_v2_lld.c
+ * @brief   AT32 SPI subsystem low level driver source.
  *
  * @addtogroup SPI
  * @{
@@ -124,13 +124,13 @@ static void spi_lld_configure(SPIDriver *spip) {
 
   /* SPI setup.*/
   if (spip->config->slave) {
-    spip->spi->CTRL1 = spip->config->cr1 & ~(SPI_CTRL1_MSTEN | SPI_CTRL1_SPIEN);
-    spip->spi->CTRL2 = spip->config->cr2 |
+    spip->spi->CTRL1 = spip->config->ctrl1 & ~(SPI_CTRL1_MSTEN | SPI_CTRL1_SPIEN);
+    spip->spi->CTRL2 = spip->config->ctrl2 |
                         SPI_CTRL2_DMAREN | SPI_CTRL2_DMATEN;
   }
   else {
-    spip->spi->CTRL1 = (spip->config->cr1 | SPI_CTRL1_MSTEN) & ~SPI_CTRL1_SPIEN;
-    spip->spi->CTRL2 = spip->config->cr2 | SPI_CTRL2_HWCSOE |
+    spip->spi->CTRL1 = (spip->config->ctrl1 | SPI_CTRL1_MSTEN) & ~SPI_CTRL1_SPIEN;
+    spip->spi->CTRL2 = spip->config->ctrl2 | SPI_CTRL2_HWCSOE |
                         SPI_CTRL2_DMAREN | SPI_CTRL2_DMATEN;
   }
 }
@@ -571,7 +571,7 @@ msg_t spi_lld_start(SPIDriver *spip) {
   }
 
   /* Configuration-specific DMA setup.*/
-  if ((spip->config->cr1 & SPI_CTRL1_FBN) == 0) {
+  if ((spip->config->ctrl1 & SPI_CTRL1_FBN) == 0) {
     /* Frame width is 8 bits or smaller.*/
     spip->rxdmamode = (spip->rxdmamode & ~AT32_DMA_CTRL_WIDTH_MASK) |
                       AT32_DMA_CTRL_PWIDTH_BYTE | AT32_DMA_CTRL_MWIDTH_BYTE;

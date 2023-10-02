@@ -995,7 +995,7 @@ void icu_lld_start_capture(ICUDriver *icup) {
   icup->tmr->ISTS   = 0;
 
   /* Timer is started.*/
-  icup->tmr->CTRL1 = AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_CEN;
+  icup->tmr->CTRL1 = AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_TMREN;
 }
 
 /**
