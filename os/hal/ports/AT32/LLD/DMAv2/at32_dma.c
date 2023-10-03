@@ -81,7 +81,28 @@
 #define DMA2_CH7_VARIANT            __DMA2_CSELR
 #define DMA2_CH8_VARIANT            __DMA2_CSELR
 
-#else 
+#elif AT32_DMA_SUPPORTS_DMAMUX == TRUE
+
+#define DMAMUX1_CHANNEL(id)         (DMA1MUX_BASE + ((id) * 4U))
+
+#define DMA1_CH1_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(0))
+#define DMA1_CH2_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(1))
+#define DMA1_CH3_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(2))
+#define DMA1_CH4_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(3))
+#define DMA1_CH5_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(4))
+#define DMA1_CH6_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(5))
+#define DMA1_CH7_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(6))
+#define DMA1_CH8_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(7))
+#define DMA2_CH1_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(0 + AT32_DMA1_NUM_CHANNELS))
+#define DMA2_CH2_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(1 + AT32_DMA1_NUM_CHANNELS))
+#define DMA2_CH3_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(2 + AT32_DMA1_NUM_CHANNELS))
+#define DMA2_CH4_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(3 + AT32_DMA1_NUM_CHANNELS))
+#define DMA2_CH5_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(4 + AT32_DMA1_NUM_CHANNELS))
+#define DMA2_CH6_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(5 + AT32_DMA1_NUM_CHANNELS))
+#define DMA2_CH7_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(6 + AT32_DMA1_NUM_CHANNELS))
+#define DMA2_CH8_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(7 + AT32_DMA1_NUM_CHANNELS))
+
+#else /* !(AT32_DMA_SUPPORTS_DMAMUX == TRUE) */
 
 #define DMA1_CH1_VARIANT            0
 #define DMA1_CH2_VARIANT            0
@@ -240,11 +261,11 @@ static struct {
   /**
    * @brief   Mask of the allocated streams.
    */
-  uint32_t          allocated_mask;
+  uint32_t           allocated_mask;
   /**
    * @brief   Mask of the enabled streams ISRs.
    */
-  uint32_t          sts_mask;
+  uint32_t           sts_mask;
   /**
    * @brief   DMA IRQ redirectors.
    */
@@ -546,6 +567,12 @@ void dmaInit(void) {
 #if AT32_DMA2_NUM_CHANNELS > 0
   DMA2->CLR = 0xFFFFFFFFU;
 #endif
+#if AT32_DMA_SUPPORTS_DMAMUX == TRUE
+  DMA1->MUXSEL = DMA_MUXSEL_TBL_SEL;
+#if AT32_DMA2_NUM_CHANNELS > 0
+  DMA2->MUXSEL = DMA_MUXSEL_TBL_SEL;
+#endif
+#endif
 }
 
 /**
@@ -786,12 +813,7 @@ void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t channel, uint
 
   osalDbgCheck(per < 128U);
 
-  dmastp->dma->SRC_SEL1 |= DMA_SRC_SEL1_DMA_FLEX_EN;
-  if (channel < 5) {
-    dmastp->dma->SRC_SEL0 |= (per << ((channel - 1) * 8));
-  } else {
-    dmastp->dma->SRC_SEL1 |= (per << ((channel - 5) * 8));
-  }
+  dmastp->mux->MUXCTRL = per;
 }
 #endif
 

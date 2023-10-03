@@ -32,83 +32,83 @@
 
 #define USART1_RX_DMA_CHANNEL                                             \
   AT32_DMA_GETCHANNEL(AT32_UART_USART1_RX_DMA_STREAM,                     \
-                       AT32_USART1_RX_DMA_CHN)
+                      AT32_USART1_RX_DMA_CHN)
 
 #define USART1_TX_DMA_CHANNEL                                             \
   AT32_DMA_GETCHANNEL(AT32_UART_USART1_TX_DMA_STREAM,                     \
-                       AT32_USART1_TX_DMA_CHN)
+                      AT32_USART1_TX_DMA_CHN)
 
 #define USART2_RX_DMA_CHANNEL                                             \
   AT32_DMA_GETCHANNEL(AT32_UART_USART2_RX_DMA_STREAM,                     \
-                       AT32_USART2_RX_DMA_CHN)
+                      AT32_USART2_RX_DMA_CHN)
 
 #define USART2_TX_DMA_CHANNEL                                             \
   AT32_DMA_GETCHANNEL(AT32_UART_USART2_TX_DMA_STREAM,                     \
-                       AT32_USART2_TX_DMA_CHN)
+                      AT32_USART2_TX_DMA_CHN)
 
 #define USART3_RX_DMA_CHANNEL                                             \
   AT32_DMA_GETCHANNEL(AT32_UART_USART3_RX_DMA_STREAM,                     \
-                       AT32_USART3_RX_DMA_CHN)
+                      AT32_USART3_RX_DMA_CHN)
 
 #define USART3_TX_DMA_CHANNEL                                             \
   AT32_DMA_GETCHANNEL(AT32_UART_USART3_TX_DMA_STREAM,                     \
-                       AT32_USART3_TX_DMA_CHN)
+                      AT32_USART3_TX_DMA_CHN)
 
 #define UART4_RX_DMA_CHANNEL                                              \
   AT32_DMA_GETCHANNEL(AT32_UART_UART4_RX_DMA_STREAM,                      \
-                       AT32_UART4_RX_DMA_CHN)
+                      AT32_UART4_RX_DMA_CHN)
 
 #define UART4_TX_DMA_CHANNEL                                              \
   AT32_DMA_GETCHANNEL(AT32_UART_UART4_TX_DMA_STREAM,                      \
-                       AT32_UART4_TX_DMA_CHN)
+                      AT32_UART4_TX_DMA_CHN)
 
 #define UART5_RX_DMA_CHANNEL                                              \
   AT32_DMA_GETCHANNEL(AT32_UART_UART5_RX_DMA_STREAM,                      \
-                       AT32_UART5_RX_DMA_CHN)
+                      AT32_UART5_RX_DMA_CHN)
 
 #define UART5_TX_DMA_CHANNEL                                              \
   AT32_DMA_GETCHANNEL(AT32_UART_UART5_TX_DMA_STREAM,                      \
-                       AT32_UART5_TX_DMA_CHN)
+                      AT32_UART5_TX_DMA_CHN)
 
 #define USART6_RX_DMA_CHANNEL                                             \
   AT32_DMA_GETCHANNEL(AT32_UART_USART6_RX_DMA_STREAM,                     \
-                       AT32_USART6_RX_DMA_CHN)
+                      AT32_USART6_RX_DMA_CHN)
 
 #define USART6_TX_DMA_CHANNEL                                             \
   AT32_DMA_GETCHANNEL(AT32_UART_USART6_TX_DMA_STREAM,                     \
-                       AT32_USART6_TX_DMA_CHN)
+                      AT32_USART6_TX_DMA_CHN)
 
 #define UART7_RX_DMA_CHANNEL                                              \
   AT32_DMA_GETCHANNEL(AT32_UART_UART7_RX_DMA_STREAM,                      \
-                       AT32_UART7_RX_DMA_CHN)
+                      AT32_UART7_RX_DMA_CHN)
 
 #define UART7_TX_DMA_CHANNEL                                              \
   AT32_DMA_GETCHANNEL(AT32_UART_UART7_TX_DMA_STREAM,                      \
-                       AT32_UART7_TX_DMA_CHN)
+                      AT32_UART7_TX_DMA_CHN)
 
 #define UART8_RX_DMA_CHANNEL                                              \
   AT32_DMA_GETCHANNEL(AT32_UART_UART8_RX_DMA_STREAM,                      \
-                       AT32_UART8_RX_DMA_CHN)
+                      AT32_UART8_RX_DMA_CHN)
 
 #define UART8_TX_DMA_CHANNEL                                              \
   AT32_DMA_GETCHANNEL(AT32_UART_UART8_TX_DMA_STREAM,                      \
-                       AT32_UART8_TX_DMA_CHN)
+                      AT32_UART8_TX_DMA_CHN)
 
 #define UART9_RX_DMA_CHANNEL                                              \
   AT32_DMA_GETCHANNEL(AT32_UART_UART9_RX_DMA_STREAM,                      \
-                       AT32_UART9_RX_DMA_CHN)
+                      AT32_UART9_RX_DMA_CHN)
 
 #define UART9_TX_DMA_CHANNEL                                              \
   AT32_DMA_GETCHANNEL(AT32_UART_UART9_TX_DMA_STREAM,                      \
-                       AT32_UART9_TX_DMA_CHN)
+                      AT32_UART9_TX_DMA_CHN)
 
 #define UART10_RX_DMA_CHANNEL                                             \
   AT32_DMA_GETCHANNEL(AT32_UART_UART10_RX_DMA_STREAM,                     \
-                       AT32_UART10_RX_DMA_CHN)
+                      AT32_UART10_RX_DMA_CHN)
 
 #define UART10_TX_DMA_CHANNEL                                             \
   AT32_DMA_GETCHANNEL(AT32_UART_UART10_TX_DMA_STREAM,                     \
-                       AT32_UART10_TX_DMA_CHN)
+                      AT32_UART10_TX_DMA_CHN)
 
 #define AT32_UART_CTRL2_CHECK_MASK                                                      \
   (USART_CTRL2_STOP_0 | USART_CTRL2_CLKEN | USART_CTRL2_CLKPOL | USART_CTRL2_CLKPHA |   \
@@ -297,7 +297,7 @@ static void uart_lld_serve_rx_end_irq(UARTDriver *uartp, uint32_t flags) {
 
   /* DMA errors handling.*/
 #if defined(AT32_UART_DMA_ERROR_HOOK)
-  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMTERRF)) != 0) {
+  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMERRF)) != 0) {
     AT32_UART_DMA_ERROR_HOOK(uartp);
   }
 #else
@@ -327,7 +327,7 @@ static void uart_lld_serve_tx_end_irq(UARTDriver *uartp, uint32_t flags) {
 
   /* DMA errors handling.*/
 #if defined(AT32_UART_DMA_ERROR_HOOK)
-  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMTERRF)) != 0) {
+  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMERRF)) != 0) {
     AT32_UART_DMA_ERROR_HOOK(uartp);
   }
 #else
@@ -569,8 +569,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD1);
   UARTD1.usart   = USART1;
   UARTD1.clock   = AT32_PCLK2;
-  UARTD1.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
-  UARTD1.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD1.dmarxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD1.dmatxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD1.dmarx   = NULL;
   UARTD1.dmatx   = NULL;
 #endif
@@ -579,8 +579,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD2);
   UARTD2.usart   = USART2;
   UARTD2.clock   = AT32_PCLK1;
-  UARTD2.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
-  UARTD2.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD2.dmarxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD2.dmatxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD2.dmarx   = NULL;
   UARTD2.dmatx   = NULL;
 #endif
@@ -589,8 +589,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD3);
   UARTD3.usart   = USART3;
   UARTD3.clock   = AT32_PCLK1;
-  UARTD3.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
-  UARTD3.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD3.dmarxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD3.dmatxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD3.dmarx   = NULL;
   UARTD3.dmatx   = NULL;
 #endif
@@ -599,8 +599,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD4);
   UARTD4.usart   = UART4;
   UARTD4.clock   = AT32_PCLK1;
-  UARTD4.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
-  UARTD4.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD4.dmarxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD4.dmatxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD4.dmarx   = NULL;
   UARTD4.dmatx   = NULL;
 #endif
@@ -609,8 +609,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD5);
   UARTD5.usart   = UART5;
   UARTD5.clock   = AT32_PCLK1;
-  UARTD5.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
-  UARTD5.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD5.dmarxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD5.dmatxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD5.dmarx   = NULL;
   UARTD5.dmatx   = NULL;
 #endif
@@ -619,8 +619,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD6);
   UARTD6.usart   = USART6;
   UARTD6.clock   = AT32_PCLK2;
-  UARTD6.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
-  UARTD6.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD6.dmarxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD6.dmatxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD6.dmarx   = NULL;
   UARTD6.dmatx   = NULL;
 #endif
@@ -629,8 +629,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD7);
   UARTD7.usart   = UART7;
   UARTD7.clock   = AT32_PCLK1;
-  UARTD7.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
-  UARTD7.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD7.dmarxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD7.dmatxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD7.dmarx   = NULL;
   UARTD7.dmatx   = NULL;
 #endif
@@ -639,8 +639,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD8);
   UARTD8.usart   = UART8;
   UARTD8.clock   = AT32_PCLK1;
-  UARTD8.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
-  UARTD8.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD8.dmarxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD8.dmatxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD8.dmarx   = NULL;
   UARTD8.dmatx   = NULL;
 #endif
@@ -649,8 +649,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD9);
   UARTD9.usart   = UART9;
   UARTD9.clock   = AT32_PCLK2;
-  UARTD9.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
-  UARTD9.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD9.dmarxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD9.dmatxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD9.dmarx   = NULL;
   UARTD9.dmatx   = NULL;
 #endif
@@ -659,8 +659,8 @@ void uart_lld_init(void) {
   uartObjectInit(&UARTD10);
   UARTD10.usart   = UART10;
   UARTD10.clock   = AT32_PCLK2;
-  UARTD10.dmarxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
-  UARTD10.dmatxmode = AT32_DMA_CTRL_DMEIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD10.dmarxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
+  UARTD10.dmatxmode = AT32_DMA_CTRL_DMERRIEN | AT32_DMA_CTRL_DTERRIEN;
   UARTD10.dmarx   = NULL;
   UARTD10.dmatx   = NULL;
 #endif
@@ -695,9 +695,14 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CTRL_CHPL(AT32_UART_USART1_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(USART1_TX_DMA_CHANNEL) |
                           AT32_DMA_CTRL_CHPL(AT32_UART_USART1_DMA_PRIORITY);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_USART1_RX_DMAMUX_CHANNEL, AT32_DMAMUX_USART1_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_USART1_TX_DMAMUX_CHANNEL, AT32_DMAMUX_USART1_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(uartp->dmarx, AT32_DMAMUX_USART1_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_DMAMUX_USART1_TX);
+#endif
 #endif
     }
 #endif
@@ -721,9 +726,14 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CTRL_CHPL(AT32_UART_USART2_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(USART2_TX_DMA_CHANNEL) |
                           AT32_DMA_CTRL_CHPL(AT32_UART_USART2_DMA_PRIORITY);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_USART2_RX_DMAMUX_CHANNEL, AT32_DMAMUX_USART2_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_USART2_TX_DMAMUX_CHANNEL, AT32_DMAMUX_USART2_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(uartp->dmarx, AT32_DMAMUX_USART2_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_DMAMUX_USART2_TX);
+#endif
 #endif
     }
 #endif
@@ -747,9 +757,14 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CTRL_CHPL(AT32_UART_USART3_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(USART3_TX_DMA_CHANNEL) |
                           AT32_DMA_CTRL_CHPL(AT32_UART_USART3_DMA_PRIORITY);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_USART3_RX_DMAMUX_CHANNEL, AT32_DMAMUX_USART3_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_USART3_TX_DMAMUX_CHANNEL, AT32_DMAMUX_USART3_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(uartp->dmarx, AT32_DMAMUX_USART3_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_DMAMUX_USART3_TX);
+#endif
 #endif
     }
 #endif
@@ -779,9 +794,14 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CTRL_CHPL(AT32_UART_UART4_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(UART4_TX_DMA_CHANNEL) |
                           AT32_DMA_CTRL_CHPL(AT32_UART_UART4_DMA_PRIORITY);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_UART4_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART4_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_UART4_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART4_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(uartp->dmarx, AT32_DMAMUX_UART4_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_DMAMUX_UART4_TX);
+#endif
 #endif
     }
 #endif
@@ -811,9 +831,14 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CTRL_CHPL(AT32_UART_UART5_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(UART5_TX_DMA_CHANNEL) |
                           AT32_DMA_CTRL_CHPL(AT32_UART_UART5_DMA_PRIORITY);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_UART5_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART5_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_UART5_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART5_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(uartp->dmarx, AT32_DMAMUX_UART5_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_DMAMUX_UART5_TX);
+#endif
 #endif
     }
 #endif
@@ -837,9 +862,14 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CTRL_CHPL(AT32_UART_USART6_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(USART6_TX_DMA_CHANNEL) |
                           AT32_DMA_CTRL_CHPL(AT32_UART_USART6_DMA_PRIORITY);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_USART6_RX_DMAMUX_CHANNEL, AT32_DMAMUX_USART6_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_USART6_TX_DMAMUX_CHANNEL, AT32_DMAMUX_USART6_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(uartp->dmarx, AT32_DMAMUX_USART6_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_DMAMUX_USART6_TX);
+#endif
 #endif
     }
 #endif
@@ -869,9 +899,14 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CTRL_CHPL(AT32_UART_UART7_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(UART7_TX_DMA_CHANNEL) |
                           AT32_DMA_CTRL_CHPL(AT32_UART_UART7_DMA_PRIORITY);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_UART7_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART7_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_UART7_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART7_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(uartp->dmarx, AT32_DMAMUX_UART7_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_DMAMUX_UART7_TX);
+#endif
 #endif
     }
 #endif
@@ -901,9 +936,14 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CTRL_CHPL(AT32_UART_UART8_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(UART8_TX_DMA_CHANNEL) |
                           AT32_DMA_CTRL_CHPL(AT32_UART_UART8_DMA_PRIORITY);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_UART8_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART8_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_UART8_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART8_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(uartp->dmarx, AT32_DMAMUX_UART8_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_DMAMUX_UART8_TX);
+#endif
 #endif
     }
 #endif
@@ -933,10 +973,15 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CTRL_CHPL(AT32_UART_UART9_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(UART9_TX_DMA_CHANNEL) |
                           AT32_DMA_CTRL_CHPL(AT32_UART_UART9_DMA_PRIORITY);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_UART9_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART9_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_UART9_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART9_TX);
-#endif     
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(uartp->dmarx, AT32_DMAMUX_UART9_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_DMAMUX_UART9_TX);
+#endif
+#endif
     }
 #endif
 
@@ -965,9 +1010,14 @@ void uart_lld_start(UARTDriver *uartp) {
                           AT32_DMA_CTRL_CHPL(AT32_UART_UART10_DMA_PRIORITY);
       uartp->dmatxmode |= AT32_DMA_CTRL_CHSEL(UART10_TX_DMA_CHANNEL) |
                           AT32_DMA_CTRL_CHPL(AT32_UART_UART10_DMA_PRIORITY);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(uartp->dmarx, AT32_UART_UART10_RX_DMAMUX_CHANNEL, AT32_DMAMUX_UART10_RX);
       dmaSetRequestSource(uartp->dmatx, AT32_UART_UART10_TX_DMAMUX_CHANNEL, AT32_DMAMUX_UART10_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(uartp->dmarx, AT32_DMAMUX_UART10_RX);
+      dmaSetRequestSource(uartp->dmatx, AT32_DMAMUX_UART10_TX);
+#endif
 #endif
     }
 #endif
@@ -1200,7 +1250,7 @@ void uart_lld_serve_interrupt(UARTDriver *uartp) {
   (void)u->DT;    /* STS reset step 2.*/
 
   if (sts & (USART_STS_BFF  | USART_STS_ROERR | USART_STS_NERR |
-            USART_STS_FERR | USART_STS_PERR)) {
+             USART_STS_FERR | USART_STS_PERR)) {
     u->STS = ~USART_STS_BFF;
     _uart_rx_error_isr_code(uartp, translate_errors(sr));
   }

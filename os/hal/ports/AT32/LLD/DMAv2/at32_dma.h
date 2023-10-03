@@ -15,7 +15,7 @@
 */
 
 /**
- * @file    DMAv1/at32_dma.h
+ * @file    DMAv2/at32_dma.h
  * @brief   DMA helper driver header.
  * @note    This driver uses the new naming convention used for the AT32F4xx
  *          so the "DMA channels" are referred as "DMA streams".
@@ -32,9 +32,9 @@
 /*===========================================================================*/
 
 /**
- * @brief   Requires use of DMAv1 driver model.
+ * @brief   Requires use of DMAv2 driver model.
  */
-#define AT32_USE_DMA_V1            TRUE
+#define AT32_USE_DMA_V2            TRUE
 
 /**
  * @brief   DMA capability.
@@ -48,7 +48,7 @@
  * @details This is the total number of streams among all the DMA units.
  */
 #define AT32_DMA_STREAMS           (AT32_DMA1_NUM_CHANNELS +              \
-                                    AT32_DMA2_NUM_CHANNELS)
+                                     AT32_DMA2_NUM_CHANNELS)
 
 /**
  * @brief   Mask of the ISR bits passed to the DMA callback functions.
@@ -309,10 +309,6 @@
 #include "at32_dmamux.h"
 #endif
 
-#if !defined(AT32_DMA_USE_DMAMUX) || defined(__DOXYGEN__)
-#define AT32_DMA_USE_DMAMUX         FALSE
-#endif
-
 /*===========================================================================*/
 /* Driver data structures and types.                                         */
 /*===========================================================================*/
@@ -330,19 +326,21 @@ typedef void (*at32_dmasts_t)(void *p, uint32_t flags);
  * @brief   AT32 DMA stream descriptor structure.
  */
 typedef struct {
-  DMA_TypeDef           *dma;           /**< @brief Associated DMA.         */
-  DMA_Channel_TypeDef   *channel;       /**< @brief Associated DMA channel. */
-  uint32_t              cmask;          /**< @brief Mask of streams sharing
-                                             the same ISR.                  */
+  DMA_TypeDef            *dma;           /**< @brief Associated DMA.         */
+  DMA_Channel_TypeDef    *channel;       /**< @brief Associated DMA channel. */
+  uint32_t               cmask;          /**< @brief Mask of streams sharing
+                                             the same ISR.                   */
 #if (AT32_DMA_SUPPORTS_CSELR == TRUE) || defined(__DOXYGEN__)
-  volatile uint32_t     *cselr;         /**< @brief Associated CSELR reg.   */
+  volatile uint32_t      *cselr;         /**< @brief Associated CSELR reg.   */
+#elif AT32_DMA_SUPPORTS_DMAMUX == TRUE
+  DMAMUX_Channel_TypeDef *mux;           /**< @brief Associated DMA mux.     */
 #else
-  uint8_t               dummy;          /**< @brief Filler.                 */
+  uint8_t                dummy;          /**< @brief Filler.                 */
 #endif
-  uint8_t               shift;          /**< @brief Bit offset in ISR, CLR
-                                             and CSELR registers.           */
-  uint8_t               selfindex;      /**< @brief Index to self in array. */
-  uint8_t               vector;         /**< @brief Associated IRQ vector.  */
+  uint8_t                shift;          /**< @brief Bit offset in STS, CLR
+                                             and CSELR registers.            */
+  uint8_t                selfindex;      /**< @brief Index to self in array. */
+  uint8_t                vector;         /**< @brief Associated IRQ vector.  */
 } at32_dma_stream_t;
 
 /*===========================================================================*/
@@ -466,7 +464,7 @@ typedef struct {
  */
 #define dmaStreamDisable(dmastp) {                                            \
   (dmastp)->channel->CTRL &= ~(AT32_DMA_CTRL_FDTIEN | AT32_DMA_CTRL_HDTIEN |  \
-                              AT32_DMA_CTRL_DTERRIEN | AT32_DMA_CTRL_CHEN);   \
+                               AT32_DMA_CTRL_DTERRIEN | AT32_DMA_CTRL_CHEN);  \
   dmaStreamClearInterrupt(dmastp);                                            \
 }
 
@@ -550,7 +548,7 @@ extern "C" {
   void dmaStreamFree(const at32_dma_stream_t *dmastp);
   void dmaServeInterrupt(const at32_dma_stream_t *dmastp);
 #if AT32_DMA_SUPPORTS_DMAMUX == TRUE
-  void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t channel, uint32_t per);
+  void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t per);
 #endif
 #ifdef __cplusplus
 }

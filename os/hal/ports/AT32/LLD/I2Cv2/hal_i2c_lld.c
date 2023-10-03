@@ -33,7 +33,7 @@
 #if AT32_I2C_USE_DMA == TRUE
 #define DMAMODE_COMMON                                                      \
   (AT32_DMA_CTRL_PWIDTH_BYTE | AT32_DMA_CTRL_MWIDTH_BYTE |                  \
-   AT32_DMA_CTRL_MINCM       | AT32_DMA_CTRL_DMEIEN      |                  \
+   AT32_DMA_CTRL_MINCM       | AT32_DMA_CTRL_DMERRIEN    |                  \
    AT32_DMA_CTRL_DTERRIEN    | AT32_DMA_CTRL_FDTIEN)
 
 #define I2C1_RX_DMA_CHANNEL                                                 \
@@ -83,7 +83,7 @@
 
 #define I2C_ERROR_MASK                                                          \
   ((uint32_t)(I2C_STS_BUSERR | I2C_STS_ARLOST | I2C_STS_OUF | I2C_STS_PECERR |  \
-              I2C_STS_TMOUT | I2C_STS_ALERTF))
+              I2C_STS_TMOUT  | I2C_STS_ALERTF))
 
 #define I2C_INT_MASK                                                            \
   ((uint32_t)(I2C_STS_TCRLD | I2C_STS_TDC  | I2C_STS_STOPF | I2C_STS_ACKFAILF | \
@@ -185,8 +185,7 @@ static void i2c_lld_setup_tx_transfer(I2CDriver *i2cp) {
   if (n > 255U) {
     n = 255U;
     rlden = I2C_CTRL2_RLDEN;
-  }
-  else {
+  } else {
     rlden = 0U;
   }
 
@@ -707,8 +706,13 @@ void i2c_lld_start(I2CDriver *i2cp) {
         i2cp->txdmamode |= AT32_DMA_CTRL_CHSEL(I2C1_TX_DMA_CHANNEL) |
                            AT32_DMA_CTRL_CHPL(AT32_I2C_I2C1_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+        dmaSetRequestSource(i2cp->dmarx, AT32_I2C_I2C1_RX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C1_RX);
+        dmaSetRequestSource(i2cp->dmatx, AT32_I2C_I2C1_TX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C1_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
         dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX_I2C1_RX);
         dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX_I2C1_TX);
+#endif
 #endif
       }
 #endif /* AT32_I2C_USE_DMA == TRUE */
@@ -747,8 +751,13 @@ void i2c_lld_start(I2CDriver *i2cp) {
         i2cp->txdmamode |= AT32_DMA_CTRL_CHSEL(I2C2_TX_DMA_CHANNEL) |
                            AT32_DMA_CTRL_CHPL(AT32_I2C_I2C2_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+        dmaSetRequestSource(i2cp->dmarx, AT32_I2C_I2C2_RX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C2_RX);
+        dmaSetRequestSource(i2cp->dmatx, AT32_I2C_I2C2_TX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C2_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
         dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX_I2C2_RX);
         dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX_I2C2_TX);
+#endif
 #endif
       }
 #endif /* AT32_I2C_USE_DMA == TRUE */
@@ -787,8 +796,13 @@ void i2c_lld_start(I2CDriver *i2cp) {
         i2cp->txdmamode |= AT32_DMA_CTRL_CHSEL(I2C3_TX_DMA_CHANNEL) |
                            AT32_DMA_CTRL_CHPL(AT32_I2C_I2C3_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+        dmaSetRequestSource(i2cp->dmarx, AT32_I2C_I2C3_RX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C3_RX);
+        dmaSetRequestSource(i2cp->dmatx, AT32_I2C_I2C3_TX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C3_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
         dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX_I2C3_RX);
         dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX_I2C3_TX);
+#endif
 #endif
       }
 #endif /* AT32_I2C_USE_DMA == TRUE */
@@ -827,8 +841,13 @@ void i2c_lld_start(I2CDriver *i2cp) {
         i2cp->txdmamode |= AT32_DMA_CTRL_CHSEL(I2C4_TX_DMA_CHANNEL) |
                            AT32_DMA_CTRL_CHPL(AT32_I2C_I2C4_DMA_PRIORITY);
 #if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+        dmaSetRequestSource(i2cp->dmarx, AT32_I2C_I2C4_RX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C4_RX);
+        dmaSetRequestSource(i2cp->dmatx, AT32_I2C_I2C4_TX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C4_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
         dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX_I2C4_RX);
         dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX_I2C4_TX);
+#endif
 #endif
       }
 #endif /* AT32_I2C_USE_DMA == TRUE */

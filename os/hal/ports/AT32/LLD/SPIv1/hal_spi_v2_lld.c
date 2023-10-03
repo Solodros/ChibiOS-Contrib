@@ -31,52 +31,52 @@
 /*===========================================================================*/
 
 #define SPI1_RX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_SPI_SPI1_RX_DMA_STREAM,                        \
-                       AT32_SPI1_RX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_SPI_SPI1_RX_DMA_STREAM,                          \
+                      AT32_SPI1_RX_DMA_CHN)
 
 #define SPI1_TX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_SPI_SPI1_TX_DMA_STREAM,                        \
-                       AT32_SPI1_TX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_SPI_SPI1_TX_DMA_STREAM,                          \
+                      AT32_SPI1_TX_DMA_CHN)
 
 #define SPI2_RX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_SPI_SPI2_RX_DMA_STREAM,                        \
-                       AT32_SPI2_RX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_SPI_SPI2_RX_DMA_STREAM,                          \
+                      AT32_SPI2_RX_DMA_CHN)
 
 #define SPI2_TX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_SPI_SPI2_TX_DMA_STREAM,                        \
-                       AT32_SPI2_TX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_SPI_SPI2_TX_DMA_STREAM,                          \
+                      AT32_SPI2_TX_DMA_CHN)
 
 #define SPI3_RX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_SPI_SPI3_RX_DMA_STREAM,                        \
-                       AT32_SPI3_RX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_SPI_SPI3_RX_DMA_STREAM,                          \
+                      AT32_SPI3_RX_DMA_CHN)
 
 #define SPI3_TX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_SPI_SPI3_TX_DMA_STREAM,                        \
-                       AT32_SPI3_TX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_SPI_SPI3_TX_DMA_STREAM,                          \
+                      AT32_SPI3_TX_DMA_CHN)
 
 #define SPI4_RX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_SPI_SPI4_RX_DMA_STREAM,                        \
-                       AT32_SPI4_RX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_SPI_SPI4_RX_DMA_STREAM,                          \
+                      AT32_SPI4_RX_DMA_CHN)
 
 #define SPI4_TX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_SPI_SPI4_TX_DMA_STREAM,                        \
-                       AT32_SPI4_TX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_SPI_SPI4_TX_DMA_STREAM,                          \
+                      AT32_SPI4_TX_DMA_CHN)
 
 #define SPI5_RX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_SPI_SPI5_RX_DMA_STREAM,                        \
-                       AT32_SPI5_RX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_SPI_SPI5_RX_DMA_STREAM,                          \
+                      AT32_SPI5_RX_DMA_CHN)
 
 #define SPI5_TX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_SPI_SPI5_TX_DMA_STREAM,                        \
-                       AT32_SPI5_TX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_SPI_SPI5_TX_DMA_STREAM,                          \
+                      AT32_SPI5_TX_DMA_CHN)
 
 #define SPI6_RX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_SPI_SPI6_RX_DMA_STREAM,                        \
-                       AT32_SPI6_RX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_SPI_SPI6_RX_DMA_STREAM,                          \
+                      AT32_SPI6_RX_DMA_CHN)
 
 #define SPI6_TX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_SPI_SPI6_TX_DMA_STREAM,                        \
-                       AT32_SPI6_TX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_SPI_SPI6_TX_DMA_STREAM,                          \
+                      AT32_SPI6_TX_DMA_CHN)
 
 /*===========================================================================*/
 /* Driver exported variables.                                                */
@@ -126,12 +126,12 @@ static void spi_lld_configure(SPIDriver *spip) {
   if (spip->config->slave) {
     spip->spi->CTRL1 = spip->config->ctrl1 & ~(SPI_CTRL1_MSTEN | SPI_CTRL1_SPIEN);
     spip->spi->CTRL2 = spip->config->ctrl2 |
-                        SPI_CTRL2_DMAREN | SPI_CTRL2_DMATEN;
+                        SPI_CTRL2_DMAREN   | SPI_CTRL2_DMATEN;
   }
   else {
     spip->spi->CTRL1 = (spip->config->ctrl1 | SPI_CTRL1_MSTEN) & ~SPI_CTRL1_SPIEN;
     spip->spi->CTRL2 = spip->config->ctrl2 | SPI_CTRL2_HWCSOE |
-                        SPI_CTRL2_DMAREN | SPI_CTRL2_DMATEN;
+                        SPI_CTRL2_DMAREN   | SPI_CTRL2_DMATEN;
   }
 }
 
@@ -226,7 +226,7 @@ static msg_t spi_lld_stop_abort(SPIDriver *spip) {
 static void spi_lld_serve_rx_interrupt(SPIDriver *spip, uint32_t flags) {
 
   /* DMA errors handling.*/
-  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMTERRF)) != 0) {
+  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMERRF)) != 0) {
 #if defined(AT32_SPI_DMA_ERROR_HOOK)
     /* Hook first, if defined.*/
     AT32_SPI_DMA_ERROR_HOOK(spip);
@@ -266,7 +266,7 @@ static void spi_lld_serve_rx_interrupt(SPIDriver *spip, uint32_t flags) {
 static void spi_lld_serve_tx_interrupt(SPIDriver *spip, uint32_t flags) {
 
   /* DMA errors handling.*/
-  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMTERRF)) != 0) {
+  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMERRF)) != 0) {
 #if defined(AT32_SPI_DMA_ERROR_HOOK)
     /* Hook first, if defined.*/
     AT32_SPI_DMA_ERROR_HOOK(spip);
@@ -332,14 +332,14 @@ void spi_lld_init(void) {
   SPID1.dmatx     = NULL;
   SPID1.rxdmamode = AT32_DMA_CTRL_CHSEL(SPI1_RX_DMA_CHANNEL) |
                     AT32_DMA_CTRL_CHPL(AT32_SPI_SPI1_DMA_PRIORITY) |
-                    AT32_DMA_CTRL_DTD_P2M |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
   SPID1.txdmamode = AT32_DMA_CTRL_CHSEL(SPI1_TX_DMA_CHANNEL) |
                     AT32_DMA_CTRL_CHPL(AT32_SPI_SPI1_DMA_PRIORITY) |
-                    AT32_DMA_CTRL_DTD_M2P |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_M2P  |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #endif
 
@@ -350,14 +350,14 @@ void spi_lld_init(void) {
   SPID2.dmatx     = NULL;
   SPID2.rxdmamode = AT32_DMA_CTRL_CHSEL(SPI2_RX_DMA_CHANNEL) |
                     AT32_DMA_CTRL_CHPL(AT32_SPI_SPI2_DMA_PRIORITY) |
-                    AT32_DMA_CTRL_DTD_P2M |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
   SPID2.txdmamode = AT32_DMA_CTRL_CHSEL(SPI2_TX_DMA_CHANNEL) |
                     AT32_DMA_CTRL_CHPL(AT32_SPI_SPI2_DMA_PRIORITY) |
-                    AT32_DMA_CTRL_DTD_M2P |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_M2P  |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #endif
 
@@ -368,14 +368,14 @@ void spi_lld_init(void) {
   SPID3.dmatx     = NULL;
   SPID3.rxdmamode = AT32_DMA_CTRL_CHSEL(SPI3_RX_DMA_CHANNEL) |
                     AT32_DMA_CTRL_CHPL(AT32_SPI_SPI3_DMA_PRIORITY) |
-                    AT32_DMA_CTRL_DTD_P2M |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
   SPID3.txdmamode = AT32_DMA_CTRL_CHSEL(SPI3_TX_DMA_CHANNEL) |
                     AT32_DMA_CTRL_CHPL(AT32_SPI_SPI3_DMA_PRIORITY) |
-                    AT32_DMA_CTRL_DTD_M2P |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_M2P  |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #endif
 
@@ -386,14 +386,14 @@ void spi_lld_init(void) {
   SPID4.dmatx     = NULL;
   SPID4.rxdmamode = AT32_DMA_CTRL_CHSEL(SPI4_RX_DMA_CHANNEL) |
                     AT32_DMA_CTRL_CHPL(AT32_SPI_SPI4_DMA_PRIORITY) |
-                    AT32_DMA_CTRL_DTD_P2M |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
   SPID4.txdmamode = AT32_DMA_CTRL_CHSEL(SPI4_TX_DMA_CHANNEL) |
                     AT32_DMA_CTRL_CHPL(AT32_SPI_SPI4_DMA_PRIORITY) |
-                    AT32_DMA_CTRL_DTD_M2P |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_M2P  |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #endif
 
@@ -404,14 +404,14 @@ void spi_lld_init(void) {
   SPID5.dmatx     = NULL;
   SPID5.rxdmamode = AT32_DMA_CTRL_CHSEL(SPI5_RX_DMA_CHANNEL) |
                     AT32_DMA_CTRL_CHPL(AT32_SPI_SPI5_DMA_PRIORITY) |
-                    AT32_DMA_CTRL_DTD_P2M |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
   SPID5.txdmamode = AT32_DMA_CTRL_CHSEL(SPI5_TX_DMA_CHANNEL) |
                     AT32_DMA_CTRL_CHPL(AT32_SPI_SPI5_DMA_PRIORITY) |
-                    AT32_DMA_CTRL_DTD_M2P |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_M2P  |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #endif
 
@@ -422,14 +422,14 @@ void spi_lld_init(void) {
   SPID6.dmatx     = NULL;
   SPID6.rxdmamode = AT32_DMA_CTRL_CHSEL(SPI6_RX_DMA_CHANNEL) |
                     AT32_DMA_CTRL_CHPL(AT32_SPI_SPI6_DMA_PRIORITY) |
-                    AT32_DMA_CTRL_DTD_P2M |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
   SPID6.txdmamode = AT32_DMA_CTRL_CHSEL(SPI6_TX_DMA_CHANNEL) |
                     AT32_DMA_CTRL_CHPL(AT32_SPI_SPI6_DMA_PRIORITY) |
-                    AT32_DMA_CTRL_DTD_M2P |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_M2P  |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #endif
 }
@@ -464,9 +464,14 @@ msg_t spi_lld_start(SPIDriver *spip) {
       }
       crmEnableSPI1(true);
       crmResetSPI1();
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(spip->dmarx, AT32_SPI_SPI1_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI1_RX);
       dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI1_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI1_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX_SPI1_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX_SPI1_TX);
+#endif
 #endif
     }
 #endif
@@ -482,9 +487,14 @@ msg_t spi_lld_start(SPIDriver *spip) {
       }
       crmEnableSPI2(true);
       crmResetSPI2();
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(spip->dmarx, AT32_SPI_SPI2_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI2_RX);
       dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI2_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI2_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX_SPI2_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX_SPI2_TX);
+#endif
 #endif
     }
 #endif
@@ -500,9 +510,14 @@ msg_t spi_lld_start(SPIDriver *spip) {
       }
       crmEnableSPI3(true);
       crmResetSPI3();
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(spip->dmarx, AT32_SPI_SPI3_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI3_RX);
-      dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI3_TX_DMAMUX_CHANNEL,AT32_DMAMUX_SPI3_TX);
+      dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI3_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI3_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX_SPI3_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX_SPI3_TX);
+#endif
 #endif
     }
 #endif
@@ -518,9 +533,14 @@ msg_t spi_lld_start(SPIDriver *spip) {
       }
       crmEnableSPI4(true);
       crmResetSPI4();
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(spip->dmarx, AT32_SPI_SPI4_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI4_RX);
       dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI4_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI4_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX_SPI4_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX_SPI4_TX);
+#endif
 #endif
     }
 #endif
@@ -536,9 +556,14 @@ msg_t spi_lld_start(SPIDriver *spip) {
       }
       crmEnableSPI5(true);
       crmResetSPI5();
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(spip->dmarx, AT32_SPI_SPI5_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI5_RX);
       dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI5_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI5_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX_SPI5_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX_SPI5_TX);
+#endif
 #endif
     }
 #endif
@@ -554,9 +579,14 @@ msg_t spi_lld_start(SPIDriver *spip) {
       }
       crmEnableSPI6(true);
       crmResetSPI6();
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(spip->dmarx, AT32_SPI_SPI6_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI6_RX);
       dmaSetRequestSource(spip->dmatx, AT32_SPI_SPI6_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI6_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX_SPI6_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX_SPI6_TX);
+#endif
 #endif
     }
 #endif

@@ -53,7 +53,7 @@
  * @brief   Maximum ADC clock frequency.
  */
 #if !defined(AT32_ADCCLK_MAX)
-#if defined(AT32F435_7xx)
+#if defined(AT32F435_7xx) || defined(AT32F423xx)
 #define AT32_ADCCLK_MAX        80000000
 #else
 #define AT32_ADCCLK_MAX        28000000
@@ -108,7 +108,7 @@
  * @name    Sampling rates
  * @{
  */
-#if defined(AT32F435_7xx) || defined(__DOXYGEN__)
+#if defined(AT32F435_7xx) || defined(AT32F423xx) || defined(AT32F423xx)|| defined(__DOXYGEN__)
 #define ADC_SAMPLE_2P5          0   /**< @brief 2.5 cycles sampling time.    */
 #define ADC_SAMPLE_6P5          1   /**< @brief 6.5 cycles sampling time.    */
 #define ADC_SAMPLE_12P5         2   /**< @brief 12.5 cycles sampling time.   */
@@ -288,9 +288,7 @@
 #error "ADC driver activated but no ADC peripheral assigned"
 #endif
 
-#if AT32_DMA_SUPPORTS_DMAMUX
-
-#else /* !AT32_DMA_SUPPORTS_DMAMUX */
+#if !AT32_DMA_SUPPORTS_DMAMUX
 
 /* Check on the validity of the assigned DMA channels.*/
 #if AT32_ADC_USE_ADC1 &&                                                   \
@@ -421,28 +419,28 @@ typedef uint32_t adcerror_t;
  * @name    Sampling rate settings helper macros
  * @{
  */
-#define ADC_SPT2_CSPT0(n)    ((n) << 0)  /**< @brief AN0 sampling time.  */
-#define ADC_SPT2_CSPT1(n)    ((n) << 3)  /**< @brief AN1 sampling time.  */
-#define ADC_SPT2_CSPT2(n)    ((n) << 6)  /**< @brief AN2 sampling time.  */
-#define ADC_SPT2_CSPT3(n)    ((n) << 9)  /**< @brief AN3 sampling time.  */
-#define ADC_SPT2_CSPT4(n)    ((n) << 12) /**< @brief AN4 sampling time.  */
-#define ADC_SPT2_CSPT5(n)    ((n) << 15) /**< @brief AN5 sampling time.  */
-#define ADC_SPT2_CSPT6(n)    ((n) << 18) /**< @brief AN6 sampling time.  */
-#define ADC_SPT2_CSPT7(n)    ((n) << 21) /**< @brief AN7 sampling time.  */
-#define ADC_SPT2_CSPT8(n)    ((n) << 24) /**< @brief AN8 sampling time.  */
-#define ADC_SPT2_CSPT9(n)    ((n) << 27) /**< @brief AN9 sampling time.  */
+#define ADC_SPT2_CSPT0(n)       ((n) << 0)  /**< @brief AN0 sampling time.  */
+#define ADC_SPT2_CSPT1(n)       ((n) << 3)  /**< @brief AN1 sampling time.  */
+#define ADC_SPT2_CSPT2(n)       ((n) << 6)  /**< @brief AN2 sampling time.  */
+#define ADC_SPT2_CSPT3(n)       ((n) << 9)  /**< @brief AN3 sampling time.  */
+#define ADC_SPT2_CSPT4(n)       ((n) << 12) /**< @brief AN4 sampling time.  */
+#define ADC_SPT2_CSPT5(n)       ((n) << 15) /**< @brief AN5 sampling time.  */
+#define ADC_SPT2_CSPT6(n)       ((n) << 18) /**< @brief AN6 sampling time.  */
+#define ADC_SPT2_CSPT7(n)       ((n) << 21) /**< @brief AN7 sampling time.  */
+#define ADC_SPT2_CSPT8(n)       ((n) << 24) /**< @brief AN8 sampling time.  */
+#define ADC_SPT2_CSPT9(n)       ((n) << 27) /**< @brief AN9 sampling time.  */
 
-#define ADC_SPT1_CSPT10(n)   ((n) << 0)  /**< @brief AN10 sampling time. */
-#define ADC_SPT1_CSPT11(n)   ((n) << 3)  /**< @brief AN11 sampling time. */
-#define ADC_SPT1_CSPT12(n)   ((n) << 6)  /**< @brief AN12 sampling time. */
-#define ADC_SPT1_CSPT13(n)   ((n) << 9)  /**< @brief AN13 sampling time. */
-#define ADC_SPT1_CSPT14(n)   ((n) << 12) /**< @brief AN14 sampling time. */
-#define ADC_SPT1_CSPT15(n)   ((n) << 15) /**< @brief AN15 sampling time. */
-#define ADC_SPT1_CSPT16(n)   ((n) << 18) /**< @brief Temperature Sensor
-                                                 sampling time.          */
-#define ADC_SPT1_CSPT17(n)   ((n) << 21) /**< @brief Voltage Reference
-                                                 sampling time.          */
-#define ADC_SPT1_CSPT18(n)   ((n) << 24) /**< @brief VBAT sampling time. */
+#define ADC_SPT1_CSPT10(n)      ((n) << 0)  /**< @brief AN10 sampling time. */
+#define ADC_SPT1_CSPT11(n)      ((n) << 3)  /**< @brief AN11 sampling time. */
+#define ADC_SPT1_CSPT12(n)      ((n) << 6)  /**< @brief AN12 sampling time. */
+#define ADC_SPT1_CSPT13(n)      ((n) << 9)  /**< @brief AN13 sampling time. */
+#define ADC_SPT1_CSPT14(n)      ((n) << 12) /**< @brief AN14 sampling time. */
+#define ADC_SPT1_CSPT15(n)      ((n) << 15) /**< @brief AN15 sampling time. */
+#define ADC_SPT1_CSPT16(n)      ((n) << 18) /**< @brief Temperature Sensor
+                                                 sampling time.             */
+#define ADC_SPT1_CSPT17(n)      ((n) << 21) /**< @brief Voltage Reference
+                                                 sampling time.             */
+#define ADC_SPT1_CSPT18(n)      ((n) << 24) /**< @brief VBAT sampling time. */
 /** @} */
 
 /**
@@ -452,11 +450,11 @@ typedef uint32_t adcerror_t;
 /**
  * @brief   High voltage monitoring boundary.
  */
-#define ADC_VMHB(n)              ((n > ADC_VMHB_HB) ? ADC_VMHB_HB : n)
+#define ADC_VMHB(n)            ((n > ADC_VMHB_HB) ? ADC_VMHB_HB : n)
 /**
  * @brief   Low voltage monitoring boundary.
  */
-#define ADC_VMHL(n)              ((n > ADC_VMHL_LB) ? ADC_VMHL_LB : n)
+#define ADC_VMHL(n)            ((n > ADC_VMHL_LB) ? ADC_VMHL_LB : n)
 /** @} */
 
 /*===========================================================================*/

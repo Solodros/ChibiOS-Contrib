@@ -40,7 +40,7 @@
 #define AT32_I2S_MODE_RX                   2
 #define AT32_I2S_MODE_TX                   4
 #define AT32_I2S_MODE_RXTX                 (AT32_I2S_MODE_RX |            \
-                                             AT32_I2S_MODE_TX)
+                                            AT32_I2S_MODE_TX)
 /** @} */
 
 /**
@@ -101,7 +101,7 @@
  */
 #if !defined(AT32_I2S_SPI1_MODE) || defined(__DOXYGEN__)
 #define AT32_I2S_SPI1_MODE                 (AT32_I2S_MODE_MASTER |        \
-                                             AT32_I2S_MODE_RX)
+                                            AT32_I2S_MODE_RX)
 #endif
 
 /**
@@ -109,7 +109,7 @@
  */
 #if !defined(AT32_I2S_SPI2_MODE) || defined(__DOXYGEN__)
 #define AT32_I2S_SPI2_MODE                 (AT32_I2S_MODE_MASTER |        \
-                                             AT32_I2S_MODE_RX)
+                                            AT32_I2S_MODE_RX)
 #endif
 
 /**
@@ -117,7 +117,7 @@
  */
 #if !defined(AT32_I2S_SPI3_MODE) || defined(__DOXYGEN__)
 #define AT32_I2S_SPI3_MODE                 (AT32_I2S_MODE_MASTER |        \
-                                             AT32_I2S_MODE_RX)
+                                            AT32_I2S_MODE_RX)
 #endif
 
 /**
@@ -125,7 +125,7 @@
  */
 #if !defined(AT32_I2S_SI4_MODE) || defined(__DOXYGEN__)
 #define AT32_I2S_SI4_MODE                 (AT32_I2S_MODE_MASTER |        \
-                                             AT32_I2S_MODE_RX)
+                                           AT32_I2S_MODE_RX)
 #endif
 
 /**
@@ -292,9 +292,6 @@
 #error "Invalid DMA priority assigned to SPI4"
 #endif
 
-/* The following checks are only required when there is a DMA able to
-   reassign streams to different channels.*/
-#if AT32_ADVANCED_DMA
 /* Check on the presence of the DMA streams settings in mcuconf.h.*/
 #if AT32_I2S_USE_SPI1 && (!defined(AT32_I2S_SPI1_RX_DMA_STREAM) ||        \
                            !defined(AT32_I2S_SPI1_TX_DMA_STREAM))
@@ -315,6 +312,10 @@
                            !defined(AT32_I2S_SPI4_TX_DMA_STREAM))
 #error "SPI4 DMA streams not defined"
 #endif
+
+/* The following checks are only required when there is a DMA able to
+   reassign streams to different channels.*/
+#if AT32_ADVANCED_DMA && !AT32_DMA_SUPPORTS_DMAMUX
 
 /* Check on the validity of the assigned DMA channels.*/
 #if AT32_I2S_USE_SPI1 &&                                                   \
@@ -375,13 +376,13 @@
  */
 #define i2s_lld_driver_fields                                               \
   /* Pointer to the SPIx registers block.*/                                 \
-  SPI_TypeDef               *spi;                                           \
+  SPI_TypeDef              *spi;                                            \
   /* Calculated part of the I2SCFGR register.*/                             \
   uint16_t                  cfg;                                            \
   /* Receive DMA stream or @p NULL.*/                                       \
-  const at32_dma_stream_t  *dmarx;                                         \
+  const at32_dma_stream_t  *dmarx;                                          \
   /* Transmit DMA stream or @p NULL.*/                                      \
-  const at32_dma_stream_t  *dmatx;                                         \
+  const at32_dma_stream_t  *dmatx;                                          \
   /* RX DMA mode bit mask.*/                                                \
   uint32_t                  rxdmamode;                                      \
   /* TX DMA mode bit mask.*/                                                \
@@ -392,7 +393,7 @@
  */
 #define i2s_lld_config_fields                                               \
   /* Configuration of the I2SCFGR register.                                 \
-     NOTE: See the AT32 reference manual, this register is used for        \
+     NOTE: See the AT32 reference manual, this register is used for         \
            the I2S configuration, the following bits must not be            \
            specified because handled directly by the driver:                \
            - I2SMOD                                                         \
@@ -401,7 +402,7 @@
    */                                                                       \
   int16_t                   i2scfgr;                                        \
   /* Configuration of the I2SPR register.                                   \
-     NOTE: See the AT32 reference manual, this register is used for        \
+     NOTE: See the AT32 reference manual, this register is used for         \
            the I2S clock setup.*/                                           \
   int16_t                   i2spr
 

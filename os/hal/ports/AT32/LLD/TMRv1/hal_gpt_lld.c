@@ -884,11 +884,11 @@ void gpt_lld_start(GPTDriver *gptp) {
 
   /* Timer configuration.*/
   gptp->tmr->CTRL1 = 0;                          /* Initially stopped.       */
-  gptp->tmrCTRL2   = gptp->config->ctrl2;
+  gptp->tmr->CTRL2 = gptp->config->ctrl2;
   gptp->tmr->DIV   = div;                        /* Prescaler value.         */
   gptp->tmr->ISTS  = 0;                          /* Clear pending IRQs.      */
   gptp->tmr->IDEN  = gptp->config->iden &        /* DMA-related IDEN bits.   */
-                    ~AT32_TMR_IDEN_IRQ_MASK;
+                     ~AT32_TMR_IDEN_IRQ_MASK;
 }
 
 /**

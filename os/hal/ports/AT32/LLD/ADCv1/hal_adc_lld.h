@@ -96,30 +96,6 @@
 #endif
 
 /**
- * @brief   ADC1 DMA priority (0..3|lowest..highest).
- */
-#if !defined(AT32_ADC_ADC1_DMA_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC1_DMA_PRIORITY         2
-#endif
-
-/**
- * @brief   ADC1 interrupt priority level setting.
- */
-#if !defined(AT32_ADC_ADC1_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC1_IRQ_PRIORITY         5
-#endif
-
-/**
- * @brief   ADC1 DMA MUX setting.
- */
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
-#if !defined(AT32_ADC_ADC1_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC1_DMAMUX_CHANNEL       1
-#endif
-#endif
-/** @} */
-
-/**
  * @brief   ADC2 driver enable switch.
  * @details If set to @p TRUE the support for ADC2 is included.
  * @note    The default is @p TRUE.
@@ -127,30 +103,6 @@
 #if !defined(AT32_ADC_USE_ADC2) || defined(__DOXYGEN__)
 #define AT32_ADC_USE_ADC2                  FALSE
 #endif
-
-/**
- * @brief   ADC2 DMA priority (0..3|lowest..highest).
- */
-#if !defined(AT32_ADC_ADC2_DMA_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC2_DMA_PRIORITY         2
-#endif
-
-/**
- * @brief   ADC2 interrupt priority level setting.
- */
-#if !defined(AT32_ADC_ADC2_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC2_IRQ_PRIORITY         5
-#endif
-
-/**
- * @brief   ADC2 DMA MUX setting.
- */
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
-#if !defined(AT32_ADC_ADC2_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
-#define AT32_ADC_ADC2_DMAMUX_CHANNEL       1
-#endif
-#endif
-/** @} */
 
 /**
  * @brief   ADC3 driver enable switch.
@@ -162,10 +114,38 @@
 #endif
 
 /**
+ * @brief   ADC1 DMA priority (0..3|lowest..highest).
+ */
+#if !defined(AT32_ADC_ADC1_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC1_DMA_PRIORITY         2
+#endif
+
+/**
+ * @brief   ADC2 DMA priority (0..3|lowest..highest).
+ */
+#if !defined(AT32_ADC_ADC2_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC2_DMA_PRIORITY         2
+#endif
+
+/**
  * @brief   ADC3 DMA priority (0..3|lowest..highest).
  */
 #if !defined(AT32_ADC_ADC3_DMA_PRIORITY) || defined(__DOXYGEN__)
 #define AT32_ADC_ADC3_DMA_PRIORITY         2
+#endif
+
+/**
+ * @brief   ADC1 interrupt priority level setting.
+ */
+#if !defined(AT32_ADC_ADC1_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC1_IRQ_PRIORITY         5
+#endif
+
+/**
+ * @brief   ADC2 interrupt priority level setting.
+ */
+#if !defined(AT32_ADC_ADC2_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC2_IRQ_PRIORITY         5
 #endif
 
 /**
@@ -175,13 +155,29 @@
 #define AT32_ADC_ADC3_IRQ_PRIORITY         5
 #endif
 
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_USE_DMA_V1 
+
+/**
+ * @brief   ADC1 DMA MUX setting.
+ */
+#if !defined(AT32_ADC_ADC1_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC1_DMAMUX_CHANNEL       1
+#endif
+
+/**
+ * @brief   ADC2 DMA MUX setting.
+ */
+#if !defined(AT32_ADC_ADC2_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_ADC_ADC2_DMAMUX_CHANNEL       1
+#endif
+
 /**
  * @brief   ADC3 DMA MUX setting.
  */
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
 #if !defined(AT32_ADC_ADC3_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
 #define AT32_ADC_ADC3_DMAMUX_CHANNEL       1
 #endif
+
 #endif
 /** @} */
 
@@ -306,27 +302,27 @@ typedef enum {
  * @name    Sampling rate settings helper macros
  * @{
  */
-#define ADC_SPT2_CSPT0(n)    ((n) << 0)  /**< @brief AN0 sampling time.  */
-#define ADC_SPT2_CSPT1(n)    ((n) << 3)  /**< @brief AN1 sampling time.  */
-#define ADC_SPT2_CSPT2(n)    ((n) << 6)  /**< @brief AN2 sampling time.  */
-#define ADC_SPT2_CSPT3(n)    ((n) << 9)  /**< @brief AN3 sampling time.  */
-#define ADC_SPT2_CSPT4(n)    ((n) << 12) /**< @brief AN4 sampling time.  */
-#define ADC_SPT2_CSPT5(n)    ((n) << 15) /**< @brief AN5 sampling time.  */
-#define ADC_SPT2_CSPT6(n)    ((n) << 18) /**< @brief AN6 sampling time.  */
-#define ADC_SPT2_CSPT7(n)    ((n) << 21) /**< @brief AN7 sampling time.  */
-#define ADC_SPT2_CSPT8(n)    ((n) << 24) /**< @brief AN8 sampling time.  */
-#define ADC_SPT2_CSPT9(n)    ((n) << 27) /**< @brief AN9 sampling time.  */
+#define ADC_SPT2_CSPT0(n)       ((n) << 0)  /**< @brief AN0 sampling time.  */
+#define ADC_SPT2_CSPT1(n)       ((n) << 3)  /**< @brief AN1 sampling time.  */
+#define ADC_SPT2_CSPT2(n)       ((n) << 6)  /**< @brief AN2 sampling time.  */
+#define ADC_SPT2_CSPT3(n)       ((n) << 9)  /**< @brief AN3 sampling time.  */
+#define ADC_SPT2_CSPT4(n)       ((n) << 12) /**< @brief AN4 sampling time.  */
+#define ADC_SPT2_CSPT5(n)       ((n) << 15) /**< @brief AN5 sampling time.  */
+#define ADC_SPT2_CSPT6(n)       ((n) << 18) /**< @brief AN6 sampling time.  */
+#define ADC_SPT2_CSPT7(n)       ((n) << 21) /**< @brief AN7 sampling time.  */
+#define ADC_SPT2_CSPT8(n)       ((n) << 24) /**< @brief AN8 sampling time.  */
+#define ADC_SPT2_CSPT9(n)       ((n) << 27) /**< @brief AN9 sampling time.  */
 
-#define ADC_SPT1_CSPT10(n)   ((n) << 0)  /**< @brief AN10 sampling time. */
-#define ADC_SPT1_CSPT11(n)   ((n) << 3)  /**< @brief AN11 sampling time. */
-#define ADC_SPT1_CSPT12(n)   ((n) << 6)  /**< @brief AN12 sampling time. */
-#define ADC_SPT1_CSPT13(n)   ((n) << 9)  /**< @brief AN13 sampling time. */
-#define ADC_SPT1_CSPT14(n)   ((n) << 12) /**< @brief AN14 sampling time. */
-#define ADC_SPT1_CSPT15(n)   ((n) << 15) /**< @brief AN15 sampling time. */
-#define ADC_SPT1_CSPT16(n)   ((n) << 18) /**< @brief Temperature Sensor
-                                                 sampling time.          */
-#define ADC_SPT1_CSPT17(n)   ((n) << 21) /**< @brief Voltage Reference
-                                                 sampling time.          */
+#define ADC_SPT1_CSPT10(n)      ((n) << 0)  /**< @brief AN10 sampling time. */
+#define ADC_SPT1_CSPT11(n)      ((n) << 3)  /**< @brief AN11 sampling time. */
+#define ADC_SPT1_CSPT12(n)      ((n) << 6)  /**< @brief AN12 sampling time. */
+#define ADC_SPT1_CSPT13(n)      ((n) << 9)  /**< @brief AN13 sampling time. */
+#define ADC_SPT1_CSPT14(n)      ((n) << 12) /**< @brief AN14 sampling time. */
+#define ADC_SPT1_CSPT15(n)      ((n) << 15) /**< @brief AN15 sampling time. */
+#define ADC_SPT1_CSPT16(n)      ((n) << 18) /**< @brief Temperature Sensor
+                                                 sampling time.             */
+#define ADC_SPT1_CSPT17(n)      ((n) << 21) /**< @brief Voltage Reference
+                                                 sampling time.             */
 /** @} */
 
 /*===========================================================================*/

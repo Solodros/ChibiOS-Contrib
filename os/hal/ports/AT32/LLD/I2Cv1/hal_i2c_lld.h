@@ -190,7 +190,8 @@
 #define AT32_I2C_I2C3_TX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 4)
 #endif
 
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_USE_DMA_V1 
+
 /**
  * @brief   I2C1 DMA MUX setting.
  */
@@ -217,6 +218,7 @@
 #define AT32_I2C_I2C3_RX_DMAMUX_CHANNEL    1
 #define AT32_I2C_I2C3_TX_DMAMUX_CHANNEL    2
 #endif
+
 #endif
 /** @} */
 
@@ -274,7 +276,7 @@
 
 /* The following checks are only required when there is a DMA able to
    reassign streams to different channels.*/
-#if AT32_ADVANCED_DMA && (!AT32_DMA_SUPPORTS_DMAMUX || (AT32_DMA_SUPPORTS_DMAMUX && !AT32_DMA_USE_DMAMUX))
+#if AT32_ADVANCED_DMA && (!AT32_DMA_SUPPORTS_DMAMUX)
 
 #if AT32_I2C_USE_I2C1 && (!defined(AT32_I2C_I2C1_RX_DMA_STREAM) ||         \
                            !defined(AT32_I2C_I2C1_TX_DMA_STREAM))

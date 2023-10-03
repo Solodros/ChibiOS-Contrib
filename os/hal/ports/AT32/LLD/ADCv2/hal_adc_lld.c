@@ -75,7 +75,7 @@ ADCDriver ADCD3;
 static void adc_lld_serve_rx_interrupt(ADCDriver *adcp, uint32_t flags) {
 
   /* DMA errors handling.*/
-  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMTERRF)) != 0) {
+  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMERRF)) != 0) {
     /* DMA, this could help only if the DMA tries to access an unmapped
        address space or violates alignment rules.*/
     _adc_isr_error_code(adcp, ADC_ERR_DMAFAILURE);
@@ -192,10 +192,10 @@ void adc_lld_init(void) {
   ADCD1.dmastp  = NULL;
   ADCD1.dmamode = AT32_DMA_CTRL_CHSEL(ADC1_DMA_CHANNEL) |
                   AT32_DMA_CTRL_CHPL(AT32_ADC_ADC1_DMA_PRIORITY) |
-                  AT32_DMA_CTRL_DTD_P2M |
+                  AT32_DMA_CTRL_DTD_P2M      |
                   AT32_DMA_CTRL_MWIDTH_HWORD | AT32_DMA_CTRL_PWIDTH_HWORD |
                   AT32_DMA_CTRL_MINCM        | AT32_DMA_CTRL_FDTIEN       |
-                  AT32_DMA_CTRL_DMEIEN       | AT32_DMA_CTRL_DTERRIEN;
+                  AT32_DMA_CTRL_DMERRIEN     | AT32_DMA_CTRL_DTERRIEN;
 #endif
 
 #if AT32_ADC_USE_ADC2
@@ -205,10 +205,10 @@ void adc_lld_init(void) {
   ADCD2.dmastp  = NULL;
   ADCD2.dmamode = AT32_DMA_CTRL_CHSEL(ADC2_DMA_CHANNEL) |
                   AT32_DMA_CTRL_CHPL(AT32_ADC_ADC2_DMA_PRIORITY) |
-                  AT32_DMA_CTRL_DTD_P2M |
+                  AT32_DMA_CTRL_DTD_P2M      |
                   AT32_DMA_CTRL_MWIDTH_HWORD | AT32_DMA_CTRL_PWIDTH_HWORD |
-                  AT32_DMA_CTRL_MINCM        | AT32_DMA_CTRL_FDTIEN        |
-                  AT32_DMA_CTRL_DMEIEN       | AT32_DMA_CTRL_DTERRIEN;
+                  AT32_DMA_CTRL_MINCM        | AT32_DMA_CTRL_FDTIEN       |
+                  AT32_DMA_CTRL_DMERRIEN     | AT32_DMA_CTRL_DTERRIEN;
 #endif
 
 #if AT32_ADC_USE_ADC3
@@ -218,10 +218,10 @@ void adc_lld_init(void) {
   ADCD3.dmastp  = NULL;
   ADCD3.dmamode = AT32_DMA_CTRL_CHSEL(ADC3_DMA_CHANNEL) |
                   AT32_DMA_CTRL_CHPL(AT32_ADC_ADC3_DMA_PRIORITY) |
-                  AT32_DMA_CTRL_DTD_P2M |
+                  AT32_DMA_CTRL_DTD_P2M      |
                   AT32_DMA_CTRL_MWIDTH_HWORD | AT32_DMA_CTRL_PWIDTH_HWORD |
-                  AT32_DMA_CTRL_MINCM        | AT32_DMA_CTRL_FDTIEN        |
-                  AT32_DMA_CTRL_DMEIEN       | AT32_DMA_CTRL_DTERRIEN;
+                  AT32_DMA_CTRL_MINCM        | AT32_DMA_CTRL_FDTIEN       |
+                  AT32_DMA_CTRL_DMERRIEN     | AT32_DMA_CTRL_DTERRIEN;
 #endif
 
   /* The shared vector is initialized on driver initialization and never
@@ -248,7 +248,14 @@ void adc_lld_start(ADCDriver *adcp) {
                                      (void *)adcp);
       osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
       dmaStreamSetPeripheral(adcp->dmastp, &ADC1->ODT);
-      rccEnableADC1(true);
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC1_DMAMUX_CHANNEL, AT32_DMAMUX_ADC1);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(adcp->dmastp, AT32_DMAMUX_ADC1);
+#endif
+#endif
+      crmEnableADC1(true);
     }
 #endif /* AT32_ADC_USE_ADC1 */
 
@@ -260,7 +267,14 @@ void adc_lld_start(ADCDriver *adcp) {
                                      (void *)adcp);
       osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
       dmaStreamSetPeripheral(adcp->dmastp, &ADC2->ODT);
-      rccEnableADC2(true);
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC2_DMAMUX_CHANNEL, AT32_DMAMUX_ADC2);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(adcp->dmastp, AT32_DMAMUX_ADC2);
+#endif
+#endif
+      crmEnableADC2(true);
     }
 #endif /* AT32_ADC_USE_ADC2 */
 
@@ -272,13 +286,20 @@ void adc_lld_start(ADCDriver *adcp) {
                                      (void *)adcp);
       osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
       dmaStreamSetPeripheral(adcp->dmastp, &ADC3->ODT);
-      rccEnableADC3(true);
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC3_DMAMUX_CHANNEL, AT32_DMAMUX_ADC3);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(adcp->dmastp, AT32_DMAMUX_ADC3);
+#endif
+#endif
+      crmEnableADC3(true);
     }
 #endif /* AT32_ADC_USE_ADC3 */
 
     /* This is a common register but apparently it requires that at least one
        of the ADCs is clocked in order to allow writing, see bug 3575297.*/
-#if defined(AT32F435_7xx)
+#if defined(AT32F435_7xx) || defined(AT32F423xx)
     ADCCOM->CCTRL = (ADCCOM->CCTRL & (ADC_CCTRL_ITSRVEN | ADC_CCTRL_VBATEN)) |
                     ((AT32_ADC_ADCDIV - 2) << 16);
 #else
@@ -289,7 +310,7 @@ void adc_lld_start(ADCDriver *adcp) {
     /* ADC initial setup, starting the analog part here in order to reduce
        the latency when starting a conversion.*/
     adcp->adc->CTRL1 = 0;
-#if defined(AT32F435_7xx)
+#if defined(AT32F435_7xx) || defined(AT32F423xx)
     adcp->adc->CTRL2 = 0;
 #endif
     adcp->adc->CTRL2 = ADC_CTRL2_ADCEN;
@@ -316,17 +337,17 @@ void adc_lld_stop(ADCDriver *adcp) {
 
 #if AT32_ADC_USE_ADC1
     if (&ADCD1 == adcp)
-      rccDisableADC1();
+      crmDisableADC1();
 #endif
 
 #if AT32_ADC_USE_ADC2
     if (&ADCD2 == adcp)
-      rccDisableADC2();
+      crmDisableADC2();
 #endif
 
 #if AT32_ADC_USE_ADC3
     if (&ADCD3 == adcp)
-      rccDisableADC3();
+      crmDisableADC3();
 #endif
   }
 }
@@ -370,7 +391,7 @@ void adc_lld_start_conversion(ADCDriver *adcp) {
   adcp->adc->OSQ3 = grpp->osq3;
 
   /* ADC configuration and start.*/
-#if defined(AT32F435_7xx)
+#if defined(AT32F435_7xx) || defined(AT32F423xx)
   adcp->adc->CTRL1 = grpp->ctrl1 | ADC_CTRL1_OCCOIE | ADC_CTRL1_SQEN;
   ctrl2 = grpp->ctrl2 | ADC_CTRL2_OCDMAEN | ADC_CTRL2_OCDRCEN | ADC_CTRL2_ADCEN;
 #else
@@ -415,7 +436,7 @@ void adc_lld_stop_conversion(ADCDriver *adcp) {
  */
 void adcAT32EnableITSRVEN(void) {
 
-#if defined(AT32F435_7xx)
+#if defined(AT32F435_7xx) || defined(AT32F423xx)
   ADCCOM->CCTRL |= ADC_CCTRL_ITSRVEN;
 #else
   ADC->CTRL2 = ADC_CTRL2_ITSRVEN;
@@ -430,7 +451,7 @@ void adcAT32EnableITSRVEN(void) {
  */
 void adcAT32DisableITSRVEN(void) {
 
-#if defined(AT32F435_7xx)
+#if defined(AT32F435_7xx) || defined(AT32F423xx)
   ADCCOM->CCTRL &= ~ADC_CCTRL_ITSRVEN;
 #else
   ADC->CTRL2 &= ~ADC_CTRL2_ITSRVEN;
@@ -445,7 +466,7 @@ void adcAT32DisableITSRVEN(void) {
  */
 void adcAT32EnableVBATEN(void) {
 
-#if defined(AT32F435_7xx)
+#if defined(AT32F435_7xx) || defined(AT32F423xx)
   ADCCOM->CCTRL |= ADC_CCTRL_VBATEN;
 #endif
 }
@@ -458,7 +479,7 @@ void adcAT32EnableVBATEN(void) {
  */
 void adcAT32DisableVBATEN(void) {
 
-#if defined(AT32F435_7xx)
+#if defined(AT32F435_7xx) || defined(AT32F423xx)
   ADCCOM->CCTRL &= ~ADC_CCTRL_VBATEN;
 #endif
 }

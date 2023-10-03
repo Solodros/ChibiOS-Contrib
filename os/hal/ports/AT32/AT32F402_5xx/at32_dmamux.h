@@ -125,6 +125,11 @@
 /* Driver macros.                                                            */
 /*===========================================================================*/
 
+#define AT32_DMAMUX_UART4_RX       AT32_DMAMUX_USART4_RX
+#define AT32_DMAMUX_UART4_TX       AT32_DMAMUX_USART4_TX
+#define AT32_DMAMUX_UART5_RX       AT32_DMAMUX_USART5_RX
+#define AT32_DMAMUX_UART5_TX       AT32_DMAMUX_USART5_TX
+
 /*===========================================================================*/
 /* External declarations.                                                    */
 /*===========================================================================*/

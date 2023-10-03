@@ -849,7 +849,7 @@ void pwm_lld_start(PWMDriver *pwmp) {
                      AT32_TMR_CM2_C4OCTRL(6) | AT32_TMR_CM2_C4OBEN;
 #if AT32_TMR_MAX_CHANNELS > 4
     pwmp->tmr->CM3 = AT32_TMR_CM3_C5OCTRL(6) | AT32_TMR_CM3_C5OBEN |
-                     AT32_TMR_CM3_OC6M(6) | AT32_TMR_CM3_C6OBEN;
+                     AT32_TMR_CM3_C6OCTRL(6) | AT32_TMR_CM3_C6OBEN;
 #endif
   }
   else {
@@ -865,7 +865,7 @@ void pwm_lld_start(PWMDriver *pwmp) {
       pwmp->tmr->CXDT[1] = 0;               /* Comparator 6 disabled.       */
     }
 #endif
-    pwmp->tmr->CVAL  = 0;                    /* Counter reset to zero.       */
+    pwmp->tmr->CVAL  = 0;                   /* Counter reset to zero.       */
   }
 
   /* Timer configuration.*/

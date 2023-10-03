@@ -218,8 +218,12 @@ void adc_lld_start(ADCDriver *adcp) {
                                      (void *)adcp);
       osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
       dmaStreamSetPeripheral(adcp->dmastp, &ADC1->ODT);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC1_DMAMUX_CHANNEL, AT32_DMAMUX_ADC1);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(adcp->dmastp, AT32_DMAMUX_ADC1);
+#endif
 #endif
       crmEnableADC1(true);
     }
@@ -233,8 +237,12 @@ void adc_lld_start(ADCDriver *adcp) {
                                      (void *)adcp);
       osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
       dmaStreamSetPeripheral(adcp->dmastp, &ADC2->ODT);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC2_DMAMUX_CHANNEL, AT32_DMAMUX_ADC2);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(adcp->dmastp, AT32_DMAMUX_ADC2);
+#endif
 #endif
       crmEnableADC2(true);
     }
@@ -248,8 +256,12 @@ void adc_lld_start(ADCDriver *adcp) {
                                      (void *)adcp);
       osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
       dmaStreamSetPeripheral(adcp->dmastp, &ADC3->ODT);
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC3_DMAMUX_CHANNEL, AT32_DMAMUX_ADC3);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(adcp->dmastp, AT32_DMAMUX_ADC3);
+#endif
 #endif
       crmEnableADC3(true);
     }

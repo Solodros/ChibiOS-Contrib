@@ -31,36 +31,36 @@
 /*===========================================================================*/
 
 #define I2S1_RX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_I2S_SPI1_RX_DMA_STREAM,                        \
-                       AT32_SPI1_RX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_I2S_SPI1_RX_DMA_STREAM,                          \
+                      AT32_SPI1_RX_DMA_CHN)
 
 #define I2S1_TX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_I2S_SPI1_TX_DMA_STREAM,                        \
-                       AT32_SPI1_TX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_I2S_SPI1_TX_DMA_STREAM,                          \
+                      AT32_SPI1_TX_DMA_CHN)
 
 #define I2S2_RX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_I2S_SPI2_RX_DMA_STREAM,                        \
-                       AT32_SPI2_RX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_I2S_SPI2_RX_DMA_STREAM,                          \
+                      AT32_SPI2_RX_DMA_CHN)
 
 #define I2S2_TX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_I2S_SPI2_TX_DMA_STREAM,                        \
-                       AT32_SPI2_TX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_I2S_SPI2_TX_DMA_STREAM,                          \
+                      AT32_SPI2_TX_DMA_CHN)
 
 #define I2S3_RX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_I2S_SPI3_RX_DMA_STREAM,                        \
-                       AT32_SPI3_RX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_I2S_SPI3_RX_DMA_STREAM,                          \
+                      AT32_SPI3_RX_DMA_CHN)
 
 #define I2S3_TX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_I2S_SPI3_TX_DMA_STREAM,                        \
-                       AT32_SPI3_TX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_I2S_SPI3_TX_DMA_STREAM,                          \
+                      AT32_SPI3_TX_DMA_CHN)
 
 #define I2S4_RX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_I2S_SPI4_RX_DMA_STREAM,                        \
-                       AT32_SPI4_RX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_I2S_SPI4_RX_DMA_STREAM,                          \
+                      AT32_SPI4_RX_DMA_CHN)
 
 #define I2S4_TX_DMA_CHANNEL                                                 \
-  AT32_DMA_GETCHANNEL(AT32_I2S_SPI4_TX_DMA_STREAM,                        \
-                       AT32_SPI4_TX_DMA_CHN)
+  AT32_DMA_GETCHANNEL(AT32_I2S_SPI4_TX_DMA_STREAM,                          \
+                      AT32_SPI4_TX_DMA_CHN)
 
 /*
  * Static I2S settings for I2S1.
@@ -186,7 +186,7 @@ static void i2s_lld_serve_rx_interrupt(I2SDriver *i2sp, uint32_t flags) {
 
   /* DMA errors handling.*/
 #if defined(AT32_I2S_DMA_ERROR_HOOK)
-  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMTERRF)) != 0) {
+  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMERRF)) != 0) {
     AT32_I2S_DMA_ERROR_HOOK(i2sp);
   }
 #endif
@@ -220,7 +220,7 @@ static void i2s_lld_serve_tx_interrupt(I2SDriver *i2sp, uint32_t flags) {
 
   /* DMA errors handling.*/
 #if defined(AT32_I2S_DMA_ERROR_HOOK)
-  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMTERRF)) != 0) {
+  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMERRF)) != 0) {
     AT32_I2S_DMA_ERROR_HOOK(i2sp);
   }
 #endif
@@ -264,12 +264,12 @@ void i2s_lld_init(void) {
                     AT32_DMA_CTRL_CHPL(AT32_I2S_SPI1_DMA_PRIORITY) |
                     AT32_DMA_CTRL_PWIDTH_HWORD |
                     AT32_DMA_CTRL_MWIDTH_HWORD |
-                    AT32_DMA_CTRL_DTD_P2M |
-                    AT32_DMA_CTRL_MINCM |
-                    AT32_DMA_CTRL_LM |
-                    AT32_DMA_CTRL_HDTIEN |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_MINCM    |
+                    AT32_DMA_CTRL_LM       |
+                    AT32_DMA_CTRL_HDTIEN   |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #else
   I2SD1.rxdmamode = 0;
@@ -279,12 +279,12 @@ void i2s_lld_init(void) {
                     AT32_DMA_CTRL_CHPL(AT32_I2S_SPI1_DMA_PRIORITY) |
                     AT32_DMA_CTRL_PWIDTH_HWORD |
                     AT32_DMA_CTRL_MWIDTH_HWORD |
-                    AT32_DMA_CTRL_DTD_M2P |
-                    AT32_DMA_CTRL_MINCM |
-                    AT32_DMA_CTRL_LM |
-                    AT32_DMA_CTRL_HDTIEN |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_MINCM    |
+                    AT32_DMA_CTRL_LM       |
+                    AT32_DMA_CTRL_HDTIEN   |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #else
   I2SD1.txdmamode = 0;
@@ -302,12 +302,12 @@ void i2s_lld_init(void) {
                     AT32_DMA_CTRL_CHPL(AT32_I2S_SPI2_DMA_PRIORITY) |
                     AT32_DMA_CTRL_PWIDTH_HWORD |
                     AT32_DMA_CTRL_MWIDTH_HWORD |
-                    AT32_DMA_CTRL_DTD_P2M |
-                    AT32_DMA_CTRL_MINCM |
-                    AT32_DMA_CTRL_LM |
-                    AT32_DMA_CTRL_HDTIEN |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_MINCM    |
+                    AT32_DMA_CTRL_LM       |
+                    AT32_DMA_CTRL_HDTIEN   |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #else
   I2SD2.rxdmamode = 0;
@@ -317,12 +317,12 @@ void i2s_lld_init(void) {
                     AT32_DMA_CTRL_CHPL(AT32_I2S_SPI2_DMA_PRIORITY) |
                     AT32_DMA_CTRL_PWIDTH_HWORD |
                     AT32_DMA_CTRL_MWIDTH_HWORD |
-                    AT32_DMA_CTRL_DTD_M2P |
-                    AT32_DMA_CTRL_MINCM |
-                    AT32_DMA_CTRL_LM |
-                    AT32_DMA_CTRL_HDTIEN |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_MINCM    |
+                    AT32_DMA_CTRL_LM       |
+                    AT32_DMA_CTRL_HDTIEN   |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #else
   I2SD2.txdmamode = 0;
@@ -340,12 +340,12 @@ void i2s_lld_init(void) {
                     AT32_DMA_CTRL_CHPL(AT32_I2S_SPI3_DMA_PRIORITY) |
                     AT32_DMA_CTRL_PWIDTH_HWORD |
                     AT32_DMA_CTRL_MWIDTH_HWORD |
-                    AT32_DMA_CTRL_DTD_P2M |
-                    AT32_DMA_CTRL_MINCM |
-                    AT32_DMA_CTRL_LM |
-                    AT32_DMA_CTRL_HDTIEN |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_MINCM    |
+                    AT32_DMA_CTRL_LM       |
+                    AT32_DMA_CTRL_HDTIEN   |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #else
   I2SD3.rxdmamode = 0;
@@ -355,12 +355,12 @@ void i2s_lld_init(void) {
                     AT32_DMA_CTRL_CHPL(AT32_I2S_SPI3_DMA_PRIORITY) |
                     AT32_DMA_CTRL_PWIDTH_HWORD |
                     AT32_DMA_CTRL_MWIDTH_HWORD |
-                    AT32_DMA_CTRL_DTD_M2P |
-                    AT32_DMA_CTRL_MINCM |
-                    AT32_DMA_CTRL_LM |
-                    AT32_DMA_CTRL_HDTIEN |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_MINCM    |
+                    AT32_DMA_CTRL_LM       |
+                    AT32_DMA_CTRL_HDTIEN   |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #else
   I2SD3.txdmamode = 0;
@@ -378,12 +378,12 @@ void i2s_lld_init(void) {
                     AT32_DMA_CTRL_CHPL(AT32_I2S_SPI4_DMA_PRIORITY) |
                     AT32_DMA_CTRL_PWIDTH_HWORD |
                     AT32_DMA_CTRL_MWIDTH_HWORD |
-                    AT32_DMA_CTRL_DTD_P2M |
-                    AT32_DMA_CTRL_MINCM |
-                    AT32_DMA_CTRL_LM |
-                    AT32_DMA_CTRL_HDTIEN |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_MINCM    |
+                    AT32_DMA_CTRL_LM       |
+                    AT32_DMA_CTRL_HDTIEN   |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #else
   I2SD4.rxdmamode = 0;
@@ -393,12 +393,12 @@ void i2s_lld_init(void) {
                     AT32_DMA_CTRL_CHPL(AT32_I2S_SPI4_DMA_PRIORITY) |
                     AT32_DMA_CTRL_PWIDTH_HWORD |
                     AT32_DMA_CTRL_MWIDTH_HWORD |
-                    AT32_DMA_CTRL_DTD_M2P |
-                    AT32_DMA_CTRL_MINCM |
-                    AT32_DMA_CTRL_LM |
-                    AT32_DMA_CTRL_HDTIEN |
-                    AT32_DMA_CTRL_FDTIEN |
-                    AT32_DMA_CTRL_DMEIEN |
+                    AT32_DMA_CTRL_DTD_P2M  |
+                    AT32_DMA_CTRL_MINCM    |
+                    AT32_DMA_CTRL_LM       |
+                    AT32_DMA_CTRL_HDTIEN   |
+                    AT32_DMA_CTRL_FDTIEN   |
+                    AT32_DMA_CTRL_DMERRIEN |
                     AT32_DMA_CTRL_DTERRIEN;
 #else
   I2SD4.txdmamode = 0;
@@ -435,6 +435,13 @@ void i2s_lld_start(I2SDriver *i2sp) {
          the driver is stopped.*/
       i2sp->spi->CTRL1 = 0;
       i2sp->spi->CTRL2 = SPI_CTRL2_DMAREN;
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(i2sp->dmarx, AT32_SPI_SPI1_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI1_RX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(i2sp->dmarx, AT32_DMAMUX_SPI1_RX);
+#endif
+#endif
 #endif
 #if AT32_I2S_TX_ENABLED(AT32_I2S_SPI1_MODE)
       i2sp->dmatx = dmaStreamAllocI(AT32_I2S_SPI1_TX_DMA_STREAM,
@@ -447,6 +454,13 @@ void i2s_lld_start(I2SDriver *i2sp) {
          the driver is stopped.*/
       i2sp->spi->CTRL1 = 0;
       i2sp->spi->CTRL2 = SPI_CTRL2_DMATEN;
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(i2sp->dmatx, AT32_SPI_SPI1_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI1_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(i2sp->dmatx, AT32_DMAMUX_SPI1_TX);
+#endif
+#endif
 #endif
     }
 #endif
@@ -468,6 +482,13 @@ void i2s_lld_start(I2SDriver *i2sp) {
          the driver is stopped.*/
       i2sp->spi->CTRL1 = 0;
       i2sp->spi->CTRL2 = SPI_CTRL2_DMAREN;
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(i2sp->dmarx, AT32_SPI_SPI2_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI2_RX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(i2sp->dmarx, AT32_DMAMUX_SPI2_RX);
+#endif
+#endif
 #endif
 #if AT32_I2S_TX_ENABLED(AT32_I2S_SPI2_MODE)
       i2sp->dmatx = dmaStreamAllocI(AT32_I2S_SPI2_TX_DMA_STREAM,
@@ -480,6 +501,13 @@ void i2s_lld_start(I2SDriver *i2sp) {
          the driver is stopped.*/
       i2sp->spi->CTRL1 = 0;
       i2sp->spi->CTRL2 = SPI_CTRL2_DMATEN;
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(i2sp->dmatx, AT32_SPI_SPI2_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI2_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(i2sp->dmatx, AT32_DMAMUX_SPI2_TX);
+#endif
+#endif
 #endif
     }
 #endif
@@ -501,6 +529,13 @@ void i2s_lld_start(I2SDriver *i2sp) {
          the driver is stopped.*/
       i2sp->spi->CTRL1 = 0;
       i2sp->spi->CTRL2 = SPI_CTRL2_DMAREN;
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(i2sp->dmarx, AT32_SPI_SPI3_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI3_RX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(i2sp->dmarx, AT32_DMAMUX_SPI3_RX);
+#endif
+#endif
 #endif
 #if AT32_I2S_TX_ENABLED(AT32_I2S_SPI3_MODE)
       i2sp->dmatx = dmaStreamAllocI(AT32_I2S_SPI3_TX_DMA_STREAM,
@@ -513,6 +548,13 @@ void i2s_lld_start(I2SDriver *i2sp) {
          the driver is stopped.*/
       i2sp->spi->CTRL1 = 0;
       i2sp->spi->CTRL2 = SPI_CTRL2_DMATEN;
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(i2sp->dmatx, AT32_SPI_SPI3_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI3_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(i2sp->dmatx, AT32_DMAMUX_SPI3_TX);
+#endif
+#endif
 #endif
     }
 #endif
@@ -534,6 +576,13 @@ void i2s_lld_start(I2SDriver *i2sp) {
          the driver is stopped.*/
       i2sp->spi->CTRL1 = 0;
       i2sp->spi->CTRL2 = SPI_CTRL2_DMAREN;
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(i2sp->dmarx, AT32_SPI_SPI4_RX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI4_RX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(i2sp->dmarx, AT32_DMAMUX_SPI4_RX);
+#endif
+#endif
 #endif
 #if AT32_I2S_TX_ENABLED(AT32_I2S_SPI4_MODE)
       i2sp->dmatx = dmaStreamAllocI(AT32_I2S_SPI4_TX_DMA_STREAM,
@@ -546,6 +595,13 @@ void i2s_lld_start(I2SDriver *i2sp) {
          the driver is stopped.*/
       i2sp->spi->CTRL1 = 0;
       i2sp->spi->CTRL2 = SPI_CTRL2_DMATEN;
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(i2sp->dmatx, AT32_SPI_SPI4_TX_DMAMUX_CHANNEL, AT32_DMAMUX_SPI4_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(i2sp->dmatx, AT32_DMAMUX_SPI4_TX);
+#endif
+#endif
 #endif
     }
 #endif

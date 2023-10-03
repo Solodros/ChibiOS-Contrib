@@ -70,14 +70,14 @@
 
 #define I2C_EV6_MASTER_TRA_MODE_SELECTED                                        \
   ((uint32_t)(((I2C_STS2_TRMODE | I2C_STS2_BUSYF | I2C_STS2_DIRF) << 16) |      \
-              I2C_STS1_ADDR7F | I2C_STS1_TDBE))
+              I2C_STS1_ADDR7F     | I2C_STS1_TDBE))
 
 #define I2C_EV6_MASTER_REC_MODE_SELECTED                                        \
   ((uint32_t)(((I2C_STS2_TRMODE | I2C_STS2_BUSYF)<< 16) | I2C_STS1_ADDR7F))
 
 #define I2C_EV8_2_MASTER_BYTE_TRANSMITTED                                       \
   ((uint32_t)(((I2C_STS2_TRMODE | I2C_STS2_BUSYF | I2C_STS2_DIRF) << 16) |      \
-              I2C_STS1_TDC | I2C_STS1_TDBE))
+              I2C_STS1_TDC      | I2C_STS1_TDBE))
 
 #define I2C_EV9_MASTER_ADD10                                                    \
   ((uint32_t)(((I2C_STS2_TRMODE | I2C_STS2_BUSYF) << 16) | I2C_STS1_ADDRHF))
@@ -90,7 +90,7 @@
 
 #define I2C_ERROR_MASK                                                              \
   ((uint16_t)(I2C_STS1_BUSERR | I2C_STS1_ARLOST | I2C_STS1_ACKFAIL | I2C_STS1_OUF | \
-              I2C_STS1_PECERR | I2C_STS1_TMOUT | I2C_STS1_ALERTF))
+              I2C_STS1_PECERR | I2C_STS1_TMOUT  | I2C_STS1_ALERTF))
 
 /*===========================================================================*/
 /* Driver exported variables.                                                */
@@ -133,7 +133,7 @@ static void i2c_lld_abort_operation(I2CDriver *i2cp) {
   dp->CTRL1 = I2C_CTRL1_RESET;
   dp->CTRL1 = 0;
   dp->CTRL2 = 0;
-  dp->STS1 = 0;
+  dp->STS1  = 0;
 
   /* Stops the associated DMA streams.*/
   dmaStreamDisable(i2cp->dmatx);
@@ -229,14 +229,14 @@ static void i2c_lld_set_opmode(I2CDriver *i2cp) {
   regCTRL1 = dp->CTRL1;
   switch (opmode) {
   case OPMODE_I2C:
-    regCTRL1 &= (uint16_t)~(I2C_CTRL1_PERMODE|I2C_CTRL1_SMBMODE);
+    regCTRL1 &= (uint16_t)~(I2C_CTRL1_PERMODE | I2C_CTRL1_SMBMODE);
     break;
   case OPMODE_SMBUS_DEVICE:
     regCTRL1 |= I2C_CTRL1_PERMODE;
     regCTRL1 &= (uint16_t)~(I2C_CTRL1_SMBMODE);
     break;
   case OPMODE_SMBUS_HOST:
-    regCTRL1 |= (I2C_CTRL1_PERMODE|I2C_CTRL1_SMBMODE);
+    regCTRL1 |= (I2C_CTRL1_PERMODE | I2C_CTRL1_SMBMODE);
     break;
   }
   dp->CTRL1 = regCTRL1;
@@ -321,7 +321,7 @@ static void i2c_lld_serve_rx_end_irq(I2CDriver *i2cp, uint32_t flags) {
 
   /* DMA errors handling.*/
 #if defined(AT32_I2C_DMA_ERROR_HOOK)
-  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMTERRF)) != 0) {
+  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMERRF)) != 0) {
     AT32_I2C_DMA_ERROR_HOOK(i2cp);
   }
 #else
@@ -348,7 +348,7 @@ static void i2c_lld_serve_tx_end_irq(I2CDriver *i2cp, uint32_t flags) {
 
   /* DMA errors handling.*/
 #if defined(AT32_I2C_DMA_ERROR_HOOK)
-  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMTERRF)) != 0) {
+  if ((flags & (AT32_DMA_STS_DTERRF | AT32_DMA_STS_DMERRF)) != 0) {
     AT32_I2C_DMA_ERROR_HOOK(i2cp);
   }
 #else
@@ -385,22 +385,22 @@ static void i2c_lld_serve_error_interrupt(I2CDriver *i2cp, uint16_t sts) {
   if (sts & I2C_STS1_ARLOST)                            /* Arbitration lost.    */
     i2cp->errors |= I2C_ARBITRATION_LOST;
 
-  if (sts & I2C_STS1_ACKFAIL) {                            /* Acknowledge fail.    */
+  if (sts & I2C_STS1_ACKFAIL) {                         /* Acknowledge fail.    */
     i2cp->i2c->CTRL2 &= ~I2C_CTRL2_EVTIEN;
-    i2cp->i2c->CTRL1 |= I2C_CTRL1_GENSTOP;                 /* Setting stop bit.    */
+    i2cp->i2c->CTRL1 |= I2C_CTRL1_GENSTOP;              /* Setting stop bit.    */
     i2cp->errors |= I2C_ACK_FAILURE;
   }
 
-  if (sts & I2C_STS1_OUF)                             /* Overrun.             */
+  if (sts & I2C_STS1_OUF)                              /* Overrun.             */
     i2cp->errors |= I2C_OVERRUN;
 
-  if (sts & I2C_STS1_TMOUT)                         /* SMBus Timeout.       */
+  if (sts & I2C_STS1_TMOUT)                            /* SMBus Timeout.       */
     i2cp->errors |= I2C_TIMEOUT;
 
-  if (sts & I2C_STS1_PECERR)                          /* PEC error.           */
+  if (sts & I2C_STS1_PECERR)                           /* PEC error.           */
     i2cp->errors |= I2C_PEC_ERROR;
 
-  if (sts & I2C_STS1_ALERTF)                        /* SMBus alert.         */
+  if (sts & I2C_STS1_ALERTF)                           /* SMBus alert.         */
     i2cp->errors |= I2C_SMB_ALERT;
 
   /* If some error has been identified then sends wakes the waiting thread.*/
@@ -556,12 +556,12 @@ void i2c_lld_start(I2CDriver *i2cp) {
   if (i2cp->state == I2C_STOP) {
 
     i2cp->txdmamode = AT32_DMA_CTRL_PWIDTH_BYTE | AT32_DMA_CTRL_MWIDTH_BYTE |
-                      AT32_DMA_CTRL_MINCM       | AT32_DMA_CTRL_DMEIEN |
-                      AT32_DMA_CTRL_DTERRIEN       | AT32_DMA_CTRL_FDTIEN |
+                      AT32_DMA_CTRL_MINCM       | AT32_DMA_CTRL_DMERRIEN    |
+                      AT32_DMA_CTRL_DTERRIEN    | AT32_DMA_CTRL_FDTIEN      |
                       AT32_DMA_CTRL_DTD_M2P;
     i2cp->rxdmamode = AT32_DMA_CTRL_PWIDTH_BYTE | AT32_DMA_CTRL_MWIDTH_BYTE |
-                      AT32_DMA_CTRL_MINCM       | AT32_DMA_CTRL_DMEIEN |
-                      AT32_DMA_CTRL_DTERRIEN       | AT32_DMA_CTRL_FDTIEN |
+                      AT32_DMA_CTRL_MINCM       | AT32_DMA_CTRL_DMERRIEN    |
+                      AT32_DMA_CTRL_DTERRIEN    | AT32_DMA_CTRL_FDTIEN      |
                       AT32_DMA_CTRL_DTD_P2M;
 
 #if AT32_I2C_USE_I2C1
@@ -578,18 +578,23 @@ void i2c_lld_start(I2CDriver *i2cp) {
                                     (at32_dmasts_t)i2c_lld_serve_tx_end_irq,
                                     (void *)i2cp);
       osalDbgAssert(i2cp->dmatx != NULL, "unable to allocate stream");
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(i2cp->dmarx, AT32_I2C_I2C1_RX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C1_RX);
       dmaSetRequestSource(i2cp->dmatx, AT32_I2C_I2C1_TX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C1_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX_I2C1_RX);
+      dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX_I2C1_TX);
+#endif
 #endif
       crmEnableI2C1(true);
       nvicEnableVector(I2C1_EVT_IRQn, AT32_I2C_I2C1_IRQ_PRIORITY);
       nvicEnableVector(I2C1_ERR_IRQn, AT32_I2C_I2C1_IRQ_PRIORITY);
 
       i2cp->rxdmamode |= AT32_DMA_CTRL_CHSEL(I2C1_RX_DMA_CHANNEL) |
-                       AT32_DMA_CTRL_CHPL(AT32_I2C_I2C1_DMA_PRIORITY);
+                         AT32_DMA_CTRL_CHPL(AT32_I2C_I2C1_DMA_PRIORITY);
       i2cp->txdmamode |= AT32_DMA_CTRL_CHSEL(I2C1_TX_DMA_CHANNEL) |
-                       AT32_DMA_CTRL_CHPL(AT32_I2C_I2C1_DMA_PRIORITY);
+                         AT32_DMA_CTRL_CHPL(AT32_I2C_I2C1_DMA_PRIORITY);
     }
 #endif /* AT32_I2C_USE_I2C1 */
 
@@ -607,18 +612,23 @@ void i2c_lld_start(I2CDriver *i2cp) {
                                     (at32_dmasts_t)i2c_lld_serve_tx_end_irq,
                                     (void *)i2cp);
       osalDbgAssert(i2cp->dmatx != NULL, "unable to allocate stream");
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(i2cp->dmarx, AT32_I2C_I2C2_RX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C2_RX);
       dmaSetRequestSource(i2cp->dmatx, AT32_I2C_I2C2_TX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C2_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX_I2C2_RX);
+      dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX_I2C2_TX);
+#endif
 #endif
       crmEnableI2C2(true);
       nvicEnableVector(I2C2_EVT_IRQn, AT32_I2C_I2C2_IRQ_PRIORITY);
       nvicEnableVector(I2C2_ERR_IRQn, AT32_I2C_I2C2_IRQ_PRIORITY);
 
       i2cp->rxdmamode |= AT32_DMA_CTRL_CHSEL(I2C2_RX_DMA_CHANNEL) |
-                       AT32_DMA_CTRL_CHPL(AT32_I2C_I2C2_DMA_PRIORITY);
+                         AT32_DMA_CTRL_CHPL(AT32_I2C_I2C2_DMA_PRIORITY);
       i2cp->txdmamode |= AT32_DMA_CTRL_CHSEL(I2C2_TX_DMA_CHANNEL) |
-                       AT32_DMA_CTRL_CHPL(AT32_I2C_I2C2_DMA_PRIORITY);
+                         AT32_DMA_CTRL_CHPL(AT32_I2C_I2C2_DMA_PRIORITY);
     }
 #endif /* AT32_I2C_USE_I2C2 */
 
@@ -636,18 +646,23 @@ void i2c_lld_start(I2CDriver *i2cp) {
                                     (at32_dmasts_t)i2c_lld_serve_tx_end_irq,
                                     (void *)i2cp);
       osalDbgAssert(i2cp->dmatx != NULL, "unable to allocate stream");
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
       dmaSetRequestSource(i2cp->dmarx, AT32_I2C_I2C3_RX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C3_RX);
       dmaSetRequestSource(i2cp->dmatx, AT32_I2C_I2C3_TX_DMAMUX_CHANNEL, AT32_DMAMUX_I2C3_TX);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(i2cp->dmarx, AT32_DMAMUX_I2C3_RX);
+      dmaSetRequestSource(i2cp->dmatx, AT32_DMAMUX_I2C3_TX);
+#endif
 #endif
       crmEnableI2C3(true);
       nvicEnableVector(I2C3_EVT_IRQn, AT32_I2C_I2C3_IRQ_PRIORITY);
       nvicEnableVector(I2C3_ERR_IRQn, AT32_I2C_I2C3_IRQ_PRIORITY);
 
       i2cp->rxdmamode |= AT32_DMA_CTRL_CHSEL(I2C3_RX_DMA_CHANNEL) |
-                       AT32_DMA_CTRL_CHPL(AT32_I2C_I2C3_DMA_PRIORITY);
+                         AT32_DMA_CTRL_CHPL(AT32_I2C_I2C3_DMA_PRIORITY);
       i2cp->txdmamode |= AT32_DMA_CTRL_CHSEL(I2C3_TX_DMA_CHANNEL) |
-                       AT32_DMA_CTRL_CHPL(AT32_I2C_I2C3_DMA_PRIORITY);
+                         AT32_DMA_CTRL_CHPL(AT32_I2C_I2C3_DMA_PRIORITY);
     }
 #endif /* AT32_I2C_USE_I2C3 */
   }

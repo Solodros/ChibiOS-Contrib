@@ -258,22 +258,22 @@
 
 /* Check on the presence of the DMA streams settings in mcuconf.h.*/
 #if AT32_I2C_USE_I2C1 && (!defined(AT32_I2C_I2C1_RX_DMA_STREAM) ||         \
-                           !defined(AT32_I2C_I2C1_TX_DMA_STREAM))
+                          !defined(AT32_I2C_I2C1_TX_DMA_STREAM))
 #error "I2C1 DMA streams not defined"
 #endif
  
 #if AT32_I2C_USE_I2C2 && (!defined(AT32_I2C_I2C2_RX_DMA_STREAM) ||         \
-                           !defined(AT32_I2C_I2C2_TX_DMA_STREAM))
+                          !defined(AT32_I2C_I2C2_TX_DMA_STREAM))
 #error "I2C2 DMA streams not defined"
 #endif
 
 #if AT32_I2C_USE_I2C3 && (!defined(AT32_I2C_I2C3_RX_DMA_STREAM) ||         \
-                           !defined(AT32_I2C_I2C3_TX_DMA_STREAM))
+                          !defined(AT32_I2C_I2C3_TX_DMA_STREAM))
 #error "I2C3 DMA streams not defined"
 #endif
 
 #if AT32_I2C_USE_I2C4 && (!defined(AT32_I2C_I2C4_RX_DMA_STREAM) ||         \
-                           !defined(AT32_I2C_I2C4_TX_DMA_STREAM))
+                          !defined(AT32_I2C_I2C4_TX_DMA_STREAM))
 #error "I2C4 DMA streams not defined"
 #endif
 
@@ -283,54 +283,53 @@
 /* Check on the validity of the assigned DMA channels.*/
 #if AT32_I2C_USE_I2C1 &&                                                   \
     !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C1_RX_DMA_STREAM,                     \
-                           AT32_I2C1_RX_DMA_MSK)
+                          AT32_I2C1_RX_DMA_MSK)
 #error "invalid DMA stream associated to I2C1 RX"
 #endif
 
 #if AT32_I2C_USE_I2C1 &&                                                   \
     !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C1_TX_DMA_STREAM,                     \
-                           AT32_I2C1_TX_DMA_MSK)
+                          AT32_I2C1_TX_DMA_MSK)
 #error "invalid DMA stream associated to I2C1 TX"
 #endif
 
 #if AT32_I2C_USE_I2C2 &&                                                   \
     !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C2_RX_DMA_STREAM,                     \
-                           AT32_I2C2_RX_DMA_MSK)
+                          AT32_I2C2_RX_DMA_MSK)
 #error "invalid DMA stream associated to I2C2 RX"
 #endif
 
 #if AT32_I2C_USE_I2C2 &&                                                   \
     !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C2_TX_DMA_STREAM,                     \
-                           AT32_I2C2_TX_DMA_MSK)
+                          AT32_I2C2_TX_DMA_MSK)
 #error "invalid DMA stream associated to I2C2 TX"
 #endif
 
 #if AT32_I2C_USE_I2C3 &&                                                   \
     !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C3_RX_DMA_STREAM,                     \
-                           AT32_I2C3_RX_DMA_MSK)
+                          AT32_I2C3_RX_DMA_MSK)
 #error "invalid DMA stream associated to I2C3 RX"
 #endif
 
 #if AT32_I2C_USE_I2C3 &&                                                   \
     !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C3_TX_DMA_STREAM,                     \
-                           AT32_I2C3_TX_DMA_MSK)
+                          AT32_I2C3_TX_DMA_MSK)
 #error "invalid DMA stream associated to I2C3 TX"
 #endif
 
 #if AT32_I2C_USE_I2C4 &&                                                   \
     !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C4_RX_DMA_STREAM,                     \
-                           AT32_I2C4_RX_DMA_MSK)
+                          AT32_I2C4_RX_DMA_MSK)
 #error "invalid DMA stream associated to I2C4 RX"
 #endif
 
 #if AT32_I2C_USE_I2C4 &&                                                   \
     !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C4_TX_DMA_STREAM,                     \
-                           AT32_I2C4_TX_DMA_MSK)
+                          AT32_I2C4_TX_DMA_MSK)
 #error "invalid DMA stream associated to I2C4 TX"
 #endif
 
 #endif /* !AT32_DMA_SUPPORTS_DMAMUX */
-
 
 #if !defined(AT32_DMA_REQUIRED)
 #define AT32_DMA_REQUIRED
@@ -422,11 +421,11 @@ struct hal_i2c_driver {
   /**
    * @brief     Receive DMA channel.
    */
-  const stm32_dma_stream_t  *dmarx;
+  const at32_dma_stream_t   *dmarx;
   /**
    * @brief     Transmit DMA channel.
    */
-  const stm32_dma_stream_t  *dmatx;
+  const at32_dma_stream_t   *dmatx;
 #else /* AT32_I2C_USE_DMA == FALSE */
   /**
    * @brief     Pointer to the next TX buffer location.

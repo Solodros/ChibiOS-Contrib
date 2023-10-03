@@ -235,7 +235,8 @@
 #define AT32_SPI_DMA_ERROR_HOOK(spip)      osalSysHalt("DMA failure")
 #endif
 
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_USE_DMA_V1 
+
 /**
  * @brief   SPI1 DMA MUX setting.
  */
@@ -289,6 +290,7 @@
 #define AT32_SPI_SPI6_RX_DMAMUX_CHANNEL    1
 #define AT32_SPI_SPI6_TX_DMAMUX_CHANNEL    2
 #endif
+
 #endif
 /** @} */
 
@@ -357,37 +359,37 @@
 
 /* Check on the presence of the DMA streams settings in mcuconf.h.*/
 #if AT32_SPI_USE_SPI1 && (!defined(AT32_SPI_SPI1_RX_DMA_STREAM) ||        \
-                           !defined(AT32_SPI_SPI1_TX_DMA_STREAM))
+                          !defined(AT32_SPI_SPI1_TX_DMA_STREAM))
 #error "SPI1 DMA streams not defined"
 #endif
 
 #if AT32_SPI_USE_SPI2 && (!defined(AT32_SPI_SPI2_RX_DMA_STREAM) ||        \
-                           !defined(AT32_SPI_SPI2_TX_DMA_STREAM))
+                          !defined(AT32_SPI_SPI2_TX_DMA_STREAM))
 #error "SPI2 DMA streams not defined"
 #endif
 
 #if AT32_SPI_USE_SPI3 && (!defined(AT32_SPI_SPI3_RX_DMA_STREAM) ||        \
-                           !defined(AT32_SPI_SPI3_TX_DMA_STREAM))
+                          !defined(AT32_SPI_SPI3_TX_DMA_STREAM))
 #error "SPI3 DMA streams not defined"
 #endif
 
 #if AT32_SPI_USE_SPI4 && (!defined(AT32_SPI_SPI4_RX_DMA_STREAM) ||        \
-                           !defined(AT32_SPI_SPI4_TX_DMA_STREAM))
+                          !defined(AT32_SPI_SPI4_TX_DMA_STREAM))
 #error "SPI4 DMA streams not defined"
 #endif
 
 #if AT32_SPI_USE_SPI5 && (!defined(AT32_SPI_SPI5_RX_DMA_STREAM) ||        \
-                           !defined(AT32_SPI_SPI5_TX_DMA_STREAM))
+                          !defined(AT32_SPI_SPI5_TX_DMA_STREAM))
 #error "SPI5 DMA streams not defined"
 #endif
 
 #if AT32_SPI_USE_SPI6 && (!defined(AT32_SPI_SPI6_RX_BDMA_STREAM) ||       \
-                           !defined(AT32_SPI_SPI6_TX_BDMA_STREAM))
+                          !defined(AT32_SPI_SPI6_TX_BDMA_STREAM))
 #error "SPI6 BDMA streams not defined"
 #endif
 
 /* Devices without DMAMUX require an additional check.*/
-#if AT32_ADVANCED_DMA && (!AT32_DMA_SUPPORTS_DMAMUX || (AT32_DMA_SUPPORTS_DMAMUX && !AT32_DMA_USE_DMAMUX))
+#if AT32_ADVANCED_DMA && !AT32_DMA_SUPPORTS_DMAMUX
 
 /* Check on the validity of the assigned DMA channels.*/
 #if AT32_SPI_USE_SPI1 &&                                                   \

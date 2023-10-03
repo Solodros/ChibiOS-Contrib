@@ -308,7 +308,8 @@
 #define AT32_UART_DMA_ERROR_HOOK(uartp)    osalSysHalt("DMA failure")
 #endif
 
-#if AT32_DMA_SUPPORTS_DMAMUX && AT32_DMA_USE_DMAMUX
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_USE_DMA_V1 
+
 /**
  * @brief   USART1 DMA MUX setting.
  */
@@ -397,6 +398,8 @@
     !defined(AT32_UART_UART10_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
 #define AT32_UART_UART10_RX_DMAMUX_CHANNEL    1
 #define AT32_UART_UART10_TX_DMAMUX_CHANNEL    2
+#endif
+
 #endif
 /** @} */
 
@@ -554,179 +557,179 @@
 #error "Invalid DMA priority assigned to UART10"
 #endif
 
-/* The following checks are only required when there is a DMA able to
-   reassign streams to different channels.*/
-#if AT32_ADVANCED_DMA && (!AT32_DMA_SUPPORTS_DMAMUX || (AT32_DMA_SUPPORTS_DMAMUX && !AT32_DMA_USE_DMAMUX))
-
 /* Check on the presence of the DMA streams settings in mcuconf.h.*/
 #if AT32_UART_USE_USART1 && (!defined(AT32_UART_USART1_RX_DMA_STREAM) ||  \
-                              !defined(AT32_UART_USART1_TX_DMA_STREAM))
+                             !defined(AT32_UART_USART1_TX_DMA_STREAM))
 #error "USART1 DMA streams not defined"
 #endif
 
 #if AT32_UART_USE_USART2 && (!defined(AT32_UART_USART2_RX_DMA_STREAM) ||  \
-                              !defined(AT32_UART_USART2_TX_DMA_STREAM))
+                             !defined(AT32_UART_USART2_TX_DMA_STREAM))
 #error "USART2 DMA streams not defined"
 #endif
 
 #if AT32_UART_USE_USART3 && (!defined(AT32_UART_USART3_RX_DMA_STREAM) ||  \
-                              !defined(AT32_UART_USART3_TX_DMA_STREAM))
+                             !defined(AT32_UART_USART3_TX_DMA_STREAM))
 #error "USART3 DMA streams not defined"
 #endif
 
 #if AT32_UART_USE_UART4 && (!defined(AT32_UART_UART4_RX_DMA_STREAM) ||    \
-                             !defined(AT32_UART_UART4_TX_DMA_STREAM))
+                            !defined(AT32_UART_UART4_TX_DMA_STREAM))
 #error "UART4 DMA streams not defined"
 #endif
 
 #if AT32_UART_USE_UART5 && (!defined(AT32_UART_UART5_RX_DMA_STREAM) ||    \
-                             !defined(AT32_UART_UART5_TX_DMA_STREAM))
+                            !defined(AT32_UART_UART5_TX_DMA_STREAM))
 #error "UART5 DMA streams not defined"
 #endif
 
 #if AT32_UART_USE_USART6 && (!defined(AT32_UART_USART6_RX_DMA_STREAM) ||  \
-                              !defined(AT32_UART_USART6_TX_DMA_STREAM))
+                             !defined(AT32_UART_USART6_TX_DMA_STREAM))
 #error "USART6 DMA streams not defined"
 #endif
 
 #if AT32_UART_USE_UART7 && (!defined(AT32_UART_UART7_RX_DMA_STREAM) ||    \
-                             !defined(AT32_UART_UART7_TX_DMA_STREAM))
+                            !defined(AT32_UART_UART7_TX_DMA_STREAM))
 #error "UART7 DMA streams not defined"
 #endif
 
 #if AT32_UART_USE_UART8 && (!defined(AT32_UART_UART8_RX_DMA_STREAM) ||    \
-                             !defined(AT32_UART_UART8_TX_DMA_STREAM))
+                            !defined(AT32_UART_UART8_TX_DMA_STREAM))
 #error "UART8 DMA streams not defined"
 #endif
 
 #if AT32_UART_USE_UART9 && (!defined(AT32_UART_UART9_RX_DMA_STREAM) ||    \
-                             !defined(AT32_UART_UART9_TX_DMA_STREAM))
+                            !defined(AT32_UART_UART9_TX_DMA_STREAM))
 #error "UART9 DMA streams not defined"
 #endif
 
 #if AT32_UART_USE_UART10 && (!defined(AT32_UART_UART10_RX_DMA_STREAM) ||   \
-                              !defined(AT32_UART_UART10_TX_DMA_STREAM))
+                             !defined(AT32_UART_UART10_TX_DMA_STREAM))
 #error "UART10 DMA streams not defined"
 #endif
 
+/* The following checks are only required when there is a DMA able to
+   reassign streams to different channels.*/
+#if AT32_ADVANCED_DMA && !AT32_DMA_SUPPORTS_DMAMUX
+
 /* Check on the validity of the assigned DMA channels.*/
 #if AT32_UART_USE_USART1 &&                                                \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_USART1_RX_DMA_STREAM,                 \
-                           AT32_USART1_RX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_USART1_RX_DMA_STREAM,                  \
+                          AT32_USART1_RX_DMA_MSK)
 #error "invalid DMA stream associated to USART1 RX"
 #endif
 
 #if AT32_UART_USE_USART1 &&                                                \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_USART1_TX_DMA_STREAM,                 \
-                           AT32_USART1_TX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_USART1_TX_DMA_STREAM,                  \
+                          AT32_USART1_TX_DMA_MSK)
 #error "invalid DMA stream associated to USART1 TX"
 #endif
 
 #if AT32_UART_USE_USART2 &&                                                \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_USART2_RX_DMA_STREAM,                 \
-                           AT32_USART2_RX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_USART2_RX_DMA_STREAM,                  \
+                          AT32_USART2_RX_DMA_MSK)
 #error "invalid DMA stream associated to USART2 RX"
 #endif
 
 #if AT32_UART_USE_USART2 &&                                                \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_USART2_TX_DMA_STREAM,                 \
-                           AT32_USART2_TX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_USART2_TX_DMA_STREAM,                  \
+                          AT32_USART2_TX_DMA_MSK)
 #error "invalid DMA stream associated to USART2 TX"
 #endif
 
 #if AT32_UART_USE_USART3 &&                                                \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_USART3_RX_DMA_STREAM,                 \
-                           AT32_USART3_RX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_USART3_RX_DMA_STREAM,                  \
+                          AT32_USART3_RX_DMA_MSK)
 #error "invalid DMA stream associated to USART3 RX"
 #endif
 
 #if AT32_UART_USE_USART3 &&                                                \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_USART3_TX_DMA_STREAM,                 \
-                           AT32_USART3_TX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_USART3_TX_DMA_STREAM,                  \
+                          AT32_USART3_TX_DMA_MSK)
 #error "invalid DMA stream associated to USART3 TX"
 #endif
 
 #if AT32_UART_USE_UART4 &&                                                 \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_UART4_RX_DMA_STREAM,                  \
-                           AT32_UART4_RX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_UART4_RX_DMA_STREAM,                   \
+                          AT32_UART4_RX_DMA_MSK)
 #error "invalid DMA stream associated to UART4 RX"
 #endif
 
 #if AT32_UART_USE_UART4 &&                                                 \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_UART4_TX_DMA_STREAM,                  \
-                           AT32_UART4_TX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_UART4_TX_DMA_STREAM,                   \
+                          AT32_UART4_TX_DMA_MSK)
 #error "invalid DMA stream associated to UART4 TX"
 #endif
 
 #if AT32_UART_USE_UART5 &&                                                 \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_UART5_RX_DMA_STREAM,                  \
-                           AT32_UART5_RX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_UART5_RX_DMA_STREAM,                   \
+                          AT32_UART5_RX_DMA_MSK)
 #error "invalid DMA stream associated to UART5 RX"
 #endif
 
 #if AT32_UART_USE_UART5 &&                                                 \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_UART5_TX_DMA_STREAM,                  \
-                           AT32_UART5_TX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_UART5_TX_DMA_STREAM,                   \
+                          AT32_UART5_TX_DMA_MSK)
 #error "invalid DMA stream associated to UART5 TX"
 #endif
 
 #if AT32_UART_USE_USART6 &&                                                \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_USART6_RX_DMA_STREAM,                 \
-                           AT32_USART6_RX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_USART6_RX_DMA_STREAM,                  \
+                          AT32_USART6_RX_DMA_MSK)
 #error "invalid DMA stream associated to USART6 RX"
 #endif
 
 #if AT32_UART_USE_USART6 &&                                                \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_USART6_TX_DMA_STREAM,                 \
-                           AT32_USART6_TX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_USART6_TX_DMA_STREAM,                  \
+                          AT32_USART6_TX_DMA_MSK)
 #error "invalid DMA stream associated to USART6 TX"
 #endif
 
 #if AT32_UART_USE_UART7 &&                                                 \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_UART7_RX_DMA_STREAM,                  \
-                           AT32_UART7_RX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_UART7_RX_DMA_STREAM,                   \
+                          AT32_UART7_RX_DMA_MSK)
 #error "invalid DMA stream associated to UART7 RX"
 #endif
 
 #if AT32_UART_USE_UART7 &&                                                 \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_UART7_TX_DMA_STREAM,                  \
-                           AT32_UART7_TX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_UART7_TX_DMA_STREAM,                   \
+                          AT32_UART7_TX_DMA_MSK)
 #error "invalid DMA stream associated to UART7 TX"
 #endif
 
 #if AT32_UART_USE_UART8 &&                                                 \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_UART8_RX_DMA_STREAM,                  \
-                           AT32_UART8_RX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_UART8_RX_DMA_STREAM,                   \
+                          AT32_UART8_RX_DMA_MSK)
 #error "invalid DMA stream associated to UART8 RX"
 #endif
 
 #if AT32_UART_USE_UART8 &&                                                 \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_UART8_TX_DMA_STREAM,                  \
-                           AT32_UART8_TX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_UART8_TX_DMA_STREAM,                   \
+                          AT32_UART8_TX_DMA_MSK)
 #error "invalid DMA stream associated to UART8 TX"
 #endif
 
 #if AT32_UART_USE_UART9 &&                                                 \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_UART9_RX_DMA_STREAM,                  \
-                           AT32_UART9_RX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_UART9_RX_DMA_STREAM,                   \
+                          AT32_UART9_RX_DMA_MSK)
 #error "invalid DMA stream associated to UART9 RX"
 #endif
 
 #if AT32_UART_USE_UART9 &&                                                 \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_UART9_TX_DMA_STREAM,                  \
-                           AT32_UART9_TX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_UART9_TX_DMA_STREAM,                   \
+                          AT32_UART9_TX_DMA_MSK)
 #error "invalid DMA stream associated to UART9 TX"
 #endif
 
 #if AT32_UART_USE_UART10 &&                                                \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_UART10_RX_DMA_STREAM,                 \
-                           AT32_UART10_RX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_UART10_RX_DMA_STREAM,                  \
+                          AT32_UART10_RX_DMA_MSK)
 #error "invalid DMA stream associated to UART10 RX"
 #endif
 
 #if AT32_UART_USE_UART10 &&                                                \
-    !AT32_DMA_IS_VALID_ID(AT32_UART_UART10_TX_DMA_STREAM,                 \
-                           AT32_UART10_TX_DMA_MSK)
+    !AT32_DMA_IS_VALID_ID(AT32_UART_UART10_TX_DMA_STREAM,                  \
+                          AT32_UART10_TX_DMA_MSK)
 #error "invalid DMA stream associated to UART10 TX"
 #endif
 
@@ -967,11 +970,11 @@ struct hal_uart_driver {
   /**
    * @brief Receive DMA channel.
    */
-  const at32_dma_stream_t  *dmarx;
+  const at32_dma_stream_t   *dmarx;
   /**
    * @brief Transmit DMA channel.
    */
-  const at32_dma_stream_t  *dmatx;
+  const at32_dma_stream_t   *dmatx;
   /**
    * @brief Default receive buffer while into @p UART_RX_IDLE state.
    */
