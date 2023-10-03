@@ -1040,7 +1040,7 @@
 #endif
 
 /* Check on LDOOVSEL value.*/
-#if AT32_LDOOVSEL == AT32_LDOOVSEL_1P3
+#if AT32_LDOOVSEL == AT32_LDOOVSEL_1P3V
 
 #if (AT32_HCLK > 216000000) ||                                              \
     (AT32_PCLK1 > 120000000) ||                                             \
@@ -1048,7 +1048,7 @@
 #error "AT32 bus clock exceeding maximum frequency when LDO is 1.3V"
 #endif
 
-#elif AT32_LDOOVSEL == AT32_LDOOVSEL_1P2
+#elif AT32_LDOOVSEL == AT32_LDOOVSEL_1P2V
 
 #if (AT32_HCLK > 168000000) ||                                              \
     (AT32_PCLK1 > 120000000) ||                                             \
@@ -1056,8 +1056,8 @@
 #error "AT32 bus clock exceeding maximum frequency when LDO is 1.2V"
 #endif
 
-#elif ((AT32_LDOOVSEL == AT32_LDOOVSEL_1P1) ||                              \
-       (AT32_LDOOVSEL == AT32_LDOOVSEL_1P0))
+#elif ((AT32_LDOOVSEL == AT32_LDOOVSEL_1P1V) ||                              \
+       (AT32_LDOOVSEL == AT32_LDOOVSEL_1P0V))
 
 #if (AT32_HCLK > 108000000) ||                                              \
     (AT32_PCLK1 > AT32_HCLK) ||                                             \
