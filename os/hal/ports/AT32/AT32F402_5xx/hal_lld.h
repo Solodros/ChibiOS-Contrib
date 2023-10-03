@@ -270,17 +270,17 @@
 #define AT32_CLKOUT_SEL_SCLK        (0 << 30)   /**< CLKOUT_SEL SYSCLK.         */
 #define AT32_CLKOUT_SEL_HEXT        (2 << 30)   /**< CLKOUT_SEL HEXT.           */
 #define AT32_CLKOUT_SEL_PLL         (3 << 30)   /**< CLKOUT_SEL PLL.            */
-#define AT32_CLKOUT_SEL_USBFS       ((1 << 30) |        
+#define AT32_CLKOUT_SEL_USBFS       ((1 << 30) |     \
                                      (0 << 16)) /**< CLKOUT_SEL USBFS.          */
-#define AT32_CLKOUT_SEL_ADC         ((1 << 30) |        
+#define AT32_CLKOUT_SEL_ADC         ((1 << 30) |     \
                                      (1 << 16)) /**< CLKOUT_SEL ADC.            */
-#define AT32_CLKOUT_SEL_HICK        ((1 << 30) |       
+#define AT32_CLKOUT_SEL_HICK        ((1 << 30) |     \
                                      (2 << 16)) /**< CLKOUT_SEL HICK.           */
-#define AT32_CLKOUT_SEL_LICK        ((1 << 30) |        
+#define AT32_CLKOUT_SEL_LICK        ((1 << 30) |     \
                                      (3 << 16)) /**< CLKOUT_SEL LICK.           */
-#define AT32_CLKOUT_SEL_LEXT        ((1 << 30) |        
+#define AT32_CLKOUT_SEL_LEXT        ((1 << 30) |     \
                                      (4 << 16)) /**< CLKOUT_SEL LEXT.           */
-#define AT32_CLKOUT_SEL_USBHS       ((1 << 30) |        
+#define AT32_CLKOUT_SEL_USBHS       ((1 << 30) |     \
                                      (5 << 16)) /**< CLKOUT_SEL USBHS.          */
 /** @} */
 
@@ -350,8 +350,8 @@
  * @name    SYSTICK_CTRL register bits definitions
  * @{
  */
-#define AT32_SYSTICK_CLKSRC_HCLKDIV8 (0 << 0)  /**< Systick clk is hclk/8      */
-#define AT32_SYSTICK_CLKSRC_HCLKDIV1 (4 << 0)  /**< Systick clk is hclk.       */
+#define AT32_SYSTICK_CLKSRC_HCLKDIV8 (0 << 0)  /**< Systick clk is hclk/8       */
+#define AT32_SYSTICK_CLKSRC_HCLKDIV1 (4 << 0)  /**< Systick clk is hclk.        */
 /** @} */
 
 /*===========================================================================*/
@@ -1040,7 +1040,7 @@
 #endif
 
 /* Check on LDOOVSEL value.*/
-#if AT32_LDOOVSEL == AT32_LDOOVSEL_1P3
+#if AT32_LDOOVSEL == AT32_LDOOVSEL_1P3V
 
 #if (AT32_HCLK > 216000000) ||                                              \
     (AT32_PCLK1 > 120000000) ||                                             \
@@ -1048,7 +1048,7 @@
 #error "AT32 bus clock exceeding maximum frequency when LDO is 1.3V"
 #endif
 
-#elif AT32_LDOOVSEL == AT32_LDOOVSEL_1P2
+#elif AT32_LDOOVSEL == AT32_LDOOVSEL_1P2V
 
 #if (AT32_HCLK > 168000000) ||                                              \
     (AT32_PCLK1 > 120000000) ||                                             \
@@ -1056,8 +1056,8 @@
 #error "AT32 bus clock exceeding maximum frequency when LDO is 1.2V"
 #endif
 
-#elif ((AT32_LDOOVSEL == AT32_LDOOVSEL_1P1) ||                              \
-       (AT32_LDOOVSEL == AT32_LDOOVSEL_1P0))
+#elif ((AT32_LDOOVSEL == AT32_LDOOVSEL_1P1V) ||                              \
+       (AT32_LDOOVSEL == AT32_LDOOVSEL_1P0V))
 
 #if (AT32_HCLK > 108000000) ||                                              \
     (AT32_PCLK1 > AT32_HCLK) ||                                             \

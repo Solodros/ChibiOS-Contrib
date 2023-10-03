@@ -329,7 +329,6 @@ typedef __I uint16_t vuc16;   /*!< read only */
 typedef __I uint8_t  vuc8;    /*!< read only */
 
 typedef enum {RESET = 0, SET = !RESET} flag_status;
-typedef enum {FALSE = 0, TRUE = !FALSE} confirm_state; 
 typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 
 /**
