@@ -778,6 +778,7 @@ void dmaServeInterrupt(const at32_dma_stream_t *dmastp) {
  * @note    This function can be invoked in both ISR or thread context.
  *
  * @param[in] dmastp    pointer to a @p at32_dma_stream_t structure
+ * @param[in] channel   at32 dma channel
  * @param[in] per       peripheral identifier
  *
  * @special

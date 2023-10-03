@@ -809,7 +809,7 @@ void dmaServeInterrupt(const at32_dma_stream_t *dmastp) {
  *
  * @special
  */
-void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t channel, uint32_t per) {
+void dmaSetRequestSource(const at32_dma_stream_t *dmastp, uint32_t per) {
 
   osalDbgCheck(per < 128U);
 
