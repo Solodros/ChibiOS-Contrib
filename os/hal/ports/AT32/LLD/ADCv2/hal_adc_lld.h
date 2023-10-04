@@ -35,8 +35,8 @@
  * @name    Possible ADC errors mask bits.
  * @{
  */
-#define ADC_ERR_DMAFAILURE      1U  /**< DMA operations failure.            */
-#define ADC_ERR_OVERFLOW        2U  /**< ADC overflow condition.            */
+#define ADC_ERR_DMAFAILURE     1U  /**< DMA operations failure.            */
+#define ADC_ERR_OVERFLOW       2U  /**< ADC overflow condition.            */
 #define ADC_ERR_VM             4U  /**< Watchdog triggered.                */
 /** @} */
 
@@ -77,6 +77,15 @@
 /** @} */
 
 /**
+ * @name    Available analog channels nums
+ * @{
+ */
+#if !define(AT32_ADC_MAX_CHANNELS)
+#define AT32_ADC_MAX_CHANNELS   18
+#endif
+/** @} */
+
+/**
  * @name    Available analog channels
  * @{
  */
@@ -102,13 +111,21 @@
                                          @note Available onADC1 only.       */
 #define ADC_CHANNEL_VBAT        18  /**< @brief VBAT.
                                          @note Available onADC1 only.       */
+#define ADC_CHANNEL_IN20        20  /**< @brief External analog input 20.   */
+#define ADC_CHANNEL_IN21        21  /**< @brief External analog input 21.   */
+#define ADC_CHANNEL_IN22        22  /**< @brief External analog input 22.   */
+#define ADC_CHANNEL_IN23        23  /**< @brief External analog input 23.   */
+#define ADC_CHANNEL_IN24        24  /**< @brief External analog input 24.   */
+#define ADC_CHANNEL_IN25        25  /**< @brief External analog input 25.   */
+#define ADC_CHANNEL_IN26        26  /**< @brief External analog input 26.   */
+#define ADC_CHANNEL_IN27        27  /**< @brief External analog input 27.   */
 /** @} */
 
 /**
  * @name    Sampling rates
  * @{
  */
-#if defined(AT32F435_7xx) || defined(AT32F423xx) || defined(AT32F423xx)|| defined(__DOXYGEN__)
+#if defined(AT32F435_7xx) || defined(AT32F423xx) || defined(__DOXYGEN__)
 #define ADC_SAMPLE_2P5          0   /**< @brief 2.5 cycles sampling time.    */
 #define ADC_SAMPLE_6P5          1   /**< @brief 6.5 cycles sampling time.    */
 #define ADC_SAMPLE_12P5         2   /**< @brief 12.5 cycles sampling time.   */
@@ -308,8 +325,12 @@
 
 #endif /* !AT32_DMA_SUPPORTS_DMAMUX */
 
+#if !defined(AT32_ADCCLKIN)
+#define AT32_ADCCLKIN                      AT32_HCLK
+#endif
+
 #if (AT32_ADC_ADCDIV >= 2) || (AT32_ADC_ADCDIV <= 17) 
-#define AT32_ADCCLK                        (AT32_HCLK / AT32_ADC_ADCDIV)
+#define AT32_ADCCLK                        (AT32_ADCCLKIN / AT32_ADC_ADCDIV)
 #else
 #error "invalid AT32_ADC_ADCDIV value specified"
 #endif
@@ -366,6 +387,7 @@ typedef uint32_t adcerror_t;
 /**
  * @brief   Low level fields of the ADC configuration structure.
  */
+#if AT32_ADC_MAX_CHANNELS < 20
 #define adc_lld_configuration_group_fields                                  \
   /* ADC CTRL1 register initialization data.*/                              \
   uint32_t                  ctrl1;                                          \
@@ -385,6 +407,35 @@ typedef uint32_t adcerror_t;
   uint32_t                  osq2;                                           \
   /* ADC OSQ3 register initialization data.*/                               \
   uint32_t                  osq3
+#else
+#define adc_lld_configuration_group_fields                                  \
+  /* ADC CTRL1 register initialization data.*/                              \
+  uint32_t                  ctrl1;                                          \
+  /* ADC CTRL2 register initialization data.*/                              \
+  uint32_t                  ctrl2;                                          \
+  /* ADC SPT1 register initialization data.*/                               \
+  uint32_t                  spt1;                                           \
+  /* ADC SPT2 register initialization data.*/                               \
+  uint32_t                  spt2;                                           \
+  /* ADC voltage monitoring high boundary.*/                                \
+  uint16_t                  vmhb;                                           \
+  /* ADC voltage monitoring low boundary.*/                                 \
+  uint16_t                  vmlb;                                           \
+  /* ADC OSQ1 register initialization data.*/                               \
+  uint32_t                  osq1;                                           \
+  /* ADC OSQ2 register initialization data.*/                               \
+  uint32_t                  osq2;                                           \
+  /* ADC OSQ3 register initialization data.*/                               \
+  uint32_t                  osq3;                                           \
+  /* ADC SPT3 register initialization data.*/                               \
+  uint32_t                  spt3;                                           \
+  /* ADC OSQ4 register initialization data.*/                               \
+  uint32_t                  osq4;                                           \
+  /* ADC OSQ5 register initialization data.*/                               \
+  uint32_t                  osq5;                                           \
+  /* ADC OSQ6 register initialization data.*/                               \
+  uint32_t                  osq6
+#endif
 
 /**
  * @name    Sequences building helper macros
@@ -413,6 +464,25 @@ typedef uint32_t adcerror_t;
 #define ADC_OSQ1_OSN14_N(n)     ((n) << 5)  /**< @brief 14th channel in seq.*/
 #define ADC_OSQ1_OSN15_N(n)     ((n) << 10) /**< @brief 15th channel in seq.*/
 #define ADC_OSQ1_OSN16_N(n)     ((n) << 15) /**< @brief 16th channel in seq.*/
+
+#define ADC_OSQ4_OSN17_N(n)     ((n) << 0)  /**< @brief 17th channel in seq.*/
+#define ADC_OSQ4_OSN18_N(n)     ((n) << 5)  /**< @brief 18th channel in seq.*/
+#define ADC_OSQ4_OSN19_N(n)     ((n) << 10) /**< @brief 19th channel in seq.*/
+#define ADC_OSQ4_OSN20_N(n)     ((n) << 15) /**< @brief 20th channel in seq.*/
+#define ADC_OSQ4_OSN21_N(n)     ((n) << 20) /**< @brief 21th channel in seq.*/
+#define ADC_OSQ4_OSN22_N(n)     ((n) << 25) /**< @brief 22th channel in seq.*/
+
+#define ADC_OSQ5_OSN23_N(n)     ((n) << 0)  /**< @brief 23th channel in seq.*/
+#define ADC_OSQ5_OSN24_N(n)     ((n) << 5)  /**< @brief 24th channel in seq.*/
+#define ADC_OSQ5_OSN25_N(n)     ((n) << 10) /**< @brief 25th channel in seq.*/
+#define ADC_OSQ5_OSN26_N(n)     ((n) << 15) /**< @brief 26th channel in seq.*/
+#define ADC_OSQ5_OSN27_N(n)     ((n) << 20) /**< @brief 27th channel in seq.*/
+#define ADC_OSQ5_OSN28_N(n)     ((n) << 25) /**< @brief 28th channel in seq.*/
+
+#define ADC_OSQ6_OSN29_N(n)     ((n) << 0)  /**< @brief 29th channel in seq.*/
+#define ADC_OSQ6_OSN30_N(n)     ((n) << 5)  /**< @brief 30th channel in seq.*/
+#define ADC_OSQ6_OSN31_N(n)     ((n) << 10) /**< @brief 31th channel in seq.*/
+#define ADC_OSQ6_OSN32_N(n)     ((n) << 15) /**< @brief 32th channel in seq.*/
 /** @} */
 
 /**
@@ -441,6 +511,15 @@ typedef uint32_t adcerror_t;
 #define ADC_SPT1_CSPT17(n)      ((n) << 21) /**< @brief Voltage Reference
                                                  sampling time.             */
 #define ADC_SPT1_CSPT18(n)      ((n) << 24) /**< @brief VBAT sampling time. */
+
+#define ADC_SPT3_CSPT20(n)      ((n) << 0)  /**< @brief AN20 sampling time. */
+#define ADC_SPT3_CSPT21(n)      ((n) << 3)  /**< @brief AN21 sampling time. */
+#define ADC_SPT3_CSPT22(n)      ((n) << 6)  /**< @brief AN22 sampling time. */
+#define ADC_SPT3_CSPT23(n)      ((n) << 9)  /**< @brief AN23 sampling time. */
+#define ADC_SPT3_CSPT24(n)      ((n) << 12) /**< @brief AN24 sampling time. */
+#define ADC_SPT3_CSPT25(n)      ((n) << 15) /**< @brief AN25 sampling time. */
+#define ADC_SPT3_CSPT26(n)      ((n) << 18) /**< @brief AN26 sampling time. */
+#define ADC_SPT3_CSPT27(n)      ((n) << 21) /**< @brief AN27 sampling time. */
 /** @} */
 
 /**

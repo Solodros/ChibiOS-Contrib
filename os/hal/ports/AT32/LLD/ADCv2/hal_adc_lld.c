@@ -299,8 +299,11 @@ void adc_lld_start(ADCDriver *adcp) {
 
     /* This is a common register but apparently it requires that at least one
        of the ADCs is clocked in order to allow writing, see bug 3575297.*/
-#if defined(AT32F435_7xx) || defined(AT32F423xx)
+#if defined(AT32F435_7xx)
     ADCCOM->CCTRL = (ADCCOM->CCTRL & (ADC_CCTRL_ITSRVEN | ADC_CCTRL_VBATEN)) |
+                    ((AT32_ADC_ADCDIV - 2) << 16);
+#elif defined(AT32F423xx)
+    ADCCOM->CCTRL = (ADCCOM->CCTRL & ADC_CCTRL_ITSRVEN) |
                     ((AT32_ADC_ADCDIV - 2) << 16);
 #else
     adcp->adc->CTRL2 = ADC_CTRL2_ITSRVEN;
@@ -389,13 +392,19 @@ void adc_lld_start_conversion(ADCDriver *adcp) {
   adcp->adc->OSQ1 = grpp->osq1 | ADC_OSQ1_NUM_CH(grpp->num_channels);
   adcp->adc->OSQ2 = grpp->osq2;
   adcp->adc->OSQ3 = grpp->osq3;
+#if AT32_ADC_MAX_CHANNELS >= 20
+  adcp->adc->SPT3 = grpp->spt3;
+  adcp->adc->OSQ4 = grpp->osq4;
+  adcp->adc->OSQ4 = grpp->osq5;
+  adcp->adc->OSQ4 = grpp->osq6;
+#endif
 
   /* ADC configuration and start.*/
 #if defined(AT32F435_7xx) || defined(AT32F423xx)
   adcp->adc->CTRL1 = grpp->ctrl1 | ADC_CTRL1_OCCOIE | ADC_CTRL1_SQEN;
   ctrl2 = grpp->ctrl2 | ADC_CTRL2_OCDMAEN | ADC_CTRL2_OCDRCEN | ADC_CTRL2_ADCEN;
 #else
-  adcp->adc->CTRL1 = grpp->ctrl1 | ADC_CTRL1_SQEN;
+  adcp->adc->CTRL1 = grpp->ctrl1 | ADC_CTRL1_OCCOIE | ADC_CTRL1_SQEN;
   ctrl2 = grpp->ctrl2 | ADC_CTRL2_OCDMAEN | ADC_CTRL2_ADCEN;
 #endif
 
@@ -466,7 +475,7 @@ void adcAT32DisableITSRVEN(void) {
  */
 void adcAT32EnableVBATEN(void) {
 
-#if defined(AT32F435_7xx) || defined(AT32F423xx)
+#if defined(AT32F435_7xx)
   ADCCOM->CCTRL |= ADC_CCTRL_VBATEN;
 #endif
 }
@@ -479,7 +488,7 @@ void adcAT32EnableVBATEN(void) {
  */
 void adcAT32DisableVBATEN(void) {
 
-#if defined(AT32F435_7xx) || defined(AT32F423xx)
+#if defined(AT32F435_7xx)
   ADCCOM->CCTRL &= ~ADC_CCTRL_VBATEN;
 #endif
 }

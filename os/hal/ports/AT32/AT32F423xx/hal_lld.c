@@ -15,8 +15,8 @@
 */
 
 /**
- * @file    AT32F402_5xx/hal_lld.c
- * @brief   AT32F402_5xx HAL subsystem low level driver source.
+ * @file    AT32F423xx/hal_lld.c
+ * @brief   AT32F423xx HAL subsystem low level driver source.
  *
  * @addtogroup HAL
  * @{
@@ -34,7 +34,7 @@
 
 /**
  * @brief   CMSIS system core clock variable.
- * @note    It is declared in system_at32f402_5xx.h.
+ * @note    It is declared in system_at32f423xx.h.
  */
 uint32_t SystemCoreClock = AT32_HCLK;
 
@@ -193,11 +193,13 @@ void at32_clock_reset(void)
   CRM->CTRL &= ~(0x010D0000U);
 
   /* reset pllms pllns pllfr pllrcs bits */
-  CRM->PLLCFG = 0x000007C1U;
+  CRM->PLLCFG = 0x00033002U;
 
-  /* reset clkout_sel, clkoutdiv, pllclk_to_adc, hick_to_usb */
-  CRM->MISC1 &= 0x00005000U;
-  CRM->MISC1 |= 0x000F0000U;
+  /* reset I2C1SEL, USART3SEL, USART2SEL, USART1SEL */
+  CRM->PICLKS = 0x00000000U;
+
+  /* reset clkout_sel, clkoutdiv, pllclk_to_adc, hick_to_sclk, hick_to_usb, hickdiv */
+  CRM->MISC1 = 0x000F0000U;
   
   /* disable all interrupts enable and clear pending bits  */
   CRM->CLKINT = 0x009F0000;
@@ -256,21 +258,18 @@ void at32_clock_init(void) {
 #if AT32_PLLRCS == AT32_PLLRCS_HICK
   at32_hick_divider_select(AT32_HICKDIV_DIV1);
 #endif
-  CRM->PLLCFG = AT32_PLL_MS | AT32_PLL_NS | AT32_PLL_FP | AT32_PLL_FU |
-                AT32_PLLRCS;
+  CRM->PLLCFG = AT32_PLL_MS | AT32_PLL_NS | AT32_PLL_FR | AT32_PLLRCS;
   CRM->CTRL |= CRM_CTRL_PLLEN;
   while (!(CRM->CTRL & CRM_CTRL_PLLSTBL));       /* Waits until PLL is stable.   */
-#if AT32_PLLU_ENABLED
-  CRM->PLLCFG |= CRM_PLLCFG_PLLUEN;
-  while (!(CRM->CTRL & CRM_CTRL_PLLUSTBL));      /* Waits until PLLU is stable.   */
-#endif
 #endif
 
   /* Clock settings.*/
-  CRM->CFG   |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_CFG_MASK) | AT32_APB2DIV     | 
-                 AT32_APB1DIV | AT32_AHBDIV | AT32_ETRCDIV   | AT32_I2SF5CLKSEL |
-                 AT32_CLKOUTDIV1;
-  CRM->MISC1 |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_MISC1_MASK) | AT32_CLKOUTDIV2;
+  CRM->CFG    |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_CFG_MASK)   | AT32_APB2DIV    | 
+                  AT32_APB1DIV | AT32_AHBDIV | AT32_ETRCDIV     | AT32_CLKOUTDIV1;
+  CRM->MISC1  |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_MISC1_MASK) | AT32_CLKOUTDIV2 |
+                  AT32_ADCCLK_SRC;
+  CRM->PICLKS |= AT32_USART1SEL | AT32_USART2SEL | AT32_USART3SEL | AT32_I2C1SEL;
+  CRM->MISC2  |= AT32_USBDIV;
 
   /* PLL Auto Step activation.*/
   CRM->MISC2 |= CRM_MISC2_AUTO_STEP_EN;
@@ -292,13 +291,12 @@ void at32_clock_init(void) {
   CRM->CTRL &= ~CRM_CTRL_HICKEN;
 #endif
 
-#if AT32_PLLU_USB48_SEL == AT32_PLLU_USB48_SEL_PLLU
-  CRM->MISC2 &= ~AT32_PLLU_USB48_SEL_MASK;
-  CRM->MISC2 |= CRM_MISC2_PLLU_USB48_SEL_PLLU;
-#elif AT32_PLLU_USB48_SEL == AT32_PLLU_USB48_SEL_HICK
+#if AT32_USBCLK_SRC == AT32_USBCLK_SRC_HICK
   at32_hick_divider_select(AT32_HICKDIV_DIV1);
   at32_hick_frequency_select(AT32_HICK_TO_SCLK_HICKOUT);
 #endif
+  CRM->MISC1 &= ~AT32_HICK_TO_USB_MASK;
+  CRM->MISC1 |= AT32_USBCLK_SRC_PLL;
 
 #if AT32_SYSTICK_CLKSRC == AT32_SYSTICK_CLKSRC_HCLKDIV1
   SysTick->CTRL |= AT32_SYSTICK_CLKSRC_HCLKDIV1;

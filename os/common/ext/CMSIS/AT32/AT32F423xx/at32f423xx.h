@@ -1,15 +1,15 @@
 /**
   **************************************************************************
-  * @file     at32f402_405.h
-  * @brief    at32f402_405 header file
+  * @file     at32f423.h
+  * @brief    at32f423 header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
-  * The software Board Support Package (BSP) that is made available to 
-  * download from Artery official website is the copyrighted work of Artery. 
-  * Artery authorizes customers to use, copy, and distribute the BSP 
-  * software and its related documentation for the purpose of design and 
-  * development in conjunction with Artery microcontrollers. Use of the 
+  * The software Board Support Package (BSP) that is made available to
+  * download from Artery official website is the copyrighted work of Artery.
+  * Artery authorizes customers to use, copy, and distribute the BSP
+  * software and its related documentation for the purpose of design and
+  * development in conjunction with Artery microcontrollers. Use of the
   * software is governed by this copyright notice and the following disclaimer.
   *
   * THIS SOFTWARE IS PROVIDED ON "AS IS" BASIS WITHOUT WARRANTIES,
@@ -22,8 +22,8 @@
   **************************************************************************
   */
 
-#ifndef __AT32F402_5_H
-#define __AT32F402_5_H
+#ifndef __AT32F423_H
+#define __AT32F423_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -33,14 +33,15 @@ extern "C" {
  #pragma anon_unions
 #endif
 
+
 /** @addtogroup CMSIS
   * @{
   */
 
-/** @addtogroup AT32F402_405
+/** @addtogroup AT32F423
   * @{
   */
-  
+
 /** @addtogroup Library_configuration_section
   * @{
   */
@@ -50,101 +51,90 @@ extern "C" {
   *      devices, you can define the device in your toolchain compiler preprocessor.
   */
 
-#if !defined (AT32F405KBU7_4) && !defined (AT32F405KCU7_4) && !defined (AT32F405CBT7)  && \
-    !defined (AT32F405CCT7)   && !defined (AT32F405CBU7)   && !defined (AT32F405CCU7)  && \
-    !defined (AT32F405RBT7_7) && !defined (AT32F405RCT7_7) && !defined (AT32F405RBT7)  && \
-    !defined (AT32F405RCT7)   && !defined (AT32F402KBU7_4) && !defined (AT32F402KCU7_4)&& \
-    !defined (AT32F402CBT7)   && !defined (AT32F402CCT7)   && !defined (AT32F402CBU7)  && \
-    !defined (AT32F402CCU7)   && !defined (AT32F402RBT7_7) && !defined (AT32F402RCT7_7)&& \
-    !defined (AT32F402RBT7)   && !defined (AT32F402RCT7)
+#if !defined (AT32F423K8U7_4) && !defined (AT32F423KBU7_4) && !defined (AT32F423KCU7_4) && \
+    !defined (AT32F423T8U7)   && !defined (AT32F423TBU7)   && !defined (AT32F423TCU7)   && \
+    !defined (AT32F423C8U7)   && !defined (AT32F423CBU7)   && !defined (AT32F423CCU7)   && \
+    !defined (AT32F423C8T7)   && !defined (AT32F423CBT7)   && !defined (AT32F423CCT7)   && \
+    !defined (AT32F423R8T7_7) && !defined (AT32F423RBT7_7) && !defined (AT32F423RCT7_7) && \
+    !defined (AT32F423R8T7)   && !defined (AT32F423RBT7)   && !defined (AT32F423RCT7)   && \
+    !defined (AT32F423V8T7)   && !defined (AT32F423VBT7)   && !defined (AT32F423VCT7)   && \
+    !defined (AT32F423CBU7_7)
 
-    #error "Please select first the target device used in your application (in at32f402_405.h file)"
+    #error "Please select first the target device used in your application (in at32f423.h file)"
 #endif
 
-#if defined (AT32F405KBU7_4) || defined (AT32F405KCU7_4) || defined (AT32F405CBT7) || \
-    defined (AT32F405CCT7)   || defined (AT32F405CBU7)   || defined (AT32F405CCU7) || \
-    defined (AT32F405RBT7_7) || defined (AT32F405RCT7_7) || defined (AT32F405RBT7) || \
-    defined (AT32F405RCT7)
+#if defined (AT32F423K8U7_4) || defined (AT32F423KBU7_4) || defined (AT32F423KCU7_4) || \
+    defined (AT32F423T8U7)   || defined (AT32F423TBU7)   || defined (AT32F423TCU7)   || \
+    defined (AT32F423C8U7)   || defined (AT32F423CBU7)   || defined (AT32F423CCU7)   || \
+    defined (AT32F423C8T7)   || defined (AT32F423CBT7)   || defined (AT32F423CCT7)   || \
+    defined (AT32F423R8T7_7) || defined (AT32F423RBT7_7) || defined (AT32F423RCT7_7) || \
+    defined (AT32F423R8T7)   || defined (AT32F423RBT7)   || defined (AT32F423RCT7)   || \
+    defined (AT32F423V8T7)   || defined (AT32F423VBT7)   || defined (AT32F423VCT7)   || \
+    defined (AT32F423CBU7_7)
 
-    #define AT32F405xx
-#endif
-
-#if defined (AT32F402KBU7_4) || defined (AT32F402KCU7_4) || defined (AT32F402CBT7) || \
-    defined (AT32F402CCT7)   || defined (AT32F402CBU7)   || defined (AT32F402CCU7) || \
-    defined (AT32F402RBT7_7) || defined (AT32F402RCT7_7) || defined (AT32F402RBT7) || \
-    defined (AT32F402RCT7)
-
-    #define AT32F402xx
+    #define AT32F423xx
 #endif
 
 /**
   * define with package
   */
-#if defined (AT32F405KBU7_4) || defined (AT32F405KCU7_4)
+#if defined (AT32F423K8U7_4) || defined (AT32F423KBU7_4) || defined (AT32F423KCU7_4)
 
-    #define AT32F405Kx
-#endif
-#if defined (AT32F405CBT7)   || defined (AT32F405CCT7)   || defined (AT32F405CBU7) || \
-    defined (AT32F405CCU7)
-
-    #define AT32F405Rx
+    #define AT32F423Kx
 #endif
 
-#if defined (AT32F405RBT7_7) || defined (AT32F405RCT7_7) || defined (AT32F405RBT7) || \
-    defined (AT32F405RCT7)
-   
-    #define AT32F405Rx
+#if defined (AT32F423T8U7)   || defined (AT32F423TBU7)   || defined (AT32F423TCU7)
+
+    #define AT32F423Tx
 #endif
 
-#if defined (AT32F402KBU7_4) || defined (AT32F402KCU7_4)
+#if defined (AT32F423C8U7)   || defined (AT32F423CBU7)   || defined (AT32F423CCU7)   || \
+    defined (AT32F423C8T7)   || defined (AT32F423CBT7)   || defined (AT32F423CCT7)   || \
+    defined (AT32F423CBU7_7)
 
-    #define AT32F402Kx
-#endif
-#if defined (AT32F402CBT7)   || defined (AT32F402CCT7)   || defined (AT32F402CBU7) || \
-    defined (AT32F402CCU7)
-
-    #define AT32F402Rx
+    #define AT32F423Cx
 #endif
 
-#if defined (AT32F402RBT7_7) || defined (AT32F402RCT7_7) || defined (AT32F402RBT7) || \
-    defined (AT32F402RCT7)
-   
-    #define AT32F402Rx
+#if defined (AT32F423R8T7_7) || defined (AT32F423RBT7_7) || defined (AT32F423RCT7_7) || \
+    defined (AT32F423R8T7)   || defined (AT32F423RBT7)   || defined (AT32F423RCT7)
+
+    #define AT32F423Rx
 #endif
 
+#if defined (AT32F423V8T7)   || defined (AT32F423VBT7)   || defined (AT32F423VCT7)
+
+    #define AT32F423Vx
+#endif
 
 /**
   * define with memory density
   */
-#if defined (AT32F405KBU7_4) || defined (AT32F405CBT7)   || defined (AT32F405CBU7) || \
-    defined (AT32F405RBT7_7) || defined (AT32F405RBT7)
+#if defined (AT32F423K8U7_4) || defined (AT32F423T8U7)   || defined (AT32F423C8U7)   || \
+    defined (AT32F423C8T7)   || defined (AT32F423R8T7_7) || defined (AT32F423R8T7)   || \
+    defined (AT32F423V8T7)
 
-    #define AT32F405xB
+    #define AT32F423x8
 #endif
 
-#if defined (AT32F405KCU7_4) || defined (AT32F405CCT7)   || defined (AT32F405CCU7) || \
-    defined (AT32F405RCT7_7) || defined (AT32F405RCT7)
+#if defined (AT32F423KBU7_4) || defined (AT32F423TBU7)   || defined (AT32F423CBU7)   || \
+    defined (AT32F423CBT7)   || defined (AT32F423RBT7_7) || defined (AT32F423RBT7)   || \
+    defined (AT32F423VBT7)   || defined (AT32F423CBU7_7)
 
-    #define AT32F405xC
+    #define AT32F423xB
 #endif
 
-#if defined (AT32F402KBU7_4) || defined (AT32F402CBT7)   || defined (AT32F402CBU7) || \
-    defined (AT32F402RBT7_7) || defined (AT32F402RBT7)
+#if defined (AT32F423KCU7_4) || defined (AT32F423TCU7)   || defined (AT32F423CCU7)   || \
+    defined (AT32F423CCT7)   || defined (AT32F423RCT7_7) || defined (AT32F423RCT7)   || \
+    defined (AT32F423VCT7)
 
-    #define AT32F402xB
-#endif
-
-#if defined (AT32F402KCU7_4) || defined (AT32F402CCT7)   || defined (AT32F402CCU7) || \
-    defined (AT32F402RCT7_7) || defined (AT32F402RCT7)
-
-    #define AT32F402xC
+    #define AT32F423xC
 #endif
 
 #ifndef USE_STDPERIPH_DRIVER
 /**
   * @brief comment the line below if you will not use the peripherals drivers.
-  * in this case, these drivers will not be included and the application code will 
-  * be based on direct access to peripherals registers 
+  * in this case, these drivers will not be included and the application code will
+  * be based on direct access to peripherals registers
   */
   #ifdef _RTE_
     #include "RTE_Components.h"
@@ -155,16 +145,16 @@ extern "C" {
 #endif
 
 /**
-  * @brief at32f402_405 standard peripheral library version number
+  * @brief at32f423 standard peripheral library version number
   */
-#define __AT32F402_405_LIBRARY_VERSION_MAJOR    (0x02) /*!< [31:24] major version */
-#define __AT32F402_405_LIBRARY_VERSION_MIDDLE   (0x00) /*!< [23:16] middle version */
-#define __AT32F402_405_LIBRARY_VERSION_MINOR    (0x00) /*!< [15:8]  minor version */
-#define __AT32F402_405_LIBRARY_VERSION_RC       (0x00) /*!< [7:0]  release candidate */
-#define __AT32F402_405_LIBRARY_VERSION          ((__AT32F402_405_LIBRARY_VERSION_MAJOR << 24)  | \
-                                                 (__AT32F402_405_LIBRARY_VERSION_MIDDLE << 16) | \
-                                                 (__AT32F402_405_LIBRARY_VERSION_MINOR << 8)   | \
-                                                 (__AT32F402_405_LIBRARY_VERSION_RC))
+#define __AT32F423_LIBRARY_VERSION_MAJOR    (0x02) /*!< [31:24] major version */
+#define __AT32F423_LIBRARY_VERSION_MIDDLE   (0x00) /*!< [23:16] middle version */
+#define __AT32F423_LIBRARY_VERSION_MINOR    (0x02) /*!< [15:8]  minor version */
+#define __AT32F423_LIBRARY_VERSION_RC       (0x00) /*!< [7:0]  release candidate */
+#define __AT32F423_LIBRARY_VERSION          ((__AT32F423_LIBRARY_VERSION_MAJOR << 24)  | \
+                                             (__AT32F423_LIBRARY_VERSION_MIDDLE << 16) | \
+                                             (__AT32F423_LIBRARY_VERSION_MINOR << 8)   | \
+                                             (__AT32F423_LIBRARY_VERSION_RC))
 
 /**
   * @}
@@ -184,7 +174,7 @@ extern "C" {
 #define __FPU_PRESENT             1U       /*!< fpu present                                  */
 
 /**
-  * @brief at32f402_405 interrupt number definition, according to the selected device
+  * @brief at32f423 interrupt number definition, according to the selected device
   *        in @ref library_configuration_section
   */
 typedef enum IRQn
@@ -246,33 +236,32 @@ typedef enum IRQn
     EXINT15_10_IRQn             = 40,     /*!< external line[15:10] interrupts                      */
     ERTCAlarm_IRQn              = 41,     /*!< ertc alarm through exint line interrupt              */
     OTGFS1_WKUP_IRQn            = 42,     /*!< otgfs1 wakeup from suspend through exint line interrupt */
+    TMR12_GLOBAL_IRQn           = 43,     /*!< tmr12 global interrupt                               */
     TMR13_GLOBAL_IRQn           = 44,     /*!< tmr13 global interrupt                               */
     TMR14_GLOBAL_IRQn           = 45,     /*!< tmr14 global interrupt                               */
     SPI3_IRQn                   = 51,     /*!< spi3 global interrupt                                */
     USART4_IRQn                 = 52,     /*!< usart4 global interrupt                              */
     USART5_IRQn                 = 53,     /*!< usart5 global interrupt                              */
-    TMR6_GLOBAL_IRQn            = 54,     /*!< tmr6 global interrupt                                */
+    TMR6_DAC_GLOBAL_IRQn        = 54,     /*!< tmr6 and dac global interrupt                        */
     TMR7_GLOBAL_IRQn            = 55,     /*!< tmr7 global interrupt                                */
     DMA2_Channel1_IRQn          = 56,     /*!< dma2 channel 1 global interrupt                      */
     DMA2_Channel2_IRQn          = 57,     /*!< dma2 channel 2 global interrupt                      */
     DMA2_Channel3_IRQn          = 58,     /*!< dma2 channel 3 global interrupt                      */
     DMA2_Channel4_IRQn          = 59,     /*!< dma2 channel 4 global interrupt                      */
     DMA2_Channel5_IRQn          = 60,     /*!< dma2 channel 5 global interrupt                      */
+    CAN2_TX_IRQn                = 63,     /*!< can2 tx interrupt                                    */
+    CAN2_RX0_IRQn               = 64,     /*!< can2 rx0 interrupt                                   */
+    CAN2_RX1_IRQn               = 65,     /*!< can2 rx1 interrupt                                   */
+    CAN2_SE_IRQn                = 66,     /*!< can2 se interrupt                                    */
     OTGFS1_IRQn                 = 67,     /*!< otgfs1 interrupt                                     */
     DMA2_Channel6_IRQn          = 68,     /*!< dma2 channel 6 global interrupt                      */
     DMA2_Channel7_IRQn          = 69,     /*!< dma2 channel 7 global interrupt                      */
     USART6_IRQn                 = 71,     /*!< usart6 interrupt                                     */
     I2C3_EVT_IRQn               = 72,     /*!< i2c3 event interrupt                                 */
     I2C3_ERR_IRQn               = 73,     /*!< i2c3 error interrupt                                 */
-    OTGHS_EP1_OUT_IRQn          = 74,     /*!< otghs wakeup from suspend through exint line interrupt */
-    OTGHS_EP1_IN_IRQn           = 75,     /*!< otghs interrupt                                     */
-    OTGHS_WKUP_IRQn             = 76,     /*!< otghs wakeup from suspend through exint line interrupt */
-    OTGHS_IRQn                  = 77,     /*!< otghs interrupt                                      */
     FPU_IRQn                    = 81,     /*!< fpu interrupt                                        */
-    UART7_IRQn                  = 82,     /*!< uart7 interrupt                                      */
-    UART8_IRQn                  = 83,     /*!< uart8 interrupt                                      */
-    I2SF5_IRQn                  = 85,     /*!< i2sf5 global interrupt                               */
-    QSPI1_IRQn                  = 92,     /*!< qspi1 global interrupt                               */
+    USART7_IRQn                 = 82,     /*!< usart7 interrupt                                     */
+    USART8_IRQn                 = 83,     /*!< usart8 interrupt                                     */
     DMAMUX_IRQn                 = 94,     /*!< dmamux global interrupt                              */
     ACC_IRQn                    = 103,    /*!< acc interrupt                                        */
 
@@ -287,7 +276,7 @@ typedef enum IRQn
 
 /** @addtogroup Exported_types
   * @{
-  */  
+  */
 
 typedef int32_t  INT32;
 typedef int16_t  INT16;
@@ -365,10 +354,6 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_CTRL_CFDEN                   (0x1U << 19)
 #define CRM_CTRL_PLLEN                   (0x1U << 24)
 #define CRM_CTRL_PLLSTBL                 (0x1U << 25)
-#define CRM_CTRL_PLLUSTBL                (0x1U << 26)
-
-/******************  Bit definition for CRM_PLLCFG register  *****************/
-#define CRM_PLLCFG_PLLUEN                (0x1U << 29)
 
 /******************  Bit definition for CRM_CFG register  ******************/
 #define CRM_CFG_SCLKSEL                  (0x3U << 0)
@@ -385,17 +370,17 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_AHBRST1_GPIOBRST             (0x1U << 1)
 #define CRM_AHBRST1_GPIOCRST             (0x1U << 2)
 #define CRM_AHBRST1_GPIODRST             (0x1U << 3)
+#define CRM_AHBRST1_GPIOERST             (0x1U << 4)
 #define CRM_AHBRST1_GPIOFRST             (0x1U << 5)
 #define CRM_AHBRST1_CRCRST               (0x1U << 12)
 #define CRM_AHBRST1_DMA1RST              (0x1U << 22)
 #define CRM_AHBRST1_DMA2RST              (0x1U << 24)
-#define CRM_AHBRST1_OTGHSRST             (0x1U << 29)
 
 /*****************  Bit definition for CRM_AHBRST2 register  ***************/
 #define CRM_AHBRST2_OTGFS1RST            (0x1U << 7)
 
 /*****************  Bit definition for CRM_AHBRST3 register  ***************/
-#define CRM_AHBRST3_QSPI1RST             (0x1U << 1)
+#define CRM_AHBRST3_XMCRST               (0x1U << 0)
 
 /*****************  Bit definition for CRM_APB1RST register  ***************/
 #define CRM_APB1RST_TMR2RST              (0x1U << 0)
@@ -403,6 +388,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1RST_TMR4RST              (0x1U << 2)
 #define CRM_APB1RST_TMR6RST              (0x1U << 4)
 #define CRM_APB1RST_TMR7RST              (0x1U << 5)
+#define CRM_APB1RST_TMR12RST             (0x1U << 6)
 #define CRM_APB1RST_TMR13RST             (0x1U << 7)
 #define CRM_APB1RST_TMR14RST             (0x1U << 8)
 #define CRM_APB1RST_WWDTRST              (0x1U << 11)
@@ -416,9 +402,11 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1RST_I2C2RST              (0x1U << 22)
 #define CRM_APB1RST_I2C3RST              (0x1U << 23)
 #define CRM_APB1RST_CAN1RST              (0x1U << 25)
+#define CRM_APB1RST_CAN2RST              (0x1U << 26)
 #define CRM_APB1RST_PWCRST               (0x1U << 28)
-#define CRM_APB1RST_UART7RST             (0x1U << 30)
-#define CRM_APB1RST_UART8RST             (0x1U << 31)
+#define CRM_APB1RST_DACRST               (0x1U << 29)
+#define CRM_APB1RST_USART7RST            (0x1U << 30)
+#define CRM_APB1RST_USART8RST            (0x1U << 31)
 
 /*****************  Bit definition for CRM_APB2RST register  ***************/
 #define CRM_APB2RST_TMR1RST              (0x1U << 0)
@@ -430,7 +418,6 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB2RST_TMR9RST              (0x1U << 16)
 #define CRM_APB2RST_TMR10RST             (0x1U << 17)
 #define CRM_APB2RST_TMR11RST             (0x1U << 18)
-#define CRM_APB2RST_I2SF5RST             (0x1U << 20)
 #define CRM_APB2RST_ACCRST               (0x1U << 29)
 
 /*****************  Bit definition for CRM_AHBEN1 register  ***************/
@@ -438,17 +425,17 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_AHBEN1_GPIOBEN               (0x1U << 1)
 #define CRM_AHBEN1_GPIOCEN               (0x1U << 2)
 #define CRM_AHBEN1_GPIODEN               (0x1U << 3)
+#define CRM_AHBEN1_GPIOEEN               (0x1U << 4)
 #define CRM_AHBEN1_GPIOFEN               (0x1U << 5)
 #define CRM_AHBEN1_CRCEN                 (0x1U << 12)
 #define CRM_AHBEN1_DMA1EN                (0x1U << 22)
 #define CRM_AHBEN1_DMA2EN                (0x1U << 24)
-#define CRM_AHBEN1_OTGHSEN               (0x1U << 29)
 
 /*****************  Bit definition for CRM_AHBEN2 register  ***************/
 #define CRM_AHBEN2_OTGFS1EN              (0x1U << 7)
 
 /*****************  Bit definition for CRM_AHBEN3 register  ***************/
-#define CRM_AHBEN3_QSPI1EN               (0x1U << 1)
+#define CRM_AHBEN3_XMCEN                 (0x1U << 0)
 
 /*****************  Bit definition for CRM_APB1EN register  ***************/
 #define CRM_APB1EN_TMR2EN                (0x1U << 0)
@@ -456,6 +443,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1EN_TMR4EN                (0x1U << 2)
 #define CRM_APB1EN_TMR6EN                (0x1U << 4)
 #define CRM_APB1EN_TMR7EN                (0x1U << 5)
+#define CRM_APB1EN_TMR12EN               (0x1U << 6)
 #define CRM_APB1EN_TMR13EN               (0x1U << 7)
 #define CRM_APB1EN_TMR14EN               (0x1U << 8)
 #define CRM_APB1EN_WWDTEN                (0x1U << 11)
@@ -469,9 +457,11 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1EN_I2C2EN                (0x1U << 22)
 #define CRM_APB1EN_I2C3EN                (0x1U << 23)
 #define CRM_APB1EN_CAN1EN                (0x1U << 25)
+#define CRM_APB1EN_CAN2EN                (0x1U << 26)
 #define CRM_APB1EN_PWCEN                 (0x1U << 28)
-#define CRM_APB1EN_UART7EN               (0x1U << 30)
-#define CRM_APB1EN_UART8EN               (0x1U << 31)
+#define CRM_APB1EN_DACEN                 (0x1U << 29)
+#define CRM_APB1EN_USART7EN              (0x1U << 30)
+#define CRM_APB1EN_USART8EN              (0x1U << 31)
 
 /*****************  Bit definition for CRM_APB2EN register  ***************/
 #define CRM_APB2EN_TMR1EN                (0x1U << 0)
@@ -483,7 +473,6 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB2EN_TMR9EN                (0x1U << 16)
 #define CRM_APB2EN_TMR10EN               (0x1U << 17)
 #define CRM_APB2EN_TMR11EN               (0x1U << 18)
-#define CRM_APB2EN_I2SF5EN               (0x1U << 20)
 #define CRM_APB2EN_ACCEN                 (0x1U << 29)
 
 /*****************  Bit definition for CRM_AHBLPEN1 register  ***************/
@@ -491,17 +480,17 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_AHBLPEN1_GPIOBLPEN           (0x1U << 1)
 #define CRM_AHBLPEN1_GPIOCLPEN           (0x1U << 2)
 #define CRM_AHBLPEN1_GPIODLPEN           (0x1U << 3)
+#define CRM_AHBLPEN1_GPIOELPEN           (0x1U << 4)
 #define CRM_AHBLPEN1_GPIOFLPEN           (0x1U << 5)
 #define CRM_AHBLPEN1_CRCLPEN             (0x1U << 12)
 #define CRM_AHBLPEN1_DMA1LPEN            (0x1U << 22)
 #define CRM_AHBLPEN1_DMA2LPEN            (0x1U << 24)
-#define CRM_AHBLPEN1_OTGHSLPEN           (0x1U << 29)
 
 /*****************  Bit definition for CRM_AHBLPEN2 register  ***************/
 #define CRM_AHBLPEN2_OTGFS1LPEN          (0x1U << 7)
 
 /*****************  Bit definition for CRM_AHBLPEN3 register  ***************/
-#define CRM_AHBLPEN3_QSPI1LPEN           (0x1U << 1)
+#define CRM_AHBLPEN3_XMCLPEN             (0x1U << 0)
 
 /*****************  Bit definition for CRM_APB1LPEN register  ***************/
 #define CRM_APB1LPEN_TMR2LPEN            (0x1U << 0)
@@ -509,6 +498,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1LPEN_TMR4LPEN            (0x1U << 2)
 #define CRM_APB1LPEN_TMR6LPEN            (0x1U << 4)
 #define CRM_APB1LPEN_TMR7LPEN            (0x1U << 5)
+#define CRM_APB1LPEN_TMR12LPEN           (0x1U << 6)
 #define CRM_APB1LPEN_TMR13LPEN           (0x1U << 7)
 #define CRM_APB1LPEN_TMR14LPEN           (0x1U << 8)
 #define CRM_APB1LPEN_WWDTLPEN            (0x1U << 11)
@@ -522,9 +512,11 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1LPEN_I2C2LPEN            (0x1U << 22)
 #define CRM_APB1LPEN_I2C3LPEN            (0x1U << 23)
 #define CRM_APB1LPEN_CAN1LPEN            (0x1U << 25)
+#define CRM_APB1LPEN_CAN2LPEN            (0x1U << 26)
 #define CRM_APB1LPEN_PWCLPEN             (0x1U << 28)
-#define CRM_APB1LPEN_UART7LPEN           (0x1U << 30)
-#define CRM_APB1LPEN_UART8LPEN           (0x1U << 31)
+#define CRM_APB1LPEN_DACLPEN             (0x1U << 29)
+#define CRM_APB1LPEN_USART7LPEN          (0x1U << 30)
+#define CRM_APB1LPEN_USART8LPEN          (0x1U << 31)
 
 /*****************  Bit definition for CRM_APB2LPEN register  ***************/
 #define CRM_APB2LPEN_TMR1LPEN            (0x1U << 0)
@@ -536,7 +528,6 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB2LPEN_TMR9LPEN            (0x1U << 16)
 #define CRM_APB2LPEN_TMR10LPEN           (0x1U << 17)
 #define CRM_APB2LPEN_TMR11LPEN           (0x1U << 18)
-#define CRM_APB2LPEN_I2SF5LPEN           (0x1U << 20)
 #define CRM_APB2LPEN_ACCLPEN             (0x1U << 29)
 
 /******************  Bit definition for CRM_BPDC register  *****************/
@@ -561,19 +552,14 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_CTRLSTS_WWDTRSTF             (0x1U << 30)
 #define CRM_CTRLSTS_LPRSTF               (0x1U << 31)
 
-/******************  Bit definition for CRM_OTGHS register  ****************/
-#define CRM_OTGHS_USBHS_PHY12_SEL        (0x1U << 4)
-#define CRM_OTGHS_USBHS_PHY12_SEL_HEXT   (0x0U << 4)
-
 /******************  Bit definition for CRM_MISC1 register  ****************/
 #define CRM_MISC1_HICKDIV                (0x1U << 12)
+#define CRM_MISC1_HICK_TO_USB            (0x1U << 13)
 #define CRM_MISC1_HICK_TO_SCLK           (0x1U << 14)
+#define CRM_MISC1_PLLCLK_TO_ADC          (0x1U << 15)
 
 /******************  Bit definition for CRM_MISC2 register  ****************/
 #define CRM_MISC2_AUTO_STEP_EN           (0x3U << 4)
-#define CRM_MISC2_PLLU_USB48_SEL         (0x1U << 10)
-#define CRM_MISC2_PLLU_USB48_SEL_PLLU    (0x0U << 10)
-#define CRM_MISC2_PLLU_USB48_SEL_HICK    (0x1U << 10)
 
 /******************  Bit definition for PWC_CTRL register  *****************/
 #define PWC_CTRL_PVMEN                   (0x1U << 4)
@@ -593,6 +579,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define FLASH_CTRL_USDERS                (0x1U << 5)
 #define FLASH_CTRL_ERSTR                 (0x1U << 6)
 #define FLASH_CTRL_OPLK                  (0x1U << 7)
+
 
 /******************  Bit definition for TMR_IDEN register  ****************/
 #define TMR_IDEN_OVFIEN                  (0x1U << 0)
@@ -659,13 +646,15 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 
 /******************  Bit definition for ADC_STS register  ***************/
 #define ADC_STS_VMOR                     (0x1U << 0)
-#define ADC_STS_CCE                      (0x1U << 1)
+#define ADC_STS_OCCE                     (0x1U << 1)
 #define ADC_STS_PCCE                     (0x1U << 2)
 #define ADC_STS_PCCS                     (0x1U << 3)
 #define ADC_STS_OCCS                     (0x1U << 4)
+#define ADC_STS_OCCO                     (0x1U << 5)
+#define ADC_STS_RDY                      (0x1U << 6)
 
 /******************  Bit definition for ADC_CTRL1 register  ***************/
-#define ADC_CTRL1_CCEIEN                 (0x1U << 5)
+#define ADC_CTRL1_OCCEIEN                (0x1U << 5)
 #define ADC_CTRL1_VMORIEN                (0x1U << 6)
 #define ADC_CTRL1_PCCEIEN                (0x1U << 7)   
 #define ADC_CTRL1_SQEN                   (0x1U << 8)
@@ -682,15 +671,17 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define ADC_CTRL2_RPEN                   (0x1U << 1)
 #define ADC_CTRL2_ADCAL                  (0x1U << 2)
 #define ADC_CTRL2_ADCALINIT              (0x1U << 3)
+#define ADC_CTRL2_ADCABRT                (0x1U << 4)
 #define ADC_CTRL2_OCDMAEN                (0x1U << 8)
+#define ADC_CTRL2_OCDRCEN                (0x1U << 9)
+#define ADC_CTRL2_EOCSFEN                (0x1U << 10)
 #define ADC_CTRL2_DTALIGN                (0x1U << 11)
 #define ADC_CTRL2_DTALIGN_R              (0x0U << 11)
 #define ADC_CTRL2_DTALIGN_L              (0x1U << 11)
-#define ADC_CTRL2_PCTEN                  (0x1U << 15)
-#define ADC_CTRL2_OCTEN                  (0x1U << 20)
-#define ADC_CTRL2_PCSWTRG                (0x1U << 21)
-#define ADC_CTRL2_OCSWTRG                (0x1U << 22)
-#define ADC_CTRL2_ITSRVEN                (0x1U << 23)
+#define ADC_CTRL2_PCETE                  (0x3U << 20)
+#define ADC_CTRL2_PCSWTRG                (0x1U << 22)
+#define ADC_CTRL2_OCETE                  (0x3U << 28)
+#define ADC_CTRL2_OCSWTRG                (0x1U << 30)
 
 /******************  Bit definition for ADC_VMHB register  ***************/
 #define ADC_VMHB_HB                      (0xFFFFU << 0)
@@ -707,10 +698,12 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define I2C_CTRL1_STOPIEN                (0x1U << 5)
 #define I2C_CTRL1_TDCIEN                 (0x1U << 6)
 #define I2C_CTRL1_ERRIEN                 (0x1U << 7)
+#define I2C_CTRL1_ANGNFOFF               (0x1U << 12)
 #define I2C_CTRL1_DMATEN                 (0x1U << 14)
 #define I2C_CTRL1_DMAREN                 (0x1U << 15)
 #define I2C_CTRL1_SCTRL                  (0x1U << 16)
 #define I2C_CTRL1_STRETCH                (0x1U << 17)
+#define I2C_CTRL1_WAKEUPEN               (0x1U << 18)
 #define I2C_CTRL1_GCAEN                  (0x1U << 19)
 #define I2C_CTRL1_HADDREN                (0x1U << 20)
 #define I2C_CTRL1_DEVADDREN              (0x1U << 21)
@@ -765,7 +758,11 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define USART_STS_BFF                    (0x1U << 8)
 #define USART_STS_CTSCF                  (0x1U << 9)
 #define USART_STS_RTODF                  (0x1U << 11)
+#define USART_STS_OCCUPY                 (0x1U << 16)
 #define USART_STS_CMDF                   (0x1U << 17)
+#define USART_STS_LPWUF                  (0x1U << 20)
+#define USART_STS_TXON                   (0x1U << 21)
+#define USART_STS_RXON                   (0x1U << 22)
 
 /*******************  Bit definition for USART_DT register  ***************/
 #define USART_DT_DT                      (0x1FFU << 0)
@@ -829,12 +826,16 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define USART_CTRL3_RTSEN                (0x1U << 8)
 #define USART_CTRL3_CTSEN                (0x1U << 9)
 #define USART_CTRL3_CTSCFIEN             (0x1U << 10)
+#define USART_CTRL3_SMUSEN               (0x1U << 11)
+#define USART_CTRL3_LPWUFIE              (0x1U << 13)
 #define USART_CTRL3_RS485EN              (0x1U << 14)
 #define USART_CTRL3_DEP                  (0x1U << 15)
+#define USART_CTRL3_LPWUM                (0x3U << 16)
 
 /*******************  Bit definition for USART_IFC register  ***************/
 #define USART_IFC_RTODFC                 (0x1U << 11)
 #define USART_IFC_CMDFC                  (0x1U << 17)
+#define USART_IFC_LPWUFC                 (0x1U << 20)
 
 /*******************  Bit definition for SPI_CTRL1 register  **************/
 #define SPI_CTRL1_CLKPHA                 (0x1U << 0)
@@ -919,13 +920,16 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define DEBUG_APB1_PAUSE_TMR4_PAUSE         (0x1U << 2)
 #define DEBUG_APB1_PAUSE_TMR6_PAUSE         (0x1U << 4)
 #define DEBUG_APB1_PAUSE_TMR7_PAUSE         (0x1U << 5)
+#define DEBUG_APB1_PAUSE_TMR12_PAUSE        (0x1U << 6)
 #define DEBUG_APB1_PAUSE_TMR13_PAUSE        (0x1U << 7)
 #define DEBUG_APB1_PAUSE_TMR14_PAUSE        (0x1U << 8)
 #define DEBUG_APB1_PAUSE_ERTC_PAUSE         (0x1U << 10)
 #define DEBUG_APB1_PAUSE_WWDT_PAUSE         (0x1U << 11)
 #define DEBUG_APB1_PAUSE_WDT_PAUSE          (0x1U << 12)
+#define DEBUG_APB1_PAUSE_ERTC_512_PAUSE     (0x1U << 15)
 #define DEBUG_APB1_PAUSE_I2C1_SMBUS_TIMEOUT (0x1U << 24)
 #define DEBUG_APB1_PAUSE_CAN1_PAUSE         (0x1U << 25)
+#define DEBUG_APB1_PAUSE_CAN2_PAUSE         (0x1U << 26)
 #define DEBUG_APB1_PAUSE_I2C2_SMBUS_TIMEOUT (0x1U << 27)
 #define DEBUG_APB1_PAUSE_I2C3_SMBUS_TIMEOUT (0x1U << 28)
 
@@ -943,10 +947,19 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
   * @{
   */
 
+#define XMC_SDRAM_MEM_BASE               ((uint32_t)0xC0000000)
 #define QSPI2_MEM_BASE                   ((uint32_t)0xB0000000)
+#define XMC_CARD_MEM_BASE                ((uint32_t)0xA8000000)
 #define QSPI2_REG_BASE                   ((uint32_t)0xA0002000)
 #define QSPI1_REG_BASE                   ((uint32_t)0xA0001000)
+#define XMC_REG_BASE                     ((uint32_t)0xA0000000)
+#define XMC_BANK1_REG_BASE               (XMC_REG_BASE + 0x0000)
+#define XMC_BANK2_REG_BASE               (XMC_REG_BASE + 0x0060)
+#define XMC_BANK3_REG_BASE               (XMC_REG_BASE + 0x0080)
+#define XMC_BANK4_REG_BASE               (XMC_REG_BASE + 0x00A0)
+#define XMC_SDRAM_REG_BASE               (XMC_REG_BASE + 0x0140)
 #define QSPI1_MEM_BASE                   ((uint32_t)0x90000000)
+#define XMC_MEM_BASE                     ((uint32_t)0x60000000)
 #define PERIPH_BASE                      ((uint32_t)0x40000000)
 #define SRAM_BB_BASE                     ((uint32_t)0x22000000)
 #define PERIPH_BB_BASE                   ((uint32_t)0x42000000)
@@ -962,9 +975,11 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define AHBPERIPH2_BASE                  (PERIPH_BASE + 0x10000000)
 
 /* apb1 bus base address */
-#define UART8_BASE                       (APB1PERIPH_BASE + 0x7C00)
-#define UART7_BASE                       (APB1PERIPH_BASE + 0x7800)
+#define USART8_BASE                      (APB1PERIPH_BASE + 0x7C00)
+#define USART7_BASE                      (APB1PERIPH_BASE + 0x7800)
+#define DAC_BASE                         (APB1PERIPH_BASE + 0x7400)
 #define PWC_BASE                         (APB1PERIPH_BASE + 0x7000)
+#define CAN2_BASE                        (APB1PERIPH_BASE + 0x6800)
 #define CAN1_BASE                        (APB1PERIPH_BASE + 0x6400)
 #define I2C3_BASE                        (APB1PERIPH_BASE + 0x5C00)
 #define I2C2_BASE                        (APB1PERIPH_BASE + 0x5800)
@@ -980,15 +995,14 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define ERTC_BASE                        (APB1PERIPH_BASE + 0x2800)
 #define TMR14_BASE                       (APB1PERIPH_BASE + 0x2000)
 #define TMR13_BASE                       (APB1PERIPH_BASE + 0x1C00)
+#define TMR12_BASE                       (APB1PERIPH_BASE + 0x1800)
 #define TMR7_BASE                        (APB1PERIPH_BASE + 0x1400)
 #define TMR6_BASE                        (APB1PERIPH_BASE + 0x1000)
 #define TMR4_BASE                        (APB1PERIPH_BASE + 0x0800)
 #define TMR3_BASE                        (APB1PERIPH_BASE + 0x0400)
 #define TMR2_BASE                        (APB1PERIPH_BASE + 0x0000)
 /* apb2 bus base address */
-#define OTGHS_PHY_BASE                   (APB2PERIPH_BASE + 0x7C00)
 #define ACC_BASE                         (APB2PERIPH_BASE + 0x7400)
-#define I2SF5_BASE                       (APB2PERIPH_BASE + 0x5000)
 #define TMR11_BASE                       (APB2PERIPH_BASE + 0x4800)
 #define TMR10_BASE                       (APB2PERIPH_BASE + 0x4400)
 #define TMR9_BASE                        (APB2PERIPH_BASE + 0x4000)
@@ -1000,8 +1014,9 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define USART6_BASE                      (APB2PERIPH_BASE + 0x1400)
 #define USART1_BASE                      (APB2PERIPH_BASE + 0x1000)
 #define TMR1_BASE                        (APB2PERIPH_BASE + 0x0000)
-/* ahb bus base address */   
+/* ahb bus base address */
 #define GPIOF_BASE                       (AHBPERIPH1_BASE + 0x1400)
+#define GPIOE_BASE                       (AHBPERIPH1_BASE + 0x1000)
 #define GPIOD_BASE                       (AHBPERIPH1_BASE + 0x0C00)
 #define GPIOC_BASE                       (AHBPERIPH1_BASE + 0x0800)
 #define GPIOB_BASE                       (AHBPERIPH1_BASE + 0x0400)
@@ -1056,13 +1071,11 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define FLASH_REG_BASE                   (AHBPERIPH1_BASE + 0x3C00)
 #define CRM_BASE                         (AHBPERIPH1_BASE + 0x3800)
 #define CRC_BASE                         (AHBPERIPH1_BASE + 0x3000)
-#define OTGHS_BASE                       (AHBPERIPH1_BASE + 0x20000)
 #define OTGFS1_BASE                      (AHBPERIPH2_BASE + 0x00000)
 
 /**
   * @}
   */
-  
 
 /** @addtogroup Peripheral_type_define
   * @{
@@ -1232,9 +1245,14 @@ typedef struct
   __IO uint32_t APB2LPEN;
 
   /**
-    * @brief crm reserved6 register, offset:0x68~0x6C
+    * @brief crm piclks register, offset:0x68
     */
-  __IO uint32_t RESERVED6[2];
+  __IO uint32_t PICLKS;
+
+  /**
+    * @brief crm reserved6 register, offset:0x6C
+    */
+  __IO uint32_t RESERVED6;
 
   /**
     * @brief crm bpdc register, offset:0x70
@@ -1247,14 +1265,9 @@ typedef struct
   __IO uint32_t CTRLSTS;
 
   /**
-    * @brief crm otghs register, offset:0x78
+    * @brief crm reserved7 register, offset:0x78~0x9C
     */
-  __IO uint32_t OTGHS;
-
-  /**
-    * @brief crm reserved7 register, offset:0x7C~0x9C
-    */
-  __IO uint32_t RESERVED7[9];
+  __IO uint32_t RESERVED7[10];
 
   /**
     * @brief crm misc1 register, offset:0xA0
@@ -1491,11 +1504,6 @@ typedef struct
     * @brief gpio hdrv register, offset:0x3C
     */
   __IO uint32_t HDRV;
-
-  /**
-    * @brief gpio srctr register, offset:0x40
-    */
-  __IO uint32_t SRCTR;
 
 } GPIO_TypeDef;
 
@@ -1895,14 +1903,54 @@ typedef struct
   __IO uint32_t ODT;
 
   /**
-    * @brief adc reserved1 register, offset:0x50~0x7C
+    * @brief adc spt3 register, offset:0x50
     */
-  __IO uint32_t RESERVED1[12];
+  __IO uint32_t SPT3;
+
+  /**
+    * @brief adc osq4 register, offset:0x54
+    */
+  __IO uint32_t OSQ4;
+
+  /**
+    * @brief adc osq5 register, offset:0x58
+    */
+  __IO uint32_t OSQ5;
+
+  /**
+    * @brief adc osq6 register, offset:0x5C
+    */
+  __IO uint32_t OSQ6;
+
+  /**
+    * @brief adc reserved1 register, offset:0x5C~0x7C
+    */
+  __IO uint32_t RESERVED1[8];
 
   /**
     * @brief adc oversample register, offset:0x80 
     */
   __IO uint32_t OVSP;
+
+  /**
+    * @brief adc reserved2 register, offset:0x80~0xB0
+    */
+  __IO uint32_t RESERVED2[12];
+
+  /**
+    * @brief adc calval register, offset:0xB4
+    */
+  __IO uint32_t CALVAL;
+
+  /**
+    * @brief adc reserved3 register, offset:0xB8~0xCC
+    */
+  __IO uint32_t RESERVED3[6];
+
+  /**
+  * @brief adc misc register, offset:0xD0
+  */
+  __IO uint32_t MISC;
 
 } ADC_TypeDef;
 
@@ -1912,9 +1960,9 @@ typedef struct
 typedef struct
 {
   /**
-    * @brief adc reserved1 register, offset:0x00
+    * @brief adc csts register, offset:0x00
     */
-  __IO uint32_t RESERVED1;
+  __IO uint32_t CSTS;
   
   /**
     * @brief adc cctrl register, offset:0x04
@@ -2087,16 +2135,6 @@ typedef struct
     */
   __IO uint32_t I2SCLK;
 
-  /**
-    * @brief spi reserved1 register, offset:0x24~0x2C
-    */
-  __IO uint32_t RESERVED1[3];
-
-  /**
-    * @brief spi misc1 register, offset:0x30
-    */
-  __IO uint32_t MISC1;
-
 } SPI_TypeDef;
 
 /**
@@ -2115,6 +2153,7 @@ typedef struct
 #define GPIOB                             ((GPIO_TypeDef *) GPIOB_BASE)
 #define GPIOC                             ((GPIO_TypeDef *) GPIOC_BASE)
 #define GPIOD                             ((GPIO_TypeDef *) GPIOD_BASE)
+#define GPIOD                             ((GPIO_TypeDef *) GPIOE_BASE)
 #define GPIOF                             ((GPIO_TypeDef *) GPIOF_BASE)
 #define SCFG                              ((SCFG_TypeDef *) SCFG_BASE)
 #define TMR1                              ((TMR_TypeDef *) TMR1_BASE)
@@ -2126,6 +2165,7 @@ typedef struct
 #define TMR9                              ((TMR_TypeDef *) TMR9_BASE)
 #define TMR10                             ((TMR_TypeDef *) TMR10_BASE)
 #define TMR11                             ((TMR_TypeDef *) TMR11_BASE)
+#define TMR11                             ((TMR_TypeDef *) TMR12_BASE)
 #define TMR13                             ((TMR_TypeDef *) TMR13_BASE)
 #define TMR14                             ((TMR_TypeDef *) TMR14_BASE)
 #define DEBUGMCU                          ((DEBUG_TypeDef *) DEBUG_BASE)
@@ -2178,18 +2218,17 @@ typedef struct
 #define UART4                             ((USART_TypeDef *) USART4_BASE)
 #define UART5                             ((USART_TypeDef *) USART5_BASE)
 #define USART6                            ((USART_TypeDef *) USART6_BASE)
-#define UART7                             ((USART_TypeDef *) UART7_BASE)
-#define UART8                             ((USART_TypeDef *) UART8_BASE)
+#define UART7                             ((USART_TypeDef *) USART7_BASE)
+#define UART8                             ((USART_TypeDef *) USART8_BASE)
 #define SPI1                              ((SPI_TypeDef *) SPI1_BASE)
 #define SPI2                              ((SPI_TypeDef *) SPI2_BASE)
 #define SPI3                              ((SPI_TypeDef *) SPI3_BASE)
-#define I2SF5                             ((SPI_TypeDef *) I2SF5_BASE)
 
 /**
   * @}
   */
 
-/** @defgroup FLASH_unlock_keys
+ /** @defgroup FLASH_unlock_keys
   * @brief flash unlock keys
   * @{
   */

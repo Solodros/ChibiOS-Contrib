@@ -15,8 +15,8 @@
 */
 
 /**
- * @file    AT32F402_5xx/hal_lld.h
- * @brief   AT32F402_5xx HAL subsystem low level driver header.
+ * @file    AT32F423xx/hal_lld.h
+ * @brief   AT32F423xx HAL subsystem low level driver header.
  * @pre     This module requires the following macros to be defined in the
  *          @p board.h file:
  *          - AT32_LEXTCLK.
@@ -47,13 +47,13 @@
  * @name    Platform identification
  * @{
  */
-#define PLATFORM_NAME                          "AT32F402_5xx"
+#define PLATFORM_NAME                          "AT32F423xx"
 
 /**
  * @brief   Sub-family identifier.
  */
-#if !defined(AT32F402_5xx) || defined(__DOXYGEN__)
-#define AT32F402_5xx
+#if !defined(AT32F423xx) || defined(__DOXYGEN__)
+#define AT32F423xx
 #endif
 /** @} */
 
@@ -64,7 +64,7 @@
 /**
  * @brief   Maximum system clock frequency.
  */
-#define AT32_SYSCLK_MAX                        216000000
+#define AT32_SYSCLK_MAX                        150000000
 
 /**
  * @brief   Maximum HEXT clock frequency.
@@ -124,7 +124,7 @@
 /**
  * @brief   Maximum PLL output clock frequency.
  */
-#define AT32_PLLOUT_MAX                        216000000
+#define AT32_PLLOUT_MAX                        300000000
 
 /**
  * @brief   Minimum PLL output clock frequency.
@@ -139,7 +139,7 @@
 /**
  * @brief   Maximum APB2 clock frequency.
  */
-#define AT32_PCLK2_MAX                         216000000
+#define AT32_PCLK2_MAX                         150000000
 /** @} */
 
 /**
@@ -180,32 +180,13 @@
  * @name    CRM_PLLCFG register bits definitions
  * @{
  */
-#define AT32_PLL_FP_MASK            (15 << 16)  /**< PLL_FP mask.               */
-#define AT32_PLL_FP_DIV1            (0 << 16)   /**< PLL clock divided by 1.    */
-#define AT32_PLL_FP_DIV2            (1 << 16)   /**< PLL clock divided by 2.    */
-#define AT32_PLL_FP_DIV4            (2 << 16)   /**< PLL clock divided by 4.    */
-#define AT32_PLL_FP_DIV6            (3 << 16)   /**< PLL clock divided by 6.    */
-#define AT32_PLL_FP_DIV8            (4 << 16)   /**< PLL clock divided by 8.    */
-#define AT32_PLL_FP_DIV10           (5 << 16)   /**< PLL clock divided by 10.   */
-#define AT32_PLL_FP_DIV12           (6 << 16)   /**< PLL clock divided by 12.   */
-#define AT32_PLL_FP_DIV14           (7 << 16)   /**< PLL clock divided by 14.   */
-#define AT32_PLL_FP_DIV16           (8 << 16)   /**< PLL clock divided by 16.   */
-#define AT32_PLL_FP_DIV18           (9 << 16)   /**< PLL clock divided by 18.   */
-#define AT32_PLL_FP_DIV20           (10 << 16)  /**< PLL clock divided by 20.   */
-#define AT32_PLL_FP_DIV22           (11 << 16)  /**< PLL clock divided by 22.   */
-#define AT32_PLL_FP_DIV24           (12 << 16)  /**< PLL clock divided by 24.   */
-#define AT32_PLL_FP_DIV26           (13 << 16)  /**< PLL clock divided by 26.   */
-#define AT32_PLL_FP_DIV28           (14 << 16)  /**< PLL clock divided by 28.   */
-#define AT32_PLL_FP_DIV30           (15 << 16)  /**< PLL clock divided by 30.   */
-
-#define AT32_PLL_FU_MASK            (7 << 20)   /**< PLL_FU mask.               */
-#define AT32_PLL_FU_DIV11           (0 << 20)   /**< PLLU clock divided by 11.  */
-#define AT32_PLL_FU_DIV13           (1 << 20)   /**< PLLU clock divided by 13.  */
-#define AT32_PLL_FU_DIV12           (2 << 20)   /**< PLLU clock divided by 12.  */
-#define AT32_PLL_FU_DIV14           (3 << 20)   /**< PLLU clock divided by 14.  */
-#define AT32_PLL_FU_DIV16           (4 << 20)   /**< PLLU clock divided by 16.  */
-#define AT32_PLL_FU_DIV18           (5 << 20)   /**< PLLU clock divided by 18.  */
-#define AT32_PLL_FU_DIV20           (6 << 20)   /**< PLLU clock divided by 20.  */
+#define AT32_PLL_FR_MASK            (15 << 16)  /**< PLL_FR mask.               */
+#define AT32_PLL_FR_DIV1            (0 << 16)   /**< PLL clock divided by 1.    */
+#define AT32_PLL_FR_DIV2            (1 << 16)   /**< PLL clock divided by 2.    */
+#define AT32_PLL_FR_DIV4            (2 << 16)   /**< PLL clock divided by 4.    */
+#define AT32_PLL_FR_DIV8            (3 << 16)   /**< PLL clock divided by 8.    */
+#define AT32_PLL_FR_DIV16           (4 << 16)   /**< PLL clock divided by 16.   */
+#define AT32_PLL_FR_DIV32           (5 << 16)   /**< PLL clock divided by 32.   */
 
 #define AT32_PLLRCS_HICK            (0 << 30)   /**< PLL clock source is HICK.  */
 #define AT32_PLLRCS_HEXT            (1 << 30)   /**< PLL clock source is HEXT.  */
@@ -218,12 +199,12 @@
 #define AT32_SCLKSEL_MASK           (3 << 0)    /**< SCLKSEL mask.              */
 #define AT32_SCLKSEL_HICK           (0 << 0)    /**< SYSCLK source is HICK.     */
 #define AT32_SCLKSEL_HEXT           (1 << 0)    /**< SYSCLK source is HEXT.     */
-#define AT32_SCLKSEL_PLL            (2 << 0)    /**< SYSCLK source is PLL.      */
+#define AT32_SCLKSEL_PLLDIV2        (2 << 0)    /**< SYSCLK source is PLL/2.    */
 
 #define AT32_SCLKSTS_MASK           (3 << 2)    /**< SCLKSTS mask.              */
 #define AT32_SCLKSTS_HICK           (0 << 2)    /**< SYSCLK use HICK.           */
 #define AT32_SCLKSTS_HEXT           (1 << 2)    /**< SYSCLK use HEXT.           */
-#define AT32_SCLKSTS_PLL            (2 << 2)    /**< SYSCLK use PLL.            */
+#define AT32_SCLKSTS_PLLDIV2        (2 << 2)    /**< SYSCLK use PLL/2.          */
 
 #define AT32_AHBDIV_MASK            (15 << 4)   /**< AHBDIV mask.               */
 #define AT32_AHBDIV_DIV1            (0 << 4)    /**< SYSCLK divided by 1.       */
@@ -252,12 +233,6 @@
 
 #define AT32_ERTCDIV_MASK           (31 << 16)  /**< ERTCDIV mask.              */
 
-#define AT32_I2SF5CLKSEL_MASK       (3 << 22)   /**< I2SF5CLKSEL mask.          */
-#define AT32_I2SF5CLKSEL_SCLK       (0 << 22)   /**< I2SF5CLKSEL is SYSCLK.     */
-#define AT32_I2SF5CLKSEL_PLL        (1 << 22)   /**< I2SF5CLKSEL is PLL.        */
-#define AT32_I2SF5CLKSEL_HICK       (1 << 22)   /**< I2SF5CLKSEL is HICK.       */
-#define AT32_I2SF5CLKSEL_EXCLK      (1 << 22)   /**< I2SF5CLKSEL is EXCLK.      */
-
 #define AT32_CLKOUTDIV1_MASK        (3 << 27)   /**< CLKOUTDIV1 mask.           */
 #define AT32_CLKOUTDIV1_DIV1        (0 << 27)   /**< CLKOUT divided by 1.       */
 #define AT32_CLKOUTDIV1_DIV2        (4 << 27)   /**< CLKOUT divided by 2.       */
@@ -270,8 +245,8 @@
 #define AT32_CLKOUT_SEL_SCLK        (0 << 30)   /**< CLKOUT_SEL SYSCLK.         */
 #define AT32_CLKOUT_SEL_HEXT        (2 << 30)   /**< CLKOUT_SEL HEXT.           */
 #define AT32_CLKOUT_SEL_PLL         (3 << 30)   /**< CLKOUT_SEL PLL.            */
-#define AT32_CLKOUT_SEL_USBFS       ((1 << 30) |     \
-                                     (0 << 16)) /**< CLKOUT_SEL USBFS.          */
+#define AT32_CLKOUT_SEL_USB         ((1 << 30) |     \
+                                     (0 << 16)) /**< CLKOUT_SEL USB.            */
 #define AT32_CLKOUT_SEL_ADC         ((1 << 30) |     \
                                      (1 << 16)) /**< CLKOUT_SEL ADC.            */
 #define AT32_CLKOUT_SEL_HICK        ((1 << 30) |     \
@@ -280,8 +255,34 @@
                                      (3 << 16)) /**< CLKOUT_SEL LICK.           */
 #define AT32_CLKOUT_SEL_LEXT        ((1 << 30) |     \
                                      (4 << 16)) /**< CLKOUT_SEL LEXT.           */
-#define AT32_CLKOUT_SEL_USBHS       ((1 << 30) |     \
-                                     (5 << 16)) /**< CLKOUT_SEL USBHS.          */
+/** @} */
+
+/**
+ * @name    CRM_PICLKS register bits definitions
+ * @{
+ */
+#define AT32_USART1SEL_MASK         (3 << 0)    /**< USART1 clock source mask.  */
+#define AT32_USART1SEL_PCLK2        (0 << 0)    /**< PCLK2 used as USART1 clock.*/
+#define AT32_USART1SEL_SCLK         (1 << 0)    /**< SCLK used as USART1 clock. */
+#define AT32_USART1SEL_HICK         (2 << 0)    /**< HICK used as USART1 clock. */
+#define AT32_USART1SEL_LEXT         (3 << 0)    /**< LEXT used as USART1 clock. */
+
+#define AT32_USART2SEL_MASK         (3 << 2)    /**< USART2 clock source mask.  */
+#define AT32_USART2SEL_PCLK1        (0 << 2)    /**< PCLK1 used as USART2 clock.*/
+#define AT32_USART2SEL_SCLK         (1 << 2)    /**< SCLK used as USART2 clock. */
+#define AT32_USART2SEL_HICK         (2 << 2)    /**< HICK used as USART2 clock. */
+#define AT32_USART2SEL_LEXT         (3 << 2)    /**< LEXT used as USART2 clock. */
+
+#define AT32_USART3SEL_MASK         (3 << 4)    /**< USART3 clock source mask.  */
+#define AT32_USART3SEL_PCLK1        (0 << 4)    /**< PCLK1 used as USART3 clock.*/
+#define AT32_USART3SEL_SCLK         (1 << 4)    /**< SCLK used as USART3 clock. */
+#define AT32_USART3SEL_HICK         (2 << 4)    /**< HICK used as USART3 clock. */
+#define AT32_USART3SEL_LEXT         (3 << 4)    /**< LEXT used as USART3 clock. */
+
+#define AT32_I2C1SEL_MASK           (3 << 12)   /**< I2C1 clock source mask.  */
+#define AT32_I2C1SEL_PCLK1          (0 << 12)   /**< PCLK1 used as I2C1 clock.*/
+#define AT32_I2C1SEL_SCLK           (1 << 12)   /**< SCLK used as I2C1 clock. */
+#define AT32_I2C1SEL_HICK           (2 << 12)   /**< HICK used as I2C1 clock. */
 /** @} */
 
 /**
@@ -304,11 +305,19 @@
 #define AT32_HICKDIV_DIV6           (0 << 12)   /**< HICK divided by 6.         */
 #define AT32_HICKDIV_DIV1           (1 << 12)   /**< HICK divided by 1.         */
 
+#define AT32_HICK_TO_USB_MASK       (1 << 14)   /**< HICK_TO_USB mask.          */
+#define AT32_HICK_TO_USB_PLL        (0 << 14)   /**< USBCLK source is PLLOUT.   */
+#define AT32_HICK_TO_USB_HICKOUT    (1 << 14)   /**< USBCLK source is HICKOUT.  */
+
 #define AT32_HICK_TO_SCLK_MASK      (1 << 14)   /**< HICK_TO_SCLK mask.         */
 #define AT32_HICK_TO_SCLK_8M        (0 << 14)   /**< SCLK is 8MHz if SCLK 
                                                      is HICK.                   */
 #define AT32_HICK_TO_SCLK_HICKOUT   (1 << 14)   /**< SCLK is HICKOUT if SCLK 
                                                      is HICK.                   */
+
+#define AT32_PLLCLK_TO_ADC_MASK     (1 << 15)   /**< PLLCLK_TO_ADC mask.        */
+#define AT32_PLLCLK_TO_ADC_HCLK     (0 << 15)   /**< ADCCLK source is HCLK.     */
+#define AT32_PLLCLK_TO_ADC_PLL      (1 << 15)   /**< ADCCLK source is PLLCLK.   */
 
 #define AT32_CLKOUTDIV2_MASK        (15 << 28)  /**< CLKOUTDIV2 mask.           */
 #define AT32_CLKOUTDIV2_DIV1        (0 << 28)   /**< CLKOUT divided by 1.       */
@@ -326,9 +335,15 @@
  * @name    CRM_MISC2 register bits definitions
  * @{
  */
-#define AT32_PLLU_USB48_SEL_MASK     (1 << 10)  /**< PLLU_USB48_SEL mask.       */
-#define AT32_PLLU_USB48_SEL_PLLU     (0 << 10)  /**< PLLU_USB48_SEL PLLU.       */
-#define AT32_PLLU_USB48_SEL_HICK     (1 << 10)  /**< PLLU_USB48_SEL HICK.       */
+#define AT32_USBDIV_MASK             (15 << 12) /**< USBDIV mask.               */
+#define AT32_USBDIV_DIV3             (0 << 12)  /**< PLLOUT divided by 3.       */
+#define AT32_USBDIV_DIV2             (1 << 12)  /**< PLLOUT divided by 2.       */
+#define AT32_USBDIV_DIV5             (2 << 12)  /**< PLLOUT divided by 5.       */
+#define AT32_USBDIV_DIV4             (3 << 12)  /**< PLLOUT divided by 4.       */
+#define AT32_USBDIV_DIV7             (4 << 12)  /**< PLLOUT divided by 7.       */
+#define AT32_USBDIV_DIV6             (5 << 12)  /**< PLLOUT divided by 6.       */
+#define AT32_USBDIV_DIV9             (6 << 12)  /**< PLLOUT divided by 9.       */
+#define AT32_USBDIV_DIV8             (7 << 12)  /**< PLLOUT divided by 8.       */
 
 #define AT32_HICK_TO_SCLK_DIV_MASK   (7 << 16)  /**< HICK_TO_SCLK_DIV mask.     */
 #define AT32_HICK_TO_SCLK_DIV_DIV1   (0 << 16)  /**< HICK divided by 1.         */
@@ -353,6 +368,12 @@
 #define AT32_SYSTICK_CLKSRC_HCLKDIV8 (0 << 0)  /**< Systick clk is hclk/8       */
 #define AT32_SYSTICK_CLKSRC_HCLKDIV1 (4 << 0)  /**< Systick clk is hclk.        */
 /** @} */
+
+#define AT32_USBCLK_SRC_PLL          AT32_HICK_TO_USB_PLL  
+#define AT32_USBCLK_SRC_HICK         AT32_HICK_TO_USB_HICKOUT
+
+#define AT32_ADCCLK_SRC_HCLK         AT32_PLLCLK_TO_ADC_HCLK
+#define AT32_ADCCLK_SRC_PLL          AT32_PLLCLK_TO_ADC_PLL
 
 /*===========================================================================*/
 /* Driver pre-compile time settings.                                         */
@@ -412,13 +433,6 @@
 #endif
 
 /**
- * @brief   Enables or disables the PLLU clock source.
- */
-#if !defined(AT32_PLLU_ENABLED) || defined(__DOXYGEN__)
-#define AT32_PLLU_ENABLED                  TRUE
-#endif
-
-/**
  * @brief   USB clock setting.
  */
 #if !defined(AT32_CLOCK48_REQUIRED) || defined(__DOXYGEN__)
@@ -428,27 +442,34 @@
 /**
  * @brief   USB clock source selection.
  */
-#if !defined(AT32_PLLU_USB48_SEL) || defined(__DOXYGEN__)
-#define AT32_PLLU_USB48_SEL                AT32_PLLU_USB48_SEL_PLLU
+#if !defined(AT32_USBCLK_SRC) || defined(__DOXYGEN__)
+#define AT32_USBCLK_SRC                    AT32_USBCLK_SRC_PLL
+#endif
+
+/**
+ * @brief   USB prescaler initialization.
+ */
+#if !defined(AT32_USBDIV) || defined(__DOXYGEN__)
+#define AT32_USBDIV                        AT32_USBDIV_DIV6
 #endif
 
 /**
  * @brief   Main clock source selection.
  * @note    If the selected clock source is not the PLL then the PLL is not
  *          initialized and started.
- * @note    The default value is calculated for a 216MHz system clock from
- *          a 12MHz crystal using the PLL.
+ * @note    The default value is calculated for a 144MHz system clock from
+ *          a 8MHz crystal using the PLL.
  */
 #if !defined(AT32_SCLKSEL) || defined(__DOXYGEN__)
-#define AT32_SCLKSEL                       AT32_SCLKSEL_PLL
+#define AT32_SCLKSEL                       AT32_SCLKSEL_PLLDIV2
 #endif
 
 /**
  * @brief   Clock source for the PLL.
  * @note    This setting has only effect if the PLL is selected as the
  *          system clock source.
- * @note    The default value is calculated for a 216MHz system clock from
- *          a 12MHz crystal using the PLL.
+ * @note    The default value is calculated for a 144MHz system clock from
+ *          a 8MHz crystal using the PLL.
  */
 #if !defined(AT32_PLLRCS) || defined(__DOXYGEN__)
 #define AT32_PLLRCS                        AT32_PLLRCS_HEXT
@@ -457,8 +478,8 @@
 /**
  * @brief   PLL_MS divider value.
  * @note    The allowed values are 1..15.
- * @note    The default value is calculated for a 216MHz system clock from
- *          a 12MHz crystal using the PLL.
+ * @note    The default value is calculated for a 144MHz system clock from
+ *          a 8MHz crystal using the PLL.
  */
 #if !defined(AT32_PLL_MS_VALUE) || defined(__DOXYGEN__)
 #define AT32_PLL_MS_VALUE                  1
@@ -467,37 +488,27 @@
 /**
  * @brief   PLL_NS multiplier value.
  * @note    The allowed values are 31..500.
- * @note    The default value is calculated for a 216MHz system clock from
- *          a 12MHz crystal using the PLL.
+ * @note    The default value is calculated for a 144MHz system clock from
+ *          a 8MHz crystal using the PLL.
  */
 #if !defined(AT32_PLL_NS_VALUE) || defined(__DOXYGEN__)
 #define AT32_PLL_NS_VALUE                  72
 #endif
 
 /**
- * @brief   PLL_FP divider value.
- * @note    The allowed values are 1, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20.
- * @note    The default value is calculated for a 216MHz system clock from
- *          a 12MHz crystal using the PLL.
+ * @brief   PLL_FR divider value.
+ * @note    The allowed values are 1, 2, 4, 8, 16, 32.
+ * @note    The default value is calculated for a 144MHz system clock from
+ *          a 8MHz crystal using the PLL.
  */
-#if !defined(AT32_PLL_FP_VALUE) || defined(__DOXYGEN__)
-#define AT32_PLL_FP_VALUE                  4
-#endif
-
-/**
- * @brief   PLL_FU divider value.
- * @note    The allowed values are 11, 12, 13, 14, 16, 18, 20.
- * @note    The default value is calculated for a 216MHz system clock from
- *          a 12MHz crystal using the PLL.
- */
-#if !defined(AT32_PLL_FU_VALUE) || defined(__DOXYGEN__)
-#define AT32_PLL_FU_VALUE                  18
+#if !defined(AT32_PLL_FR_VALUE) || defined(__DOXYGEN__)
+#define AT32_PLL_FR_VALUE                  2
 #endif
 
 /**
  * @brief   AHB prescaler value.
- * @note    The default value is calculated for a 216MHz system clock from
- *          a 12MHz crystal using the PLL.
+ * @note    The default value is calculated for a 144MHz system clock from
+ *          a 8MHz crystal using the PLL.
  */
 #if !defined(AT32_AHBDIV) || defined(__DOXYGEN__)
 #define AT32_AHBDIV                        AT32_AHBDIV_DIV1
@@ -546,10 +557,17 @@
 #endif
 
 /**
+ * @brief   ADC clock source.
+ */
+#if !defined(AT32_ADCCLK_SRC) || defined(__DOXYGEN__)
+#define AT32_ADCCLK_SRC                    AT32_ADCCLK_SRC_HCLK
+#endif
+
+/**
  * @brief   ERTC clock source.
  */
 #if !defined(AT32_ERTCSEL) || defined(__DOXYGEN__)
-#define AT32_ERTCSEL                      AT32_ERTCSEL_NOCLOCK
+#define AT32_ERTCSEL                       AT32_ERTCSEL_NOCLOCK
 #endif
 
 /**
@@ -561,10 +579,31 @@
 #endif
 
 /**
- * @brief   I2SF5 clock source.
+ * @brief   USART1 clock source.
  */
-#if !defined(AT32_I2SF5CLKSEL) || defined(__DOXYGEN__)
-#define AT32_I2SF5CLKSEL                  AT32_I2SF5CLKSEL_SCLK
+#if !defined(AT32_USART1SEL) || defined(__DOXYGEN__)
+#define AT32_USART1SEL                    AT32_USART1SEL_PCLK2
+#endif
+
+/**
+ * @brief   USART2 clock source.
+ */
+#if !defined(AT32_USART2SEL) || defined(__DOXYGEN__)
+#define AT32_USART2SEL                    AT32_USART2SEL_PCLK1
+#endif
+
+/**
+ * @brief   USART3 clock source.
+ */
+#if !defined(AT32_USART3SEL) || defined(__DOXYGEN__)
+#define AT32_USART3SEL                    AT32_USART3SEL_PCLK1
+#endif
+
+/**
+ * @brief   I2C1 clock source.
+ */
+#if !defined(AT32_I2C1SEL) || defined(__DOXYGEN__)
+#define AT32_I2C1SEL                      AT32_I2C1SEL_PCLK1
 #endif
 
 /**
@@ -610,8 +649,8 @@
 /*
  * Configuration-related checks.
  */
-#if !defined(AT32F402_5xx_MCUCONF)
-#error "Using a wrong mcuconf.h file, AT32F402_5xx_MCUCONF not defined"
+#if !defined(AT32F423xx_MCUCONF)
+#error "Using a wrong mcuconf.h file, AT32F423xx_MCUCONF not defined"
 #endif
 
 /*
@@ -635,32 +674,50 @@
 #error "HICK not enabled, required by AT32_SCLKSEL"
 #endif
 
-#if ((AT32_SCLKSEL == AT32_SCLKSEL_HICK) &&                                      \
+#if ((AT32_SCLKSEL == AT32_SCLKSEL_HICK) &&                                     \
      (AT32_PLLRCS == AT32_PLLRCS_HICK))
 #error "HICK not enabled, required by AT32_SCLKSEL and AT32_PLLRCS"
 #endif
 
-#if (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_HICK) ||                                 \
-    ((AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLL) &&                                 \
+#if (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_HICK) ||                                \
+    ((AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLL) &&                                \
      (AT32_PLLRCS == AT32_PLLRCS_HICK))
 #error "HICK not enabled, required by AT32_CLKOUT_SEL"
 #endif
 
-#if (AT32_PLLU_USB48_SEL == AT32_PLLU_USB48_SEL_HICK) ||                         \
-    ((AT32_PLLU_USB48_SEL == AT32_PLLU_USB48_SEL_PLLU) &&                        \
+#if (AT32_USBCLK_SRC == AT32_USBCLK_SRC_HICK) ||                                \
+    ((AT32_USBCLK_SRC == AT32_USBCLK_SRC_PLL) &&                                \
      (AT32_PLLRCS == AT32_PLLRCS_HICK))
-#error "HICK not enabled, required by AT32_PLLU_USB48_SEL"
+#error "HICK not enabled, required by AT32_USBCLK_SRC"
 #endif
 
-#if (AT32_I2SF5CLKSEL == AT32_I2SF5CLKSEL_HICK) ||                               \
-    ((AT32_I2SF5CLKSEL == AT32_I2SF5CLKSEL_PLL) &&                               \
-     (AT32_PLLRCS == AT32_PLLRCS_HICK)) ||                                       \
-    ((AT32_I2SF5CLKSEL == AT32_I2SF5CLKSEL_SCLK) &&                              \
-     (AT32_SCLKSEL == AT32_SCLKSEL_HICK)) ||                                     \
-    ((AT32_I2SF5CLKSEL == AT32_I2SF5CLKSEL_SCLK) &&                              \
-     (AT32_SCLKSEL == AT32_SCLKSEL_PLL) &&                                       \
+#if ((AT32_ADCCLK_SRC == AT32_ADCCLK_SRC_PLL) &&                                \
      (AT32_PLLRCS == AT32_PLLRCS_HICK))
-#error "HICK not enabled, required by AT32_I2SF5CLKSEL"
+#error "HICK not enabled, required by AT32_ADCCLK_SRC"
+#endif
+
+#if ((AT32_USART1SEL == AT32_USART1SEL_HICK) ||                                 \
+     (AT32_USART1SEL == AT32_USART1SEL_SCLK) &&                                 \
+     (AT32_SCLKSEL == AT32_SCLKSEL_HICK))
+#error "HICK not enabled, required by AT32_USART1SEL"
+#endif
+
+#if ((AT32_USART2SEL == AT32_USART2SEL_HICK) ||                                 \
+     (AT32_USART2SEL == AT32_USART2SEL_SCLK) &&                                 \
+     (AT32_SCLKSEL == AT32_SCLKSEL_HICK))
+#error "HICK not enabled, required by AT32_USART2SEL"
+#endif
+
+#if ((AT32_USART3SEL == AT32_USART3SEL_HICK) ||                                 \
+     (AT32_USART3SEL == AT32_USART3SEL_SCLK) &&                                 \
+     (AT32_SCLKSEL == AT32_SCLKSEL_HICK))
+#error "HICK not enabled, required by AT32_USART3SEL"
+#endif
+
+#if ((AT32_I2C1SEL == AT32_I2C1SEL_HICK) ||                                     \
+     (AT32_I2C1SEL == AT32_I2C1SEL_SCLK) &&                                     \
+     (AT32_SCLKSEL == AT32_SCLKSEL_HICK))
+#error "HICK not enabled, required by AT32_I2C1SEL"
 #endif
 
 #endif /* !AT32_HICK_ENABLED */
@@ -690,7 +747,7 @@
 #error "HEXT not enabled, required by AT32_SCLKSEL"
 #endif
 
-#if (AT32_SCLKSEL == AT32_SCLKSEL_PLL) && (AT32_PLLRCS == AT32_PLLRCS_HEXT)
+#if (AT32_SCLKSEL == AT32_SCLKSEL_PLLDIV2) && (AT32_PLLRCS == AT32_PLLRCS_HEXT)
 #error "HEXT not enabled, required by AT32_SCLKSEL and AT32_PLLRCS"
 #endif
 
@@ -704,14 +761,34 @@
 #error "HEXT not enabled, required by AT32_ERTCSEL"
 #endif
 
-#if ((AT32_I2SF5CLKSEL == AT32_I2SF5CLKSEL_PLL) &&                               \
-     (AT32_PLLRCS == AT32_PLLRCS_HEXT)) ||                                       \
-    ((AT32_I2SF5CLKSEL == AT32_I2SF5CLKSEL_SCLK) &&                              \
-     (AT32_SCLKSEL == AT32_SCLKSEL_HEXT)) ||                                     \
-    ((AT32_I2SF5CLKSEL == AT32_I2SF5CLKSEL_SCLK) &&                              \
-     (AT32_SCLKSEL == AT32_SCLKSEL_PLL) &&                                       \
+#if ((AT32_USBCLK_SRC == AT32_USBCLK_SRC_PLL) &&                                \
      (AT32_PLLRCS == AT32_PLLRCS_HEXT))
-#error "HICK not enabled, required by AT32_I2SF5CLKSEL"
+#error "HEXT not enabled, required by AT32_USBCLK_SRC"
+#endif
+
+#if ((AT32_ADCCLK_SRC == AT32_ADCCLK_SRC_PLL) &&                                \
+     (AT32_PLLRCS == AT32_PLLRCS_HEXT))
+#error "HEXT not enabled, required by AT32_ADCCLK_SRC"
+#endif
+
+#if ((AT32_USART1SEL == AT32_USART1SEL_SCLK) &&                                 \
+     (AT32_SCLKSEL == AT32_SCLKSEL_HEXT))
+#error "HEXT not enabled, required by AT32_USART1SEL"
+#endif
+
+#if ((AT32_USART2SEL == AT32_USART2SEL_SCLK) &&                                 \
+     (AT32_SCLKSEL == AT32_SCLKSEL_HEXT))
+#error "HEXT not enabled, required by AT32_USART2SEL"
+#endif
+
+#if ((AT32_USART3SEL == AT32_USART3SEL_SCLK) &&                                 \
+     (AT32_SCLKSEL == AT32_SCLKSEL_HEXT))
+#error "HEXT not enabled, required by AT32_USART3SEL"
+#endif
+
+#if ((AT32_I2C1SEL == AT32_I2C1SEL_SCLK) &&                                     \
+     (AT32_SCLKSEL == AT32_SCLKSEL_HEXT))
+#error "HEXT not enabled, required by AT32_I2C1SEL"
 #endif
 
 #endif /* !AT32_HEXT_ENABLED */
@@ -742,18 +819,24 @@
 #if AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_LEXT
 #error "LEXT not enabled, required by AT32_CLKOUT_SEL"
 #endif
+
 #if AT32_ERTCSEL == AT32_ERTCSEL_LEXT
 #error "LEXT not enabled, required by AT32_ERTCSEL"
 #endif
-#endif /* !AT32_LEXT_ENABLED */
 
-#if AT32_PLLU_ENABLED
-#else /* !AT32_PLLU_ENABLED */
-
-#if AT32_PLLU_USB48_SEL == AT32_PLLU_USB48_SEL_PLLU
-#error "PLLU not enabled, required by AT32_PLLU_USB48_SEL"
+#if AT32_USART1SEL == AT32_USART1SEL_LEXT
+#error "LEXT not enabled, required by AT32_USART1SEL"
 #endif
-#endif /* !AT32_PLLU_ENABLED */
+
+#if AT32_USART2SEL == AT32_USART2SEL_LEXT
+#error "LEXT not enabled, required by AT32_USART2SEL"
+#endif
+
+#if AT32_USART3SEL == AT32_USART3SEL_LEXT
+#error "LEXT not enabled, required by AT32_USART3SEL"
+#endif
+
+#endif /* !AT32_LEXT_ENABLED */
 
 /**
  * @brief   AT32_PLL_MS field.
@@ -797,11 +880,10 @@
 /*
  * PLL enable check.
  */
-#if (AT32_CLOCK48_REQUIRED && (AT32_PLLU_USB48_SEL == AT32_PLLU_USB48_SEL_PLLU)) ||   \
-    (AT32_SCLKSEL == AT32_SCLKSEL_PLL) ||                                             \
-    (AT32_I2SF5CLKSEL == AT32_I2SF5CLKSEL_PLL) ||                                     \
-    (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLL) ||                                       \
-    (AT32_PLLU_ENABLED) || defined(__DOXYGEN__)
+#if (AT32_CLOCK48_REQUIRED && (AT32_USBCLK_SRC == AT32_USBCLK_SRC_PLL)) ||    \
+    (AT32_SCLKSEL == AT32_SCLKSEL_PLLDIV2) ||                                 \
+    (AT32_ADCCLK_SRC == AT32_ADCCLK_SRC_PLL) ||                               \
+    (AT32_CLKOUT_SEL == AT32_CLKOUT_SEL_PLL) || defined(__DOXYGEN__)
 /**
  * @brief   PLL activation flag.
  */
@@ -821,53 +903,22 @@
 #endif
 
 /**
- * @brief   AT32_PLL_FP field.
+ * @brief   AT32_PLL_FR field.
  */
-#if (AT32_PLL_FP_VALUE == 1) || defined(__DOXYGEN__)
-#define AT32_PLL_FP                  AT32_PLL_FP_DIV1
-#elif AT32_PLL_FP_VALUE == 2
-#define AT32_PLL_FP                  AT32_PLL_FP_DIV2
-#elif AT32_PLL_FP_VALUE == 4
-#define AT32_PLL_FP                  AT32_PLL_FP_DIV4
-#elif AT32_PLL_FP_VALUE == 6
-#define AT32_PLL_FP                  AT32_PLL_FP_DIV6
-#elif AT32_PLL_FP_VALUE == 8
-#define AT32_PLL_FP                  AT32_PLL_FP_DIV8
-#elif AT32_PLL_FP_VALUE == 10
-#define AT32_PLL_FP                  AT32_PLL_FP_DIV10
-#elif AT32_PLL_FP_VALUE == 12
-#define AT32_PLL_FP                  AT32_PLL_FP_DIV12
-#elif AT32_PLL_FP_VALUE == 14
-#define AT32_PLL_FP                  AT32_PLL_FP_DIV14
-#elif AT32_PLL_FP_VALUE == 16
-#define AT32_PLL_FP                  AT32_PLL_FP_DIV16
-#elif AT32_PLL_FP_VALUE == 18
-#define AT32_PLL_FP                  AT32_PLL_FP_DIV18
-#elif AT32_PLL_FP_VALUE == 20
-#define AT32_PLL_FP                  AT32_PLL_FP_DIV20
+#if (AT32_PLL_FR_VALUE == 1) || defined(__DOXYGEN__)
+#define AT32_PLL_FR                  AT32_PLL_FR_DIV1
+#elif AT32_PLL_FR_VALUE == 2
+#define AT32_PLL_FR                  AT32_PLL_FR_DIV2
+#elif AT32_PLL_FR_VALUE == 4
+#define AT32_PLL_FR                  AT32_PLL_FR_DIV4
+#elif AT32_PLL_FR_VALUE == 8
+#define AT32_PLL_FR                  AT32_PLL_FR_DIV8
+#elif AT32_PLL_FR_VALUE == 16
+#define AT32_PLL_FR                  AT32_PLL_FR_DIV16
+#elif AT32_PLL_FR_VALUE == 32
+#define AT32_PLL_FR                  AT32_PLL_FR_DIV32
 #else
-#error "invalid AT32_PLL_FP_VALUE value specified"
-#endif
-
-/**
- * @brief   AT32_PLL_FU field.
- */
-#if (AT32_PLL_FU_VALUE == 11) || defined(__DOXYGEN__)
-#define AT32_PLL_FU                  AT32_PLL_FU_DIV11
-#elif AT32_PLL_FU_VALUE == 12
-#define AT32_PLL_FU                  AT32_PLL_FU_DIV12
-#elif AT32_PLL_FU_VALUE == 13
-#define AT32_PLL_FU                  AT32_PLL_FU_DIV13
-#elif AT32_PLL_FU_VALUE == 14
-#define AT32_PLL_FU                  AT32_PLL_FU_DIV14
-#elif AT32_PLL_FU_VALUE == 16
-#define AT32_PLL_FU                  AT32_PLL_FU_DIV16
-#elif AT32_PLL_FU_VALUE == 18
-#define AT32_PLL_FU                  AT32_PLL_FU_DIV18
-#elif AT32_PLL_FU_VALUE == 20
-#define AT32_PLL_FU                  AT32_PLL_FU_DIV20
-#else
-#error "invalid AT32_PLL_FU_VALUE value specified"
+#error "invalid AT32_PLL_FR_VALUE value specified"
 #endif
 
 /**
@@ -885,25 +936,13 @@
 /**
  * @brief   PLL PCLK output clock frequency.
  */
-#define AT32_PLLPCLK                 (AT32_PLLVCO / AT32_PLL_FP_VALUE)
+#define AT32_PLLCLKOUT               (AT32_PLLVCO / AT32_PLL_FR_VALUE)
 
 /*
- * PLL PCLK frequency range check.
+ * PLL out frequency range check.
  */
-#if (AT32_PLLPCLK < AT32_PLLOUT_MIN) || (AT32_PLLPCLK > AT32_PLLOUT_MAX)
-#error "AT32_PLLPCLK outside acceptable range (AT32_PLLOUT_MIN...AT32_PLLOUT_MAX)"
-#endif
-
-/**
- * @brief   PLL UCLK output clock frequency.
- */
-#define AT32_PLLUCLK                 (AT32_PLLVCO / AT32_PLL_FU_VALUE)
-
-/*
- * PLL UCLK frequency range check.
- */
-#if (AT32_PLLUCLK < AT32_PLLOUT_MIN) || (AT32_PLLUCLK > AT32_PLLOUT_MAX)
-#error "AT32_PLLUCLK outside acceptable range (AT32_PLLOUT_MIN...AT32_PLLOUT_MAX)"
+#if (AT32_PLLCLKOUT < AT32_PLLOUT_MIN) || (AT32_PLLCLKOUT > AT32_PLLOUT_MAX)
+#error "AT32_PLLCLKOUT outside acceptable range (AT32_PLLOUT_MIN...AT32_PLLOUT_MAX)"
 #endif
 
 /**
@@ -952,9 +991,9 @@
 #error  "invalid AT32_HEXT_TO_SCLK_DIV value specified"
 #endif
 
-#elif AT32_SCLKSEL == AT32_SCLKSEL_PLL
+#elif AT32_SCLKSEL == AT32_SCLKSEL_PLLDIV2
 
-#define AT32_SYSCLK                  AT32_PLLPCLK
+#define AT32_SYSCLK                  (AT32_PLLCLKOUT / 2)
 
 #else
 #error "invalid AT32_SCLKSEL value specified"
@@ -999,15 +1038,15 @@
  * @brief   APB1 frequency.
  */
 #if (AT32_APB1DIV == AT32_APB1DIV_DIV1) || defined(__DOXYGEN__)
-#define AT32_PCLK1                 (AT32_HCLK / 1)
+#define AT32_PCLK1                  (AT32_HCLK / 1)
 #elif AT32_APB1DIV == AT32_APB1DIV_DIV2
-#define AT32_PCLK1                 (AT32_HCLK / 2)
+#define AT32_PCLK1                  (AT32_HCLK / 2)
 #elif AT32_APB1DIV == AT32_APB1DIV_DIV4
-#define AT32_PCLK1                 (AT32_HCLK / 4)
+#define AT32_PCLK1                  (AT32_HCLK / 4)
 #elif AT32_APB1DIV == AT32_APB1DIV_DIV8
-#define AT32_PCLK1                 (AT32_HCLK / 8)
+#define AT32_PCLK1                  (AT32_HCLK / 8)
 #elif AT32_APB1DIV == AT32_APB1DIV_DIV16
-#define AT32_PCLK1                 (AT32_HCLK / 16)
+#define AT32_PCLK1                  (AT32_HCLK / 16)
 #else
 #error "invalid AT32_APB1DIV value specified"
 #endif
@@ -1021,15 +1060,15 @@
  * @brief   APB2 frequency.
  */
 #if (AT32_APB2DIV == AT32_APB2DIV_DIV1) || defined(__DOXYGEN__)
-#define AT32_PCLK2                 (AT32_HCLK / 1)
+#define AT32_PCLK2                  (AT32_HCLK / 1)
 #elif AT32_APB2DIV == AT32_APB2DIV_DIV2
-#define AT32_PCLK2                 (AT32_HCLK / 2)
+#define AT32_PCLK2                  (AT32_HCLK / 2)
 #elif AT32_APB2DIV == AT32_APB2DIV_DIV4
-#define AT32_PCLK2                 (AT32_HCLK / 4)
+#define AT32_PCLK2                  (AT32_HCLK / 4)
 #elif AT32_APB2DIV == AT32_APB2DIV_DIV8
-#define AT32_PCLK2                 (AT32_HCLK / 8)
+#define AT32_PCLK2                  (AT32_HCLK / 8)
 #elif AT32_APB2DIV == AT32_APB2DIV_DIV16
-#define AT32_PCLK2                 (AT32_HCLK / 16)
+#define AT32_PCLK2                  (AT32_HCLK / 16)
 #else
 #error "invalid AT32_APB2DIV value specified"
 #endif
@@ -1042,7 +1081,7 @@
 /* Check on LDOOVSEL value.*/
 #if AT32_LDOOVSEL == AT32_LDOOVSEL_1P3V
 
-#if (AT32_HCLK > 216000000) ||                                              \
+#if (AT32_HCLK > 150000000) ||                                              \
     (AT32_PCLK1 > 120000000) ||                                             \
     (AT32_PCLK1 > AT32_HCLK)
 #error "AT32 bus clock exceeding maximum frequency when LDO is 1.3V"
@@ -1050,8 +1089,8 @@
 
 #elif AT32_LDOOVSEL == AT32_LDOOVSEL_1P2V
 
-#if (AT32_HCLK > 168000000) ||                                              \
-    (AT32_PCLK1 > 120000000) ||                                             \
+#if (AT32_HCLK > 120000000) ||                                              \
+    (AT32_PCLK1 > AT32_HCLK) ||                                             \
     (AT32_PCLK1 > AT32_HCLK)
 #error "AT32 bus clock exceeding maximum frequency when LDO is 1.2V"
 #endif
@@ -1059,7 +1098,7 @@
 #elif ((AT32_LDOOVSEL == AT32_LDOOVSEL_1P1V) ||                              \
        (AT32_LDOOVSEL == AT32_LDOOVSEL_1P0V))
 
-#if (AT32_HCLK > 108000000) ||                                              \
+#if (AT32_HCLK > 64000000) ||                                              \
     (AT32_PCLK1 > AT32_HCLK) ||                                             \
     (AT32_PCLK1 > AT32_HCLK)
 #error "AT32 bus clock exceeding maximum frequency when LDO is 1.0V"
@@ -1072,10 +1111,39 @@
 /**
  * @brief   USB clock.
  */
-#if AT32_PLLU_USB48_SEL == AT32_PLLU_USB48_SEL_PLLU
-#define AT32_USBCLK                 AT32_PLLUCLK
-#elif AT32_PLLU_USB48_SEL == AT32_PLLU_USB48_SEL_HICK
+#if (AT32_USBCLK_SRC == AT32_USBCLK_SRC_PLL) || defined(__DOXYGEN__)
+#if (AT32_USBDIV == AT32_USBDIV_DIV2) || defined(__DOXYGEN__)
+#define AT32_USBCLK                 (AT32_PLLCLKOUT / 2)
+#elif  AT32_USBDIV == AT32_USBDIV_DIV3
+#define AT32_USBCLK                 (AT32_PLLCLKOUT / 3)
+#elif  AT32_USBDIV == AT32_USBDIV_DIV4
+#define AT32_USBCLK                 (AT32_PLLCLKOUT / 4)
+#elif  AT32_USBDIV == AT32_USBDIV_DIV5
+#define AT32_USBCLK                 (AT32_PLLCLKOUT / 5)
+#elif  AT32_USBDIV == AT32_USBDIV_DIV6
+#define AT32_USBCLK                 (AT32_PLLCLKOUT / 6)
+#elif  AT32_USBDIV == AT32_USBDIV_DIV7
+#define AT32_USBCLK                 (AT32_PLLCLKOUT / 7)
+#elif  AT32_USBDIV == AT32_USBDIV_DIV8
+#define AT32_USBCLK                 (AT32_PLLCLKOUT / 8)
+#elif  AT32_USBDIV == AT32_USBDIV_DIV9
+#define AT32_USBCLK                 (AT32_PLLCLKOUT / 9)
+#else
+#error "invalid AT32_USBDIV value specified"
+#endif
+#elif AT32_USBCLK_SRC_PLL == AT32_USBCLK_SRC_HICK
 #define AT32_USBCLK                 AT32_HICKCLKOUT
+#else
+#error "invalid AT32_PLLU_USB48_SEL value specified"
+#endif
+
+/**
+ * @brief   ADC clock.
+ */
+#if (AT32_ADCCLK_SRC == AT32_ADCCLK_SRC_HCLK) || defined(__DOXYGEN__)
+#define AT32_ADCCLKIN               AT32_HCLK
+#elif AT32_ADCCLK_SRC == AT32_ADCCLK_SRC_PLL
+#define AT32_ADCCLKIN               AT32_PLLCLKOUT
 #else
 #error "invalid AT32_PLLU_USB48_SEL value specified"
 #endif
@@ -1107,18 +1175,61 @@
 #endif
 
 /**
- * @brief   I2SF5 clock.
+ * @brief   USART1 clock.
  */
-#if (AT32_I2SF5CLKSEL == AT32_I2SF5CLKSEL_SCLK) || defined(__DOXYGEN__)
-#define AT32_I2SF5CLK               AT32_SYSCLK
-#elif AT32_I2SF5CLKSEL == AT32_I2SF5CLKSEL_PLL
-#define AT32_I2SF5CLK               AT32_PLLPCLK
-#elif AT32_I2SF5CLKSEL == AT32_I2SF5CLKSEL_HICK
-#define AT32_I2SF5CLK               AT32_HICKCLKOUT
-#elif AT32_I2SF5CLKSEL == AT32_I2SF5CLKSEL_EXCLK
-#define AT32_I2SF5CLK               0
+#if (AT32_USART1SEL == AT32_USART1SEL_PCLK2) || defined(__DOXYGEN__)
+#define AT32_USART1CLK              AT32_PCLK2
+#elif AT32_USART1SEL == AT32_USART1SEL_SCLK
+#define AT32_USART1CLK              AT32_SYSCLK
+#elif AT32_USART1SEL == AT32_USART1SEL_HICK
+#define AT32_USART1CLK              AT32_HICKCLKOUT
+#elif AT32_USART1SEL == AT32_USART1SEL_LEXT
+#define AT32_USART1CLK              AT32_LEXTCLK
 #else
-#error "invalid AT32_I2SF5CLKSEL value specified"
+#error "invalid AT32_USART1SEL value specified"
+#endif
+
+/**
+ * @brief   USART2 clock.
+ */
+#if (AT32_USART2SEL == AT32_USART2SEL_PCLK1) || defined(__DOXYGEN__)
+#define AT32_USART2CLK              AT32_PCLK1
+#elif AT32_USART2SEL == AT32_USART2SEL_SCLK
+#define AT32_USART2CLK              AT32_SYSCLK
+#elif AT32_USART2SEL == AT32_USART2SEL_HICK
+#define AT32_USART2CLK              AT32_HICKCLKOUT
+#elif AT32_USART2SEL == AT32_USART2SEL_LEXT
+#define AT32_USART2CLK              AT32_LEXTCLK
+#else
+#error "invalid AT32_USART2SEL value specified"
+#endif
+
+/**
+ * @brief   USART3 clock.
+ */
+#if (AT32_USART3SEL == AT32_USART3SEL_PCLK1) || defined(__DOXYGEN__)
+#define AT32_USART3CLK              AT32_PCLK1
+#elif AT32_USART3SEL == AT32_USART3SEL_SCLK
+#define AT32_USART3CLK              AT32_SYSCLK
+#elif AT32_USART3SEL == AT32_USART3SEL_HICK
+#define AT32_USART3CLK              AT32_HICKCLKOUT
+#elif AT32_USART3SEL == AT32_USART3SEL_LEXT
+#define AT32_USART3CLK              AT32_LEXTCLK
+#else
+#error "invalid AT32_USART3SEL value specified"
+#endif
+
+/**
+ * @brief   I2C1 clock.
+ */
+#if (AT32_I2C1SEL == AT32_I2C1SEL_PCLK1) || defined(__DOXYGEN__)
+#define AT32_I2C1CLK              AT32_PCLK1
+#elif AT32_I2C1SEL == AT32_I2C1SEL_SCLK
+#define AT32_I2C1CLK              AT32_SYSCLK
+#elif AT32_I2C1SEL == AT32_I2C1SEL_HICK
+#define AT32_I2C1CLK              AT32_HICKCLKOUT
+#else
+#error "invalid AT32_I2C1SEL value specified"
 #endif
 
 /**
@@ -1133,7 +1244,7 @@
 #endif
 
 /**
- * @brief   Timers 2, 3, 4, 6, 7, 13, 14 clock.
+ * @brief   Timers 2, 3, 4, 6, 7, 12, 13, 14 clock.
  */
 #if (AT32_APB1DIV == AT32_APB1DIV_DIV1) || defined(__DOXYGEN__)
 #define AT32_TMRCLK1                (AT32_PCLK1 * 1)
@@ -1161,12 +1272,8 @@
 #define AT32_FLASHBITS              0x00000152
 #elif (AT32_HCLK <= 128000000)
 #define AT32_FLASHBITS              0x00000153
-#elif (AT32_HCLK <= 160000000)
+#elif (AT32_HCLK <= 150000000)
 #define AT32_FLASHBITS              0x00000154
-#elif (AT32_HCLK <= 192000000)
-#define AT32_FLASHBITS              0x00000155
-#elif (AT32_HCLK <= 216000000)
-#define AT32_FLASHBITS              0x00000156
 #endif
 
 /* Various helpers.*/
