@@ -15,10 +15,10 @@
 */
 
 /**
- * @file    TIMv1/at32_tim12.inc
- * @brief   Shared TIM12 handler.
+ * @file    TMRv1/at32_tmr12.inc
+ * @brief   Shared TMR12 handler.
  *
- * @addtogroup AT32_TIM12_HANDLER
+ * @addtogroup AT32_TMR12_HANDLER
  * @{
  */
 
@@ -31,37 +31,37 @@
 /*===========================================================================*/
 
 /* Registry checks for robustness.*/
-#if !defined(AT32_HAS_TIM12)
-#error "AT32_HAS_TIM12 not defined in registry"
+#if !defined(AT32_HAS_TMR12)
+#error "AT32_HAS_TMR12 not defined in registry"
 #endif
 
 /* Driver checks for robustness, undefined USE macros are defaulted to
    FALSE. This makes this module independent from drivers implementation.*/
-#if !defined(AT32_GPT_USE_TIM12)
-#define AT32_GPT_USE_TIM12                 FALSE
+#if !defined(AT32_GPT_USE_TMR12)
+#define AT32_GPT_USE_TMR12                 FALSE
 #endif
-#if !defined(AT32_ICU_USE_TIM12)
-#define AT32_ICU_USE_TIM12                 FALSE
+#if !defined(AT32_ICU_USE_TMR12)
+#define AT32_ICU_USE_TMR12                 FALSE
 #endif
-#if !defined(AT32_PWM_USE_TIM12)
-#define AT32_PWM_USE_TIM12                 FALSE
+#if !defined(AT32_PWM_USE_TMR12)
+#define AT32_PWM_USE_TMR12                 FALSE
 #endif
-#if !defined(AT32_ST_USE_TIM12)
-#define AT32_ST_USE_TIM12                  FALSE
+#if !defined(AT32_ST_USE_TMR12)
+#define AT32_ST_USE_TMR12                  FALSE
 #endif
 
-#if AT32_HAS_TIM12
+#if AT32_HAS_TMR12
 
 /* Priority settings checks.*/
-#if !defined(AT32_IRQ_TIM12_PRIORITY)
-#error "AT32_IRQ_TIM12_PRIORITY not defined in mcuconf.h"
+#if !defined(AT32_IRQ_TMR12_PRIORITY)
+#error "AT32_IRQ_TMR12_PRIORITY not defined in mcuconf.h"
 #endif
 
-#if !OSAL_IRQ_IS_VALID_PRIORITY(AT32_IRQ_TIM12_PRIORITY)
-#error "Invalid IRQ priority assigned to AT32_IRQ_TIM12_PRIORITY"
+#if !OSAL_IRQ_IS_VALID_PRIORITY(AT32_IRQ_TMR12_PRIORITY)
+#error "Invalid IRQ priority assigned to AT32_IRQ_TMR12_PRIORITY"
 #endif
 
-#endif /* AT32_HAS_TIM12 */
+#endif /* AT32_HAS_TMR12 */
 
 /*===========================================================================*/
 /* Driver exported variables.                                                */
@@ -75,15 +75,15 @@
 /* Driver local functions.                                                   */
 /*===========================================================================*/
 
-static inline void tim12_irq_init(void) {
-#if defined(AT32_TIM12_IS_USED)
-  nvicEnableVector(AT32_TIM12_NUMBER, AT32_IRQ_TIM12_PRIORITY);
+static inline void tmr12_irq_init(void) {
+#if defined(AT32_TMR12_IS_USED)
+  nvicEnableVector(AT32_TMR12_NUMBER, AT32_IRQ_TMR12_PRIORITY);
 #endif
 }
 
-static inline void tim12_irq_deinit(void) {
-#if defined(AT32_TIM12_IS_USED)
-  nvicDisableVector(AT32_TIM12_NUMBER);
+static inline void tmr12_irq_deinit(void) {
+#if defined(AT32_TMR12_IS_USED)
+  nvicDisableVector(AT32_TMR12_NUMBER);
 #endif
 }
 
@@ -91,33 +91,33 @@ static inline void tim12_irq_deinit(void) {
 /* Driver interrupt handlers.                                                */
 /*===========================================================================*/
 
-#if defined(AT32_TIM12_IS_USED) || defined(__DOXYGEN__)
+#if defined(AT32_TMR12_IS_USED) || defined(__DOXYGEN__)
 /**
- * @brief   TIM12 interrupt handler.
+ * @brief   TMR12 interrupt handler.
  *
  * @isr
  */
-OSAL_IRQ_HANDLER(AT32_TIM12_HANDLER) {
+OSAL_IRQ_HANDLER(AT32_TMR12_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
 #if HAL_USE_GPT
-#if AT32_GPT_USE_TIM12
+#if AT32_GPT_USE_TMR12
   gpt_lld_serve_interrupt(&GPTD12);
 #endif
 #endif
 #if HAL_USE_ICU
-#if AT32_ICU_USE_TIM12
+#if AT32_ICU_USE_TMR12
   icu_lld_serve_interrupt(&ICUD12);
 #endif
 #endif
 #if HAL_USE_PWM
-#if AT32_PWM_USE_TIM12
+#if AT32_PWM_USE_TMR12
   pwm_lld_serve_interrupt(&PWMD12);
 #endif
 #endif
 #if 1
-#if AT32_ST_USE_TIM12
+#if AT32_ST_USE_TMR12
   st_lld_serve_interrupt();
 #endif
 #endif
