@@ -2153,7 +2153,7 @@ typedef struct
 #define GPIOB                             ((GPIO_TypeDef *) GPIOB_BASE)
 #define GPIOC                             ((GPIO_TypeDef *) GPIOC_BASE)
 #define GPIOD                             ((GPIO_TypeDef *) GPIOD_BASE)
-#define GPIOD                             ((GPIO_TypeDef *) GPIOE_BASE)
+#define GPIOE                             ((GPIO_TypeDef *) GPIOE_BASE)
 #define GPIOF                             ((GPIO_TypeDef *) GPIOF_BASE)
 #define SCFG                              ((SCFG_TypeDef *) SCFG_BASE)
 #define TMR1                              ((TMR_TypeDef *) TMR1_BASE)
