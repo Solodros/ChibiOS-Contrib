@@ -2165,7 +2165,7 @@ typedef struct
 #define TMR9                              ((TMR_TypeDef *) TMR9_BASE)
 #define TMR10                             ((TMR_TypeDef *) TMR10_BASE)
 #define TMR11                             ((TMR_TypeDef *) TMR11_BASE)
-#define TMR11                             ((TMR_TypeDef *) TMR12_BASE)
+#define TMR12                             ((TMR_TypeDef *) TMR12_BASE)
 #define TMR13                             ((TMR_TypeDef *) TMR13_BASE)
 #define TMR14                             ((TMR_TypeDef *) TMR14_BASE)
 #define DEBUGMCU                          ((DEBUG_TypeDef *) DEBUG_BASE)
