@@ -537,7 +537,7 @@
  *
  * @api
  */
-#define crmResetOTG_HS() crmResetAHB1(CRM_AHBEN1_OTGHRST)
+#define crmResetOTG_HS() crmResetAHB1(CRM_AHBRST1_OTGHSRST)
 /** @} */
 
 /**

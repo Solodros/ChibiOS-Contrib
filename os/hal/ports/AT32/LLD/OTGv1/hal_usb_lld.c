@@ -779,12 +779,14 @@ void usb_lld_start(USBDriver *usbp) {
 
       /* ULPI clock is managed depending on the presence of an external
          PHY.*/
+#if defined(crmEnableOTG_HSULPI) && defined(crmDisableOTG_HSULPI)
 #if defined(BOARD_OTG2_USES_ULPI)
       crmEnableOTG_HSULPI(true);
 #else
       /* Workaround for the problem described here:
          http://forum.chibios.org/phpbb/viewtopic.php?f=16&t=1798.*/
       crmDisableOTG_HSULPI();
+#endif
 #endif
 
       /* Enables IRQ vector.*/
@@ -902,7 +904,7 @@ void usb_lld_stop(USBDriver *usbp) {
     if (&USBD2 == usbp) {
       nvicDisableVector(AT32_OTG2_NUMBER);
       crmDisableOTG_HS();
-#if defined(BOARD_OTG2_USES_ULPI)
+#if defined(BOARD_OTG2_USES_ULPI) && defined(crmDisableOTG_HSULPI)
       crmDisableOTG_HSULPI()
 #endif
     }
