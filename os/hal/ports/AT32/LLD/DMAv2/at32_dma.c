@@ -652,9 +652,9 @@ const at32_dma_stream_t *dmaStreamAllocI(uint32_t id,
       }
 #endif
 #if AT32_DMA_SUPPORTS_DMAMUX == TRUE
-  DMA1->MUXSEL = DMA_MUXSEL_TBL_SEL;
+      DMA1->MUXSEL = DMA_MUXSEL_TBL_SEL;
 #if AT32_DMA2_NUM_CHANNELS > 0
-  DMA2->MUXSEL = DMA_MUXSEL_TBL_SEL;
+      DMA2->MUXSEL = DMA_MUXSEL_TBL_SEL;
 #endif
 #endif
       /* Enables the associated IRQ vector if not already enabled and if a

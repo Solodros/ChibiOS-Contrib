@@ -476,12 +476,6 @@ void dmaInit(void) {
   EDMA2->CLR1 = 0xFFFFFFFFU;
   EDMA2->CLR2 = 0xFFFFFFFFU;
 #endif
-#if AT32_DMA_SUPPORTS_DMAMUX == TRUE
-  EDMA1->MUXSEL = EDMA_MUXSEL_TBL_SEL;
-#if AT32_HAS_DMA2 == TRUE
-  EDMA2->MUXSEL = EDMA_MUXSEL_TBL_SEL;
-#endif
-#endif
 }
 
 /**
@@ -563,7 +557,12 @@ const at32_dma_stream_t *dmaStreamAllocI(uint32_t id,
         crmEnableEDMAMUX(true);
       }
 #endif
-
+#if AT32_DMA_SUPPORTS_DMAMUX == TRUE
+      EDMA1->MUXSEL = DMA_MUXSEL_TBL_SEL;
+#if AT32_HAS_DMA2 == TRUE
+      EDMA2->MUXSEL = DMA_MUXSEL_TBL_SEL;
+#endif
+#endif
       /* Putting the stream in a safe state.*/
       dmaStreamDisable(dmastp);
       dmastp->stream->CTRL = AT32_DMA_SCTRL_RESET_VALUE;
