@@ -83,24 +83,25 @@
 
 #elif AT32_DMA_SUPPORTS_DMAMUX == TRUE
 
-#define DMAMUX1_CHANNEL(id)         (DMA1MUX_BASE + ((id) * 4U))
+#define DMA1MUX_CHANNEL(id)         (DMA1MUX_BASE + ((id) * 4U))
+#define DMA2MUX_CHANNEL(id)         (DMA2MUX_BASE + ((id) * 4U))
 
-#define DMA1_CH1_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(0))
-#define DMA1_CH2_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(1))
-#define DMA1_CH3_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(2))
-#define DMA1_CH4_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(3))
-#define DMA1_CH5_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(4))
-#define DMA1_CH6_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(5))
-#define DMA1_CH7_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(6))
-#define DMA1_CH8_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(7))
-#define DMA2_CH1_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(0 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH2_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(1 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH3_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(2 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH4_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(3 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH5_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(4 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH6_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(5 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH7_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(6 + AT32_DMA1_NUM_CHANNELS))
-#define DMA2_CH8_VARIANT            ((DMAMUX_Channel_TypeDef *)DMAMUX1_CHANNEL(7 + AT32_DMA1_NUM_CHANNELS))
+#define DMA1_CH1_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA1MUX_CHANNEL(0))
+#define DMA1_CH2_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA1MUX_CHANNEL(1))
+#define DMA1_CH3_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA1MUX_CHANNEL(2))
+#define DMA1_CH4_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA1MUX_CHANNEL(3))
+#define DMA1_CH5_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA1MUX_CHANNEL(4))
+#define DMA1_CH6_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA1MUX_CHANNEL(5))
+#define DMA1_CH7_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA1MUX_CHANNEL(6))
+#define DMA1_CH8_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA1MUX_CHANNEL(7))
+#define DMA2_CH1_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA2MUX_CHANNEL(0))
+#define DMA2_CH2_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA2MUX_CHANNEL(1))
+#define DMA2_CH3_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA2MUX_CHANNEL(2))
+#define DMA2_CH4_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA2MUX_CHANNEL(3))
+#define DMA2_CH5_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA2MUX_CHANNEL(4))
+#define DMA2_CH6_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA2MUX_CHANNEL(5))
+#define DMA2_CH7_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA2MUX_CHANNEL(6))
+#define DMA2_CH8_VARIANT            ((DMAMUX_Channel_TypeDef *)DMA2MUX_CHANNEL(7))
 
 #else /* !(AT32_DMA_SUPPORTS_DMAMUX == TRUE) */
 
@@ -567,12 +568,6 @@ void dmaInit(void) {
 #if AT32_DMA2_NUM_CHANNELS > 0
   DMA2->CLR = 0xFFFFFFFFU;
 #endif
-#if AT32_DMA_SUPPORTS_DMAMUX == TRUE
-  DMA1->MUXSEL = DMA_MUXSEL_TBL_SEL;
-#if AT32_DMA2_NUM_CHANNELS > 0
-  DMA2->MUXSEL = DMA_MUXSEL_TBL_SEL;
-#endif
-#endif
 }
 
 /**
@@ -656,7 +651,12 @@ const at32_dma_stream_t *dmaStreamAllocI(uint32_t id,
         crmEnableDMAMUX(true);
       }
 #endif
-
+#if AT32_DMA_SUPPORTS_DMAMUX == TRUE
+  DMA1->MUXSEL = DMA_MUXSEL_TBL_SEL;
+#if AT32_DMA2_NUM_CHANNELS > 0
+  DMA2->MUXSEL = DMA_MUXSEL_TBL_SEL;
+#endif
+#endif
       /* Enables the associated IRQ vector if not already enabled and if a
          callback is defined.*/
       if (func != NULL) {
