@@ -407,21 +407,21 @@
  *
  * @api
  */
-#define crmEnableOTG_FS(lp) crmEnableAHB(CRM_AHBEN_OTGFS1EN, lp)
+#define crmEnableOTG_FS1(lp) crmEnableAHB(CRM_AHBEN_OTGFS1EN, lp)
 
 /**
  * @brief   Disables the OTG_FS peripheral clock.
  *
  * @api
  */
-#define crmDisableOTG_FS() crmDisableAHB(CRM_AHBEN_OTGFS1EN)
+#define crmDisableOTG_FS1() crmDisableAHB(CRM_AHBEN_OTGFS1EN)
 
 /**
  * @brief   Resets the OTG_FS peripheral.
  *
  * @api
  */
-#define crmResetOTG_FS() crmResetAHB(CRM_AHBRST_OTGFS1RST)
+#define crmResetOTG_FS1() crmResetAHB(CRM_AHBRST_OTGFS1RST)
 /** @} */
 
 /**

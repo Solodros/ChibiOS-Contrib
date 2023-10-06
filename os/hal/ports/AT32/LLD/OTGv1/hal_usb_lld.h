@@ -135,6 +135,73 @@
 #define AT32_USB_HOST_WAKEUP_DURATION      2
 #endif
 
+/**
+ * @brief   OTG2 supports HS or only FS.
+ * @note    The default is @p TRUE.
+ */
+#if !defined(AT32_USB_OTG2_SUPPORTS_HS) || defined(__DOXYGEN__)
+#define AT32_USB_OTG2_SUPPORTS_HS          TRUE
+#endif
+
+/**
+ * @brief   OTGFS1 register block base address.
+ */
+#if !defined(OTG_FS1_ADDR) || defined(__DOXYGEN__)    
+#if defined(OTGFS1_BASE)            
+#define OTG_FS1_ADDR                      OTGFS1_BASE
+#elif defined(OTGFS_BASE)
+#define OTG_FS1_ADDR                      OTGFS_BASE
+#else
+#define OTG_FS1_ADDR                      0x50000000UL
+#endif
+#endif
+
+#if (AT32_USB_OTG2_SUPPORTS_HS == TRUE)
+/**
+ * @brief   OTGHS register block base address.
+ */
+#if !defined(OTG_FS2_ADDR) || defined(__DOXYGEN__)  
+#if defined(OTGHS_BASE)       
+#define OTG_HS_ADDR                       OTGHS_BASE
+#else
+#define OTG_HS_ADDR                       0x40040000UL
+#endif
+#endif
+#else
+/**
+ * @brief   OTGFS2 register block base address.
+ */
+#if !defined(OTG_FS2_ADDR) || defined(__DOXYGEN__)    
+#if defined(OTGFS2_BASE)            
+#define OTG_FS2_ADDR                      OTGFS2_BASE
+#else
+#define OTG_FS2_ADDR                      0x40040000UL
+#endif
+#endif
+#endif
+
+/**
+ * @brief   Accesses to the OTG_FS1 registers block.
+ */
+#if !defined(OTG_FS1) || defined(__DOXYGEN__)    
+#define OTG_FS1                          ((at32_otg_t *)OTG_FS1_ADDR)
+
+#if (AT32_USB_OTG2_SUPPORTS_HS == TRUE)
+/**
+ * @brief   Accesses to the OTG_FS2 registers block.
+ */
+#if !defined(OTG_HS) || defined(__DOXYGEN__)   
+#define OTG_HS                          ((at32_otg_t *)OTG_HS_ADDR)
+#endif
+#else
+/**
+ * @brief   Accesses to the OTG_FS2 registers block.
+ */
+#if !defined(OTG_FS2) || defined(__DOXYGEN__)   
+#define OTG_FS2                          ((at32_otg_t *)OTG_FS2_ADDR)
+#endif
+#endif
+
 /*===========================================================================*/
 /* Derived constants and error checks.                                       */
 /*===========================================================================*/
@@ -534,7 +601,7 @@ struct USBDriver {
 #define usb_lld_wakeup_host(usbp)                                           \
   do {                                                                      \
     (usbp)->otg->DCTL |= DCTL_RWUSIG;                                       \
-    osalThreadSleepMilliseconds(AT32_USB_HOST_WAKEUP_DURATION);            \
+    osalThreadSleepMilliseconds(AT32_USB_HOST_WAKEUP_DURATION);             \
     (usbp)->otg->DCTL &= ~DCTL_RWUSIG;                                      \
   } while (false)
 

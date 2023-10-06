@@ -118,7 +118,7 @@ static const USBEndpointConfig ep0config = {
 };
 
 #if AT32_USB_USE_OTG1
-static const at32_otg_params_t fsparams = {
+static const at32_otg_params_t otg1params = {
   AT32_USB_OTG1_RX_FIFO_SIZE / 4,
   AT32_OTG1_FIFO_MEM_SIZE,
   AT32_OTG1_ENDPOINTS
@@ -126,7 +126,7 @@ static const at32_otg_params_t fsparams = {
 #endif
 
 #if AT32_USB_USE_OTG2
-static const at32_otg_params_t hsparams = {
+static const at32_otg_params_t otg2params = {
   AT32_USB_OTG2_RX_FIFO_SIZE / 4,
   AT32_OTG2_FIFO_MEM_SIZE,
   AT32_OTG2_ENDPOINTS
@@ -723,15 +723,18 @@ void usb_lld_init(void) {
   /* Driver initialization.*/
 #if AT32_USB_USE_OTG1
   usbObjectInit(&USBD1);
-  USBD1.otg       = OTG_FS;
-  USBD1.otgparams = &fsparams;
-
+  USBD1.otg       = OTG_FS1;
+  USBD1.otgparams = &otg1params;
 #endif
 
 #if AT32_USB_USE_OTG2
   usbObjectInit(&USBD2);
+#if (AT32_USB_OTG2_SUPPORTS_HS == TRUE)
   USBD2.otg       = OTG_HS;
-  USBD2.otgparams = &hsparams;
+#else
+  USBD2.otg       = OTG_FS2;
+#endif
+  USBD2.otgparams = &otg2params;
 #endif
 }
 
@@ -754,8 +757,8 @@ void usb_lld_start(USBDriver *usbp) {
 #if AT32_USB_USE_OTG1
     if (&USBD1 == usbp) {
       /* OTG FS clock enable and reset.*/
-      crmEnableOTG_FS(true);
-      crmResetOTG_FS();
+      crmEnableOTG_FS1(true);
+      crmResetOTG_FS1();
 
       /* Enables IRQ vector.*/
       nvicEnableVector(AT32_OTG1_NUMBER, AT32_USB_OTG1_IRQ_PRIORITY);
@@ -773,6 +776,7 @@ void usb_lld_start(USBDriver *usbp) {
 
 #if AT32_USB_USE_OTG2
     if (&USBD2 == usbp) {
+#if (AT32_USB_OTG2_SUPPORTS_HS == TRUE)
       /* OTG HS clock enable and reset.*/
       crmEnableOTG_HS(true);
       crmResetOTG_HS();
@@ -812,6 +816,24 @@ void usb_lld_start(USBDriver *usbp) {
       otgp->DCFG = 0x02200000 | DCFG_DSPD_HS_FS;
 #endif
 #else
+      /* 48MHz 1.1 PHY.*/
+      otgp->DCFG = 0x02200000 | DCFG_DSPD_FS11;
+#endif
+
+#else
+      /* OTG FS clock enable and reset.*/
+      crmEnableOTG_FS2(true);
+      crmResetOTG_FS2();
+
+      /* Enables IRQ vector.*/
+      nvicEnableVector(AT32_OTG2_NUMBER, AT32_USB_OTG2_IRQ_PRIORITY);
+
+      /* - Forced device mode.
+         - USB turn-around time = TRDT_VALUE_FS.
+         - Full Speed 1.1 PHY.*/
+      otgp->GUSBCFG = GUSBCFG_FDMOD | GUSBCFG_TRDT(TRDT_VALUE_FS) |
+                      GUSBCFG_PHYSEL;
+
       /* 48MHz 1.1 PHY.*/
       otgp->DCFG = 0x02200000 | DCFG_DSPD_FS11;
 #endif
@@ -896,16 +918,20 @@ void usb_lld_stop(USBDriver *usbp) {
 #if AT32_USB_USE_OTG1
     if (&USBD1 == usbp) {
       nvicDisableVector(AT32_OTG1_NUMBER);
-      crmDisableOTG_FS();
+      crmDisableOTG_FS1();
     }
 #endif
 
 #if AT32_USB_USE_OTG2
     if (&USBD2 == usbp) {
       nvicDisableVector(AT32_OTG2_NUMBER);
+#if (AT32_USB_OTG2_SUPPORTS_HS == TRUE)
       crmDisableOTG_HS();
 #if defined(BOARD_OTG2_USES_ULPI) && defined(crmDisableOTG_HSULPI)
       crmDisableOTG_HSULPI()
+#endif
+#else
+      crmDisableOTG_FS2();
 #endif
     }
 #endif

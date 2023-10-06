@@ -901,19 +901,6 @@ typedef struct {
 #define PCGCCTL_STPPCLK         (1U << 0)   /**< Stop PCLK.                 */
 /** @} */
 
-#define OTG_FS_ADDR                 OTGFS1_BASE
-#define OTG_HS_ADDR                 OTGHS_BASE
-
-/**
- * @brief   Accesses to the OTG_FS registers block.
- */
-#define OTG_FS                      ((at32_otg_t *)OTG_FS_ADDR)
-
-/**
- * @brief   Accesses to the OTG_HS registers block.
- */
-#define OTG_HS                      ((at32_otg_t *)OTG_HS_ADDR)
-
 #endif /* AT32_OTG_H */
 
 /** @} */
