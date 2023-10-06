@@ -15,8 +15,8 @@
 */
 
 /**
- * @file    hal_efl_lld.c
- * @brief   AT32F403_7xx Embedded Flash subsystem low level driver source.
+ * @file    AT32F435_7xx/hal_efl_lld.c
+ * @brief   AT32F435_7xx Embedded Flash subsystem low level driver source.
  *
  * @addtogroup HAL_EFL
  * @{
@@ -41,8 +41,6 @@ do {                                                                            
     bank = FLASH_BANK_1;                                                           \
   } else if ((addr >= FLASH_BANK2_START_ADDR) && (addr <= FLASH_BANK2_END_ADDR)) { \
     bank = FLASH_BANK_2;                                                           \
-  } else {                                                                         \
-    bank = FLASH_BANK_SPIM;                                                        \
   }                                                                                \
 } while (0)
 /*===========================================================================*/
@@ -87,10 +85,6 @@ static inline void at32_flash_lock(EFlashDriver *eflp, flash_bank_t bank) {
       eflp->flash->CTRL2 |= FLASH_CTRL_OPLK;
       break;
     }
-    case FLASH_BANK_SPIM: {
-      eflp->flash->CTRL3 |= FLASH_CTRL_OPLK;
-      break;
-    }
   }
 }
 
@@ -107,11 +101,6 @@ static inline void at32_flash_unlock(EFlashDriver *eflp, flash_bank_t bank) {
       eflp->flash->UNLOCK2 = FLASH_UNLOCK_KEY2;
       break;
     }
-    case FLASH_BANK_SPIM: {
-      eflp->flash->UNLOCK3 = FLASH_UNLOCK_KEY1;
-      eflp->flash->UNLOCK3 = FLASH_UNLOCK_KEY2;
-      break;
-    }
   }
 }
 
@@ -126,12 +115,9 @@ static inline void at32_flash_enable_pgm(EFlashDriver *eflp, flash_bank_t bank) 
       eflp->flash->CTRL2 |= FLASH_CTRL_FPRGM;
       break;
     }
-    case FLASH_BANK_SPIM: {
-      eflp->flash->CTRL3 |= FLASH_CTRL_FPRGM;
-      break;
-    }
   }
 }
+
 
 static inline void at32_flash_disable_pgm(EFlashDriver *eflp, flash_bank_t bank) {
 
@@ -142,10 +128,6 @@ static inline void at32_flash_disable_pgm(EFlashDriver *eflp, flash_bank_t bank)
     }
     case FLASH_BANK_2: {
       eflp->flash->CTRL2 &= ~FLASH_CTRL_FPRGM;
-      break;
-    }
-    case FLASH_BANK_SPIM: {
-      eflp->flash->CTRL3 &= ~FLASH_CTRL_FPRGM;
       break;
     }
   }
@@ -162,10 +144,6 @@ static inline void at32_flash_clear_status(EFlashDriver *eflp, flash_bank_t bank
       eflp->flash->STS2 = FLASH_STS_PRGMERR | FLASH_STS_EPPERR;
       break;
     }
-    case FLASH_BANK_SPIM: {
-      eflp->flash->STS3 = FLASH_STS_PRGMERR | FLASH_STS_EPPERR;
-      break;
-    }
   }
 }
 
@@ -177,9 +155,6 @@ static inline uint32_t at32_flash_is_busy(EFlashDriver *eflp, flash_bank_t bank)
     }
     case FLASH_BANK_2: {
       return (eflp->flash->STS2 & FLASH_STS_OBF);
-    }
-    case FLASH_BANK_SPIM: {
-      return (eflp->flash->STS3 & FLASH_STS_OBF);
     }
   }
   return 0;
@@ -389,10 +364,6 @@ flash_error_t efl_lld_program(void *instance, flash_offset_t offset,
         sts = devp->flash->STS2;
         break;
       }
-      case FLASH_BANK_SPIM: {
-        sts = devp->flash->STS3;
-        break;
-      }
     }
   
     /* Clearing error status bits.*/
@@ -495,13 +466,6 @@ flash_error_t efl_lld_start_erase_sector(void *instance,
       devp->flash->ADDR2 = (uint32_t)(efl_lld_descriptor.address +
                          flashGetSectorOffset(getBaseFlash(devp), sector));
       devp->flash->CTRL2 |= FLASH_CTRL_ERSTR;
-      break;
-    }
-    case FLASH_BANK_SPIM: {
-      devp->flash->CTRL3 |= FLASH_CTRL_SECERS;
-      devp->flash->ADDR3 = (uint32_t)(efl_lld_descriptor.address +
-                         flashGetSectorOffset(getBaseFlash(devp), sector));
-      devp->flash->CTRL3 |= FLASH_CTRL_ERSTR;
       break;
     }
   }

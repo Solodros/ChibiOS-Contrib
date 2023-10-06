@@ -729,7 +729,7 @@ void usb_lld_init(void) {
 
 #if AT32_USB_USE_OTG2
   usbObjectInit(&USBD2);
-#if (AT32_USB_OTG2_SUPPORTS_HS == TRUE)
+#if (AT32_OTG2_SUPPORTS_HS == TRUE)
   USBD2.otg       = OTG_HS;
 #else
   USBD2.otg       = OTG_FS2;
@@ -776,7 +776,7 @@ void usb_lld_start(USBDriver *usbp) {
 
 #if AT32_USB_USE_OTG2
     if (&USBD2 == usbp) {
-#if (AT32_USB_OTG2_SUPPORTS_HS == TRUE)
+#if (AT32_OTG2_SUPPORTS_HS == TRUE)
       /* OTG HS clock enable and reset.*/
       crmEnableOTG_HS(true);
       crmResetOTG_HS();
@@ -925,7 +925,7 @@ void usb_lld_stop(USBDriver *usbp) {
 #if AT32_USB_USE_OTG2
     if (&USBD2 == usbp) {
       nvicDisableVector(AT32_OTG2_NUMBER);
-#if (AT32_USB_OTG2_SUPPORTS_HS == TRUE)
+#if (AT32_OTG2_SUPPORTS_HS == TRUE)
       crmDisableOTG_HS();
 #if defined(BOARD_OTG2_USES_ULPI) && defined(crmDisableOTG_HSULPI)
       crmDisableOTG_HSULPI()

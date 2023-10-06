@@ -199,7 +199,7 @@
 #define AT32_EDMA_CTRL_MWIDTH_HWORD    EDMA_SCTRL_MWIDTH_16BITS
 #define AT32_EDMA_CTRL_MWIDTH_WORD     EDMA_SCTRL_MWIDTH_32BITS
 #define AT32_EDMA_CTRL_WIDTH_MASK      (AT32_EDMA_CTRL_PWIDTH_MASK |              \
-                                       AT32_EDMA_CTRL_MWIDTH_MASK)
+                                        AT32_EDMA_CTRL_MWIDTH_MASK)
 #define AT32_EDMA_CTRL_CHPL_MASK       EDMA_SCTRL_SPL
 #define AT32_EDMA_CTRL_CHPL(n)         ((n) << 16U)
 /** @} */

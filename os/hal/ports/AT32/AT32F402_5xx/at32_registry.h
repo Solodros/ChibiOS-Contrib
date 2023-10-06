@@ -184,6 +184,7 @@
 #if defined(AT32F405xx)
 #define AT32_HAS_OTG2                       TRUE
 #define AT32_OTG2_ENDPOINTS                 8
+#define AT32_OTG2_SUPPORTS_HS               TRUE
 #else
 #define AT32_HAS_OTG2                       FALSE
 #endif

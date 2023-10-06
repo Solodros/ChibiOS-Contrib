@@ -15,8 +15,8 @@
 */
 
 /**
- * @file    AT32F423xx/hal_lld.c
- * @brief   AT32F423xx HAL subsystem low level driver source.
+ * @file    AT32F435_7xx/hal_lld.c
+ * @brief   AT32F435_7xx HAL subsystem low level driver source.
  *
  * @addtogroup HAL
  * @{
@@ -34,7 +34,7 @@
 
 /**
  * @brief   CMSIS system core clock variable.
- * @note    It is declared in system_at32f423xx.h.
+ * @note    It is declared in system_at32f435_7xx.h.
  */
 uint32_t SystemCoreClock = AT32_HCLK;
 
@@ -119,6 +119,9 @@ void hal_lld_init(void) {
 #if defined(AT32_DMA_REQUIRED)
   dmaInit();
 #endif
+#if defined(AT32_EDMA_REQUIRED)
+  edmaInit();
+#endif
 
   /* IRQ subsystem initialization.*/
   irqInit();
@@ -134,25 +137,8 @@ void hal_lld_init(void) {
  */
 static void at32_hick_divider_select(uint32_t div)
 {
-  volatile uint32_t misc1 = CRM->MISC1;
-  volatile uint32_t misc2 = CRM->MISC2;
-
-  CRM->MISC2 &= ~AT32_HICK_TO_SCLK_DIV_MASK;
-  CRM->MISC2 |= AT32_HICK_TO_SCLK_DIV_DIV16;
-  /* delay */
-  {
-    __NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();
-    __NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();
-    __NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();
-    __NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();
-  }
-
-  CRM->MISC1 = (AT32_HICK_TO_SCLK_HICKOUT | div);
-  CRM->MISC1 &= ~AT32_HICK_TO_SCLK_MASK;
-  CRM->MISC1 |= (misc1 & AT32_HICK_TO_SCLK_MASK);
-  
-  CRM->MISC2 &= ~AT32_HICK_TO_SCLK_DIV_MASK;
-  CRM->MISC2 |= (misc2 & AT32_HICK_TO_SCLK_DIV_MASK);
+  CRM->MISC1 &= ~AT32_HICKDIV_MASK;
+  CRM->MISC1 |= div;
 }
 
 /* 
@@ -161,24 +147,12 @@ static void at32_hick_divider_select(uint32_t div)
 static void at32_hick_frequency_select(uint32_t value)
 {
   volatile uint32_t misc1 = CRM->MISC1;
-  volatile uint32_t misc2 = CRM->MISC2;
+  at32_hick_divider_select(AT32_HICKDIV_DIV1);
 
-  CRM->MISC2 &= ~AT32_HICK_TO_SCLK_DIV_MASK;
-  CRM->MISC2 |= AT32_HICK_TO_SCLK_DIV_DIV16;
-  /* delay */
-  {
-    __NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();
-    __NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();
-    __NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();
-    __NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();__NOP();
-  }
-  
-  CRM->MISC1 = (AT32_HICK_TO_SCLK_HICKOUT | (misc1 & AT32_HICKDIV_MASK));
   CRM->MISC1 &= ~AT32_HICK_TO_SCLK_MASK;
   CRM->MISC1 |= value;
 
-  CRM->MISC2 &= ~AT32_HICK_TO_SCLK_DIV_MASK;
-  CRM->MISC2 |= (misc2 & AT32_HICK_TO_SCLK_DIV_MASK);
+  at32_hick_divider_select(misc1 & AT32_HICKDIV_MASK);
 }
 
 /*
@@ -186,23 +160,22 @@ static void at32_hick_frequency_select(uint32_t value)
  */
 void at32_clock_reset(void)
 {
-  /* reset cfg register, include sclk switch, ahbdiv, apb1div, apb2div, adcdiv, clkout bits */
-  CRM->CFG = (0x40000000U);
-
   /* reset hexten, hextbyps, cfden and pllen bits */
   CRM->CTRL &= ~(0x010D0000U);
+
+  /* reset cfg register, include sclk switch, ahbdiv, apb1div, apb2div, adcdiv, clkout bits */
+  CRM->CFG = 0;
 
   /* reset pllms pllns pllfr pllrcs bits */
   CRM->PLLCFG = 0x00033002U;
 
-  /* reset I2C1SEL, USART3SEL, USART2SEL, USART1SEL */
-  CRM->PICLKS = 0x00000000U;
+  /* reset clkout[3], usbbufs, hickdiv, clkoutdiv */
+  CRM->MISC1 = 0;
 
-  /* reset clkout_sel, clkoutdiv, pllclk_to_adc, hick_to_sclk, hick_to_usb, hickdiv */
-  CRM->MISC1 = 0x000F0000U;
-  
+  CRM->MISC2 = 0x0000000D;
+
   /* disable all interrupts enable and clear pending bits  */
-  CRM->CLKINT = 0x009F0000;
+  CRM->CLKINT = 0x009F0000U;
 }
 
 /*
@@ -212,28 +185,29 @@ void at32_clock_init(void) {
 #if !AT32_NO_INIT
   /* HICK setup, it enforces the reset situation in order to handle possible
      problems with JTAG probes and re-initializations.*/
-  CRM->MISC2 |= CRM_MISC2_AUTO_STEP_EN;
-
   CRM->CTRL |= CRM_CTRL_HICKEN;                                 /* Make sure HICK is ON.        */
   while((CRM->CTRL & CRM_CTRL_HICKSTBL) == 0);                  /* Wait until HICK is stable.   */
   CRM->CTRL &= CRM_CTRL_HICKTRIM | CRM_CTRL_HICKEN;             /* CTRL Reset value.            */
   at32_hick_divider_select(AT32_HICKDIV);
   at32_hick_frequency_select(AT32_HICK_TO_SCLK);
-  CRM->MISC2 |= AT32_HICK_TO_SCLK_DIV;
   CRM->CFG  |= CRM_CFG_SCLK_HICK;                               /* CFG reset value.             */
   while ((CRM->CFG & CRM_CFG_SCLKSTS) != CRM_CFG_SCLKSTS_HICK); /* Waits until HICK is selected.*/
 
   at32_clock_reset();
   
-  CRM->MISC2 &= ~CRM_MISC2_AUTO_STEP_EN;
-
-  /* Flash setup and final clock selection.*/
-  FLASH->PSR = AT32_FLASHBITS;
-
   CRM->APB1EN |= CRM_APB1EN_PWCEN;
 
   /* PWR initialization.*/
   PWC->LDOOV = AT32_LDOOVSEL;
+
+  /* Flash setup and final clock selection.*/
+  FLASH->DIVR &= ~AT32_FDIV_MASK;
+  FLASH->DIVR |= AT32_FDIV;
+
+  FLASH->PSR &= ~AT32_FLASH_NZW_BST_MASK;
+#if AT32_NZW_BST_ENABLED
+  FLASH->PSR |= AT32_FLASH_NZW_BST_ENABLE;
+#endif
 
 #if AT32_HEXT_ENABLED
   /* HEXT activation.*/
@@ -260,25 +234,22 @@ void at32_clock_init(void) {
 #endif
   CRM->PLLCFG = AT32_PLL_MS | AT32_PLL_NS | AT32_PLL_FR | AT32_PLLRCS;
   CRM->CTRL |= CRM_CTRL_PLLEN;
-  while (!(CRM->CTRL & CRM_CTRL_PLLSTBL));       /* Waits until PLL is stable.   */
+  while (!(CRM->CTRL & CRM_CTRL_PLLSTBL));          /* Waits until PLL is stable.   */
 #endif
 
   /* Clock settings.*/
-  CRM->CFG    |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_CFG_MASK)   | AT32_APB2DIV    | 
-                  AT32_APB1DIV | AT32_AHBDIV | AT32_ETRCDIV     | AT32_CLKOUTDIV1;
-  CRM->MISC1  |= (AT32_CLKOUT_SEL & AT32_CLKOUT_SEL_MISC1_MASK) | AT32_CLKOUTDIV2 |
-                  AT32_ADCCLK_SRC;
-  CRM->PICLKS |= AT32_USART1SEL | AT32_USART2SEL | AT32_USART3SEL | AT32_I2C1SEL;
-  CRM->MISC2  |= AT32_USBDIV;
+  CRM->CFG   |= (AT32_CLKOUT2_SEL & AT32_CLKOUT2_SEL_CFG_MASK)   | AT32_APB2DIV     | 
+                 AT32_APB1DIV | AT32_AHBDIV | AT32_ETRCDIV       | AT32_CLKOUT2DIV1 |
+                 AT32_CLKOUT1DIV1 | AT32_CLKOUT1_SEL;
+  CRM->MISC1 |= (AT32_CLKOUT2_SEL & AT32_CLKOUT2_SEL_MISC1_MASK) | AT32_CLKOUT2DIV2 |
+                 AT32_CLKOUT1DIV2;
+  CRM->MISC2 |= AT32_USBDIV;
 
   /* PLL Auto Step activation.*/
   CRM->MISC2 |= CRM_MISC2_AUTO_STEP_EN;
   
   /* Switching to the configured clock source if it is different from HICK.*/
 #if AT32_SCLKSEL != AT32_SCLKSEL_HICK
-#if AT32_SCLKSEL == AT32_SCLKSEL_HEXT
-  CRM->MISC2 |= AT32_HEXT_TO_SCLK_DIV;
-#endif
   /* Switches clock source.*/
   CRM->CFG |= AT32_SCLKSEL;
   while ((CRM->CFG & CRM_CFG_SCLKSTS) != (AT32_SCLKSEL << 2)); /* Waits selection complete.    */

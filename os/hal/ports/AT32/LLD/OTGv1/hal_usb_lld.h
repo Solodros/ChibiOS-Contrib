@@ -139,8 +139,8 @@
  * @brief   OTG2 supports HS or only FS.
  * @note    The default is @p TRUE.
  */
-#if !defined(AT32_USB_OTG2_SUPPORTS_HS) || defined(__DOXYGEN__)
-#define AT32_USB_OTG2_SUPPORTS_HS          TRUE
+#if !defined(AT32_OTG2_SUPPORTS_HS) || defined(__DOXYGEN__)
+#define AT32_OTG2_SUPPORTS_HS             TRUE
 #endif
 
 /**
@@ -156,7 +156,7 @@
 #endif
 #endif
 
-#if (AT32_USB_OTG2_SUPPORTS_HS == TRUE)
+#if (AT32_OTG2_SUPPORTS_HS == TRUE)
 /**
  * @brief   OTGHS register block base address.
  */
@@ -186,7 +186,7 @@
 #if !defined(OTG_FS1) || defined(__DOXYGEN__)    
 #define OTG_FS1                          ((at32_otg_t *)OTG_FS1_ADDR)
 
-#if (AT32_USB_OTG2_SUPPORTS_HS == TRUE)
+#if (AT32_OTG2_SUPPORTS_HS == TRUE)
 /**
  * @brief   Accesses to the OTG_FS2 registers block.
  */

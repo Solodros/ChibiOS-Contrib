@@ -1,7 +1,7 @@
 /**
   **************************************************************************
-  * @file     at32f423.h
-  * @brief    at32f423 header file
+  * @file     at32f435_437.h
+  * @brief    at32f435_437 header file
   **************************************************************************
   *                       Copyright notice & Disclaimer
   *
@@ -22,8 +22,8 @@
   **************************************************************************
   */
 
-#ifndef __AT32F423_H
-#define __AT32F423_H
+#ifndef __AT32F435_437_H
+#define __AT32F435_437_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,7 +38,7 @@ extern "C" {
   * @{
   */
 
-/** @addtogroup AT32F423
+/** @addtogroup AT32F435_437
   * @{
   */
 
@@ -51,83 +51,68 @@ extern "C" {
   *      devices, you can define the device in your toolchain compiler preprocessor.
   */
 
-#if !defined (AT32F423K8U7_4) && !defined (AT32F423KBU7_4) && !defined (AT32F423KCU7_4) && \
-    !defined (AT32F423T8U7)   && !defined (AT32F423TBU7)   && !defined (AT32F423TCU7)   && \
-    !defined (AT32F423C8U7)   && !defined (AT32F423CBU7)   && !defined (AT32F423CCU7)   && \
-    !defined (AT32F423C8T7)   && !defined (AT32F423CBT7)   && !defined (AT32F423CCT7)   && \
-    !defined (AT32F423R8T7_7) && !defined (AT32F423RBT7_7) && !defined (AT32F423RCT7_7) && \
-    !defined (AT32F423R8T7)   && !defined (AT32F423RBT7)   && !defined (AT32F423RCT7)   && \
-    !defined (AT32F423V8T7)   && !defined (AT32F423VBT7)   && !defined (AT32F423VCT7)   && \
-    !defined (AT32F423CBU7_7)
+#if !defined (AT32F435CCU7) && !defined (AT32F435CGU7) && !defined (AT32F435CMU7) && \
+    !defined (AT32F435CCT7) && !defined (AT32F435CGT7) && !defined (AT32F435CMT7) && \
+    !defined (AT32F435RCT7) && !defined (AT32F435RGT7) && !defined (AT32F435RMT7) && \
+    !defined (AT32F435VCT7) && !defined (AT32F435VGT7) && !defined (AT32F435VMT7) && \
+    !defined (AT32F435ZCT7) && !defined (AT32F435ZGT7) && !defined (AT32F435ZMT7) && \
+    !defined (AT32F437RCT7) && !defined (AT32F437RGT7) && !defined (AT32F437RMT7) && \
+    !defined (AT32F437VCT7) && !defined (AT32F437VGT7) && !defined (AT32F437VMT7) && \
+    !defined (AT32F437ZCT7) && !defined (AT32F437ZGT7) && !defined (AT32F437ZMT7)
 
-    #error "Please select first the target device used in your application (in at32f423.h file)"
+    #error "Please select first the target device used in your application (in at32f435_437.h file)"
 #endif
 
-#if defined (AT32F423K8U7_4) || defined (AT32F423KBU7_4) || defined (AT32F423KCU7_4) || \
-    defined (AT32F423T8U7)   || defined (AT32F423TBU7)   || defined (AT32F423TCU7)   || \
-    defined (AT32F423C8U7)   || defined (AT32F423CBU7)   || defined (AT32F423CCU7)   || \
-    defined (AT32F423C8T7)   || defined (AT32F423CBT7)   || defined (AT32F423CCT7)   || \
-    defined (AT32F423R8T7_7) || defined (AT32F423RBT7_7) || defined (AT32F423RCT7_7) || \
-    defined (AT32F423R8T7)   || defined (AT32F423RBT7)   || defined (AT32F423RCT7)   || \
-    defined (AT32F423V8T7)   || defined (AT32F423VBT7)   || defined (AT32F423VCT7)   || \
-    defined (AT32F423CBU7_7)
+#if defined (AT32F435CCU7) || defined (AT32F435CGU7) || defined (AT32F435CMU7) || \
+    defined (AT32F435CCT7) || defined (AT32F435CGT7) || defined (AT32F435CMT7) || \
+    defined (AT32F435RCT7) || defined (AT32F435RGT7) || defined (AT32F435RMT7) || \
+    defined (AT32F435VCT7) || defined (AT32F435VGT7) || defined (AT32F435VMT7) || \
+    defined (AT32F435ZCT7) || defined (AT32F435ZGT7) || defined (AT32F435ZMT7)
 
-    #define AT32F423xx
+    #define AT32F435xx
 #endif
 
-/**
-  * define with package
-  */
-#if defined (AT32F423K8U7_4) || defined (AT32F423KBU7_4) || defined (AT32F423KCU7_4)
+#if defined (AT32F437RCT7) || defined (AT32F437RGT7) || defined (AT32F437RMT7) || \
+    defined (AT32F437VCT7) || defined (AT32F437VGT7) || defined (AT32F437VMT7) || \
+    defined (AT32F437ZCT7) || defined (AT32F437ZGT7) || defined (AT32F437ZMT7)
 
-    #define AT32F423Kx
+    #define AT32F437xx
 #endif
 
-#if defined (AT32F423T8U7)   || defined (AT32F423TBU7)   || defined (AT32F423TCU7)
+#if defined (AT32F435ZCT7) || defined (AT32F435ZGT7) || defined (AT32F435ZMT7)
 
-    #define AT32F423Tx
+    #define AT32F435Zx
 #endif
 
-#if defined (AT32F423C8U7)   || defined (AT32F423CBU7)   || defined (AT32F423CCU7)   || \
-    defined (AT32F423C8T7)   || defined (AT32F423CBT7)   || defined (AT32F423CCT7)   || \
-    defined (AT32F423CBU7_7)
+#if defined (AT32F435VCT7) || defined (AT32F435VGT7) || defined (AT32F435VMT7)
 
-    #define AT32F423Cx
+    #define AT32F435Vx
 #endif
 
-#if defined (AT32F423R8T7_7) || defined (AT32F423RBT7_7) || defined (AT32F423RCT7_7) || \
-    defined (AT32F423R8T7)   || defined (AT32F423RBT7)   || defined (AT32F423RCT7)
+#if defined (AT32F435RCT7) || defined (AT32F435RGT7) || defined (AT32F435RMT7)
 
-    #define AT32F423Rx
+    #define AT32F435Rx
 #endif
 
-#if defined (AT32F423V8T7)   || defined (AT32F423VBT7)   || defined (AT32F423VCT7)
+#if defined (AT32F435CCU7) || defined (AT32F435CGU7) || defined (AT32F435CMU7) || \
+    defined (AT32F435CCT7) || defined (AT32F435CGT7) || defined (AT32F435CMT7)
 
-    #define AT32F423Vx
+    #define AT32F435Cx
 #endif
 
-/**
-  * define with memory density
-  */
-#if defined (AT32F423K8U7_4) || defined (AT32F423T8U7)   || defined (AT32F423C8U7)   || \
-    defined (AT32F423C8T7)   || defined (AT32F423R8T7_7) || defined (AT32F423R8T7)   || \
-    defined (AT32F423V8T7)
+#if defined (AT32F437ZCT7) || defined (AT32F437ZGT7) || defined (AT32F437ZMT7)
 
-    #define AT32F423x8
+    #define AT32F437Zx
 #endif
 
-#if defined (AT32F423KBU7_4) || defined (AT32F423TBU7)   || defined (AT32F423CBU7)   || \
-    defined (AT32F423CBT7)   || defined (AT32F423RBT7_7) || defined (AT32F423RBT7)   || \
-    defined (AT32F423VBT7)   || defined (AT32F423CBU7_7)
+#if defined (AT32F437VCT7) || defined (AT32F437VGT7) || defined (AT32F437VMT7)
 
-    #define AT32F423xB
+    #define AT32F437Vx
 #endif
 
-#if defined (AT32F423KCU7_4) || defined (AT32F423TCU7)   || defined (AT32F423CCU7)   || \
-    defined (AT32F423CCT7)   || defined (AT32F423RCT7_7) || defined (AT32F423RCT7)   || \
-    defined (AT32F423VCT7)
+#if defined (AT32F437RCT7) || defined (AT32F437RGT7) || defined (AT32F437RMT7)
 
-    #define AT32F423xC
+    #define AT32F437Rx
 #endif
 
 #ifndef USE_STDPERIPH_DRIVER
@@ -145,16 +130,16 @@ extern "C" {
 #endif
 
 /**
-  * @brief at32f423 standard peripheral library version number
+  * @brief at32f435_437 standard peripheral library version number
   */
-#define __AT32F423_LIBRARY_VERSION_MAJOR    (0x02) /*!< [31:24] major version */
-#define __AT32F423_LIBRARY_VERSION_MIDDLE   (0x00) /*!< [23:16] middle version */
-#define __AT32F423_LIBRARY_VERSION_MINOR    (0x02) /*!< [15:8]  minor version */
-#define __AT32F423_LIBRARY_VERSION_RC       (0x00) /*!< [7:0]  release candidate */
-#define __AT32F423_LIBRARY_VERSION          ((__AT32F423_LIBRARY_VERSION_MAJOR << 24)  | \
-                                             (__AT32F423_LIBRARY_VERSION_MIDDLE << 16) | \
-                                             (__AT32F423_LIBRARY_VERSION_MINOR << 8)   | \
-                                             (__AT32F423_LIBRARY_VERSION_RC))
+#define __AT32F435_437_LIBRARY_VERSION_MAJOR    (0x02) /*!< [31:24] major version */
+#define __AT32F435_437_LIBRARY_VERSION_MIDDLE   (0x01) /*!< [23:16] middle version */
+#define __AT32F435_437_LIBRARY_VERSION_MINOR    (0x02) /*!< [15:8]  minor version */
+#define __AT32F435_437_LIBRARY_VERSION_RC       (0x00) /*!< [7:0]  release candidate */
+#define __AT32F435_437_LIBRARY_VERSION          ((__AT32F435_437_LIBRARY_VERSION_MAJOR << 24)  | \
+                                                 (__AT32F435_437_LIBRARY_VERSION_MIDDLE << 16) | \
+                                                 (__AT32F435_437_LIBRARY_VERSION_MINOR << 8)   | \
+                                                 (__AT32F435_437_LIBRARY_VERSION_RC))
 
 /**
   * @}
@@ -174,7 +159,7 @@ extern "C" {
 #define __FPU_PRESENT             1U       /*!< fpu present                                  */
 
 /**
-  * @brief at32f423 interrupt number definition, according to the selected device
+  * @brief at32f435_437 interrupt number definition, according to the selected device
   *        in @ref library_configuration_section
   */
 typedef enum IRQn
@@ -203,15 +188,16 @@ typedef enum IRQn
     EXINT2_IRQn                 = 8,      /*!< exint line2 interrupt                                */
     EXINT3_IRQn                 = 9,      /*!< exint line3 interrupt                                */
     EXINT4_IRQn                 = 10,     /*!< exint line4 interrupt                                */
-    DMA1_Channel1_IRQn          = 11,     /*!< dma1 channel 1 global interrupt                      */
-    DMA1_Channel2_IRQn          = 12,     /*!< dma1 channel 2 global interrupt                      */
-    DMA1_Channel3_IRQn          = 13,     /*!< dma1 channel 3 global interrupt                      */
-    DMA1_Channel4_IRQn          = 14,     /*!< dma1 channel 4 global interrupt                      */
-    DMA1_Channel5_IRQn          = 15,     /*!< dma1 channel 5 global interrupt                      */
-    DMA1_Channel6_IRQn          = 16,     /*!< dma1 channel 6 global interrupt                      */
-    DMA1_Channel7_IRQn          = 17,     /*!< dma1 channel 7 global interrupt                      */
+    EDMA_Stream1_IRQn           = 11,     /*!< edma stream 1 global interrupt                       */
+    EDMA_Stream2_IRQn           = 12,     /*!< edma stream 2 global interrupt                       */
+    EDMA_Stream3_IRQn           = 13,     /*!< edma stream 3 global interrupt                       */
+    EDMA_Stream4_IRQn           = 14,     /*!< edma stream 4 global interrupt                       */
+    EDMA_Stream5_IRQn           = 15,     /*!< edma stream 5 global interrupt                       */
+    EDMA_Stream6_IRQn           = 16,     /*!< edma stream 6 global interrupt                       */
+    EDMA_Stream7_IRQn           = 17,     /*!< edma stream 7 global interrupt                       */
 
-    ADC1_IRQn                   = 18,     /*!< adc1 global interrupt                                */
+#if defined (AT32F435xx)
+    ADC1_2_3_IRQn               = 18,     /*!< adc1 adc2 and adc3 global interrupt                  */
     CAN1_TX_IRQn                = 19,     /*!< can1 tx interrupts                                   */
     CAN1_RX0_IRQn               = 20,     /*!< can1 rx0 interrupts                                  */
     CAN1_RX1_IRQn               = 21,     /*!< can1 rx1 interrupt                                   */
@@ -229,41 +215,146 @@ typedef enum IRQn
     I2C2_EVT_IRQn               = 33,     /*!< i2c2 event interrupt                                 */
     I2C2_ERR_IRQn               = 34,     /*!< i2c2 error interrupt                                 */
     SPI1_IRQn                   = 35,     /*!< spi1 global interrupt                                */
-    SPI2_IRQn                   = 36,     /*!< spi2 global interrupt                                */
+    SPI2_I2S2EXT_IRQn           = 36,     /*!< spi2 global interrupt                                */
     USART1_IRQn                 = 37,     /*!< usart1 global interrupt                              */
     USART2_IRQn                 = 38,     /*!< usart2 global interrupt                              */
     USART3_IRQn                 = 39,     /*!< usart3 global interrupt                              */
     EXINT15_10_IRQn             = 40,     /*!< external line[15:10] interrupts                      */
     ERTCAlarm_IRQn              = 41,     /*!< ertc alarm through exint line interrupt              */
     OTGFS1_WKUP_IRQn            = 42,     /*!< otgfs1 wakeup from suspend through exint line interrupt */
-    TMR12_GLOBAL_IRQn           = 43,     /*!< tmr12 global interrupt                               */
-    TMR13_GLOBAL_IRQn           = 44,     /*!< tmr13 global interrupt                               */
-    TMR14_GLOBAL_IRQn           = 45,     /*!< tmr14 global interrupt                               */
-    SPI3_IRQn                   = 51,     /*!< spi3 global interrupt                                */
-    USART4_IRQn                 = 52,     /*!< usart4 global interrupt                              */
-    USART5_IRQn                 = 53,     /*!< usart5 global interrupt                              */
+    TMR8_BRK_TMR12_IRQn         = 43,     /*!< tmr8 brake interrupt                                 */
+    TMR8_OVF_TMR13_IRQn         = 44,     /*!< tmr8 overflow interrupt                              */
+    TMR8_TRG_HALL_TMR14_IRQn    = 45,     /*!< tmr8 trigger and hall interrupt                      */
+    TMR8_CH_IRQn                = 46,     /*!< tmr8 channel interrupt                               */
+    EDMA_Stream8_IRQn           = 47,     /*!< edma stream 8 global interrupt                       */
+    XMC_IRQn                    = 48,     /*!< xmc global interrupt                                 */
+    SDIO1_IRQn                  = 49,     /*!< sdio global interrupt                                */
+    TMR5_GLOBAL_IRQn            = 50,     /*!< tmr5 global interrupt                                */
+    SPI3_I2S3EXT_IRQn           = 51,     /*!< spi3 global interrupt                                */
+    UART4_IRQn                  = 52,     /*!< uart4 global interrupt                               */
+    UART5_IRQn                  = 53,     /*!< uart5 global interrupt                               */
     TMR6_DAC_GLOBAL_IRQn        = 54,     /*!< tmr6 and dac global interrupt                        */
     TMR7_GLOBAL_IRQn            = 55,     /*!< tmr7 global interrupt                                */
-    DMA2_Channel1_IRQn          = 56,     /*!< dma2 channel 1 global interrupt                      */
-    DMA2_Channel2_IRQn          = 57,     /*!< dma2 channel 2 global interrupt                      */
-    DMA2_Channel3_IRQn          = 58,     /*!< dma2 channel 3 global interrupt                      */
-    DMA2_Channel4_IRQn          = 59,     /*!< dma2 channel 4 global interrupt                      */
-    DMA2_Channel5_IRQn          = 60,     /*!< dma2 channel 5 global interrupt                      */
+    DMA1_Channel1_IRQn          = 56,     /*!< dma1 channel 0 global interrupt                      */
+    DMA1_Channel2_IRQn          = 57,     /*!< dma1 channel 1 global interrupt                      */
+    DMA1_Channel3_IRQn          = 58,     /*!< dma1 channel 2 global interrupt                      */
+    DMA1_Channel4_IRQn          = 59,     /*!< dma1 channel 3 global interrupt                      */
+    DMA1_Channel5_IRQn          = 60,     /*!< dma1 channel 4 global interrupt                      */
     CAN2_TX_IRQn                = 63,     /*!< can2 tx interrupt                                    */
     CAN2_RX0_IRQn               = 64,     /*!< can2 rx0 interrupt                                   */
     CAN2_RX1_IRQn               = 65,     /*!< can2 rx1 interrupt                                   */
     CAN2_SE_IRQn                = 66,     /*!< can2 se interrupt                                    */
     OTGFS1_IRQn                 = 67,     /*!< otgfs1 interrupt                                     */
-    DMA2_Channel6_IRQn          = 68,     /*!< dma2 channel 6 global interrupt                      */
-    DMA2_Channel7_IRQn          = 69,     /*!< dma2 channel 7 global interrupt                      */
+    DMA1_Channel6_IRQn          = 68,     /*!< dma1 channel 5 global interrupt                      */
+    DMA1_Channel7_IRQn          = 69,     /*!< dma1 channel 6 global interrupt                      */
     USART6_IRQn                 = 71,     /*!< usart6 interrupt                                     */
     I2C3_EVT_IRQn               = 72,     /*!< i2c3 event interrupt                                 */
     I2C3_ERR_IRQn               = 73,     /*!< i2c3 error interrupt                                 */
+    OTGFS2_WKUP_IRQn            = 76,     /*!< otgfs2 wakeup from suspend through exint line interrupt */
+    OTGFS2_IRQn                 = 77,     /*!< otgfs2 interrupt                                     */
+    DVP_IRQn                    = 78,     /*!< dvp interrupt                                        */
     FPU_IRQn                    = 81,     /*!< fpu interrupt                                        */
-    USART7_IRQn                 = 82,     /*!< usart7 interrupt                                     */
-    USART8_IRQn                 = 83,     /*!< usart8 interrupt                                     */
+    UART7_IRQn                  = 82,     /*!< uart7 interrupt                                      */
+    UART8_IRQn                  = 83,     /*!< uart8 interrupt                                      */
+    SPI4_IRQn                   = 84,     /*!< spi4 global interrupt                                */
+    QSPI2_IRQn                  = 91,     /*!< qspi2 global interrupt                               */
+    QSPI1_IRQn                  = 92,     /*!< qspi1 global interrupt                               */
     DMAMUX_IRQn                 = 94,     /*!< dmamux global interrupt                              */
+    SDIO2_IRQn                  = 102,    /*!< sdio2 global interrupt                               */
     ACC_IRQn                    = 103,    /*!< acc interrupt                                        */
+    TMR20_BRK_IRQn              = 104,    /*!< tmr20 brake interrupt                                */
+    TMR20_OVF_IRQn              = 105,    /*!< tmr20 overflow interrupt                             */
+    TMR20_TRG_HALL_IRQn         = 106,    /*!< tmr20 trigger and hall interrupt                     */
+    TMR20_CH_IRQn               = 107,    /*!< tmr20 channel interrupt                              */
+    DMA2_Channel1_IRQn          = 108,    /*!< dma2 channel 1 global interrupt                      */
+    DMA2_Channel2_IRQn          = 109,    /*!< dma2 channel 2 global interrupt                      */
+    DMA2_Channel3_IRQn          = 110,    /*!< dma2 channel 3 global interrupt                      */
+    DMA2_Channel4_IRQn          = 111,    /*!< dma2 channel 4 global interrupt                      */
+    DMA2_Channel5_IRQn          = 112,    /*!< dma2 channel 5 global interrupt                      */
+    DMA2_Channel6_IRQn          = 113,    /*!< dma2 channel 6 global interrupt                      */
+    DMA2_Channel7_IRQn          = 114,    /*!< dma2 channel 7 global interrupt                      */
+#endif
+
+#if defined (AT32F437xx)
+    ADC1_2_3_IRQn               = 18,     /*!< adc1 adc2 and adc3 global interrupt                  */
+    CAN1_TX_IRQn                = 19,     /*!< can1 tx interrupts                                   */
+    CAN1_RX0_IRQn               = 20,     /*!< can1 rx0 interrupts                                  */
+    CAN1_RX1_IRQn               = 21,     /*!< can1 rx1 interrupt                                   */
+    CAN1_SE_IRQn                = 22,     /*!< can1 se interrupt                                    */
+    EXINT9_5_IRQn               = 23,     /*!< external line[9:5] interrupts                        */
+    TMR1_BRK_TMR9_IRQn          = 24,     /*!< tmr1 brake interrupt                                 */
+    TMR1_OVF_TMR10_IRQn         = 25,     /*!< tmr1 overflow interrupt                              */
+    TMR1_TRG_HALL_TMR11_IRQn    = 26,     /*!< tmr1 trigger and hall interrupt                      */
+    TMR1_CH_IRQn                = 27,     /*!< tmr1 channel interrupt                               */
+    TMR2_GLOBAL_IRQn            = 28,     /*!< tmr2 global interrupt                                */
+    TMR3_GLOBAL_IRQn            = 29,     /*!< tmr3 global interrupt                                */
+    TMR4_GLOBAL_IRQn            = 30,     /*!< tmr4 global interrupt                                */
+    I2C1_EVT_IRQn               = 31,     /*!< i2c1 event interrupt                                 */
+    I2C1_ERR_IRQn               = 32,     /*!< i2c1 error interrupt                                 */
+    I2C2_EVT_IRQn               = 33,     /*!< i2c2 event interrupt                                 */
+    I2C2_ERR_IRQn               = 34,     /*!< i2c2 error interrupt                                 */
+    SPI1_IRQn                   = 35,     /*!< spi1 global interrupt                                */
+    SPI2_I2S2EXT_IRQn           = 36,     /*!< spi2 global interrupt                                */
+    USART1_IRQn                 = 37,     /*!< usart1 global interrupt                              */
+    USART2_IRQn                 = 38,     /*!< usart2 global interrupt                              */
+    USART3_IRQn                 = 39,     /*!< usart3 global interrupt                              */
+    EXINT15_10_IRQn             = 40,     /*!< external line[15:10] interrupts                      */
+    ERTCAlarm_IRQn              = 41,     /*!< ertc alarm through exint line interrupt              */
+    OTGFS1_WKUP_IRQn            = 42,     /*!< otgfs1 wakeup from suspend through exint line interrupt */
+    TMR8_BRK_TMR12_IRQn         = 43,     /*!< tmr8 brake interrupt                                 */
+    TMR8_OVF_TMR13_IRQn         = 44,     /*!< tmr8 overflow interrupt                              */
+    TMR8_TRG_HALL_TMR14_IRQn    = 45,     /*!< tmr8 trigger and hall interrupt                      */
+    TMR8_CH_IRQn                = 46,     /*!< tmr8 channel interrupt                               */
+    EDMA_Stream8_IRQn           = 47,     /*!< dma1 stream 8 global interrupt                       */
+    XMC_IRQn                    = 48,     /*!< xmc global interrupt                                 */
+    SDIO1_IRQn                  = 49,     /*!< sdio global interrupt                                */
+    TMR5_GLOBAL_IRQn            = 50,     /*!< tmr5 global interrupt                                */
+    SPI3_I2S3EXT_IRQn           = 51,     /*!< spi3 global interrupt                                */
+    UART4_IRQn                  = 52,     /*!< uart4 global interrupt                               */
+    UART5_IRQn                  = 53,     /*!< uart5 global interrupt                               */
+    TMR6_DAC_GLOBAL_IRQn        = 54,     /*!< tmr6 and dac global interrupt                        */
+    TMR7_GLOBAL_IRQn            = 55,     /*!< tmr7 global interrupt                                */
+    DMA1_Channel1_IRQn          = 56,     /*!< dma1 channel 0 global interrupt                      */
+    DMA1_Channel2_IRQn          = 57,     /*!< dma1 channel 1 global interrupt                      */
+    DMA1_Channel3_IRQn          = 58,     /*!< dma1 channel 2 global interrupt                      */
+    DMA1_Channel4_IRQn          = 59,     /*!< dma1 channel 3 global interrupt                      */
+    DMA1_Channel5_IRQn          = 60,     /*!< dma1 channel 4 global interrupt                      */
+    EMAC_IRQn                   = 61,     /*!< emac interrupt                                       */
+    EMAC_WKUP_IRQn              = 62,     /*!< emac wakeup interrupt                                */
+    CAN2_TX_IRQn                = 63,     /*!< can2 tx interrupt                                    */
+    CAN2_RX0_IRQn               = 64,     /*!< can2 rx0 interrupt                                   */
+    CAN2_RX1_IRQn               = 65,     /*!< can2 rx1 interrupt                                   */
+    CAN2_SE_IRQn                = 66,     /*!< can2 se interrupt                                    */
+    OTGFS1_IRQn                 = 67,     /*!< otgfs1 interrupt                                     */
+    DMA1_Channel6_IRQn          = 68,     /*!< dma1 channel 5 global interrupt                      */
+    DMA1_Channel7_IRQn          = 69,     /*!< dma1 channel 6 global interrupt                      */
+    USART6_IRQn                 = 71,     /*!< usart6 interrupt                                     */
+    I2C3_EVT_IRQn               = 72,     /*!< i2c3 event interrupt                                 */
+    I2C3_ERR_IRQn               = 73,     /*!< i2c3 error interrupt                                 */
+    OTGFS2_WKUP_IRQn            = 76,     /*!< otgfs2 wakeup from suspend through exint line interrupt */
+    OTGFS2_IRQn                 = 77,     /*!< otgfs2 interrupt                                     */
+    DVP_IRQn                    = 78,     /*!< dvp interrupt                                        */
+    FPU_IRQn                    = 81,     /*!< fpu interrupt                                        */
+    UART7_IRQn                  = 82,     /*!< uart7 interrupt                                      */
+    UART8_IRQn                  = 83,     /*!< uart8 interrupt                                      */
+    SPI4_IRQn                   = 84,     /*!< spi4 global interrupt                                */
+    QSPI2_IRQn                  = 91,     /*!< qspi2 global interrupt                               */
+    QSPI1_IRQn                  = 92,     /*!< qspi1 global interrupt                               */
+    DMAMUX_IRQn                 = 94,     /*!< dmamux global interrupt                              */
+    SDIO2_IRQn                  = 102,    /*!< sdio2 global interrupt                               */
+    ACC_IRQn                    = 103,    /*!< acc interrupt                                        */
+    TMR20_BRK_IRQn              = 104,    /*!< tmr20 brake interrupt                                */
+    TMR20_OVF_IRQn              = 105,    /*!< tmr20 overflow interrupt                             */
+    TMR20_TRG_HALL_IRQn         = 106,    /*!< tmr20 trigger and hall interrupt                     */
+    TMR20_CH_IRQn               = 107,    /*!< tmr20 channel interrupt                              */
+    DMA2_Channel1_IRQn          = 108,    /*!< dma2 channel 1 global interrupt                      */
+    DMA2_Channel2_IRQn          = 109,    /*!< dma2 channel 2 global interrupt                      */
+    DMA2_Channel3_IRQn          = 110,    /*!< dma2 channel 3 global interrupt                      */
+    DMA2_Channel4_IRQn          = 111,    /*!< dma2 channel 4 global interrupt                      */
+    DMA2_Channel5_IRQn          = 112,    /*!< dma2 channel 5 global interrupt                      */
+    DMA2_Channel6_IRQn          = 113,    /*!< dma2 channel 6 global interrupt                      */
+    DMA2_Channel7_IRQn          = 114,    /*!< dma2 channel 7 global interrupt                      */
+#endif
 
 } IRQn_Type;
 
@@ -372,20 +463,31 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_AHBRST1_GPIODRST             (0x1U << 3)
 #define CRM_AHBRST1_GPIOERST             (0x1U << 4)
 #define CRM_AHBRST1_GPIOFRST             (0x1U << 5)
+#define CRM_AHBRST1_GPIOGRST             (0x1U << 6)
+#define CRM_AHBRST1_GPIOHRST             (0x1U << 7)
 #define CRM_AHBRST1_CRCRST               (0x1U << 12)
+#define CRM_AHBRST1_EDMARST              (0x1U << 21)
 #define CRM_AHBRST1_DMA1RST              (0x1U << 22)
 #define CRM_AHBRST1_DMA2RST              (0x1U << 24)
+#define CRM_AHBRST1_EMACRST              (0x1U << 25)
+#define CRM_AHBRST1_OTGFS2RST            (0x1U << 29)
 
 /*****************  Bit definition for CRM_AHBRST2 register  ***************/
+#define CRM_AHBRST2_DVPRST               (0x1U << 0)
 #define CRM_AHBRST2_OTGFS1RST            (0x1U << 7)
+#define CRM_AHBRST2_SDIO1RST             (0x1U << 15)
 
 /*****************  Bit definition for CRM_AHBRST3 register  ***************/
 #define CRM_AHBRST3_XMCRST               (0x1U << 0)
+#define CRM_AHBRST3_QSPI1RST             (0x1U << 1)
+#define CRM_AHBRST3_QSPI2RST             (0x1U << 14)
+#define CRM_AHBRST3_SDIO2RST             (0x1U << 15)
 
 /*****************  Bit definition for CRM_APB1RST register  ***************/
 #define CRM_APB1RST_TMR2RST              (0x1U << 0)
 #define CRM_APB1RST_TMR3RST              (0x1U << 1)
 #define CRM_APB1RST_TMR4RST              (0x1U << 2)
+#define CRM_APB1RST_TMR5RST              (0x1U << 3)
 #define CRM_APB1RST_TMR6RST              (0x1U << 4)
 #define CRM_APB1RST_TMR7RST              (0x1U << 5)
 #define CRM_APB1RST_TMR12RST             (0x1U << 6)
@@ -396,8 +498,8 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1RST_SPI3RST              (0x1U << 15)
 #define CRM_APB1RST_USART2RST            (0x1U << 17)
 #define CRM_APB1RST_USART3RST            (0x1U << 18)
-#define CRM_APB1RST_USART4RST            (0x1U << 19)
-#define CRM_APB1RST_USART5RST            (0x1U << 20)
+#define CRM_APB1RST_UART4RST             (0x1U << 19)
+#define CRM_APB1RST_UART5RST             (0x1U << 20)
 #define CRM_APB1RST_I2C1RST              (0x1U << 21)
 #define CRM_APB1RST_I2C2RST              (0x1U << 22)
 #define CRM_APB1RST_I2C3RST              (0x1U << 23)
@@ -405,19 +507,24 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1RST_CAN2RST              (0x1U << 26)
 #define CRM_APB1RST_PWCRST               (0x1U << 28)
 #define CRM_APB1RST_DACRST               (0x1U << 29)
-#define CRM_APB1RST_USART7RST            (0x1U << 30)
-#define CRM_APB1RST_USART8RST            (0x1U << 31)
+#define CRM_APB1RST_UART7RST             (0x1U << 30)
+#define CRM_APB1RST_UART8RST             (0x1U << 31)
 
 /*****************  Bit definition for CRM_APB2RST register  ***************/
 #define CRM_APB2RST_TMR1RST              (0x1U << 0)
+#define CRM_APB2RST_TMR8RST              (0x1U << 1)
 #define CRM_APB2RST_USART1RST            (0x1U << 4)
 #define CRM_APB2RST_USART6RST            (0x1U << 5)
 #define CRM_APB2RST_ADC1RST              (0x1U << 8)
+#define CRM_APB2RST_ADC2RST              (0x1U << 8)
+#define CRM_APB2RST_ADC3RST              (0x1U << 8)
 #define CRM_APB2RST_SPI1RST              (0x1U << 12)
+#define CRM_APB2RST_SPI4RST              (0x1U << 13)
 #define CRM_APB2RST_SCFGRST              (0x1U << 14)
 #define CRM_APB2RST_TMR9RST              (0x1U << 16)
 #define CRM_APB2RST_TMR10RST             (0x1U << 17)
 #define CRM_APB2RST_TMR11RST             (0x1U << 18)
+#define CRM_APB2RST_TMR20RST             (0x1U << 20)
 #define CRM_APB2RST_ACCRST               (0x1U << 29)
 
 /*****************  Bit definition for CRM_AHBEN1 register  ***************/
@@ -427,20 +534,31 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_AHBEN1_GPIODEN               (0x1U << 3)
 #define CRM_AHBEN1_GPIOEEN               (0x1U << 4)
 #define CRM_AHBEN1_GPIOFEN               (0x1U << 5)
+#define CRM_AHBEN1_GPIOGEN               (0x1U << 6)
+#define CRM_AHBEN1_GPIOHEN               (0x1U << 7)
 #define CRM_AHBEN1_CRCEN                 (0x1U << 12)
+#define CRM_AHBEN1_EDMAEN                (0x1U << 21)
 #define CRM_AHBEN1_DMA1EN                (0x1U << 22)
 #define CRM_AHBEN1_DMA2EN                (0x1U << 24)
+#define CRM_AHBEN1_EMACEN                (0x1U << 25)
+#define CRM_AHBEN1_OTGFS2EN              (0x1U << 29)
 
 /*****************  Bit definition for CRM_AHBEN2 register  ***************/
+#define CRM_AHBEN2_DVPEN                 (0x1U << 0)
 #define CRM_AHBEN2_OTGFS1EN              (0x1U << 7)
+#define CRM_AHBEN2_SDIO1EN               (0x1U << 15)
 
 /*****************  Bit definition for CRM_AHBEN3 register  ***************/
 #define CRM_AHBEN3_XMCEN                 (0x1U << 0)
+#define CRM_AHBEN3_QSPI1EN               (0x1U << 1)
+#define CRM_AHBEN3_QSPI2EN               (0x1U << 14)
+#define CRM_AHBEN3_SDIO2EN               (0x1U << 15)
 
 /*****************  Bit definition for CRM_APB1EN register  ***************/
 #define CRM_APB1EN_TMR2EN                (0x1U << 0)
 #define CRM_APB1EN_TMR3EN                (0x1U << 1)
 #define CRM_APB1EN_TMR4EN                (0x1U << 2)
+#define CRM_APB1EN_TMR5EN                (0x1U << 3)
 #define CRM_APB1EN_TMR6EN                (0x1U << 4)
 #define CRM_APB1EN_TMR7EN                (0x1U << 5)
 #define CRM_APB1EN_TMR12EN               (0x1U << 6)
@@ -451,8 +569,8 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1EN_SPI3EN                (0x1U << 15)
 #define CRM_APB1EN_USART2EN              (0x1U << 17)
 #define CRM_APB1EN_USART3EN              (0x1U << 18)
-#define CRM_APB1EN_USART4EN              (0x1U << 19)
-#define CRM_APB1EN_USART5EN              (0x1U << 20)
+#define CRM_APB1EN_UART4EN               (0x1U << 19)
+#define CRM_APB1EN_UART5EN               (0x1U << 20)
 #define CRM_APB1EN_I2C1EN                (0x1U << 21)
 #define CRM_APB1EN_I2C2EN                (0x1U << 22)
 #define CRM_APB1EN_I2C3EN                (0x1U << 23)
@@ -460,19 +578,24 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1EN_CAN2EN                (0x1U << 26)
 #define CRM_APB1EN_PWCEN                 (0x1U << 28)
 #define CRM_APB1EN_DACEN                 (0x1U << 29)
-#define CRM_APB1EN_USART7EN              (0x1U << 30)
-#define CRM_APB1EN_USART8EN              (0x1U << 31)
+#define CRM_APB1EN_UART7EN               (0x1U << 30)
+#define CRM_APB1EN_UART8EN               (0x1U << 31)
 
 /*****************  Bit definition for CRM_APB2EN register  ***************/
 #define CRM_APB2EN_TMR1EN                (0x1U << 0)
+#define CRM_APB2EN_TMR8EN                (0x1U << 1)
 #define CRM_APB2EN_USART1EN              (0x1U << 4)
 #define CRM_APB2EN_USART6EN              (0x1U << 5)
 #define CRM_APB2EN_ADC1EN                (0x1U << 8)
+#define CRM_APB2EN_ADC2EN                (0x1U << 9)
+#define CRM_APB2EN_ADC3EN                (0x1U << 10)
 #define CRM_APB2EN_SPI1EN                (0x1U << 12)
+#define CRM_APB2EN_SPI4EN                (0x1U << 13)
 #define CRM_APB2EN_SCFGEN                (0x1U << 14)
 #define CRM_APB2EN_TMR9EN                (0x1U << 16)
 #define CRM_APB2EN_TMR10EN               (0x1U << 17)
 #define CRM_APB2EN_TMR11EN               (0x1U << 18)
+#define CRM_APB2EN_TMR20EN               (0x1U << 20)
 #define CRM_APB2EN_ACCEN                 (0x1U << 29)
 
 /*****************  Bit definition for CRM_AHBLPEN1 register  ***************/
@@ -482,20 +605,31 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_AHBLPEN1_GPIODLPEN           (0x1U << 3)
 #define CRM_AHBLPEN1_GPIOELPEN           (0x1U << 4)
 #define CRM_AHBLPEN1_GPIOFLPEN           (0x1U << 5)
+#define CRM_AHBLPEN1_GPIOGLPEN           (0x1U << 6)
+#define CRM_AHBLPEN1_GPIOHLPEN           (0x1U << 7)
 #define CRM_AHBLPEN1_CRCLPEN             (0x1U << 12)
+#define CRM_AHBLPEN1_EDMALPEN            (0x1U << 21)
 #define CRM_AHBLPEN1_DMA1LPEN            (0x1U << 22)
 #define CRM_AHBLPEN1_DMA2LPEN            (0x1U << 24)
+#define CRM_AHBLPEN1_EMACLPEN            (0x1U << 25)
+#define CRM_AHBLPEN1_OTGFS2LPEN          (0x1U << 29)
 
 /*****************  Bit definition for CRM_AHBLPEN2 register  ***************/
+#define CRM_AHBLPEN2_DVPLPEN             (0x1U << 0)
 #define CRM_AHBLPEN2_OTGFS1LPEN          (0x1U << 7)
+#define CRM_AHBLPEN2_SDIO1LPEN           (0x1U << 15)
 
 /*****************  Bit definition for CRM_AHBLPEN3 register  ***************/
 #define CRM_AHBLPEN3_XMCLPEN             (0x1U << 0)
+#define CRM_AHBLPEN3_QSPI1LPEN           (0x1U << 1)
+#define CRM_AHBLPEN3_QSPI2LPEN           (0x1U << 14)
+#define CRM_AHBLPEN3_SDIO2LPEN           (0x1U << 15)
 
 /*****************  Bit definition for CRM_APB1LPEN register  ***************/
 #define CRM_APB1LPEN_TMR2LPEN            (0x1U << 0)
 #define CRM_APB1LPEN_TMR3LPEN            (0x1U << 1)
 #define CRM_APB1LPEN_TMR4LPEN            (0x1U << 2)
+#define CRM_APB1LPEN_TMR5LPEN            (0x1U << 3)
 #define CRM_APB1LPEN_TMR6LPEN            (0x1U << 4)
 #define CRM_APB1LPEN_TMR7LPEN            (0x1U << 5)
 #define CRM_APB1LPEN_TMR12LPEN           (0x1U << 6)
@@ -506,8 +640,8 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1LPEN_SPI3LPEN            (0x1U << 15)
 #define CRM_APB1LPEN_USART2LPEN          (0x1U << 17)
 #define CRM_APB1LPEN_USART3LPEN          (0x1U << 18)
-#define CRM_APB1LPEN_USART4LPEN          (0x1U << 19)
-#define CRM_APB1LPEN_USART5LPEN          (0x1U << 20)
+#define CRM_APB1LPEN_UART4LPEN           (0x1U << 19)
+#define CRM_APB1LPEN_UART5LPEN           (0x1U << 20)
 #define CRM_APB1LPEN_I2C1LPEN            (0x1U << 21)
 #define CRM_APB1LPEN_I2C2LPEN            (0x1U << 22)
 #define CRM_APB1LPEN_I2C3LPEN            (0x1U << 23)
@@ -515,19 +649,24 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_APB1LPEN_CAN2LPEN            (0x1U << 26)
 #define CRM_APB1LPEN_PWCLPEN             (0x1U << 28)
 #define CRM_APB1LPEN_DACLPEN             (0x1U << 29)
-#define CRM_APB1LPEN_USART7LPEN          (0x1U << 30)
-#define CRM_APB1LPEN_USART8LPEN          (0x1U << 31)
+#define CRM_APB1LPEN_UART7LPEN           (0x1U << 30)
+#define CRM_APB1LPEN_UART8LPEN           (0x1U << 31)
 
 /*****************  Bit definition for CRM_APB2LPEN register  ***************/
 #define CRM_APB2LPEN_TMR1LPEN            (0x1U << 0)
+#define CRM_APB2LPEN_TMR8LPEN            (0x1U << 1)
 #define CRM_APB2LPEN_USART1LPEN          (0x1U << 4)
 #define CRM_APB2LPEN_USART6LPEN          (0x1U << 5)
 #define CRM_APB2LPEN_ADC1LPEN            (0x1U << 8)
+#define CRM_APB2LPEN_ADC2LPEN            (0x1U << 9)
+#define CRM_APB2LPEN_ADC3LPEN            (0x1U << 10)
 #define CRM_APB2LPEN_SPI1LPEN            (0x1U << 12)
+#define CRM_APB2LPEN_SPI4LPEN            (0x1U << 13)
 #define CRM_APB2LPEN_SCFGLPEN            (0x1U << 14)
 #define CRM_APB2LPEN_TMR9LPEN            (0x1U << 16)
 #define CRM_APB2LPEN_TMR10LPEN           (0x1U << 17)
 #define CRM_APB2LPEN_TMR11LPEN           (0x1U << 18)
+#define CRM_APB2LPEN_TMR20LPEN           (0x1U << 20)
 #define CRM_APB2LPEN_ACCLPEN             (0x1U << 29)
 
 /******************  Bit definition for CRM_BPDC register  *****************/
@@ -556,10 +695,11 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define CRM_MISC1_HICKDIV                (0x1U << 12)
 #define CRM_MISC1_HICK_TO_USB            (0x1U << 13)
 #define CRM_MISC1_HICK_TO_SCLK           (0x1U << 14)
-#define CRM_MISC1_PLLCLK_TO_ADC          (0x1U << 15)
 
 /******************  Bit definition for CRM_MISC2 register  ****************/
 #define CRM_MISC2_AUTO_STEP_EN           (0x3U << 4)
+#define CRM_MISC2_CLK1_TO_TMR            (0x1U << 8)
+#define CRM_MISC2_EMAC_PPS_SEL           (0x1U << 9)
 
 /******************  Bit definition for PWC_CTRL register  *****************/
 #define PWC_CTRL_PVMEN                   (0x1U << 4)
@@ -642,6 +782,51 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define DMA_MUXGCTRL_GPOL_RISING         (0x1U << 17)
 #define DMA_MUXGCTRL_GPOL_FALLING        (0x2U << 17)
 #define DMA_MUXGCTRL_GPOL_BOTH           (0x3U << 17)
+
+/******************  Bit definition for EDMA_SxCTRL register  **************/
+#define EDMA_SCTRL_SEN                     (0x1U << 0)
+#define EDMA_SCTRL_DMERRIEN                (0x1U << 1)
+#define EDMA_SCTRL_DTERRIEN                (0x1U << 2)
+#define EDMA_SCTRL_HDTIEN                  (0x1U << 3)
+#define EDMA_SCTRL_FDTIEN                  (0x1U << 4)
+#define EDMA_SCTRL_PFCTRL                  (0x1U << 5)
+#define EDMA_SCTRL_DTD                     (0x3U << 6)
+#define EDMA_SCTRL_DTD_P2M                 (0x0U << 6)
+#define EDMA_SCTRL_DTD_M2P                 (0x1U << 6)
+#define EDMA_SCTRL_DTD_M2M                 (0x2U << 6)
+#define EDMA_SCTRL_LM                      (0x1U << 8)
+#define EDMA_SCTRL_PINCM                   (0x1U << 9)
+#define EDMA_SCTRL_MINCM                   (0x1U << 10)
+#define EDMA_SCTRL_PWIDTH                  (0x3U << 11)
+#define EDMA_SCTRL_PWIDTH_8BITS            (0x0U << 11)
+#define EDMA_SCTRL_PWIDTH_16BITS           (0x1U << 11)
+#define EDMA_SCTRL_PWIDTH_32BITS           (0x2U << 11)
+#define EDMA_SCTRL_MWIDTH                  (0x3U << 13)
+#define EDMA_SCTRL_MWIDTH_8BITS            (0x0U << 13)
+#define EDMA_SCTRL_MWIDTH_16BITS           (0x1U << 13)
+#define EDMA_SCTRL_MWIDTH_32BITS           (0x2U << 13)
+#define EDMA_SCTRL_PINCOS                  (0x1U << 15)
+#define EDMA_SCTRL_SPL                     (0x3U << 16)
+#define EDMA_SCTRL_SPL_LOW                 (0x0U << 16)
+#define EDMA_SCTRL_SPL_MID                 (0x1U << 16)
+#define EDMA_SCTRL_SPL_HIGH                (0x2U << 16)
+#define EDMA_SCTRL_SPL_HIGHEST             (0x3U << 16)
+#define EDMA_SCTRL_DMM                     (0x1U << 18)
+#define EDMA_SCTRL_CM                      (0x1U << 19)
+#define EDMA_SCTRL_PBURST                  (0x3U << 21)
+#define EDMA_SCTRL_PBURST_SINGLE           (0x0U << 21)
+#define EDMA_SCTRL_PBURST_INCR4            (0x1U << 21)
+#define EDMA_SCTRL_PBURST_INCR8            (0x2U << 21)
+#define EDMA_SCTRL_PBURST_INCR16           (0x3U << 21)
+#define EDMA_SCTRL_MBURST                  (0x3U << 23)
+#define EDMA_SCTRL_MBURST_SINGLE           (0x0U << 23)
+#define EDMA_SCTRL_MBURST_INCR4            (0x1U << 23)
+#define EDMA_SCTRL_MBURST_INCR8            (0x2U << 23)
+#define EDMA_SCTRL_MBURST_INCR16           (0x3U << 23)
+#define EDMA_SCTRL_CHSEL                   (0x7U << 25)
+
+/******************  Bit definition for EDMA_MUXSEL register  *************/
+#define EDMA_MUXSEL_TBL_SEL               (0x1U << 0)
 
 /******************  Bit definition for ADC_STS register  ***************/
 #define ADC_STS_VMOR                     (0x1U << 0)
@@ -756,12 +941,6 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define USART_STS_TDBE                   (0x1U << 7)
 #define USART_STS_BFF                    (0x1U << 8)
 #define USART_STS_CTSCF                  (0x1U << 9)
-#define USART_STS_RTODF                  (0x1U << 11)
-#define USART_STS_OCCUPY                 (0x1U << 16)
-#define USART_STS_CMDF                   (0x1U << 17)
-#define USART_STS_LPWUF                  (0x1U << 20)
-#define USART_STS_TXON                   (0x1U << 21)
-#define USART_STS_RXON                   (0x1U << 22)
 
 /*******************  Bit definition for USART_DT register  ***************/
 #define USART_DT_DT                      (0x1FFU << 0)
@@ -781,13 +960,11 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define USART_CTRL1_WUM                  (0x1U << 11)
 #define USART_CTRL1_DBN0                 (0x1U << 12)
 #define USART_CTRL1_UEN                  (0x1U << 13)
-#define USART_CTRL1_CMDIE                (0x1U << 14)
-#define USART_CTRL1_RETODIE              (0x1U << 26)
-#define USART_CTRL1_RTODEN               (0x1U << 27)
 #define USART_CTRL1_DBN1                 (0x1U << 28)
 #define USART_CTRL1_DBN_7BITS            (0x1U << 28)
 #define USART_CTRL1_DBN_8BITS            (0x0U << 28)
 #define USART_CTRL1_DBN_9BITS            (0x1U << 12)
+
 
 /******************  Bit definition for USART_CTRL2 register  *************/
 #define USART_CTRL2_IDL                  (0xFU << 0)
@@ -825,16 +1002,8 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define USART_CTRL3_RTSEN                (0x1U << 8)
 #define USART_CTRL3_CTSEN                (0x1U << 9)
 #define USART_CTRL3_CTSCFIEN             (0x1U << 10)
-#define USART_CTRL3_SMUSEN               (0x1U << 11)
-#define USART_CTRL3_LPWUFIE              (0x1U << 13)
 #define USART_CTRL3_RS485EN              (0x1U << 14)
 #define USART_CTRL3_DEP                  (0x1U << 15)
-#define USART_CTRL3_LPWUM                (0x3U << 16)
-
-/*******************  Bit definition for USART_IFC register  ***************/
-#define USART_IFC_RTODFC                 (0x1U << 11)
-#define USART_IFC_CMDFC                  (0x1U << 17)
-#define USART_IFC_LPWUFC                 (0x1U << 20)
 
 /*******************  Bit definition for SPI_CTRL1 register  **************/
 #define SPI_CTRL1_CLKPHA                 (0x1U << 0)
@@ -917,6 +1086,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define DEBUG_APB1_PAUSE_TMR2_PAUSE         (0x1U << 0)
 #define DEBUG_APB1_PAUSE_TMR3_PAUSE         (0x1U << 1)
 #define DEBUG_APB1_PAUSE_TMR4_PAUSE         (0x1U << 2)
+#define DEBUG_APB1_PAUSE_TMR5_PAUSE         (0x1U << 3)
 #define DEBUG_APB1_PAUSE_TMR6_PAUSE         (0x1U << 4)
 #define DEBUG_APB1_PAUSE_TMR7_PAUSE         (0x1U << 5)
 #define DEBUG_APB1_PAUSE_TMR12_PAUSE        (0x1U << 6)
@@ -934,6 +1104,8 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 
 /******************  Bit definition for DEBUG_APB2_PAUSE register  **************/
 #define DEBUG_APB2_PAUSE_TMR1_PAUSE      (0x1U << 0)
+#define DEBUG_APB2_PAUSE_TMR8_PAUSE      (0x1U << 1)
+#define DEBUG_APB2_PAUSE_TMR20_PAUSE     (0x1U << 6)
 #define DEBUG_APB2_PAUSE_TMR9_PAUSE      (0x1U << 16)
 #define DEBUG_APB2_PAUSE_TMR10_PAUSE     (0x1U << 17)
 #define DEBUG_APB2_PAUSE_TMR11_PAUSE     (0x1U << 18)
@@ -963,7 +1135,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define SRAM_BB_BASE                     ((uint32_t)0x22000000)
 #define PERIPH_BB_BASE                   ((uint32_t)0x42000000)
 #define SRAM_BASE                        ((uint32_t)0x20000000)
-#define USD_BASE                         ((uint32_t)0x1FFFF800)
+#define USD_BASE                         ((uint32_t)0x1FFFC000)
 #define FLASH_BASE                       ((uint32_t)0x08000000)
 
 #define DEBUG_BASE                       ((uint32_t)0xE0042000)
@@ -973,9 +1145,10 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define AHBPERIPH1_BASE                  (PERIPH_BASE + 0x20000)
 #define AHBPERIPH2_BASE                  (PERIPH_BASE + 0x10000000)
 
+#if defined (AT32F435xx)
 /* apb1 bus base address */
-#define USART8_BASE                      (APB1PERIPH_BASE + 0x7C00)
-#define USART7_BASE                      (APB1PERIPH_BASE + 0x7800)
+#define UART8_BASE                       (APB1PERIPH_BASE + 0x7C00)
+#define UART7_BASE                       (APB1PERIPH_BASE + 0x7800)
 #define DAC_BASE                         (APB1PERIPH_BASE + 0x7400)
 #define PWC_BASE                         (APB1PERIPH_BASE + 0x7000)
 #define CAN2_BASE                        (APB1PERIPH_BASE + 0x6800)
@@ -983,8 +1156,8 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define I2C3_BASE                        (APB1PERIPH_BASE + 0x5C00)
 #define I2C2_BASE                        (APB1PERIPH_BASE + 0x5800)
 #define I2C1_BASE                        (APB1PERIPH_BASE + 0x5400)
-#define USART5_BASE                      (APB1PERIPH_BASE + 0x5000)
-#define USART4_BASE                      (APB1PERIPH_BASE + 0x4C00)
+#define UART5_BASE                       (APB1PERIPH_BASE + 0x5000)
+#define UART4_BASE                       (APB1PERIPH_BASE + 0x4C00)
 #define USART3_BASE                      (APB1PERIPH_BASE + 0x4800)
 #define USART2_BASE                      (APB1PERIPH_BASE + 0x4400)
 #define SPI3_BASE                        (APB1PERIPH_BASE + 0x3C00)
@@ -997,23 +1170,35 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define TMR12_BASE                       (APB1PERIPH_BASE + 0x1800)
 #define TMR7_BASE                        (APB1PERIPH_BASE + 0x1400)
 #define TMR6_BASE                        (APB1PERIPH_BASE + 0x1000)
+#define TMR5_BASE                        (APB1PERIPH_BASE + 0x0C00)
 #define TMR4_BASE                        (APB1PERIPH_BASE + 0x0800)
 #define TMR3_BASE                        (APB1PERIPH_BASE + 0x0400)
 #define TMR2_BASE                        (APB1PERIPH_BASE + 0x0000)
 /* apb2 bus base address */
+#define I2S2EXT_BASE                     (APB2PERIPH_BASE + 0x7800)
+#define I2S3EXT_BASE                     (APB2PERIPH_BASE + 0x7C00)
 #define ACC_BASE                         (APB2PERIPH_BASE + 0x7400)
+#define TMR20_BASE                       (APB2PERIPH_BASE + 0x4C00)
 #define TMR11_BASE                       (APB2PERIPH_BASE + 0x4800)
 #define TMR10_BASE                       (APB2PERIPH_BASE + 0x4400)
 #define TMR9_BASE                        (APB2PERIPH_BASE + 0x4000)
 #define EXINT_BASE                       (APB2PERIPH_BASE + 0x3C00)
 #define SCFG_BASE                        (APB2PERIPH_BASE + 0x3800)
+#define SPI4_BASE                        (APB2PERIPH_BASE + 0x3400)
 #define SPI1_BASE                        (APB2PERIPH_BASE + 0x3000)
 #define ADC1_BASE                        (APB2PERIPH_BASE + 0x2000)
+#define ADC2_BASE                        (APB2PERIPH_BASE + 0x2100)
+#define ADC3_BASE                        (APB2PERIPH_BASE + 0x2200)
 #define ADCCOM_BASE                      (APB2PERIPH_BASE + 0x2300)
 #define USART6_BASE                      (APB2PERIPH_BASE + 0x1400)
 #define USART1_BASE                      (APB2PERIPH_BASE + 0x1000)
+#define TMR8_BASE                        (APB2PERIPH_BASE + 0x0400)
 #define TMR1_BASE                        (APB2PERIPH_BASE + 0x0000)
 /* ahb bus base address */
+#define OTGFS2_BASE                      (AHBPERIPH1_BASE + 0x20000)
+#define SDIO1_BASE                       (AHBPERIPH1_BASE + 0xC400)
+#define GPIOH_BASE                       (AHBPERIPH1_BASE + 0x1C00)
+#define GPIOG_BASE                       (AHBPERIPH1_BASE + 0x1800)
 #define GPIOF_BASE                       (AHBPERIPH1_BASE + 0x1400)
 #define GPIOE_BASE                       (AHBPERIPH1_BASE + 0x1000)
 #define GPIOD_BASE                       (AHBPERIPH1_BASE + 0x0C00)
@@ -1021,7 +1206,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define GPIOB_BASE                       (AHBPERIPH1_BASE + 0x0400)
 #define GPIOA_BASE                       (AHBPERIPH1_BASE + 0x0000)
 
-#define DMA1_BASE                        (AHBPERIPH1_BASE + 0x6000)
+#define DMA1_BASE                        (AHBPERIPH1_BASE + 0x6400)
 #define DMA1_CHANNEL1_BASE               (DMA1_BASE + 0x0008)
 #define DMA1_CHANNEL2_BASE               (DMA1_BASE + 0x001C)
 #define DMA1_CHANNEL3_BASE               (DMA1_BASE + 0x0030)
@@ -1044,7 +1229,7 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define DMA1MUX_GENERATOR3_BASE          (DMA1_BASE + 0x0128)
 #define DMA1MUX_GENERATOR4_BASE          (DMA1_BASE + 0x012C)
 
-#define DMA2_BASE                        (AHBPERIPH1_BASE + 0x6400)
+#define DMA2_BASE                        (AHBPERIPH1_BASE + 0x6600)
 #define DMA2_CHANNEL1_BASE               (DMA2_BASE + 0x0008)
 #define DMA2_CHANNEL2_BASE               (DMA2_BASE + 0x001C)
 #define DMA2_CHANNEL3_BASE               (DMA2_BASE + 0x0030)
@@ -1067,10 +1252,224 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 #define DMA2MUX_GENERATOR3_BASE          (DMA2_BASE + 0x0128)
 #define DMA2MUX_GENERATOR4_BASE          (DMA2_BASE + 0x012C)
 
+#define EDMA_BASE                        (AHBPERIPH1_BASE + 0x6000)
+#define EDMA_STREAM1_BASE                (EDMA_BASE + 0x0010)
+#define EDMA_STREAM2_BASE                (EDMA_BASE + 0x0028)
+#define EDMA_STREAM3_BASE                (EDMA_BASE + 0x0040)
+#define EDMA_STREAM4_BASE                (EDMA_BASE + 0x0058)
+#define EDMA_STREAM5_BASE                (EDMA_BASE + 0x0070)
+#define EDMA_STREAM6_BASE                (EDMA_BASE + 0x0088)
+#define EDMA_STREAM7_BASE                (EDMA_BASE + 0x00A0)
+#define EDMA_STREAM8_BASE                (EDMA_BASE + 0x00B8)
+
+#define EDMA_2D_BASE                     (EDMA_BASE + 0x00F4)
+#define EDMA_STREAM1_2D_BASE             (EDMA_2D_BASE + 0x0004)
+#define EDMA_STREAM2_2D_BASE             (EDMA_2D_BASE + 0x000C)
+#define EDMA_STREAM3_2D_BASE             (EDMA_2D_BASE + 0x0014)
+#define EDMA_STREAM4_2D_BASE             (EDMA_2D_BASE + 0x001C)
+#define EDMA_STREAM5_2D_BASE             (EDMA_2D_BASE + 0x0024)
+#define EDMA_STREAM6_2D_BASE             (EDMA_2D_BASE + 0x002C)
+#define EDMA_STREAM7_2D_BASE             (EDMA_2D_BASE + 0x0034)
+#define EDMA_STREAM8_2D_BASE             (EDMA_2D_BASE + 0x003C)
+
+#define EDMA_LL_BASE                     (EDMA_BASE + 0x00D0)
+#define EDMA_STREAM1_LL_BASE             (EDMA_LL_BASE + 0x0004)
+#define EDMA_STREAM2_LL_BASE             (EDMA_LL_BASE + 0x0008)
+#define EDMA_STREAM3_LL_BASE             (EDMA_LL_BASE + 0x000C)
+#define EDMA_STREAM4_LL_BASE             (EDMA_LL_BASE + 0x0010)
+#define EDMA_STREAM5_LL_BASE             (EDMA_LL_BASE + 0x0014)
+#define EDMA_STREAM6_LL_BASE             (EDMA_LL_BASE + 0x0018)
+#define EDMA_STREAM7_LL_BASE             (EDMA_LL_BASE + 0x001C)
+#define EDMA_STREAM8_LL_BASE             (EDMA_LL_BASE + 0x0020)
+
+#define EDMAMUX_BASE                     (EDMA_BASE + 0x0140)
+#define EDMAMUX_CHANNEL1_BASE            (EDMAMUX_BASE)
+#define EDMAMUX_CHANNEL2_BASE            (EDMAMUX_BASE + 0x0004)
+#define EDMAMUX_CHANNEL3_BASE            (EDMAMUX_BASE + 0x0008)
+#define EDMAMUX_CHANNEL4_BASE            (EDMAMUX_BASE + 0x000C)
+#define EDMAMUX_CHANNEL5_BASE            (EDMAMUX_BASE + 0x0010)
+#define EDMAMUX_CHANNEL6_BASE            (EDMAMUX_BASE + 0x0014)
+#define EDMAMUX_CHANNEL7_BASE            (EDMAMUX_BASE + 0x0018)
+#define EDMAMUX_CHANNEL8_BASE            (EDMAMUX_BASE + 0x001C)
+
+#define EDMAMUX_GENERATOR1_BASE          (EDMA_BASE + 0x0160)
+#define EDMAMUX_GENERATOR2_BASE          (EDMA_BASE + 0x0164)
+#define EDMAMUX_GENERATOR3_BASE          (EDMA_BASE + 0x0168)
+#define EDMAMUX_GENERATOR4_BASE          (EDMA_BASE + 0x016C)
+
 #define FLASH_REG_BASE                   (AHBPERIPH1_BASE + 0x3C00)
 #define CRM_BASE                         (AHBPERIPH1_BASE + 0x3800)
 #define CRC_BASE                         (AHBPERIPH1_BASE + 0x3000)
+#define SDIO2_BASE                       (AHBPERIPH2_BASE + 0x61000)
+#define DVP_BASE                         (AHBPERIPH2_BASE + 0x50000)
 #define OTGFS1_BASE                      (AHBPERIPH2_BASE + 0x00000)
+#endif
+
+#if defined (AT32F437xx)
+/* apb1 bus base address */
+#define UART8_BASE                       (APB1PERIPH_BASE + 0x7C00)
+#define UART7_BASE                       (APB1PERIPH_BASE + 0x7800)
+#define DAC_BASE                         (APB1PERIPH_BASE + 0x7400)
+#define PWC_BASE                         (APB1PERIPH_BASE + 0x7000)
+#define CAN2_BASE                        (APB1PERIPH_BASE + 0x6800)
+#define CAN1_BASE                        (APB1PERIPH_BASE + 0x6400)
+#define I2C3_BASE                        (APB1PERIPH_BASE + 0x5C00)
+#define I2C2_BASE                        (APB1PERIPH_BASE + 0x5800)
+#define I2C1_BASE                        (APB1PERIPH_BASE + 0x5400)
+#define UART5_BASE                       (APB1PERIPH_BASE + 0x5000)
+#define UART4_BASE                       (APB1PERIPH_BASE + 0x4C00)
+#define USART3_BASE                      (APB1PERIPH_BASE + 0x4800)
+#define USART2_BASE                      (APB1PERIPH_BASE + 0x4400)
+#define SPI3_BASE                        (APB1PERIPH_BASE + 0x3C00)
+#define SPI2_BASE                        (APB1PERIPH_BASE + 0x3800)
+#define WDT_BASE                         (APB1PERIPH_BASE + 0x3000)
+#define WWDT_BASE                        (APB1PERIPH_BASE + 0x2C00)
+#define ERTC_BASE                        (APB1PERIPH_BASE + 0x2800)
+#define TMR14_BASE                       (APB1PERIPH_BASE + 0x2000)
+#define TMR13_BASE                       (APB1PERIPH_BASE + 0x1C00)
+#define TMR12_BASE                       (APB1PERIPH_BASE + 0x1800)
+#define TMR7_BASE                        (APB1PERIPH_BASE + 0x1400)
+#define TMR6_BASE                        (APB1PERIPH_BASE + 0x1000)
+#define TMR5_BASE                        (APB1PERIPH_BASE + 0x0C00)
+#define TMR4_BASE                        (APB1PERIPH_BASE + 0x0800)
+#define TMR3_BASE                        (APB1PERIPH_BASE + 0x0400)
+#define TMR2_BASE                        (APB1PERIPH_BASE + 0x0000)
+/* apb2 bus base address */
+#define I2S2EXT_BASE                     (APB2PERIPH_BASE + 0x7800)
+#define I2S3EXT_BASE                     (APB2PERIPH_BASE + 0x7C00)
+#define ACC_BASE                         (APB2PERIPH_BASE + 0x7400)
+#define TMR20_BASE                       (APB2PERIPH_BASE + 0x4C00)
+#define TMR11_BASE                       (APB2PERIPH_BASE + 0x4800)
+#define TMR10_BASE                       (APB2PERIPH_BASE + 0x4400)
+#define TMR9_BASE                        (APB2PERIPH_BASE + 0x4000)
+#define EXINT_BASE                       (APB2PERIPH_BASE + 0x3C00)
+#define SCFG_BASE                        (APB2PERIPH_BASE + 0x3800)
+#define SPI4_BASE                        (APB2PERIPH_BASE + 0x3400)
+#define SPI1_BASE                        (APB2PERIPH_BASE + 0x3000)
+#define ADC1_BASE                        (APB2PERIPH_BASE + 0x2000)
+#define ADC2_BASE                        (APB2PERIPH_BASE + 0x2100)
+#define ADC3_BASE                        (APB2PERIPH_BASE + 0x2200)
+#define ADCCOM_BASE                      (APB2PERIPH_BASE + 0x2300)
+#define USART6_BASE                      (APB2PERIPH_BASE + 0x1400)
+#define USART1_BASE                      (APB2PERIPH_BASE + 0x1000)
+#define TMR8_BASE                        (APB2PERIPH_BASE + 0x0400)
+#define TMR1_BASE                        (APB2PERIPH_BASE + 0x0000)
+/* ahb bus base address */
+#define OTGFS2_BASE                      (AHBPERIPH1_BASE + 0x20000)
+#define SDIO1_BASE                       (AHBPERIPH1_BASE + 0xC400)
+#define EMAC_BASE                        (AHBPERIPH1_BASE + 0x8000)
+#define GPIOH_BASE                       (AHBPERIPH1_BASE + 0x1C00)
+#define GPIOG_BASE                       (AHBPERIPH1_BASE + 0x1800)
+#define GPIOF_BASE                       (AHBPERIPH1_BASE + 0x1400)
+#define GPIOE_BASE                       (AHBPERIPH1_BASE + 0x1000)
+#define GPIOD_BASE                       (AHBPERIPH1_BASE + 0x0C00)
+#define GPIOC_BASE                       (AHBPERIPH1_BASE + 0x0800)
+#define GPIOB_BASE                       (AHBPERIPH1_BASE + 0x0400)
+#define GPIOA_BASE                       (AHBPERIPH1_BASE + 0x0000)
+
+#define DMA1_BASE                        (AHBPERIPH1_BASE + 0x6400)
+#define DMA1_CHANNEL1_BASE               (DMA1_BASE + 0x0008)
+#define DMA1_CHANNEL2_BASE               (DMA1_BASE + 0x001C)
+#define DMA1_CHANNEL3_BASE               (DMA1_BASE + 0x0030)
+#define DMA1_CHANNEL4_BASE               (DMA1_BASE + 0x0044)
+#define DMA1_CHANNEL5_BASE               (DMA1_BASE + 0x0058)
+#define DMA1_CHANNEL6_BASE               (DMA1_BASE + 0x006C)
+#define DMA1_CHANNEL7_BASE               (DMA1_BASE + 0x0080)
+
+#define DMA1MUX_BASE                     (DMA1_BASE + 0x0104)
+#define DMA1MUX_CHANNEL1_BASE            (DMA1MUX_BASE)
+#define DMA1MUX_CHANNEL2_BASE            (DMA1MUX_BASE + 0x0004)
+#define DMA1MUX_CHANNEL3_BASE            (DMA1MUX_BASE + 0x0008)
+#define DMA1MUX_CHANNEL4_BASE            (DMA1MUX_BASE + 0x000C)
+#define DMA1MUX_CHANNEL5_BASE            (DMA1MUX_BASE + 0x0010)
+#define DMA1MUX_CHANNEL6_BASE            (DMA1MUX_BASE + 0x0014)
+#define DMA1MUX_CHANNEL7_BASE            (DMA1MUX_BASE + 0x0018)
+
+#define DMA1MUX_GENERATOR1_BASE          (DMA1_BASE + 0x0120)
+#define DMA1MUX_GENERATOR2_BASE          (DMA1_BASE + 0x0124)
+#define DMA1MUX_GENERATOR3_BASE          (DMA1_BASE + 0x0128)
+#define DMA1MUX_GENERATOR4_BASE          (DMA1_BASE + 0x012C)
+
+#define DMA2_BASE                        (AHBPERIPH1_BASE + 0x6600)
+#define DMA2_CHANNEL1_BASE               (DMA2_BASE + 0x0008)
+#define DMA2_CHANNEL2_BASE               (DMA2_BASE + 0x001C)
+#define DMA2_CHANNEL3_BASE               (DMA2_BASE + 0x0030)
+#define DMA2_CHANNEL4_BASE               (DMA2_BASE + 0x0044)
+#define DMA2_CHANNEL5_BASE               (DMA2_BASE + 0x0058)
+#define DMA2_CHANNEL6_BASE               (DMA2_BASE + 0x006C)
+#define DMA2_CHANNEL7_BASE               (DMA2_BASE + 0x0080)
+
+#define DMA2MUX_BASE                     (DMA2_BASE + 0x0104)
+#define DMA2MUX_CHANNEL1_BASE            (DMA2MUX_BASE)
+#define DMA2MUX_CHANNEL2_BASE            (DMA2MUX_BASE + 0x0004)
+#define DMA2MUX_CHANNEL3_BASE            (DMA2MUX_BASE + 0x0008)
+#define DMA2MUX_CHANNEL4_BASE            (DMA2MUX_BASE + 0x000C)
+#define DMA2MUX_CHANNEL5_BASE            (DMA2MUX_BASE + 0x0010)
+#define DMA2MUX_CHANNEL6_BASE            (DMA2MUX_BASE + 0x0014)
+#define DMA2MUX_CHANNEL7_BASE            (DMA2MUX_BASE + 0x0018)
+
+#define DMA2MUX_GENERATOR1_BASE          (DMA2_BASE + 0x0120)
+#define DMA2MUX_GENERATOR2_BASE          (DMA2_BASE + 0x0124)
+#define DMA2MUX_GENERATOR3_BASE          (DMA2_BASE + 0x0128)
+#define DMA2MUX_GENERATOR4_BASE          (DMA2_BASE + 0x012C)
+
+#define EDMA_BASE                        (AHBPERIPH1_BASE + 0x6000)
+#define EDMA_STREAM1_BASE                (EDMA_BASE + 0x0010)
+#define EDMA_STREAM2_BASE                (EDMA_BASE + 0x0028)
+#define EDMA_STREAM3_BASE                (EDMA_BASE + 0x0040)
+#define EDMA_STREAM4_BASE                (EDMA_BASE + 0x0058)
+#define EDMA_STREAM5_BASE                (EDMA_BASE + 0x0070)
+#define EDMA_STREAM6_BASE                (EDMA_BASE + 0x0088)
+#define EDMA_STREAM7_BASE                (EDMA_BASE + 0x00A0)
+#define EDMA_STREAM8_BASE                (EDMA_BASE + 0x00B8)
+
+#define EDMA_2D_BASE                     (EDMA_BASE + 0x00F4)
+#define EDMA_STREAM1_2D_BASE             (EDMA_2D_BASE + 0x0004)
+#define EDMA_STREAM2_2D_BASE             (EDMA_2D_BASE + 0x000C)
+#define EDMA_STREAM3_2D_BASE             (EDMA_2D_BASE + 0x0014)
+#define EDMA_STREAM4_2D_BASE             (EDMA_2D_BASE + 0x001C)
+#define EDMA_STREAM5_2D_BASE             (EDMA_2D_BASE + 0x0024)
+#define EDMA_STREAM6_2D_BASE             (EDMA_2D_BASE + 0x002C)
+#define EDMA_STREAM7_2D_BASE             (EDMA_2D_BASE + 0x0034)
+#define EDMA_STREAM8_2D_BASE             (EDMA_2D_BASE + 0x003C)
+
+#define EDMA_LL_BASE                     (EDMA_BASE + 0x00D0)
+#define EDMA_STREAM1_LL_BASE             (EDMA_LL_BASE + 0x0004)
+#define EDMA_STREAM2_LL_BASE             (EDMA_LL_BASE + 0x0008)
+#define EDMA_STREAM3_LL_BASE             (EDMA_LL_BASE + 0x000C)
+#define EDMA_STREAM4_LL_BASE             (EDMA_LL_BASE + 0x0010)
+#define EDMA_STREAM5_LL_BASE             (EDMA_LL_BASE + 0x0014)
+#define EDMA_STREAM6_LL_BASE             (EDMA_LL_BASE + 0x0018)
+#define EDMA_STREAM7_LL_BASE             (EDMA_LL_BASE + 0x001C)
+#define EDMA_STREAM8_LL_BASE             (EDMA_LL_BASE + 0x0020)
+
+#define EDMAMUX_BASE                     (EDMA_BASE + 0x0140)
+#define EDMAMUX_CHANNEL1_BASE            (EDMAMUX_BASE)
+#define EDMAMUX_CHANNEL2_BASE            (EDMAMUX_BASE + 0x0004)
+#define EDMAMUX_CHANNEL3_BASE            (EDMAMUX_BASE + 0x0008)
+#define EDMAMUX_CHANNEL4_BASE            (EDMAMUX_BASE + 0x000C)
+#define EDMAMUX_CHANNEL5_BASE            (EDMAMUX_BASE + 0x0010)
+#define EDMAMUX_CHANNEL6_BASE            (EDMAMUX_BASE + 0x0014)
+#define EDMAMUX_CHANNEL7_BASE            (EDMAMUX_BASE + 0x0018)
+#define EDMAMUX_CHANNEL8_BASE            (EDMAMUX_BASE + 0x001C)
+
+#define EDMAMUX_GENERATOR1_BASE          (EDMA_BASE + 0x0160)
+#define EDMAMUX_GENERATOR2_BASE          (EDMA_BASE + 0x0164)
+#define EDMAMUX_GENERATOR3_BASE          (EDMA_BASE + 0x0168)
+#define EDMAMUX_GENERATOR4_BASE          (EDMA_BASE + 0x016C)
+
+#define FLASH_REG_BASE                   (AHBPERIPH1_BASE + 0x3C00)
+#define CRM_BASE                         (AHBPERIPH1_BASE + 0x3800)
+#define CRC_BASE                         (AHBPERIPH1_BASE + 0x3000)
+#define SDIO2_BASE                       (AHBPERIPH2_BASE + 0x61000)
+#define DVP_BASE                         (AHBPERIPH2_BASE + 0x50000)
+#define OTGFS1_BASE                      (AHBPERIPH2_BASE + 0x00000)
+
+#define EMAC_MAC_BASE                    (EMAC_BASE)
+#define EMAC_MMC_BASE                    (EMAC_BASE + 0x0100)
+#define EMAC_PTP_BASE                    (EMAC_BASE + 0x0700)
+#define EMAC_DMA_BASE                    (EMAC_BASE + 0x1000)
+#endif
 
 /**
   * @}
@@ -1079,7 +1478,6 @@ typedef enum {ERROR = 0, SUCCESS = !ERROR} error_status;
 /** @addtogroup Peripheral_type_define
   * @{
   */
-
 /**
   * @brief type define exint register all
   */
@@ -1244,14 +1642,9 @@ typedef struct
   __IO uint32_t APB2LPEN;
 
   /**
-    * @brief crm piclks register, offset:0x68
+    * @brief crm reserved6 register, offset:0x68~0x6C
     */
-  __IO uint32_t PICLKS;
-
-  /**
-    * @brief crm reserved6 register, offset:0x6C
-    */
-  __IO uint32_t RESERVED6;
+  __IO uint32_t RESERVED6[2];
 
   /**
     * @brief crm bpdc register, offset:0x70
@@ -1355,78 +1748,128 @@ typedef struct
   /**
     * @brief flash epps register, offset:0x20
     */
-  __IO uint32_t EPPS;
+  __IO uint32_t EPPS0;
 
   /**
-    * @brief flash reserved2 register, offset:0x70~0x24
+    * @brief flash reserved2 register, offset:0x28~0x24
     */
-  __IO uint32_t RESERVED2[20];
+  __IO uint32_t RESERVED2[2];
 
   /**
-    * @brief flash slib_sts0 register, offset:0x74
+    * @brief flash epps1 register, offset:0x2C
+    */
+  __IO uint32_t EPPS1;
+
+  /**
+    * @brief flash reserved3 register, offset:0x40~0x30
+    */
+  __IO uint32_t RESERVED3[5];
+
+  /**
+    * @brief flash unlock2 register, offset:0x44
+    */
+  __IO uint32_t UNLOCK2;
+
+  /**
+    * @brief flash reserved4 register, offset:0x48
+    */
+  __IO uint32_t RESERVED4;
+
+  /**
+    * @brief flash sts2 register, offset:0x4C
+    */
+  __IO uint32_t STS2;
+
+  /**
+    * @brief flash ctrl2 register, offset:0x50
+    */
+  __IO uint32_t CTRL2;
+
+  /**
+    * @brief flash addr2 register, offset:0x54
+    */
+  __IO uint32_t ADDR2;
+
+  /**
+    * @brief flash contr register, offset:0x58
+    */
+  __IO uint32_t CONTR;
+
+  /**
+    * @brief flash reserved5 register, offset:0x5C
+    */
+  __IO uint32_t RESERVED5;
+
+  /**
+    * @brief flash divr register, offset:0x60
+    */
+  __IO uint32_t DIVR;
+
+  /**
+    * @brief flash reserved6 register, offset:0xC4~0x64
+    */
+  __IO uint32_t RESERVED6[25];
+
+  /**
+    * @brief flash slib_sts2 register, offset:0xC8
+    */
+  __IO uint32_t SLIB_STS2;
+
+  /**
+    * @brief flash slib_sts0 register, offset:0xCC
     */
   __IO uint32_t SLIB_STS0;
 
   /**
-    * @brief flash slib_sts1 register, offset:0x78
+    * @brief flash slib_sts1 register, offset:0xD0
     */
   __IO uint32_t SLIB_STS1;
 
   /**
-    * @brief flash slib_pwd_clr register, offset:0x7C
+    * @brief flash slib_pwd_clr register, offset:0xD4
     */
   __IO uint32_t SLIB_PWD_CLR;
 
   /**
-    * @brief flash slib_misc_sts register, offset:0x80
+    * @brief flash slib_misc_sts register, offset:0xD8
     */
   __IO uint32_t SLIB_MISC_STS;
 
   /**
-    * @brief flash crc_addr register, offset:0x84
-    */
-  __IO uint32_t CRC_ADDR;
-
-  /**
-    * @brief flash crc_ctrl register, offset:0x88
-    */
-  __IO uint32_t CRC_CTRL;
-
-  /**
-    * @brief flash crc_chkr register, offset:0x8C
-    */
-  __IO uint32_t CRC_CHKR;
-
-  /**
-    * @brief flash reserved3 register, offset:0x15C~0x90
-    */
-  __IO uint32_t RESERVED3[52];
-
-  /**
-    * @brief flash slib_set_pwd register, offset:0x160
+    * @brief flash slib_set_pwd register, offset:0xDC
     */
   __IO uint32_t SLIB_SET_PWD;
 
   /**
-    * @brief flash slib_set_range register, offset:0x164
+    * @brief flash slib_set_range0 register, offset:0xE0
     */
-  __IO uint32_t SLIB_SET_RANGE;
+  __IO uint32_t SLIB_SET_RANGE0;
 
   /**
-    * @brief flash em_slib_set register, offset:0x168
+    * @brief flash slib_set_range1 register, offset:0xE4
     */
-  __IO uint32_t EM_SLIB_SET;
+  __IO uint32_t SLIB_SET_RANGE1;
 
   /**
-    * @brief flash btm_mode_set register, offset:0x16C
+    * @brief flash reserved7 register, offset:0xEC~0xE8
     */
-  __IO uint32_t BTM_MODE_SET;
+  __IO uint32_t RESERVED7[2];
 
   /**
-    * @brief flash slib_unlock register, offset:0x170
+    * @brief flash slib_unlock register, offset:0xF0
     */
   __IO uint32_t SLIB_UNLOCK;
 
+  /**
+    * @brief flash crc_ctrl register, offset:0xF4
+    */
+  __IO uint32_t CRC_CTRL;
+
+  /**
+    * @brief flash crc_chkr register, offset:0xF8
+    */
+  __IO uint32_t CRC_CHKR;
+  
 } FLASH_TypeDef;
 
 /**
@@ -1490,14 +1933,9 @@ typedef struct
   __IO uint32_t CLR;
 
   /**
-    * @brief gpio togr register, offset:0x2C
+    * @brief gpio reserved1 register, offset:0x2C~0x38
     */
-  __IO uint32_t TOGR;
-
-  /**
-    * @brief gpio reserved1 register, offset:0x30~0x38
-    */
-  __IO uint32_t RESERVED1[3];
+  __IO uint32_t RESERVED1[4];
 
   /**
     * @brief gpio hdrv register, offset:0x3C
@@ -1795,6 +2233,178 @@ typedef struct
 } DMAMUX_Generator_TypeDef;
 
 /**
+  * @brief type define edma register
+  */
+typedef struct
+{
+  /**
+    * @brief edma sts1 register, offset:0x00
+    */
+  __IO uint32_t STS1;
+
+  /**
+    * @brief edma sts2 register, offset:0x04
+    */
+  __IO uint32_t STS2;
+
+  /**
+    * @brief edma clr1 register, offset:0x08
+    */
+  __IO uint32_t CLR1;
+
+  /**
+    * @brief edma clr2 register, offset:0x0C
+    */
+  __IO uint32_t CLR2;
+
+  /**
+    * @brief reserved, offset:0x10~0xCC
+    */
+  __IO uint32_t RESERVED1[48];
+
+  /**
+    * @brief edma link list ctrl register, offset:0xD0
+    */
+  __IO uint32_t LLCTRL;
+
+  /**
+    * @brief reserved, offset:0xD4~0xF0
+    */
+  __IO uint32_t RESERVED2[8];
+
+  /**
+    * @brief edma 2d ctrl register, offset:0xF4
+    */
+  __IO uint32_t S2DCTRL;
+
+  /**
+    * @brief reserved, offset:0xF8~0x138
+    */
+  __IO uint32_t RESERVED3[17];
+
+  /**
+    * @brief edmamux sel register, offset:0x13C
+    */
+  __IO uint32_t MUXSEL;
+
+  /**
+    * @brief reserved, offset:0x140~0x16C
+    */
+  __IO uint32_t RESERVED4[12];
+
+  /**
+    * @brief edmamux syncsts register, offset:0x170
+    */
+  __IO uint32_t MUXSYNCSTS;
+
+  /**
+    * @brief edmamux syncclr register, offset:0x174
+    */
+  __IO uint32_t MUXSYNCCLR;
+
+  /**
+    * @brief edmamux request generator status register, offset:0x178
+    */
+  __IO uint32_t MUXGSTS;
+
+  /**
+    * @brief edmamux request generator status clear register, offset:0x17C
+    */
+  __IO uint32_t MUXGCLR;
+
+} EDMA_TypeDef;
+
+/**
+  * @brief type define edma channel register all
+  */
+typedef struct
+{
+  /**
+    * @brief edma sxctrl register, offset:0x10+0x18*n n=1...8
+    */
+  __IO uint32_t CTRL;
+
+  /**
+    * @brief edma dtcnt register, offset:0x14+0x18*n n=1...8
+    */
+  __IO uint32_t DTCNT;
+
+  /**
+    * @brief edma paddr register, offset:0x18+0x18*n n=1...8
+    */
+  __IO uint32_t PADDR;
+
+  /**
+    * @brief edma m0adr register, offset:0x1C+0x18*n n=1...8
+    */
+  __IO uint32_t M0ADDR;
+
+  /**
+    * @brief edma m1adr register, offset:0x20+0x18*n n=1...8
+    */
+  __IO uint32_t M1ADDR;
+
+  /**
+    * @brief edma fctrl register, offset:0x24+0x18*n n=1...8
+    */
+  __IO uint32_t FCTRL;
+  
+} EDMA_Stream_TypeDef;
+
+/**
+  * @brief type define edma stream link list pointer register
+  */
+typedef struct
+{
+  /**
+    * @brief edma stream link list pointer register
+    */
+  __IO uint32_t LLP;
+
+} EDMA_Stream_Link_List_TypeDef;
+
+/**
+  * @brief type define edma 2d register all
+  */
+typedef struct
+{
+  /**
+    * @brief edma s2dcnt register, offset:0x00
+    */
+  __IO uint32_t S2DCNT;
+
+  /**
+    * @brief edma stride register, offset:0x04
+    */
+  __IO uint32_t STRIDE;
+ 
+} EDMA_Stream_2D_TypeDef;
+
+/**
+  * @brief type define edmamux muxsctrl register
+  */
+typedef struct
+{
+  /**
+    * @brief edma muxsctrl register
+    */
+  __IO uint32_t MUXCTRL;
+
+} EDMAMUX_Channel_TypeDef;
+
+/**
+  * @brief type define edmaamux request generator register all
+  */
+typedef struct
+{
+  /**
+    * @brief edmaamux request generator register, offset:0x120+4*(x-1) x=1...4
+    */
+  __IO uint32_t GCTRL;
+
+} EDMAMUX_Generator_TypeDef;
+
+/**
   * @brief type define adc register all
   */
 typedef struct
@@ -1900,29 +2510,9 @@ typedef struct
   __IO uint32_t ODT;
 
   /**
-    * @brief adc spt3 register, offset:0x50
+    * @brief adc reserved1 register, offset:0x50~0x7C
     */
-  __IO uint32_t SPT3;
-
-  /**
-    * @brief adc osq4 register, offset:0x54
-    */
-  __IO uint32_t OSQ4;
-
-  /**
-    * @brief adc osq5 register, offset:0x58
-    */
-  __IO uint32_t OSQ5;
-
-  /**
-    * @brief adc osq6 register, offset:0x5C
-    */
-  __IO uint32_t OSQ6;
-
-  /**
-    * @brief adc reserved1 register, offset:0x5C~0x7C
-    */
-  __IO uint32_t RESERVED1[8];
+  __IO uint32_t RESERVED1[12];
 
   /**
     * @brief adc oversample register, offset:0x80 
@@ -1938,16 +2528,6 @@ typedef struct
     * @brief adc calval register, offset:0xB4
     */
   __IO uint32_t CALVAL;
-
-  /**
-    * @brief adc reserved3 register, offset:0xB8~0xCC
-    */
-  __IO uint32_t RESERVED3[6];
-
-  /**
-  * @brief adc misc register, offset:0xD0
-  */
-  __IO uint32_t MISC;
 
 } ADC_TypeDef;
 
@@ -1965,6 +2545,11 @@ typedef struct
     * @brief adc cctrl register, offset:0x04
     */
   __IO uint32_t CCTRL;
+
+  /**
+    * @brief adc codt register, offset:0x08
+    */
+  __IO uint32_t CODT;
 
 } ADCCOM_TypeDef;
 
@@ -2070,16 +2655,6 @@ typedef struct
     */
   __IO uint32_t GDIV;
 
-  /**
-    * @brief usart rtov register, offset:0x1C
-    */
-  __IO uint32_t RTOV;
-
-  /**
-    * @brief usart ifc register, offset:0x20
-    */
-  __IO uint32_t IFC;
-
 } USART_TypeDef;
 
 /**
@@ -2152,19 +2727,24 @@ typedef struct
 #define GPIOD                             ((GPIO_TypeDef *) GPIOD_BASE)
 #define GPIOE                             ((GPIO_TypeDef *) GPIOE_BASE)
 #define GPIOF                             ((GPIO_TypeDef *) GPIOF_BASE)
+#define GPIOG                             ((GPIO_TypeDef *) GPIOG_BASE)
+#define GPIOH                             ((GPIO_TypeDef *) GPIOH_BASE)
 #define SCFG                              ((SCFG_TypeDef *) SCFG_BASE)
 #define TMR1                              ((TMR_TypeDef *) TMR1_BASE)
 #define TMR2                              ((TMR_TypeDef *) TMR2_BASE)
 #define TMR3                              ((TMR_TypeDef *) TMR3_BASE)
 #define TMR4                              ((TMR_TypeDef *) TMR4_BASE)
+#define TMR5                              ((TMR_TypeDef *) TMR5_BASE)
 #define TMR6                              ((TMR_TypeDef *) TMR6_BASE)
 #define TMR7                              ((TMR_TypeDef *) TMR7_BASE)
+#define TMR8                              ((TMR_TypeDef *) TMR8_BASE)
 #define TMR9                              ((TMR_TypeDef *) TMR9_BASE)
 #define TMR10                             ((TMR_TypeDef *) TMR10_BASE)
 #define TMR11                             ((TMR_TypeDef *) TMR11_BASE)
 #define TMR12                             ((TMR_TypeDef *) TMR12_BASE)
 #define TMR13                             ((TMR_TypeDef *) TMR13_BASE)
 #define TMR14                             ((TMR_TypeDef *) TMR14_BASE)
+#define TMR20                             ((TMR_TypeDef *) TMR20_BASE)
 #define DEBUGMCU                          ((DEBUG_TypeDef *) DEBUG_BASE)
 #define DMA1                              ((DMA_TypeDef *) DMA1_BASE)
 #define DMA2                              ((DMA_TypeDef *) DMA2_BASE)
@@ -2204,7 +2784,46 @@ typedef struct
 #define DMA2MUX_GENERATOR2                ((DMAMUX_Generator_TypeDef *) DMA2MUX_GENERATOR2_BASE)
 #define DMA2MUX_GENERATOR3                ((DMAMUX_Generator_TypeDef *) DMA2MUX_GENERATOR3_BASE)
 #define DMA2MUX_GENERATOR4                ((DMAMUX_Generator_TypeDef *) DMA2MUX_GENERATOR4_BASE)
+#define EDMA1                             ((EDMA_TypeDef *) EDMA_BASE)
+#define EDMA1_STREAM1                     ((EDMA_Stream_TypeDef *) EDMA_STREAM1_BASE)
+#define EDMA1_STREAM2                     ((EDMA_Stream_TypeDef *) EDMA_STREAM2_BASE)
+#define EDMA1_STREAM3                     ((EDMA_Stream_TypeDef *) EDMA_STREAM3_BASE)
+#define EDMA1_STREAM4                     ((EDMA_Stream_TypeDef *) EDMA_STREAM4_BASE)
+#define EDMA1_STREAM5                     ((EDMA_Stream_TypeDef *) EDMA_STREAM5_BASE)
+#define EDMA1_STREAM6                     ((EDMA_Stream_TypeDef *) EDMA_STREAM6_BASE)
+#define EDMA1_STREAM7                     ((EDMA_Stream_TypeDef *) EDMA_STREAM7_BASE)
+#define EDMA1_STREAM8                     ((EDMA_Stream_TypeDef *) EDMA_STREAM8_BASE)
+#define EDMA1_STREAM1_2D                  ((EDMA_Stream_2D_TypeDef *) EDMA_STREAM1_2D_BASE)
+#define EDMA1_STREAM2_2D                  ((EDMA_Stream_2D_TypeDef *) EDMA_STREAM2_2D_BASE)
+#define EDMA1_STREAM3_2D                  ((EDMA_Stream_2D_TypeDef *) EDMA_STREAM3_2D_BASE)
+#define EDMA1_STREAM4_2D                  ((EDMA_Stream_2D_TypeDef *) EDMA_STREAM4_2D_BASE)
+#define EDMA1_STREAM5_2D                  ((EDMA_Stream_2D_TypeDef *) EDMA_STREAM5_2D_BASE)
+#define EDMA1_STREAM6_2D                  ((EDMA_Stream_2D_TypeDef *) EDMA_STREAM6_2D_BASE)
+#define EDMA1_STREAM7_2D                  ((EDMA_Stream_2D_TypeDef *) EDMA_STREAM7_2D_BASE)
+#define EDMA1_STREAM8_2D                  ((EDMA_Stream_2D_TypeDef *) EDMA_STREAM8_2D_BASE)
+#define EDMA1_STREAM1_LL                  ((EDMA_Stream_Link_List_TypeDef *) EDMA_STREAM1_LL_BASE)
+#define EDMA1_STREAM2_LL                  ((EDMA_Stream_Link_List_TypeDef *) EDMA_STREAM2_LL_BASE)
+#define EDMA1_STREAM3_LL                  ((EDMA_Stream_Link_List_TypeDef *) EDMA_STREAM3_LL_BASE)
+#define EDMA1_STREAM4_LL                  ((EDMA_Stream_Link_List_TypeDef *) EDMA_STREAM4_LL_BASE)
+#define EDMA1_STREAM5_LL                  ((EDMA_Stream_Link_List_TypeDef *) EDMA_STREAM5_LL_BASE)
+#define EDMA1_STREAM6_LL                  ((EDMA_Stream_Link_List_TypeDef *) EDMA_STREAM6_LL_BASE)
+#define EDMA1_STREAM7_LL                  ((EDMA_Stream_Link_List_TypeDef *) EDMA_STREAM7_LL_BASE)
+#define EDMA1_STREAM8_LL                  ((EDMA_Stream_Link_List_TypeDef *) EDMA_STREAM8_LL_BASE)
+#define EDMA1MUX_CHANNEL1                 ((EDMAMUX_Channel_TypeDef *) EDMAMUX_CHANNEL1_BASE)
+#define EDMA1MUX_CHANNEL2                 ((EDMAMUX_Channel_TypeDef *) EDMAMUX_CHANNEL2_BASE)
+#define EDMA1MUX_CHANNEL3                 ((EDMAMUX_Channel_TypeDef *) EDMAMUX_CHANNEL3_BASE)
+#define EDMA1MUX_CHANNEL4                 ((EDMAMUX_Channel_TypeDef *) EDMAMUX_CHANNEL4_BASE)
+#define EDMA1MUX_CHANNEL5                 ((EDMAMUX_Channel_TypeDef *) EDMAMUX_CHANNEL5_BASE)
+#define EDMA1MUX_CHANNEL6                 ((EDMAMUX_Channel_TypeDef *) EDMAMUX_CHANNEL6_BASE)
+#define EDMA1MUX_CHANNEL7                 ((EDMAMUX_Channel_TypeDef *) EDMAMUX_CHANNEL7_BASE)
+#define EDMA1MUX_CHANNEL8                 ((EDMAMUX_Channel_TypeDef *) EDMAMUX_CHANNEL8_BASE)
+#define EDMA1MUX_GENERATOR1               ((EDMAMUX_Generator_TypeDef *) EDMAMUX_GENERATOR1_BASE)
+#define EDMA1MUX_GENERATOR2               ((EDMAMUX_Generator_TypeDef *) EDMAMUX_GENERATOR2_BASE)
+#define EDMA1MUX_GENERATOR3               ((EDMAMUX_Generator_TypeDef *) EDMAMUX_GENERATOR3_BASE)
+#define EDMA1MUX_GENERATOR4               ((EDMAMUX_Generator_TypeDef *) EDMAMUX_GENERATOR4_BASE)
 #define ADC1                              ((ADC_TypeDef *) ADC1_BASE)
+#define ADC2                              ((ADC_TypeDef *) ADC2_BASE)
+#define ADC3                              ((ADC_TypeDef *) ADC3_BASE)
 #define ADCCOM                            ((ADCCOM_TypeDef *) ADCCOM_BASE)
 #define I2C1                              ((I2C_TypeDef *) I2C1_BASE)
 #define I2C2                              ((I2C_TypeDef *) I2C2_BASE)
@@ -2212,14 +2831,17 @@ typedef struct
 #define USART1                            ((USART_TypeDef *) USART1_BASE)
 #define USART2                            ((USART_TypeDef *) USART2_BASE)
 #define USART3                            ((USART_TypeDef *) USART3_BASE)
-#define UART4                             ((USART_TypeDef *) USART4_BASE)
-#define UART5                             ((USART_TypeDef *) USART5_BASE)
+#define UART4                             ((USART_TypeDef *) UART4_BASE)
+#define UART5                             ((USART_TypeDef *) UART5_BASE)
 #define USART6                            ((USART_TypeDef *) USART6_BASE)
-#define UART7                             ((USART_TypeDef *) USART7_BASE)
-#define UART8                             ((USART_TypeDef *) USART8_BASE)
+#define UART7                             ((USART_TypeDef *) UART7_BASE)
+#define UART8                             ((USART_TypeDef *) UART8_BASE)
 #define SPI1                              ((SPI_TypeDef *) SPI1_BASE)
 #define SPI2                              ((SPI_TypeDef *) SPI2_BASE)
 #define SPI3                              ((SPI_TypeDef *) SPI3_BASE)
+#define SPI4                              ((SPI_TypeDef *) SPI4_BASE)
+#define I2S2EXT                           ((SPI_TypeDef *) I2S2EXT_BASE)
+#define I2S3EXT                           ((SPI_TypeDef *) I2S3EXT_BASE)
 
 /**
   * @}
@@ -2229,12 +2851,25 @@ typedef struct
   * @brief flash unlock keys
   * @{
   */
+ 
+#define FLASH_UNLOCK_KEY1                ((uint32_t)0x45670123) /*!< flash operation unlock order key1 */
+#define FLASH_UNLOCK_KEY2                ((uint32_t)0xCDEF89AB) /*!< flash operation unlock order key2 */
+#define FAP_RELIEVE_KEY                  ((uint16_t)0x00A5)     /*!< flash fap relieve key val */
+#define SLIB_UNLOCK_KEY                  ((uint32_t)0xA35F6D24) /*!< flash slib operation unlock order key */
 
-#define FLASH_UNLOCK_KEY1                ((uint32_t)0x45670123)  /*!< flash operation unlock order key1 */
-#define FLASH_UNLOCK_KEY2                ((uint32_t)0xCDEF89AB)  /*!< flash operation unlock order key2 */
-#define FAP_RELIEVE_KEY                  ((uint16_t)0x00A5)      /*!< flash fap relieve key val */
-#define FAP_HIGH_LEVEL_KEY               ((uint16_t)0x00CC)      /*!< flash fap high level enable key val */
-#define SLIB_UNLOCK_KEY                  ((uint32_t)0xA35F6D24)  /*!< flash slib operation unlock order key */
+#if defined (AT32F435CMU7) || defined (AT32F435CMT7) || defined (AT32F435RMT7) || \
+    defined (AT32F435VMT7) || defined (AT32F435ZMT7) || defined (AT32F437RMT7) || \
+    defined (AT32F437VMT7) || defined (AT32F437ZMT7)
+#define FLASH_BANK1_START_ADDR           ((uint32_t)0x08000000) /*!< flash start address of bank1 */
+#define FLASH_BANK1_END_ADDR             ((uint32_t)0x081FFFFF) /*!< flash end address of bank1 */
+#define FLASH_BANK2_START_ADDR           ((uint32_t)0x08200000) /*!< flash start address of bank2 */
+#define FLASH_BANK2_END_ADDR             ((uint32_t)0x083EFFFF) /*!< flash end address of bank2 */
+#else
+#define FLASH_BANK1_START_ADDR           ((uint32_t)0x08000000) /*!< flash start address of bank1 */
+#define FLASH_BANK1_END_ADDR             ((uint32_t)0x0807FFFF) /*!< flash end address of bank1 */
+#define FLASH_BANK2_START_ADDR           ((uint32_t)0x08080000) /*!< flash start address of bank2 */
+#define FLASH_BANK2_END_ADDR             ((uint32_t)0x080FFFFF) /*!< flash end address of bank2 */
+#endif
 
 #define FLASHSIZE_BASE                   ((uint32_t)0x1FFFF7E0U) /*!< FLASH Size register base address */
 #define UID_BASE                         ((uint32_t)0x1FFFF7E8U) /*!< Unique device ID register base address */
@@ -2242,7 +2877,7 @@ typedef struct
 /**
   * @}
   */
-
+ 
 #ifdef __cplusplus
 }
 #endif

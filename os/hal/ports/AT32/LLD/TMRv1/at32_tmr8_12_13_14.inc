@@ -227,7 +227,7 @@ OSAL_IRQ_HANDLER(AT32_TMR8_BRK_TMR12_HANDLER) {
 #if defined(AT32_TMR8_IS_USED) || defined(AT32_TMR13_IS_USED)  ||         \
     defined(__DOXYGEN__)
 /**
- * @brief   TMR8-UP, TMR13 interrupt handler.
+ * @brief   TMR8-OVF, TMR13 interrupt handler.
  *
  * @isr
  */
@@ -275,7 +275,7 @@ OSAL_IRQ_HANDLER(AT32_TMR8_OVF_TMR13_HANDLER) {
 #if defined(AT32_TMR8_IS_USED) || defined(AT32_TMR14_IS_USED)  ||         \
     defined(__DOXYGEN__)
 /**
- * @brief   TMR8-TRG-COM, TMR14 interrupt handler.
+ * @brief   TMR8-TRG-HALL, TMR14 interrupt handler.
  *
  * @isr
  */
@@ -310,7 +310,7 @@ OSAL_IRQ_HANDLER(AT32_TMR8_TRG_HALL_TMR14_HANDLER) {
 
 #if defined(AT32_TMR8_IS_USED) || defined(__DOXYGEN__)
 /**
- * @brief   TMR8-CC interrupt handler.
+ * @brief   TMR8-CH interrupt handler.
  *
  * @isr
  */
