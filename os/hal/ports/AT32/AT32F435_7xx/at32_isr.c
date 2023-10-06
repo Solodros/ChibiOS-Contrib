@@ -350,9 +350,6 @@ OSAL_IRQ_HANDLER(AT32_EXINT22_HANDLER) {
 #include "at32_tmr5.inc"
 #include "at32_tmr6.inc"
 #include "at32_tmr7.inc"
-#include "at32_tmr12.inc"
-#include "at32_tmr13.inc"
-#include "at32_tmr14.inc"
 #include "at32_tmr8_12_13_14.inc"
 #include "at32_tmr20.inc"
 

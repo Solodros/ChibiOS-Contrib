@@ -72,8 +72,7 @@
  */
 typedef enum {
   FLASH_BANK_1    = 0,
-  FLASH_BANK_2    = 1,
-  FLASH_BANK_SPIM = 2
+  FLASH_BANK_2    = 1
 } flash_bank_t;
 
 /*===========================================================================*/

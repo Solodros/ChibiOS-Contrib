@@ -521,10 +521,12 @@ const at32_edma_stream_t *edmaStreamAllocI(uint32_t id,
     startid = 0U;
     endid   = (AT32_EDMA_STREAMS / 2U) - 1U;
   }
+#if AT32_HAS_EDMA2 == TRUE
   else if (id == AT32_EDMA_STREAM_ID_ANY_EDMA2) {
     startid = (AT32_EDMA_STREAMS / 2U) - 1U;
     endid   = AT32_EDMA_STREAMS - 1U;
   }
+#endif
 #endif
   else {
     osalDbgCheck(false);
@@ -566,7 +568,7 @@ const at32_edma_stream_t *edmaStreamAllocI(uint32_t id,
       /* Putting the stream in a safe state.*/
       edmaStreamDisable(edmastp);
       edmastp->stream->CTRL = AT32_EDMA_SCTRL_RESET_VALUE;
-      edmastp->stream->FCR = AT32_EDMA_FCR_RESET_VALUE;
+      edmastp->stream->FCTRL = AT32_EDMA_FCTRL_RESET_VALUE;
 
       /* Enables the associated IRQ vector if a callback is defined.*/
       if (func != NULL) {

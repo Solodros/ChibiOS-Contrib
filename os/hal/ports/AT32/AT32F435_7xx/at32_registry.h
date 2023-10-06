@@ -61,7 +61,7 @@
 #define AT32_DMA2_NUM_CHANNELS              7
 
 /* EDMA attributes.*/
-#define AT32_EDMA_SUPPORTS_DMAMUX           TRUE
+#define AT32_EDMA_SUPPORTS_EDMAMUX          TRUE
 #define AT32_HAS_EDMA1                      TRUE
 #define AT32_HAS_EDMA2                      FALSE
 
@@ -224,7 +224,7 @@
 #define AT32_OTG1_ENDPOINTS                 8
 
 #define AT32_HAS_OTG2                       TRUE
-#define AT32_OTG1_ENDPOINTS                 8
+#define AT32_OTG2_ENDPOINTS                 8
 #define AT32_OTG2_SUPPORTS_HS               FALSE
 
 #define AT32_HAS_USB                        FALSE
@@ -270,7 +270,7 @@
 #define AT32_DMA2_NUM_CHANNELS              7
 
 /* EDMA attributes.*/
-#define AT32_EDMA_SUPPORTS_DMAMUX           TRUE
+#define AT32_EDMA_SUPPORTS_EDMAMUX          TRUE
 #define AT32_HAS_EDMA1                      TRUE
 #define AT32_HAS_EDMA2                      FALSE
 
@@ -438,7 +438,7 @@
 #define AT32_OTG1_ENDPOINTS                 8
 
 #define AT32_HAS_OTG2                       TRUE
-#define AT32_OTG1_ENDPOINTS                 8
+#define AT32_OTG2_ENDPOINTS                 8
 #define AT32_OTG2_SUPPORTS_HS               FALSE
 
 #define AT32_HAS_USB                        FALSE
@@ -484,7 +484,7 @@
 #define AT32_DMA2_NUM_CHANNELS              7
 
 /* EDMA attributes.*/
-#define AT32_EDMA_SUPPORTS_DMAMUX           TRUE
+#define AT32_EDMA_SUPPORTS_EDMAMUX          TRUE
 #define AT32_HAS_EDMA1                      TRUE
 #define AT32_HAS_EDMA2                      FALSE
 
@@ -653,7 +653,7 @@
 #define AT32_OTG1_ENDPOINTS                 8
 
 #define AT32_HAS_OTG2                       TRUE
-#define AT32_OTG1_ENDPOINTS                 8
+#define AT32_OTG2_ENDPOINTS                 8
 #define AT32_OTG2_SUPPORTS_HS               FALSE
 
 #define AT32_HAS_USB                        FALSE
@@ -699,7 +699,7 @@
 #define AT32_DMA2_NUM_CHANNELS              7
 
 /* EDMA attributes.*/
-#define AT32_EDMA_SUPPORTS_DMAMUX           TRUE
+#define AT32_EDMA_SUPPORTS_EDMAMUX          TRUE
 #define AT32_HAS_EDMA1                      TRUE
 #define AT32_HAS_EDMA2                      FALSE
 
@@ -870,7 +870,7 @@
 #define AT32_OTG1_ENDPOINTS                 8
 
 #define AT32_HAS_OTG2                       TRUE
-#define AT32_OTG1_ENDPOINTS                 8
+#define AT32_OTG2_ENDPOINTS                 8
 #define AT32_OTG2_SUPPORTS_HS               FALSE
 
 #define AT32_HAS_USB                        FALSE

@@ -1079,10 +1079,10 @@
 #else
 #error "invalid AT32_USBDIV value specified"
 #endif
-#elif AT32_USBCLK_SRC_PLL == AT32_USBCLK_SRC_HICK
+#elif AT32_USBCLK_SRC == AT32_USBCLK_SRC_HICK
 #define AT32_USBCLK                 AT32_HICKCLKOUT
 #else
-#error "invalid AT32_PLLU_USB48_SEL value specified"
+#error "invalid AT32_USBCLK_SRC value specified"
 #endif
 
 /**

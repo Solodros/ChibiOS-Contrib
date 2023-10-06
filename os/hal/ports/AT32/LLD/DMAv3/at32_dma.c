@@ -521,10 +521,12 @@ const at32_dma_stream_t *dmaStreamAllocI(uint32_t id,
     startid = 0U;
     endid   = (AT32_DMA_STREAMS / 2U) - 1U;
   }
+#if AT32_HAS_DMA2 == TRUE
   else if (id == AT32_DMA_STREAM_ID_ANY_DMA2) {
     startid = (AT32_DMA_STREAMS / 2U) - 1U;
     endid   = AT32_DMA_STREAMS - 1U;
   }
+#endif
 #endif
   else {
     osalDbgCheck(false);
@@ -566,7 +568,7 @@ const at32_dma_stream_t *dmaStreamAllocI(uint32_t id,
       /* Putting the stream in a safe state.*/
       dmaStreamDisable(dmastp);
       dmastp->stream->CTRL = AT32_DMA_SCTRL_RESET_VALUE;
-      dmastp->stream->FCR = AT32_DMA_FCR_RESET_VALUE;
+      dmastp->stream->FCTRL = AT32_DMA_FCTRL_RESET_VALUE;
 
       /* Enables the associated IRQ vector if a callback is defined.*/
       if (func != NULL) {

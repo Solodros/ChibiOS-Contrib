@@ -185,13 +185,14 @@
  */
 #if !defined(OTG_FS1) || defined(__DOXYGEN__)    
 #define OTG_FS1                          ((at32_otg_t *)OTG_FS1_ADDR)
+#endif
 
 #if (AT32_OTG2_SUPPORTS_HS == TRUE)
 /**
  * @brief   Accesses to the OTG_FS2 registers block.
  */
 #if !defined(OTG_HS) || defined(__DOXYGEN__)   
-#define OTG_HS                          ((at32_otg_t *)OTG_HS_ADDR)
+#define OTG_HS                           ((at32_otg_t *)OTG_HS_ADDR)
 #endif
 #else
 /**
