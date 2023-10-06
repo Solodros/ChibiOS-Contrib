@@ -51,24 +51,24 @@
 
 #if AT32_DMA_SUPPORTS_DMAMUX == TRUE
 
-#define DMA1_CH1_VARIANT            EDMA1MUX_CHANNEL1
-#define DMA1_CH2_VARIANT            EDMA1MUX_CHANNEL2
-#define DMA1_CH3_VARIANT            EDMA1MUX_CHANNEL3
-#define DMA1_CH4_VARIANT            EDMA1MUX_CHANNEL4
-#define DMA1_CH5_VARIANT            EDMA1MUX_CHANNEL5
-#define DMA1_CH6_VARIANT            EDMA1MUX_CHANNEL6
-#define DMA1_CH7_VARIANT            EDMA1MUX_CHANNEL7
-#define DMA1_CH8_VARIANT            EDMA1MUX_CHANNEL8
+#define DMA1_CH1_VARIANT            DMA1MUX_CHANNEL1
+#define DMA1_CH2_VARIANT            DMA1MUX_CHANNEL2
+#define DMA1_CH3_VARIANT            DMA1MUX_CHANNEL3
+#define DMA1_CH4_VARIANT            DMA1MUX_CHANNEL4
+#define DMA1_CH5_VARIANT            DMA1MUX_CHANNEL5
+#define DMA1_CH6_VARIANT            DMA1MUX_CHANNEL6
+#define DMA1_CH7_VARIANT            DMA1MUX_CHANNEL7
+#define DMA1_CH8_VARIANT            DMA1MUX_CHANNEL8
 
 #if AT32_HAS_DMA2 == TRUE
-#define DMA2_CH1_VARIANT            EDMA2MUX_CHANNEL1
-#define DMA2_CH2_VARIANT            EDMA2MUX_CHANNEL2
-#define DMA2_CH3_VARIANT            EDMA2MUX_CHANNEL3
-#define DMA2_CH4_VARIANT            EDMA2MUX_CHANNEL4
-#define DMA2_CH5_VARIANT            EDMA2MUX_CHANNEL5
-#define DMA2_CH6_VARIANT            EDMA2MUX_CHANNEL6
-#define DMA2_CH7_VARIANT            EDMA2MUX_CHANNEL7
-#define DMA2_CH8_VARIANT            EDMA2MUX_CHANNEL8
+#define DMA2_CH1_VARIANT            DMA2MUX_CHANNEL1
+#define DMA2_CH2_VARIANT            DMA2MUX_CHANNEL2
+#define DMA2_CH3_VARIANT            DMA2MUX_CHANNEL3
+#define DMA2_CH4_VARIANT            DMA2MUX_CHANNEL4
+#define DMA2_CH5_VARIANT            DMA2MUX_CHANNEL5
+#define DMA2_CH6_VARIANT            DMA2MUX_CHANNEL6
+#define DMA2_CH7_VARIANT            DMA2MUX_CHANNEL7
+#define DMA2_CH8_VARIANT            DMA2MUX_CHANNEL8
 #endif
 
 #else /* !(AT32_DMA_SUPPORTS_DMAMUX == TRUE) */
@@ -106,23 +106,23 @@
  *          instead: @p AT32_DMA1_STREAM1, @p AT32_DMA1_STREAM2 etc.
  */
 const at32_dma_stream_t _at32_dma_streams[AT32_DMA_STREAMS] = {
-  {EDMA1_STREAM1, &EDMA1->CLR1, DMA1_CH1_VARIANT,  0,  0, AT32_DMA1_CH1_NUMBER},
-  {EDMA1_STREAM2, &EDMA1->CLR1, DMA1_CH2_VARIANT,  6,  1, AT32_DMA1_CH2_NUMBER},
-  {EDMA1_STREAM3, &EDMA1->CLR1, DMA1_CH3_VARIANT, 16,  2, AT32_DMA1_CH3_NUMBER},
-  {EDMA1_STREAM4, &EDMA1->CLR1, DMA1_CH4_VARIANT, 22,  3, AT32_DMA1_CH4_NUMBER},
-  {EDMA1_STREAM5, &EDMA1->CLR2, DMA1_CH5_VARIANT,  0,  4, AT32_DMA1_CH5_NUMBER},
-  {EDMA1_STREAM6, &EDMA1->CLR2, DMA1_CH6_VARIANT,  6,  5, AT32_DMA1_CH6_NUMBER},
-  {EDMA1_STREAM7, &EDMA1->CLR2, DMA1_CH7_VARIANT, 16,  6, AT32_DMA1_CH7_NUMBER},
-  {EDMA1_STREAM8, &EDMA1->CLR2, DMA1_CH8_VARIANT, 22,  7, AT32_DMA1_CH8_NUMBER},
+  {DMA1_STREAM1, &DMA1->CLR1, DMA1_CH1_VARIANT,  0,  0, AT32_DMA1_CH1_NUMBER},
+  {DMA1_STREAM2, &DMA1->CLR1, DMA1_CH2_VARIANT,  6,  1, AT32_DMA1_CH2_NUMBER},
+  {DMA1_STREAM3, &DMA1->CLR1, DMA1_CH3_VARIANT, 16,  2, AT32_DMA1_CH3_NUMBER},
+  {DMA1_STREAM4, &DMA1->CLR1, DMA1_CH4_VARIANT, 22,  3, AT32_DMA1_CH4_NUMBER},
+  {DMA1_STREAM5, &DMA1->CLR2, DMA1_CH5_VARIANT,  0,  4, AT32_DMA1_CH5_NUMBER},
+  {DMA1_STREAM6, &DMA1->CLR2, DMA1_CH6_VARIANT,  6,  5, AT32_DMA1_CH6_NUMBER},
+  {DMA1_STREAM7, &DMA1->CLR2, DMA1_CH7_VARIANT, 16,  6, AT32_DMA1_CH7_NUMBER},
+  {DMA1_STREAM8, &DMA1->CLR2, DMA1_CH8_VARIANT, 22,  7, AT32_DMA1_CH8_NUMBER},
 #if AT32_HAS_DMA2 == TRUE
-  {EDMA2_STREAM1, &EDMA2->CLR1, DMA2_CH1_VARIANT,  0,  8, AT32_DMA2_CH1_NUMBER},
-  {EDMA2_STREAM2, &EDMA2->CLR1, DMA2_CH2_VARIANT,  6,  9, AT32_DMA2_CH2_NUMBER},
-  {EDMA2_STREAM3, &EDMA2->CLR1, DMA2_CH3_VARIANT, 16, 10, AT32_DMA2_CH3_NUMBER},
-  {EDMA2_STREAM4, &EDMA2->CLR1, DMA2_CH4_VARIANT, 22, 11, AT32_DMA2_CH4_NUMBER},
-  {EDMA2_STREAM5, &EDMA2->CLR2, DMA2_CH5_VARIANT,  0, 12, AT32_DMA2_CH5_NUMBER},
-  {EDMA2_STREAM6, &EDMA2->CLR2, DMA2_CH6_VARIANT,  6, 13, AT32_DMA2_CH6_NUMBER},
-  {EDMA2_STREAM7, &EDMA2->CLR2, DMA2_CH7_VARIANT, 16, 14, AT32_DMA2_CH7_NUMBER},
-  {EDMA2_STREAM8, &EDMA2->CLR2, DMA2_CH8_VARIANT, 22, 15, AT32_DMA2_CH8_NUMBER},
+  {DMA2_STREAM1, &DMA2->CLR1, DMA2_CH1_VARIANT,  0,  8, AT32_DMA2_CH1_NUMBER},
+  {DMA2_STREAM2, &DMA2->CLR1, DMA2_CH2_VARIANT,  6,  9, AT32_DMA2_CH2_NUMBER},
+  {DMA2_STREAM3, &DMA2->CLR1, DMA2_CH3_VARIANT, 16, 10, AT32_DMA2_CH3_NUMBER},
+  {DMA2_STREAM4, &DMA2->CLR1, DMA2_CH4_VARIANT, 22, 11, AT32_DMA2_CH4_NUMBER},
+  {DMA2_STREAM5, &DMA2->CLR2, DMA2_CH5_VARIANT,  0, 12, AT32_DMA2_CH5_NUMBER},
+  {DMA2_STREAM6, &DMA2->CLR2, DMA2_CH6_VARIANT,  6, 13, AT32_DMA2_CH6_NUMBER},
+  {DMA2_STREAM7, &DMA2->CLR2, DMA2_CH7_VARIANT, 16, 14, AT32_DMA2_CH7_NUMBER},
+  {DMA2_STREAM8, &DMA2->CLR2, DMA2_CH8_VARIANT, 22, 15, AT32_DMA2_CH8_NUMBER},
 #endif
 };
 
@@ -171,8 +171,8 @@ OSAL_IRQ_HANDLER(AT32_DMA1_CH1_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA1->STS1 >> 0U) & AT32_DMA_STS_MASK;
-  EDMA1->CLR1 = flags << 0U;
+  flags = (DMA1->STS1 >> 0U) & AT32_DMA_STS_MASK;
+  DMA1->CLR1 = flags << 0U;
   if (dma.streams[0].func)
     dma.streams[0].func(dma.streams[0].param, flags);
 
@@ -189,8 +189,8 @@ OSAL_IRQ_HANDLER(AT32_DMA1_CH2_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA1->STS1 >> 6U) & AT32_DMA_STS_MASK;
-  EDMA1->CLR1 = flags << 6U;
+  flags = (DMA1->STS1 >> 6U) & AT32_DMA_STS_MASK;
+  DMA1->CLR1 = flags << 6U;
   if (dma.streams[1].func)
     dma.streams[1].func(dma.streams[1].param, flags);
 
@@ -207,8 +207,8 @@ OSAL_IRQ_HANDLER(AT32_DMA1_CH3_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA1->STS1 >> 16U) & AT32_DMA_STS_MASK;
-  EDMA1->CLR1 = flags << 16U;
+  flags = (DMA1->STS1 >> 16U) & AT32_DMA_STS_MASK;
+  DMA1->CLR1 = flags << 16U;
   if (dma.streams[2].func)
     dma.streams[2].func(dma.streams[2].param, flags);
 
@@ -225,8 +225,8 @@ OSAL_IRQ_HANDLER(AT32_DMA1_CH4_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA1->STS1 >> 22U) & AT32_DMA_STS_MASK;
-  EDMA1->CLR1 = flags << 22U;
+  flags = (DMA1->STS1 >> 22U) & AT32_DMA_STS_MASK;
+  DMA1->CLR1 = flags << 22U;
   if (dma.streams[3].func)
     dma.streams[3].func(dma.streams[3].param, flags);
 
@@ -243,8 +243,8 @@ OSAL_IRQ_HANDLER(AT32_DMA1_CH5_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA1->STS2 >> 0U) & AT32_DMA_STS_MASK;
-  EDMA1->CLR2 = flags << 0U;
+  flags = (DMA1->STS2 >> 0U) & AT32_DMA_STS_MASK;
+  DMA1->CLR2 = flags << 0U;
   if (dma.streams[4].func)
     dma.streams[4].func(dma.streams[4].param, flags);
 
@@ -261,8 +261,8 @@ OSAL_IRQ_HANDLER(AT32_DMA1_CH6_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA1->STS2 >> 6U) & AT32_DMA_STS_MASK;
-  EDMA1->CLR2 = flags << 6U;
+  flags = (DMA1->STS2 >> 6U) & AT32_DMA_STS_MASK;
+  DMA1->CLR2 = flags << 6U;
   if (dma.streams[5].func)
     dma.streams[5].func(dma.streams[5].param, flags);
 
@@ -279,8 +279,8 @@ OSAL_IRQ_HANDLER(AT32_DMA1_CH7_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA1->STS2 >> 16U) & AT32_DMA_STS_MASK;
-  EDMA1->CLR2 = flags << 16U;
+  flags = (DMA1->STS2 >> 16U) & AT32_DMA_STS_MASK;
+  DMA1->CLR2 = flags << 16U;
   if (dma.streams[6].func)
     dma.streams[6].func(dma.streams[6].param, flags);
 
@@ -297,8 +297,8 @@ OSAL_IRQ_HANDLER(AT32_DMA1_CH8_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA1->STS2 >> 22U) & AT32_DMA_STS_MASK;
-  EDMA1->CLR2 = flags << 22U;
+  flags = (DMA1->STS2 >> 22U) & AT32_DMA_STS_MASK;
+  DMA1->CLR2 = flags << 22U;
   if (dma.streams[7].func)
     dma.streams[7].func(dma.streams[7].param, flags);
 
@@ -317,8 +317,8 @@ OSAL_IRQ_HANDLER(AT32_DMA2_CH1_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA2->STS1 >> 0U) & AT32_DMA_STS_MASK;
-  EDMA2->CLR1 = flags << 0U;
+  flags = (DMA2->STS1 >> 0U) & AT32_DMA_STS_MASK;
+  DMA2->CLR1 = flags << 0U;
   if (dma.streams[8].func)
     dma.streams[8].func(dma.streams[8].param, flags);
 
@@ -335,8 +335,8 @@ OSAL_IRQ_HANDLER(AT32_DMA2_CH2_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA2->STS1 >> 6U) & AT32_DMA_STS_MASK;
-  EDMA2->CLR1 = flags << 6U;
+  flags = (DMA2->STS1 >> 6U) & AT32_DMA_STS_MASK;
+  DMA2->CLR1 = flags << 6U;
   if (dma.streams[9].func)
     dma.streams[9].func(dma.streams[9].param, flags);
 
@@ -353,8 +353,8 @@ OSAL_IRQ_HANDLER(AT32_DMA2_CH3_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA2->STS1 >> 16U) & AT32_DMA_STS_MASK;
-  EDMA2->CLR1 = flags << 16U;
+  flags = (DMA2->STS1 >> 16U) & AT32_DMA_STS_MASK;
+  DMA2->CLR1 = flags << 16U;
   if (dma.streams[10].func)
     dma.streams[10].func(dma.streams[10].param, flags);
 
@@ -371,8 +371,8 @@ OSAL_IRQ_HANDLER(AT32_DMA2_CH4_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA2->STS1 >> 22U) & AT32_DMA_STS_MASK;
-  EDMA2->CLR1 = flags << 22U;
+  flags = (DMA2->STS1 >> 22U) & AT32_DMA_STS_MASK;
+  DMA2->CLR1 = flags << 22U;
   if (dma.streams[11].func)
     dma.streams[11].func(dma.streams[11].param, flags);
 
@@ -389,8 +389,8 @@ OSAL_IRQ_HANDLER(AT32_DMA2_CH5_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA2->STS2 >> 0U) & AT32_DMA_STS_MASK;
-  EDMA2->CLR2 = flags << 0U;
+  flags = (DMA2->STS2 >> 0U) & AT32_DMA_STS_MASK;
+  DMA2->CLR2 = flags << 0U;
   if (dma.streams[12].func)
     dma.streams[12].func(dma.streams[12].param, flags);
 
@@ -407,8 +407,8 @@ OSAL_IRQ_HANDLER(AT32_DMA2_CH6_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA2->STS2 >> 6U) & AT32_DMA_STS_MASK;
-  EDMA2->CLR2 = flags << 6U;
+  flags = (DMA2->STS2 >> 6U) & AT32_DMA_STS_MASK;
+  DMA2->CLR2 = flags << 6U;
   if (dma.streams[13].func)
     dma.streams[13].func(dma.streams[13].param, flags);
 
@@ -425,8 +425,8 @@ OSAL_IRQ_HANDLER(AT32_DMA2_CH7_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA2->STS2 >> 16U) & AT32_DMA_STS_MASK;
-  EDMA2->CLR2 = flags << 16U;
+  flags = (DMA2->STS2 >> 16U) & AT32_DMA_STS_MASK;
+  DMA2->CLR2 = flags << 16U;
   if (dma.streams[14].func)
     dma.streams[14].func(dma.streams[14].param, flags);
 
@@ -443,8 +443,8 @@ OSAL_IRQ_HANDLER(AT32_DMA2_CH8_HANDLER) {
 
   OSAL_IRQ_PROLOGUE();
 
-  flags = (EDMA2->STS2 >> 22U) & AT32_DMA_STS_MASK;
-  EDMA2->CLR2 = flags << 22U;
+  flags = (DMA2->STS2 >> 22U) & AT32_DMA_STS_MASK;
+  DMA2->CLR2 = flags << 22U;
   if (dma.streams[15].func)
     dma.streams[15].func(dma.streams[15].param, flags);
 
@@ -470,11 +470,11 @@ void dmaInit(void) {
     _at32_dma_streams[i].stream->CTRL = AT32_DMA_SCTRL_RESET_VALUE;
     dma.streams[i].func = NULL;
   }
-  EDMA1->CLR1 = 0xFFFFFFFFU;
-  EDMA1->CLR2 = 0xFFFFFFFFU;
+  DMA1->CLR1 = 0xFFFFFFFFU;
+  DMA1->CLR2 = 0xFFFFFFFFU;
 #if AT32_HAS_DMA2 == TRUE
-  EDMA2->CLR1 = 0xFFFFFFFFU;
-  EDMA2->CLR2 = 0xFFFFFFFFU;
+  DMA2->CLR1 = 0xFFFFFFFFU;
+  DMA2->CLR2 = 0xFFFFFFFFU;
 #endif
 }
 
@@ -543,24 +543,24 @@ const at32_dma_stream_t *dmaStreamAllocI(uint32_t id,
 
       /* Enabling DMA clocks required by the current streams set.*/
       if ((AT32_DMA1_STREAMS_MASK & mask) != 0U) {
-        crmEnableEDMA1(true);
+        crmEnableDMA1(true);
       }
 #if AT32_HAS_DMA2 == TRUE
       if ((AT32_DMA2_STREAMS_MASK & mask) != 0U) {
-        crmEnableEDMA2(true);
+        crmEnableDMA2(true);
       }
 #endif
 
-#if (AT32_DMA_SUPPORTS_DMAMUX == TRUE) && defined(crmEnableEDMAMUX)
+#if (AT32_DMA_SUPPORTS_DMAMUX == TRUE) && defined(crmEnableDMAMUX)
       /* Enabling DMAMUX if present.*/
       if (dma.allocated_mask != 0U) {
-        crmEnableEDMAMUX(true);
+        crmEnableDMAMUX(true);
       }
 #endif
 #if AT32_DMA_SUPPORTS_DMAMUX == TRUE
-      EDMA1->MUXSEL = DMA_MUXSEL_TBL_SEL;
+      DMA1->MUXSEL = DMA_MUXSEL_TBL_SEL;
 #if AT32_HAS_DMA2 == TRUE
-      EDMA2->MUXSEL = DMA_MUXSEL_TBL_SEL;
+      DMA2->MUXSEL = DMA_MUXSEL_TBL_SEL;
 #endif
 #endif
       /* Putting the stream in a safe state.*/
@@ -641,18 +641,18 @@ void dmaStreamFreeI(const at32_dma_stream_t *dmastp) {
 
   /* Shutting down clocks that are no more required, if any.*/
   if ((dma.allocated_mask & AT32_DMA1_STREAMS_MASK) == 0U) {
-    crmDisableEDMA1();
+    crmDisableDMA1();
   }
 #if AT32_HAS_DMA2 == TRUE
   if ((dma.allocated_mask & AT32_DMA2_STREAMS_MASK) == 0U) {
-    crmDisableEDMA2();
+    crmDisableDMA2();
   }
 #endif
 
-#if (AT32_DMA_SUPPORTS_DMAMUX == TRUE) && defined(crmDisableEDMAMUX)
+#if (AT32_DMA_SUPPORTS_DMAMUX == TRUE) && defined(crmDisableDMAMUX)
   /* Shutting down DMAMUX if present.*/
   if (dma.allocated_mask == 0U) {
-    crmDisableEDMAMUX();
+    crmDisableDMAMUX();
   }
 #endif
 }

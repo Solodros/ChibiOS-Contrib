@@ -434,10 +434,10 @@ typedef void (*at32_dmasts_t)(void *p, uint32_t flags);
  * @brief   AT32 DMA stream descriptor structure.
  */
 typedef struct {
-  EDMA_Stream_TypeDef     *stream;        /**< @brief Associated EDMA stream.  */
+  DMA_Stream_TypeDef     *stream;        /**< @brief Associated DMA stream.  */
   volatile uint32_t       *clr;           /**< @brief Associated CLR reg.     */
 #if (AT32_DMA_SUPPORTS_DMAMUX == TRUE) || defined(__DOXYGEN__)
-  EDMAMUX_Channel_TypeDef *mux;           /**< @brief Associated EDMA mux.      */
+  DMAMUX_Channel_TypeDef *mux;           /**< @brief Associated DMA mux.      */
 #else
   uint8_t                 dummy;          /**< @brief Filler.                 */
 #endif
