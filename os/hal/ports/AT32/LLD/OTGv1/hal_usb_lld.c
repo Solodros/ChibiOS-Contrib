@@ -57,7 +57,7 @@
 #if defined(BOARD_OTG_NOVBUSSENS)
 #define GCCFG_INIT_VALUE        (GCCFG_NOVBUSSENS | GCCFG_PWRDWN)
 #else
-#define GCCFG_INIT_VALUE        (GCCFG_VBDEN | GCCFG_PWRDWN)
+#define GCCFG_INIT_VALUE        GCCFG_PWRDWN
 #endif
 
 #endif
@@ -846,7 +846,6 @@ void usb_lld_start(USBDriver *usbp) {
     /* VBUS sensing and transceiver enabled.*/
     otgp->GOTGCTL = GOTGCTL_BVALOEN | GOTGCTL_BVALOVAL;
 
-#if defined(BOARD_OTG2_USES_ULPI)
 #if AT32_USB_USE_OTG1
     if (&USBD1 == usbp) {
       otgp->GCCFG = GCCFG_INIT_VALUE;
@@ -855,11 +854,12 @@ void usb_lld_start(USBDriver *usbp) {
 
 #if AT32_USB_USE_OTG2
     if (&USBD2 == usbp) {
+#if defined(BOARD_OTG2_USES_ULPI) && !defined(AT32F402_5xx)
       otgp->GCCFG = 0;
-    }
-#endif
 #else
-    otgp->GCCFG = GCCFG_INIT_VALUE;
+      otgp->GCCFG = GCCFG_INIT_VALUE;
+#endif
+    }
 #endif
 
     /* Soft core reset.*/
