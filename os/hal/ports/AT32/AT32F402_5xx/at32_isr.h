@@ -127,8 +127,8 @@
 #define AT32_EXINT17_HANDLER               VectorE4    /* ERTC ALARM       */
 #define AT32_EXINT18_HANDLER               VectorE8    /* OTGFS1 WAKEUP    */
 #define AT32_EXINT20_HANDLER               Vector170   /* OTGHS WAKEUP     */
-#define AT32_EXINT21_HANDLER               VectorE8    /* ERTC TAMP        */
-#define AT32_EXINT22_HANDLER               Vector48    /* ERTC WAKEUP      */
+#define AT32_EXINT21_HANDLER               Vector48    /* ERTC TAMP        */
+#define AT32_EXINT22_HANDLER               Vector4C    /* ERTC WAKEUP      */
 
 #define AT32_EXINT0_NUMBER                 6
 #define AT32_EXINT1_NUMBER                 7

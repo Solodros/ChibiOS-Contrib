@@ -108,35 +108,35 @@
 /*
  * EXINT unit.
  */
-#define AT32_EXINT0_HANDLER                 Vector58
-#define AT32_EXINT1_HANDLER                 Vector5C
-#define AT32_EXINT2_HANDLER                 Vector60
-#define AT32_EXINT3_HANDLER                 Vector64
-#define AT32_EXINT4_HANDLER                 Vector68
-#define AT32_EXINT5_9_HANDLER               Vector9C
-#define AT32_EXINT10_15_HANDLER             VectorE0
-#define AT32_EXINT16_HANDLER                Vector44    /* PVM              */
-#define AT32_EXINT17_HANDLER                VectorE4    /* ERTC ALARM       */
-#define AT32_EXINT18_HANDLER                VectorE8    /* OTG FS WAKEUP    */
-#define AT32_EXINT19_HANDLER                Vector158   /* CMP1             */
-#define AT32_EXINT20_HANDLER                Vector15C   /* CMP2             */
-#define AT32_EXINT21_HANDLER                Vector48    /* ERTC TAMPER      */
-#define AT32_EXINT22_HANDLER                Vector4C    /* ERTC WAKEUP      */
+#define AT32_EXINT0_HANDLER                Vector58
+#define AT32_EXINT1_HANDLER                Vector5C
+#define AT32_EXINT2_HANDLER                Vector60
+#define AT32_EXINT3_HANDLER                Vector64
+#define AT32_EXINT4_HANDLER                Vector68
+#define AT32_EXINT5_9_HANDLER              Vector9C
+#define AT32_EXINT10_15_HANDLER            VectorE0
+#define AT32_EXINT16_HANDLER               Vector44    /* PVM              */
+#define AT32_EXINT17_HANDLER               VectorE4    /* ERTC ALARM       */
+#define AT32_EXINT18_HANDLER               VectorE8    /* OTG FS WAKEUP    */
+#define AT32_EXINT19_HANDLER               Vector158   /* CMP1             */
+#define AT32_EXINT20_HANDLER               Vector15C   /* CMP2             */
+#define AT32_EXINT21_HANDLER               Vector48    /* ERTC TAMPER      */
+#define AT32_EXINT22_HANDLER               Vector4C    /* ERTC WAKEUP      */
 
-#define AT32_EXINT0_NUMBER                  6
-#define AT32_EXINT1_NUMBER                  7
-#define AT32_EXINT2_NUMBER                  8
-#define AT32_EXINT3_NUMBER                  9
-#define AT32_EXINT4_NUMBER                  10
-#define AT32_EXINT5_9_NUMBER                23
-#define AT32_EXINT10_15_NUMBER              40
-#define AT32_EXINT16_NUMBER                 1
-#define AT32_EXINT17_NUMBER                 41
-#define AT32_EXINT18_NUMBER                 42
-#define AT32_EXINT19_NUMBER                 70
-#define AT32_EXINT20_NUMBER                 71
-#define AT32_EXINT21_NUMBER                 2
-#define AT32_EXINT22_NUMBER                 3
+#define AT32_EXINT0_NUMBER                 6
+#define AT32_EXINT1_NUMBER                 7
+#define AT32_EXINT2_NUMBER                 8
+#define AT32_EXINT3_NUMBER                 9
+#define AT32_EXINT4_NUMBER                 10
+#define AT32_EXINT5_9_NUMBER               23
+#define AT32_EXINT10_15_NUMBER             40
+#define AT32_EXINT16_NUMBER                1
+#define AT32_EXINT17_NUMBER                41
+#define AT32_EXINT18_NUMBER                42
+#define AT32_EXINT19_NUMBER                70
+#define AT32_EXINT20_NUMBER                71
+#define AT32_EXINT21_NUMBER                2
+#define AT32_EXINT22_NUMBER                3
 
 /*
  * I2C units.
