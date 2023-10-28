@@ -42,18 +42,35 @@
 #define SPI_SUPPORTS_SLAVE_MODE         TRUE
 
 /**
- * @name    Register helpers not found in ST headers
+ * @name    Register helpers not found in AT headers
  * @{
  */
-#define SPI_CFG1_MBR_VALUE(n)           ((n) << SPI_CFG1_MBR_Pos)
-#define SPI_CFG1_MBR_DIV2               SPI_CFG1_MBR_VALUE(0)
-#define SPI_CFG1_MBR_DIV4               SPI_CFG1_MBR_VALUE(1)
-#define SPI_CFG1_MBR_DIV8               SPI_CFG1_MBR_VALUE(2)
-#define SPI_CFG1_MBR_DIV16              SPI_CFG1_MBR_VALUE(3)
-#define SPI_CFG1_MBR_DIV32              SPI_CFG1_MBR_VALUE(4)
-#define SPI_CFG1_MBR_DIV64              SPI_CFG1_MBR_VALUE(5)
-#define SPI_CFG1_MBR_DIV128             SPI_CFG1_MBR_VALUE(6)
-#define SPI_CFG1_MBR_DIV256             SPI_CFG1_MBR_VALUE(7)
+#define SPI_CTRL1_MDIV_VALUE(n)           ((n & 0x7) << 3)
+#define SPI_CTRL1_MDIV_DIV2               SPI_CTRL1_MDIV_VALUE(0)
+#define SPI_CTRL1_MDIV_DIV4               SPI_CTRL1_MDIV_VALUE(1)
+#define SPI_CTRL1_MDIV_DIV8               SPI_CTRL1_MDIV_VALUE(2)
+#define SPI_CTRL1_MDIV_DIV16              SPI_CTRL1_MDIV_VALUE(3)
+#define SPI_CTRL1_MDIV_DIV32              SPI_CTRL1_MDIV_VALUE(4)
+#define SPI_CTRL1_MDIV_DIV64              SPI_CTRL1_MDIV_VALUE(5)
+#define SPI_CTRL1_MDIV_DIV128             SPI_CTRL1_MDIV_VALUE(6)
+#define SPI_CTRL1_MDIV_DIV256             SPI_CTRL1_MDIV_VALUE(7)
+#define SPI_CTRL1_MDIV_DIV512             SPI_CTRL1_MDIV_VALUE(8)
+#define SPI_CTRL1_MDIV_DIV1024            SPI_CTRL1_MDIV_VALUE(9)
+
+#define SPI_CTRL2_MDIV_VALUE(n)           ((n & 0x8) << 5)
+#define SPI_CTRL2_MDIV_DIV2               SPI_CTRL2_MDIV_VALUE(0)
+#define SPI_CTRL2_MDIV_DIV4               SPI_CTRL2_MDIV_VALUE(1)
+#define SPI_CTRL2_MDIV_DIV8               SPI_CTRL1_MDIV_VALUE(2)
+#define SPI_CTRL2_MDIV_DIV16              SPI_CTRL2_MDIV_VALUE(3)
+#define SPI_CTRL2_MDIV_DIV32              SPI_CTRL2_MDIV_VALUE(4)
+#define SPI_CTRL2_MDIV_DIV64              SPI_CTRL2_MDIV_VALUE(5)
+#define SPI_CTRL2_MDIV_DIV128             SPI_CTRL2_MDIV_VALUE(6)
+#define SPI_CTRL2_MDIV_DIV256             SPI_CTRL2_MDIV_VALUE(7)
+#define SPI_CTRL2_MDIV_DIV512             SPI_CTRL2_MDIV_VALUE(8)
+#define SPI_CTRL2_MDIV_DIV1024            SPI_CTRL2_MDIV_VALUE(9)
+
+#define SPI_CTRL1_MDIV_DIV3               (0x0U)
+#define SPI_CTRL2_MDIV_DIV3               (0x1U << 9)
 
 /** @} */
 
@@ -474,7 +491,7 @@
   /* Pointer to the SPIx registers block.*/                                 \
   SPI_TypeDef               *spi;                                           \
   /** DMA type for this instance.*/                                         \
-  bool                      is_bdma;                                        \
+  bool                      is_edma;                                        \
   /* Receive DMA stream.*/                                                  \
   const at32_dma_stream_t  *dmarx;                                          \
   /* Transmit DMA stream.*/                                                 \

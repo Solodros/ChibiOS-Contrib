@@ -126,12 +126,12 @@ static void spi_lld_configure(SPIDriver *spip) {
   if (spip->config->slave) {
     spip->spi->CTRL1 = spip->config->ctrl1 & ~(SPI_CTRL1_MSTEN | SPI_CTRL1_SPIEN);
     spip->spi->CTRL2 = spip->config->ctrl2 |
-                        SPI_CTRL2_DMAREN   | SPI_CTRL2_DMATEN;
+                       SPI_CTRL2_DMAREN    | SPI_CTRL2_DMATEN;
   }
   else {
     spip->spi->CTRL1 = (spip->config->ctrl1 | SPI_CTRL1_MSTEN) & ~SPI_CTRL1_SPIEN;
     spip->spi->CTRL2 = spip->config->ctrl2 | SPI_CTRL2_HWCSOE |
-                        SPI_CTRL2_DMAREN   | SPI_CTRL2_DMATEN;
+                       SPI_CTRL2_DMAREN    | SPI_CTRL2_DMATEN;
   }
 }
 
@@ -644,7 +644,7 @@ void spi_lld_stop(SPIDriver *spip) {
   if (spip->state == SPI_READY) {
 
     /* Just in case this has been called uncleanly.*/
-    (void) spi_lld_stop_abort(spip);
+    (void)spi_lld_stop_abort(spip);
 
     /* SPI cleanup.*/
     spip->spi->CTRL1  = 0;
