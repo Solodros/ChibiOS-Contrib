@@ -475,116 +475,136 @@ void gpt_lld_init(void) {
 
 #if AT32_GPT_USE_TMR1
   /* Driver initialization.*/
-  GPTD1.tmr = AT32_TMR1;
   gptObjectInit(&GPTD1);
+  GPTD1.tmr = AT32_TMR1;
+  GPTD1.has_plus_mode = (bool)AT32_TMR1_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR2
   /* Driver initialization.*/
-  GPTD2.tmr = AT32_TMR2;
   gptObjectInit(&GPTD2);
+  GPTD2.tmr = AT32_TMR2;
+  GPTD2.has_plus_mode = (bool)AT32_TMR2_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR3
   /* Driver initialization.*/
-  GPTD3.tmr = AT32_TMR3;
   gptObjectInit(&GPTD3);
+  GPTD3.tmr = AT32_TMR3;
+  GPTD3.has_plus_mode = (bool)AT32_TMR3_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR4
   /* Driver initialization.*/
   GPTD4.tmr = AT32_TMR4;
   gptObjectInit(&GPTD4);
+  GPTD4.tmr = AT32_TMR4;
+  GPTD4.has_plus_mode = (bool)AT32_TMR4_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR5
   /* Driver initialization.*/
-  GPTD5.tmr = AT32_TMR5;
   gptObjectInit(&GPTD5);
+  GPTD5.tmr = AT32_TMR5;
+  GPTD5.has_plus_mode = (bool)AT32_TMR5_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR6
   /* Driver initialization.*/
-  GPTD6.tmr = AT32_TMR6;
   gptObjectInit(&GPTD6);
+  GPTD6.tmr = AT32_TMR6;
+  GPTD6.has_plus_mode = (bool)AT32_TMR6_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR7
   /* Driver initialization.*/
-  GPTD7.tmr = AT32_TMR7;
   gptObjectInit(&GPTD7);
+  GPTD7.tmr = AT32_TMR7;
+  GPTD7.has_plus_mode = (bool)AT32_TMR7_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR8
   /* Driver initialization.*/
-  GPTD8.tmr = AT32_TMR8;
   gptObjectInit(&GPTD8);
+  GPTD8.tmr = AT32_TMR8;
+  GPTD8.has_plus_mode = (bool)AT32_TMR8_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR9
   /* Driver initialization.*/
-  GPTD9.tmr = AT32_TMR9;
   gptObjectInit(&GPTD9);
+  GPTD9.tmr = AT32_TMR9;
+  GPTD9.has_plus_mode = (bool)AT32_TMR9_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR10
   /* Driver initialization.*/
-  GPTD10.tmr = AT32_TMR10;
   gptObjectInit(&GPTD10);
+  GPTD10.tmr = AT32_TMR10;
+  GPTD10.has_plus_mode = (bool)AT32_TMR10_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR11
   /* Driver initialization.*/
-  GPTD11.tmr = AT32_TMR11;
   gptObjectInit(&GPTD11);
+  GPTD11.tmr = AT32_TMR11;
+  GPTD11.has_plus_mode = (bool)AT32_TMR11_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR12
   /* Driver initialization.*/
-  GPTD12.tmr = AT32_TMR12;
   gptObjectInit(&GPTD12);
+  GPTD12.tmr = AT32_TMR12;
+  GPTD12.has_plus_mode = (bool)AT32_TMR12_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR13
   /* Driver initialization.*/
-  GPTD13.tmr = AT32_TMR13;
   gptObjectInit(&GPTD13);
+  GPTD13.tmr = AT32_TMR13;
+  GPTD13.has_plus_mode = (bool)AT32_TMR13_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR14
   /* Driver initialization.*/
-  GPTD14.tmr = AT32_TMR14;
   gptObjectInit(&GPTD14);
+  GPTD14.tmr = AT32_TMR14;
+  GPTD14.has_plus_mode = (bool)AT32_TMR14_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR15
   /* Driver initialization.*/
-  GPTD15.tmr = AT32_TMR15;
   gptObjectInit(&GPTD15);
+  GPTD15.tmr = AT32_TMR15;
+  GPTD15.has_plus_mode = (bool)AT32_TMR15_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR16
   /* Driver initialization.*/
-  GPTD16.tmr = AT32_TMR16;
   gptObjectInit(&GPTD16);
+  GPTD16.tmr = AT32_TMR16;
+  GPTD16.has_plus_mode = (bool)AT32_TMR16_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR17
   /* Driver initialization.*/
-  GPTD17.tmr = AT32_TMR17;
   gptObjectInit(&GPTD17);
+  GPTD17.tmr = AT32_TMR17;
+  GPTD17.has_plus_mode = (bool)AT32_TMR17_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR21
   /* Driver initialization.*/
-  GPTD21.tmr = AT32_TMR21;
   gptObjectInit(&GPTD21);
+  GPTD21.tmr = AT32_TMR21;
+  GPTD21.has_plus_mode = (bool)AT32_TMR21_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR22
   /* Driver initialization.*/
-  GPTD22.tmr = AT32_TMR22;
   gptObjectInit(&GPTD22);
+  GPTD22.tmr = AT32_TMR22;
+  GPTD22.has_plus_mode = (bool)AT32_TMR22_IS_32BITS;
 #endif
 }
 
@@ -882,8 +902,12 @@ void gpt_lld_start(GPTDriver *gptp) {
   osalDbgAssert(((uint32_t)(div + 1) * gptp->config->frequency) == gptp->clock,
                 "invalid frequency");
 
+  /* If timer counter is 32bits.*/
+  if (gptp->has_plus_mode) {
+    gptp->tmr->CTRL1 = AT32_TMR_CTRL1_PMEN;
+  }
+
   /* Timer configuration.*/
-  gptp->tmr->CTRL1 = 0;                          /* Initially stopped.       */
   gptp->tmr->CTRL2 = gptp->config->ctrl2;
   gptp->tmr->DIV   = div;                        /* Prescaler value.         */
   gptp->tmr->ISTS  = 0;                          /* Clear pending IRQs.      */
@@ -1089,7 +1113,7 @@ void gpt_lld_start_timer(GPTDriver *gptp, gptcnt_t interval) {
   gptp->tmr->ISTS = 0;                          /* Clear pending IRQs.      */
   if (NULL != gptp->config->callback)
     gptp->tmr->IDEN |= AT32_TMR_IDEN_OVFIEN;    /* Update Event IRQ enabled.*/
-  gptp->tmr->CTRL1 = AT32_TMR_CTRL1_PRBEN | AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_TMREN;
+  gptp->tmr->CTRL1 |= AT32_TMR_CTRL1_PRBEN | AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_TMREN;
 }
 
 /**
@@ -1101,8 +1125,9 @@ void gpt_lld_start_timer(GPTDriver *gptp, gptcnt_t interval) {
  */
 void gpt_lld_stop_timer(GPTDriver *gptp) {
 
-  gptp->tmr->CTRL1 = 0;                         /* Initially stopped.       */
-  gptp->tmr->ISTS  = 0;                         /* Clear pending IRQs.      */
+  gptp->tmr->CTRL1 &= ~(AT32_TMR_CTRL1_PRBEN | AT32_TMR_CTRL1_OVFS | 
+                        AT32_TMR_CTRL1_TMREN);                         /* Initially stopped.       */
+  gptp->tmr->ISTS  = 0;                                                /* Clear pending IRQs.      */
 
   /* All interrupts disabled.*/
   gptp->tmr->IDEN &= ~AT32_TMR_IDEN_IRQ_MASK;
@@ -1121,10 +1146,10 @@ void gpt_lld_stop_timer(GPTDriver *gptp) {
  */
 void gpt_lld_polled_delay(GPTDriver *gptp, gptcnt_t interval) {
 
-  gptp->tmr->PR    = (uint32_t)(interval - 1U);   /* Time constant.           */
-  gptp->tmr->SWEVT = AT32_TMR_SWEVT_OVFSWTR;      /* Update event.            */
-  gptp->tmr->ISTS  = 0;                           /* Clear pending IRQs.      */
-  gptp->tmr->CTRL1 = AT32_TMR_CTRL1_OCMEN | AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_TMREN;
+  gptp->tmr->PR     = (uint32_t)(interval - 1U);   /* Time constant.           */
+  gptp->tmr->SWEVT  = AT32_TMR_SWEVT_OVFSWTR;      /* Update event.            */
+  gptp->tmr->ISTS   = 0;                           /* Clear pending IRQs.      */
+  gptp->tmr->CTRL1 |= AT32_TMR_CTRL1_OCMEN | AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_TMREN;
   while (!(gptp->tmr->ISTS & AT32_TMR_ISTS_OVFIF))
     ;
   gptp->tmr->ISTS = 0;                         /* Clear pending IRQs.      */

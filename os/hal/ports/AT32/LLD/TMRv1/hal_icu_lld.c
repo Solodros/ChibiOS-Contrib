@@ -449,96 +449,112 @@ void icu_lld_init(void) {
   /* Driver initialization.*/
   icuObjectInit(&ICUD1);
   ICUD1.tmr = AT32_TMR1;
+  ICUD1.has_plus_mode = (bool)AT32_TMR1_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR2
   /* Driver initialization.*/
   icuObjectInit(&ICUD2);
   ICUD2.tmr = AT32_TMR2;
+  ICUD2.has_plus_mode = (bool)AT32_TMR2_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR3
   /* Driver initialization.*/
   icuObjectInit(&ICUD3);
   ICUD3.tmr = AT32_TMR3;
+  ICUD3.has_plus_mode = (bool)AT32_TMR3_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR4
   /* Driver initialization.*/
   icuObjectInit(&ICUD4);
   ICUD4.tmr = AT32_TMR4;
+  ICUD4.has_plus_mode = (bool)AT32_TMR4_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR5
   /* Driver initialization.*/
   icuObjectInit(&ICUD5);
   ICUD5.tmr = AT32_TMR5;
+  ICUD5.has_plus_mode = (bool)AT32_TMR5_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR8
   /* Driver initialization.*/
   icuObjectInit(&ICUD8);
   ICUD8.tmr = AT32_TMR8;
+  ICUD8.has_plus_mode = (bool)AT32_TMR8_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR9
   /* Driver initialization.*/
   icuObjectInit(&ICUD9);
   ICUD9.tmr = AT32_TMR9;
+  ICUD9.has_plus_mode = (bool)AT32_TMR9_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR10
   /* Driver initialization.*/
   icuObjectInit(&ICUD10);
   ICUD10.tmr = AT32_TMR10;
+  ICUD10.has_plus_mode = (bool)AT32_TMR10_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR11
   /* Driver initialization.*/
   icuObjectInit(&ICUD11);
   ICUD11.tmr = AT32_TMR11;
+  ICUD11.has_plus_mode = (bool)AT32_TMR11_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR12
   /* Driver initialization.*/
   icuObjectInit(&ICUD12);
   ICUD12.tmr = AT32_TMR12;
+  ICUD12.has_plus_mode = (bool)AT32_TMR12_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR13
   /* Driver initialization.*/
   icuObjectInit(&ICUD13);
   ICUD13.tmr = AT32_TMR13;
+  ICUD13.has_plus_mode = (bool)AT32_TMR13_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR14
   /* Driver initialization.*/
   icuObjectInit(&ICUD14);
   ICUD14.tmr = AT32_TMR14;
+  ICUD14.has_plus_mode = (bool)AT32_TMR14_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR15
   /* Driver initialization.*/
   icuObjectInit(&ICUD15);
   ICUD15.tmr = AT32_TMR15;
+  ICUD15.has_plus_mode = (bool)AT32_TMR15_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR20
   /* Driver initialization.*/
   icuObjectInit(&ICUD20);
   ICUD20.tmr = AT32_TMR20;
+  ICUD20.has_plus_mode = (bool)AT32_TMR20_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR21
   /* Driver initialization.*/
   icuObjectInit(&ICUD21);
   ICUD21.tmr = AT32_TMR21;
+  ICUD21.has_plus_mode = (bool)AT32_TMR21_IS_32BITS;
 #endif
 
 #if AT32_ICU_USE_TMR22
   /* Driver initialization.*/
   icuObjectInit(&ICUD22);
   ICUD22.tmr = AT32_TMR22;
+  ICUD22.has_plus_mode = (bool)AT32_TMR22_IS_32BITS;
 #endif
 }
 
@@ -778,6 +794,11 @@ void icu_lld_start(ICUDriver *icup) {
     icup->tmr->CVAL   = 0;                  /* Counter reset to zero.       */
   }
 
+  /* If timer counter is 32bits.*/
+  if (icup->has_plus_mode) {
+    icup->tmr->CTRL1 = AT32_TMR_CTRL1_PMEN;
+  }
+
   /* Timer configuration.*/
   icup->tmr->ISTS = 0;                      /* Clear eventual pending IRQs. */
   icup->tmr->IDEN = icup->config->iden &    /* DMA-related IDEN settings.   */
@@ -995,7 +1016,7 @@ void icu_lld_start_capture(ICUDriver *icup) {
   icup->tmr->ISTS   = 0;
 
   /* Timer is started.*/
-  icup->tmr->CTRL1 = AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_TMREN;
+  icup->tmr->CTRL1 |= AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_TMREN;
 }
 
 /**
@@ -1032,7 +1053,7 @@ bool icu_lld_wait_capture(ICUDriver *icup) {
 void icu_lld_stop_capture(ICUDriver *icup) {
 
   /* Timer stopped.*/
-  icup->tmr->CTRL1 = 0;
+  icup->tmr->CTRL1 &= ~(AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_TMREN);
 
   /* All interrupts disabled.*/
   icup->tmr->IDEN &= ~AT32_TMR_IDEN_IRQ_MASK;

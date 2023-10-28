@@ -748,6 +748,10 @@ struct ICUDriver {
    */
   uint32_t                  clock;
   /**
+   * @brief Presence of plus mode.
+   */
+  bool                      has_plus_mode;
+  /**
    * @brief Pointer to the TMRx registers block.
    */
   at32_tmr_t                *tmr;

@@ -451,6 +451,7 @@ void pwm_lld_init(void) {
   PWMD1.channels = AT32_TMR1_CHANNELS;
   PWMD1.tmr = AT32_TMR1;
   PWMD1.has_brk = true;
+  PWMD1.has_plus_mode = (bool)AT32_TMR1_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR2
@@ -459,6 +460,7 @@ void pwm_lld_init(void) {
   PWMD2.channels = AT32_TMR2_CHANNELS;
   PWMD2.tmr = AT32_TMR2;
   PWMD2.has_brk = false;
+  PWMD2.has_plus_mode = (bool)AT32_TMR2_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR3
@@ -467,6 +469,7 @@ void pwm_lld_init(void) {
   PWMD3.channels = AT32_TMR3_CHANNELS;
   PWMD3.tmr = AT32_TMR3;
   PWMD3.has_brk = false;
+  PWMD3.has_plus_mode = (bool)AT32_TMR3_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR4
@@ -475,6 +478,7 @@ void pwm_lld_init(void) {
   PWMD4.channels = AT32_TMR4_CHANNELS;
   PWMD4.tmr = AT32_TMR4;
   PWMD4.has_brk = false;
+  PWMD4.has_plus_mode = (bool)AT32_TMR4_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR5
@@ -483,6 +487,7 @@ void pwm_lld_init(void) {
   PWMD5.channels = AT32_TMR5_CHANNELS;
   PWMD5.tmr = AT32_TMR5;
   PWMD5.has_brk = false;
+  PWMD5.has_plus_mode = (bool)AT32_TMR5_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR8
@@ -491,6 +496,7 @@ void pwm_lld_init(void) {
   PWMD8.channels = AT32_TMR8_CHANNELS;
   PWMD8.tmr = AT32_TMR8;
   PWMD8.has_brk = true;
+  PWMD8.has_plus_mode = (bool)AT32_TMR8_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR9
@@ -499,6 +505,7 @@ void pwm_lld_init(void) {
   PWMD9.channels = AT32_TMR9_CHANNELS;
   PWMD9.tmr = AT32_TMR9;
   PWMD9.has_brk = false;
+  PWMD9.has_plus_mode = (bool)AT32_TMR9_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR10
@@ -507,6 +514,7 @@ void pwm_lld_init(void) {
   PWMD10.channels = AT32_TMR10_CHANNELS;
   PWMD10.tmr = AT32_TMR10;
   PWMD10.has_brk = false;
+  PWMD10.has_plus_mode = (bool)AT32_TMR10_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR11
@@ -515,6 +523,7 @@ void pwm_lld_init(void) {
   PWMD11.channels = AT32_TMR11_CHANNELS;
   PWMD11.tmr = AT32_TMR11;
   PWMD11.has_brk = false;
+  PWMD11.has_plus_mode = (bool)AT32_TMR11_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR12
@@ -523,6 +532,7 @@ void pwm_lld_init(void) {
   PWMD12.channels = AT32_TMR12_CHANNELS;
   PWMD12.tmr = AT32_TMR12;
   PWMD12.has_brk = false;
+  PWMD12.has_plus_mode = (bool)AT32_TMR12_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR13
@@ -531,6 +541,7 @@ void pwm_lld_init(void) {
   PWMD13.channels = AT32_TMR13_CHANNELS;
   PWMD13.tmr = AT32_TMR13;
   PWMD13.has_brk = false;
+  PWMD13.has_plus_mode = (bool)AT32_TMR13_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR14
@@ -539,6 +550,7 @@ void pwm_lld_init(void) {
   PWMD14.channels = AT32_TMR14_CHANNELS;
   PWMD14.tmr = AT32_TMR14;
   PWMD14.has_brk = false;
+  PWMD14.has_plus_mode = (bool)AT32_TMR14_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR15
@@ -547,6 +559,7 @@ void pwm_lld_init(void) {
   PWMD15.channels = AT32_TMR15_CHANNELS;
   PWMD15.tmr = AT32_TMR15;
   PWMD15.has_brk = true;
+  PWMD15.has_plus_mode = (bool)AT32_TMR15_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR16
@@ -555,6 +568,7 @@ void pwm_lld_init(void) {
   PWMD16.channels = AT32_TMR16_CHANNELS;
   PWMD16.tmr = AT32_TMR16;
   PWMD16.has_brk = true;
+  PWMD16.has_plus_mode = (bool)AT32_TMR16_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR17
@@ -563,6 +577,7 @@ void pwm_lld_init(void) {
   PWMD17.channels = AT32_TMR17_CHANNELS;
   PWMD17.tmr = AT32_TMR17;
   PWMD17.has_brk = true;
+  PWMD17.has_plus_mode = (bool)AT32_TMR17_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR20
@@ -571,6 +586,7 @@ void pwm_lld_init(void) {
   PWMD20.channels = AT32_TMR20_CHANNELS;
   PWMD20.tmr = AT32_TMR20;
   PWMD20.has_brk = true;
+  PWMD20.has_plus_mode = (bool)AT32_TMR20_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR21
@@ -579,6 +595,7 @@ void pwm_lld_init(void) {
   PWMD21.channels = AT32_TMR21_CHANNELS;
   PWMD21.tmr = AT32_TMR21;
   PWMD21.has_brk = false;
+  PWMD21.has_plus_mode = (bool)AT32_TMR21_IS_32BITS;
 #endif
 
 #if AT32_PWM_USE_TMR22
@@ -587,6 +604,7 @@ void pwm_lld_init(void) {
   PWMD22.channels = AT32_TMR22_CHANNELS;
   PWMD22.tmr = AT32_TMR22;
   PWMD22.has_brk = false;
+  PWMD22.has_plus_mode = (bool)AT32_TMR22_IS_32BITS;
 #endif
 }
 
@@ -851,30 +869,34 @@ void pwm_lld_start(PWMDriver *pwmp) {
     pwmp->tmr->CM3 = AT32_TMR_CM3_C5OCTRL(6) | AT32_TMR_CM3_C5OBEN |
                      AT32_TMR_CM3_C6OCTRL(6) | AT32_TMR_CM3_C6OBEN;
 #endif
-  }
-  else {
+  } else {
     /* Driver re-configuration scenario, it must be stopped first.*/
-    pwmp->tmr->CTRL1  = 0;                  /* Timer disabled.              */
-    pwmp->tmr->CDT[0] = 0;                  /* Comparator 1 disabled.       */
-    pwmp->tmr->CDT[1] = 0;                  /* Comparator 2 disabled.       */
-    pwmp->tmr->CDT[2] = 0;                  /* Comparator 3 disabled.       */
-    pwmp->tmr->CDT[3] = 0;                  /* Comparator 4 disabled.       */
+    pwmp->tmr->CTRL1  = 0; /* Timer disabled.              */
+    pwmp->tmr->CDT[0] = 0; /* Comparator 1 disabled.       */
+    pwmp->tmr->CDT[1] = 0; /* Comparator 2 disabled.       */
+    pwmp->tmr->CDT[2] = 0; /* Comparator 3 disabled.       */
+    pwmp->tmr->CDT[3] = 0; /* Comparator 4 disabled.       */
 #if AT32_TMR_MAX_CHANNELS > 4
     if (pwmp->channels > 4) {
-      pwmp->tmr->CXDT[0] = 0;               /* Comparator 5 disabled.       */
-      pwmp->tmr->CXDT[1] = 0;               /* Comparator 6 disabled.       */
+      pwmp->tmr->CXDT[0] = 0; /* Comparator 5 disabled.       */
+      pwmp->tmr->CXDT[1] = 0; /* Comparator 6 disabled.       */
     }
 #endif
-    pwmp->tmr->CVAL  = 0;                   /* Counter reset to zero.       */
+    pwmp->tmr->CVAL = 0; /* Counter reset to zero.       */
+  }
+
+  /* If timer counter is 32bits.*/
+  if (pwmp->has_plus_mode) {
+    pwmp->tmr->CTRL1 = AT32_TMR_CTRL1_PMEN;
   }
 
   /* Timer configuration.*/
   div = (pwmp->clock / pwmp->config->frequency) - 1;
   osalDbgAssert((div <= 0xFFFF) &&
-                ((div + 1) * pwmp->config->frequency) == pwmp->clock,
+                    ((div + 1) * pwmp->config->frequency) == pwmp->clock,
                 "invalid frequency");
-  pwmp->tmr->DIV   = div;
-  pwmp->tmr->PR    = pwmp->period - 1;
+  pwmp->tmr->DIV = div;
+  pwmp->tmr->PR = pwmp->period - 1;
   pwmp->tmr->CTRL2 = pwmp->config->ctrl2;
 
   /* Output enables and polarities setup.*/
@@ -886,8 +908,7 @@ void pwm_lld_start(PWMDriver *pwmp) {
   case PWM_OUTPUT_ACTIVE_HIGH:
     cctrl |= AT32_TMR_CCTRL_C1EN;
     /* Falls through.*/
-  default:
-    ;
+  default:;
   }
   switch (pwmp->config->channels[1].mode & PWM_OUTPUT_MASK) {
   case PWM_OUTPUT_ACTIVE_LOW:
@@ -896,8 +917,7 @@ void pwm_lld_start(PWMDriver *pwmp) {
   case PWM_OUTPUT_ACTIVE_HIGH:
     cctrl |= AT32_TMR_CCTRL_C2EN;
     /* Falls through.*/
-  default:
-    ;
+  default:;
   }
   switch (pwmp->config->channels[2].mode & PWM_OUTPUT_MASK) {
   case PWM_OUTPUT_ACTIVE_LOW:
@@ -906,8 +926,7 @@ void pwm_lld_start(PWMDriver *pwmp) {
   case PWM_OUTPUT_ACTIVE_HIGH:
     cctrl |= AT32_TMR_CCTRL_C3EN;
     /* Falls through.*/
-  default:
-    ;
+  default:;
   }
   switch (pwmp->config->channels[3].mode & PWM_OUTPUT_MASK) {
   case PWM_OUTPUT_ACTIVE_LOW:
@@ -916,8 +935,7 @@ void pwm_lld_start(PWMDriver *pwmp) {
   case PWM_OUTPUT_ACTIVE_HIGH:
     cctrl |= AT32_TMR_CCTRL_C4EN;
     /* Falls through.*/
-  default:
-    ;
+  default:;
   }
   if (pwmp->has_brk) {
     switch (pwmp->config->channels[0].mode & PWM_COMPLEMENTARY_OUTPUT_MASK) {
@@ -927,8 +945,7 @@ void pwm_lld_start(PWMDriver *pwmp) {
     case PWM_COMPLEMENTARY_OUTPUT_ACTIVE_HIGH:
       cctrl |= AT32_TMR_CCTRL_C1CEN;
       /* Falls through.*/
-    default:
-      ;
+    default:;
     }
     switch (pwmp->config->channels[1].mode & PWM_COMPLEMENTARY_OUTPUT_MASK) {
     case PWM_COMPLEMENTARY_OUTPUT_ACTIVE_LOW:
@@ -937,8 +954,7 @@ void pwm_lld_start(PWMDriver *pwmp) {
     case PWM_COMPLEMENTARY_OUTPUT_ACTIVE_HIGH:
       cctrl |= AT32_TMR_CCTRL_C2CEN;
       /* Falls through.*/
-    default:
-      ;
+    default:;
     }
     switch (pwmp->config->channels[2].mode & PWM_COMPLEMENTARY_OUTPUT_MASK) {
     case PWM_COMPLEMENTARY_OUTPUT_ACTIVE_LOW:
@@ -947,8 +963,7 @@ void pwm_lld_start(PWMDriver *pwmp) {
     case PWM_COMPLEMENTARY_OUTPUT_ACTIVE_HIGH:
       cctrl |= AT32_TMR_CCTRL_C3CEN;
       /* Falls through.*/
-    default:
-      ;
+    default:;
     }
     switch (pwmp->config->channels[3].mode & PWM_COMPLEMENTARY_OUTPUT_MASK) {
     case PWM_COMPLEMENTARY_OUTPUT_ACTIVE_LOW:
@@ -957,22 +972,21 @@ void pwm_lld_start(PWMDriver *pwmp) {
     case PWM_COMPLEMENTARY_OUTPUT_ACTIVE_HIGH:
       cctrl |= AT32_TMR_CCTRL_C4CEN;
       /* Falls through.*/
-    default:
-      ;
+    default:;
     }
   }
 
   pwmp->tmr->CCTRL = cctrl;
-  pwmp->tmr->SWEVT = AT32_TMR_SWEVT_OVFSWTR;      /* Update event.                */
-  pwmp->tmr->ISTS  = 0;                           /* Clear pending IRQs.          */
-  pwmp->tmr->IDEN  = pwmp->config->iden &         /* DMA-related IDEN settings.   */
+  pwmp->tmr->SWEVT = AT32_TMR_SWEVT_OVFSWTR;  /* Update event.                */
+  pwmp->tmr->ISTS  = 0;                       /* Clear pending IRQs.          */
+  pwmp->tmr->IDEN  = pwmp->config->iden &     /* DMA-related IDEN settings.   */
                      ~AT32_TMR_IDEN_IRQ_MASK;
   if (pwmp->has_brk) {
     pwmp->tmr->BRK = pwmp->config->brk | AT32_TMR_BRK_OEN;
   }
   /* Timer configured and started.*/
-  pwmp->tmr->CTRL1 = AT32_TMR_CTRL1_PRBEN | AT32_TMR_CTRL1_OVFS |
-                     AT32_TMR_CTRL1_TMREN;
+  pwmp->tmr->CTRL1 |= AT32_TMR_CTRL1_PRBEN | AT32_TMR_CTRL1_OVFS | 
+                      AT32_TMR_CTRL1_TMREN;
 }
 
 /**
@@ -986,11 +1000,11 @@ void pwm_lld_stop(PWMDriver *pwmp) {
 
   /* If in ready state then disables the PWM clock.*/
   if (pwmp->state == PWM_READY) {
-    pwmp->tmr->CTRL1  = 0;                    /* Timer disabled.              */
-    pwmp->tmr->IDEN   = 0;                    /* All IRQs disabled.           */
-    pwmp->tmr->ISTS   = 0;                    /* Clear eventual pending IRQs. */
+    pwmp->tmr->CTRL1 = 0; /* Timer disabled.              */
+    pwmp->tmr->IDEN = 0;  /* All IRQs disabled.           */
+    pwmp->tmr->ISTS = 0;  /* Clear eventual pending IRQs. */
     if (pwmp->has_brk) {
-      pwmp->tmr->BRK  = 0;
+      pwmp->tmr->BRK = 0;
     }
 
 #if AT32_PWM_USE_TMR1
@@ -1136,8 +1150,7 @@ void pwm_lld_stop(PWMDriver *pwmp) {
  *
  * @notapi
  */
-void pwm_lld_enable_channel(PWMDriver *pwmp,
-                            pwmchannel_t channel,
+void pwm_lld_enable_channel(PWMDriver *pwmp, pwmchannel_t channel,
                             pwmcnt_t width) {
 
   /* Changing channel duty cycle on the fly.*/
@@ -1172,8 +1185,7 @@ void pwm_lld_disable_channel(PWMDriver *pwmp, pwmchannel_t channel) {
   if (channel < 4) {
     pwmp->tmr->CDT[channel] = 0;
     pwmp->tmr->IDEN &= ~(2 << channel);
-  }
-  else
+  } else
     pwmp->tmr->CXDT[channel - 4] = 0;
 #endif
 }
@@ -1270,7 +1282,7 @@ void pwm_lld_disable_channel_notification(PWMDriver *pwmp,
 void pwm_lld_serve_interrupt(PWMDriver *pwmp) {
   uint32_t ists;
 
-  ists  = pwmp->tmr->ISTS;
+  ists = pwmp->tmr->ISTS;
   ists &= pwmp->tmr->IDEN & AT32_TMR_IDEN_IRQ_MASK;
   pwmp->tmr->ISTS = ~ists;
   if (((ists & AT32_TMR_ISTS_C1IF) != 0) &&
