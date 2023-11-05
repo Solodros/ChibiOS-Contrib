@@ -1222,6 +1222,7 @@ typedef struct
     * @brief gpio clr register, offset:0x14
     */
   __IO uint32_t CLR;
+  
   /**
     * @brief gpio wpr register, offset:0x18
     */

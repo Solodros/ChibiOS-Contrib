@@ -379,6 +379,18 @@ typedef uint32_t iopadid_t;
 #define pal_lld_clearport(port, bits) ((port)->SCR.H.clear = (uint16_t)(bits))
 
 /**
+ * @brief   Toggles a bits mask on a I/O port.
+ * @details This function is implemented by writing the GPIO TOGR register, the
+ *          implementation has no side effects.
+ *
+ * @param[in] port      port identifier
+ * @param[in] bits      bits to be toggled on the specified port
+ *
+ * @notapi
+ */
+#define pal_lld_toggleport(port, bits) ((port)->TOGR = (uint16_t)(bits))
+
+/**
  * @brief   Writes a group of bits.
  * @details This function is implemented by writing the GPIO SCR register, the
  *          implementation has no side effects.
