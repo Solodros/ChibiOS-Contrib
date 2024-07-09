@@ -1,7 +1,5 @@
 /*
     ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
-    ChibiOS - Copyright (C) 2023..2024 HorrorTroll
-    ChibiOS - Copyright (C) 2023..2024 Zhaqian
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -34,16 +32,12 @@
 
 #if OSAL_ST_MODE == OSAL_ST_MODE_FREERUNNING
 
-#if (OSAL_ST_RESOLUTION != 16) && (OSAL_ST_RESOLUTION != 32)
-#error "unsupported ST resolution"
-#endif
-
 #if (OSAL_ST_RESOLUTION == 32)
-#define ST_PR_INIT                          0xFFFFFFFFU
-#define ST_CTRL1_INIT                       0x00000400U
+#define ST_PR_INIT                         0xFFFFFFFFU
+#define ST_CTRL1_INIT                      0x00000400U
 #else
-#define ST_PR_INIT                          0x0000FFFFU
-#define ST_CTRL1_INIT                       0x00000000U
+#define ST_PR_INIT                         0x0000FFFFU
+#define ST_CTRL1_INIT                      0x00000000U
 #endif
 
 #if AT32_ST_USE_TIMER == 2
@@ -60,7 +54,11 @@
 #define ST_NUMBER                           AT32_TMR2_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK1
 #define ST_ENABLE_CLOCK()                   crmEnableTMR2(true)
-#define ST_ENABLE_PAUSE()                   DEBUG->CTRL |= DEBUG_CTRL_TMR2_PAUSE
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUG_APB1_PAUSE_TMR2_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR2_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 3
 
@@ -76,7 +74,11 @@
 #define ST_NUMBER                           AT32_TMR3_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK1
 #define ST_ENABLE_CLOCK()                   crmEnableTMR3(true)
-#define ST_ENABLE_PAUSE()                   DEBUG->CTRL |= DEBUG_CTRL_TMR3_PAUSE
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUG_APB1_PAUSE_TMR3_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR3_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 4
 
@@ -92,7 +94,11 @@
 #define ST_NUMBER                           AT32_TMR4_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK1
 #define ST_ENABLE_CLOCK()                   crmEnableTMR4(true)
-#define ST_ENABLE_PAUSE()                   DEBUG->CTRL |= DEBUG_CTRL_TMR4_PAUSE
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUG_APB1_PAUSE_TMR4_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR4_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 5
 
@@ -108,7 +114,11 @@
 #define ST_NUMBER                           AT32_TMR5_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK1
 #define ST_ENABLE_CLOCK()                   crmEnableTMR5(true)
-#define ST_ENABLE_PAUSE()                   DEBUG->CTRL |= DEBUG_CTRL_TMR5_PAUSE
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUG_APB1_PAUSE_TMR5_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR5_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 9
 
@@ -124,7 +134,11 @@
 #define ST_NUMBER                           AT32_TMR9_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK2
 #define ST_ENABLE_CLOCK()                   crmEnableTMR9(true)
-#define ST_ENABLE_PAUSE()                   DEBUG->CTRL |= DEBUG_CTRL_TMR9_PAUSE
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUG_APB2_PAUSE_TMR9_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR9_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 10
 
@@ -140,7 +154,11 @@
 #define ST_NUMBER                           AT32_TMR10_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK2
 #define ST_ENABLE_CLOCK()                   crmEnableTMR10(true)
-#define ST_ENABLE_PAUSE()                   DEBUG->CTRL |= DEBUG_CTRL_TMR10_PAUSE
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUG_APB2_PAUSE_TMR10_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR10_PAUSE
+#endif
 
 #elif AT32_ST_USE_TIMER == 11
 
@@ -156,10 +174,174 @@
 #define ST_NUMBER                           AT32_TMR11_NUMBER
 #define ST_CLOCK_SRC                        AT32_TMRCLK2
 #define ST_ENABLE_CLOCK()                   crmEnableTMR11(true)
-#define ST_ENABLE_PAUSE()                   DEBUG->CTRL |= DEBUG_CTRL_TMR11_PAUSE
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUG_APB2_PAUSE_TMR11_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR11_PAUSE
+#endif
+
+#elif AT32_ST_USE_TIMER == 12
+
+#if !AT32_HAS_TMR12
+#error "TMR12 not present in the selected device"
+#endif
+
+#if (OSAL_ST_RESOLUTION == 32) && !AT32_TMR12_IS_32BITS
+#error "TMR12 is not a 32bits timer"
+#endif
+
+#define ST_HANDLER                          AT32_TMR12_HANDLER
+#define ST_NUMBER                           AT32_TMR12_NUMBER
+#define ST_CLOCK_SRC                        AT32_TMRCLK1
+#define ST_ENABLE_CLOCK()                   crmEnableTMR12(true)
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUG_APB1_PAUSE_TMR12_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR12_PAUSE
+#endif
+
+#elif AT32_ST_USE_TIMER == 13
+
+#if !AT32_HAS_TMR13
+#error "TMR13 not present in the selected device"
+#endif
+
+#if (OSAL_ST_RESOLUTION == 32) && !AT32_TMR13_IS_32BITS
+#error "TMR13 is not a 32bits timer"
+#endif
+
+#define ST_HANDLER                          AT32_TMR13_HANDLER
+#define ST_NUMBER                           AT32_TMR13_NUMBER
+#define ST_CLOCK_SRC                        AT32_TMRCLK1
+#define ST_ENABLE_CLOCK()                   crmEnableTMR13(true)
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUG_APB1_PAUSE_TMR13_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR13_PAUSE
+#endif
+
+#elif AT32_ST_USE_TIMER == 14
+
+#if !AT32_HAS_TMR14
+#error "TMR14 not present in the selected device"
+#endif
+
+#if (OSAL_ST_RESOLUTION == 32) && !AT32_TMR14_IS_32BITS
+#error "TMR14 is not a 32bits timer"
+#endif
+
+#define ST_HANDLER                          AT32_TMR14_HANDLER
+#define ST_NUMBER                           AT32_TMR14_NUMBER
+#define ST_CLOCK_SRC                        AT32_TMRCLK1
+#define ST_ENABLE_CLOCK()                   crmEnableTMR14(true)
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB1_PAUSE |= DEBUG_APB1_PAUSE_TMR14_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR14_PAUSE
+#endif
+
+#elif AT32_ST_USE_TIMER == 15
+
+#if !AT32_HAS_TMR15
+#error "TMR15 not present in the selected device"
+#endif
+
+#if (OSAL_ST_RESOLUTION == 32) && !AT32_TMR15_IS_32BITS
+#error "TMR15 is not a 32bits timer"
+#endif
+
+#define ST_HANDLER                          AT32_TMR15_HANDLER
+#define ST_NUMBER                           AT32_TMR15_NUMBER
+#define ST_CLOCK_SRC                        AT32_TMRCLK2
+#define ST_ENABLE_CLOCK()                   crmEnableTMR15(true)
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUG_APB2_PAUSE_TMR15_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR15_PAUSE
+#endif
+
+#elif AT32_ST_USE_TIMER == 16
+
+#if !AT32_HAS_TMR16
+#error "TMR16 not present in the selected device"
+#endif
+
+#if (OSAL_ST_RESOLUTION == 32) && !AT32_TMR16_IS_32BITS
+#error "TMR16 is not a 32bits timer"
+#endif
+
+#define ST_HANDLER                          AT32_TMR16_HANDLER
+#define ST_NUMBER                           AT32_TMR16_NUMBER
+#define ST_CLOCK_SRC                        AT32_TMRCLK2
+#define ST_ENABLE_CLOCK()                   crmEnableTMR16(true)
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUG_APB2_PAUSE_TMR16_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR16_PAUSE
+#endif
+
+#elif AT32_ST_USE_TIMER == 17
+
+#if !AT32_HAS_TMR17
+#error "TMR17 not present in the selected device"
+#endif
+
+#if (OSAL_ST_RESOLUTION == 32) && !AT32_TMR17_IS_32BITS
+#error "TMR17 is not a 32bits timer"
+#endif
+
+#define ST_HANDLER                          AT32_TMR17_HANDLER
+#define ST_NUMBER                           AT32_TMR17_NUMBER
+#define ST_CLOCK_SRC                        AT32_TMRCLK2
+#define ST_ENABLE_CLOCK()                   crmEnableTMR17(true)
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUG_APB2_PAUSE_TMR17_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR17_PAUSE
+#endif
+
+#elif AT32_ST_USE_TIMER == 21
+
+#if !AT32_HAS_TMR21
+#error "TMR21 not present in the selected device"
+#endif
+
+#if (OSAL_ST_RESOLUTION == 32) && !AT32_TMR21_IS_32BITS
+#error "TMR21 is not a 32bits timer"
+#endif
+
+#define ST_HANDLER                          AT32_TMR21_HANDLER
+#define ST_NUMBER                           AT32_TMR21_NUMBER
+#define ST_CLOCK_SRC                        AT32_TMRCLK2
+#define ST_ENABLE_CLOCK()                   crmEnableTMR21(true)
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUG_APB2_PAUSE_TMR21_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR21_PAUSE
+#endif
+
+#elif AT32_ST_USE_TIMER == 22
+
+#if !AT32_HAS_TMR22
+#error "TMR22 not present in the selected device"
+#endif
+
+#if (OSAL_ST_RESOLUTION == 32) && !AT32_TMR22_IS_32BITS
+#error "TMR21 is not a 32bits timer"
+#endif
+
+#define ST_HANDLER                          AT32_TMR22_HANDLER
+#define ST_NUMBER                           AT32_TMR22_NUMBER
+#define ST_CLOCK_SRC                        AT32_TMRCLK2
+#define ST_ENABLE_CLOCK()                   crmEnableTMR22(true)
+#if defined(AT32F435_7xx) || defined(AT32F402_5xx) || defined(AT32F423xx) 
+#define ST_ENABLE_STOP()                    DEBUGMCU->APB2_PAUSE |= DEBUG_APB2_PAUSE_TMR22_PAUSE
+#else
+#define ST_ENABLE_STOP()                    DEBUGMCU->CTRL |= DEBUG_CTRL_TMR22_PAUSE
+#endif
 
 #else
-#error "AT32_ST_USE_TIMER specifies an unsupported timer"
+#error "AT32_ST_USE_TMRER specifies an unsupported timer"
 #endif
 
 #if 0 /* TODO remove */
@@ -178,17 +360,17 @@
 
 #define ST_HANDLER                          SysTick_Handler
 
-#if defined(AT32_CORE_CK)
-#define SYSTICK_CK                          AT32_CORE_CK
+#if defined(AT32_SYSTICK_CLK)
+#define SYSTICK_CLK                         AT32_SYSTICK_CLK
 #else
-#define SYSTICK_CK                          AT32_HCLK
+#define SYSTICK_CLK                         AT32_HCLK
 #endif
 
-#if SYSTICK_CK % OSAL_ST_FREQUENCY != 0
+#if SYSTICK_CLK % OSAL_ST_FREQUENCY != 0
 #error "the selected ST frequency is not obtainable because integer rounding"
 #endif
 
-#if (SYSTICK_CK / OSAL_ST_FREQUENCY) - 1 > 0xFFFFFF
+#if (SYSTICK_CLK / OSAL_ST_FREQUENCY) - 1 > 0xFFFFFF
 #error "the selected ST frequency is not obtainable because SysTick timer counter limits"
 #endif
 
@@ -251,8 +433,8 @@ void st_lld_init(void) {
   /* Enabling timer clock.*/
   ST_ENABLE_CLOCK();
 
-  /* Enabling the pause mode during debug for this timer.*/
-  ST_ENABLE_PAUSE();
+  /* Enabling the stop mode during debug for this timer.*/
+  ST_ENABLE_STOP();
 
   /* Initializing the counter in free running mode.*/
   AT32_ST_TMR->CTRL1  = ST_CTRL1_INIT;
@@ -271,8 +453,8 @@ void st_lld_init(void) {
 #endif
   AT32_ST_TMR->IDEN   = 0;
   AT32_ST_TMR->CTRL2  = 0;
-  AT32_ST_TMR->SWEVT  = AT32_TMR_SWEVT_OVFSWTR;
-  AT32_ST_TMR->CTRL1 |= AT32_TMR_CTRL1_TMREN;
+  AT32_ST_TMR->SWEVT  = (0x1U << 0);
+  AT32_ST_TMR->CTRL1 |= (0x1U << 0);
 
 #if !defined(AT32_SYSTICK_SUPPRESS_ISR)
   /* IRQ enabled.*/
@@ -283,8 +465,8 @@ void st_lld_init(void) {
 #if OSAL_ST_MODE == OSAL_ST_MODE_PERIODIC
   /* Periodic systick mode, the Cortex-Mx internal systick timer is used
      in this mode.*/
-  SysTick->LOAD = (SYSTICK_CK / OSAL_ST_FREQUENCY) - 1;
-  SysTick->VAL = 0;
+  SysTick->LOAD = (SYSTICK_CLK / OSAL_ST_FREQUENCY) - 1;
+  SysTick->VAL  = 0;
   SysTick->CTRL = SysTick_CTRL_CLKSOURCE_Msk |
                   SysTick_CTRL_ENABLE_Msk |
                   SysTick_CTRL_TICKINT_Msk;
@@ -300,13 +482,13 @@ void st_lld_init(void) {
 void st_lld_serve_interrupt(void) {
 #if OSAL_ST_MODE == OSAL_ST_MODE_FREERUNNING
   uint32_t ists;
-  at32_tmr_t *timp = AT32_ST_TMR;
+  at32_tmr_t *tmrp = AT32_ST_TMR;
 
-  ists  = timp->ISTS;
-  ists &= timp->IDEN & AT32_TMR_IDEN_IRQ_MASK;
-  timp->ISTS = ~ists;
+  ists  = tmrp->ISTS;
+  ists &= tmrp->IDEN & AT32_TMR_IDEN_IRQ_MASK;
+  tmrp->ISTS = ~ists;
 
-  if ((ists & AT32_TMR_ISTS_C1IF) != 0U)
+  if ((ists & (0x1U << 1)) != 0U)
 #endif
   {
     osalSysLockFromISR();

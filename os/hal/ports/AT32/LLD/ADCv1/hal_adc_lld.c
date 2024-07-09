@@ -1,7 +1,5 @@
 /*
     ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
-    ChibiOS - Copyright (C) 2023..2024 HorrorTroll
-    ChibiOS - Copyright (C) 2023..2024 Zhaqian
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -17,7 +15,7 @@
 */
 
 /**
- * @file    ADCv1/hal_adc_lld.c
+ * @file    AT32/hal_adc_lld.c
  * @brief   AT32 ADC subsystem low level driver source.
  *
  * @addtogroup ADC
@@ -31,7 +29,20 @@
 /*===========================================================================*/
 /* Driver local definitions.                                                 */
 /*===========================================================================*/
+#if AT32_HAS_ADC1
+#define ADC1_DMA_CHANNEL                                                    \
+  AT32_DMA_GETCHANNEL(AT32_ADC_ADC1_DMA_STREAM, AT32_ADC1_DMA_CHN)
+#endif
 
+#if AT32_HAS_ADC2
+#define ADC2_DMA_CHANNEL                                                    \
+  AT32_DMA_GETCHANNEL(AT32_ADC_ADC2_DMA_STREAM, AT32_ADC2_DMA_CHN)
+#endif
+
+#if AT32_HAS_ADC3
+#define ADC3_DMA_CHANNEL                                                    \
+  AT32_DMA_GETCHANNEL(AT32_ADC_ADC3_DMA_STREAM, AT32_ADC3_DMA_CHN)
+#endif
 /*===========================================================================*/
 /* Driver exported variables.                                                */
 /*===========================================================================*/
@@ -39,6 +50,16 @@
 /** @brief ADC1 driver identifier.*/
 #if AT32_ADC_USE_ADC1 || defined(__DOXYGEN__)
 ADCDriver ADCD1;
+#endif
+
+/** @brief ADC2 driver identifier.*/
+#if AT32_ADC_USE_ADC2 || defined(__DOXYGEN__)
+ADCDriver ADCD2;
+#endif
+
+/** @brief ADC3 driver identifier.*/
+#if AT32_ADC_USE_ADC3 || defined(__DOXYGEN__)
+ADCDriver ADCD3;
 #endif
 
 /*===========================================================================*/
@@ -50,10 +71,10 @@ ADCDriver ADCD1;
 /*===========================================================================*/
 
 /**
- * @brief   ADC DMA service routine.
+ * @brief   Shared ADC DMA ISR service routine.
  *
  * @param[in] adcp      pointer to the @p ADCDriver object
- * @param[in] flags     pre-shifted content of the STS register
+ * @param[in] flags     pre-shifted content of the ISR register
  */
 static void adc_lld_serve_rx_interrupt(ADCDriver *adcp, uint32_t flags) {
 
@@ -95,10 +116,11 @@ void adc_lld_init(void) {
   adcObjectInit(&ADCD1);
   ADCD1.adc = ADC1;
   ADCD1.dmastp  = NULL;
-  ADCD1.dmamode = AT32_DMA_CCTRL_CHPL(AT32_ADC_ADC1_DMA_PRIORITY) |
-                  AT32_DMA_CCTRL_MWIDTH_HWORD | AT32_DMA_CCTRL_PWIDTH_HWORD |
-                  AT32_DMA_CCTRL_MINCM        | AT32_DMA_CCTRL_FDTIEN       |
-                  AT32_DMA_CCTRL_DTERRIEN;
+  ADCD1.dmamode = AT32_DMA_CTRL_CHSEL(ADC1_DMA_CHANNEL) |
+                  AT32_DMA_CTRL_CHPL(AT32_ADC_ADC1_DMA_PRIORITY) |
+                  AT32_DMA_CTRL_MWIDTH_HWORD | AT32_DMA_CTRL_PWIDTH_HWORD |
+                  AT32_DMA_CTRL_MINCM        | AT32_DMA_CTRL_FDTIEN       |
+                  AT32_DMA_CTRL_DTERRIEN;
 
   /* Temporary activation.*/
   crmEnableADC1(true);
@@ -107,17 +129,73 @@ void adc_lld_init(void) {
 
   /* Reset calibration just to be safe.*/
   ADC1->CTRL2 = ADC_CTRL2_ADCEN | ADC_CTRL2_ADCALINIT;
-  while ((ADC1->CTRL2 & ADC_CTRL2_ADCALINIT) != 0)
-    ;
+  while ((ADC1->CTRL2 & ADC_CTRL2_ADCALINIT) != 0);
 
   /* Calibration.*/
   ADC1->CTRL2 = ADC_CTRL2_ADCEN | ADC_CTRL2_ADCAL;
-  while ((ADC1->CTRL2 & ADC_CTRL2_ADCAL) != 0)
-    ;
+  while ((ADC1->CTRL2 & ADC_CTRL2_ADCAL) != 0);
 
   /* Return the ADC in low power mode.*/
   ADC1->CTRL2 = 0;
   crmDisableADC1();
+#endif
+
+#if AT32_ADC_USE_ADC2
+  /* Driver initialization.*/
+  adcObjectInit(&ADCD2);
+  ADCD2.adc = ADC2;
+  ADCD2.dmastp  = NULL;
+  ADCD2.dmamode = AT32_DMA_CTRL_CHSEL(ADC2_DMA_CHANNEL) |
+                  AT32_DMA_CTRL_CHPL(AT32_ADC_ADC2_DMA_PRIORITY) |
+                  AT32_DMA_CTRL_MWIDTH_HWORD | AT32_DMA_CTRL_PWIDTH_HWORD |
+                  AT32_DMA_CTRL_MINCM        | AT32_DMA_CTRL_FDTIEN        |
+                  AT32_DMA_CTRL_DTERRIEN;
+
+  /* Temporary activation.*/
+  crmEnableADC2(true);
+  ADC2->CTRL1 = 0;
+  ADC2->CTRL2 = ADC_CTRL2_ADCEN;
+
+  /* Reset calibration just to be safe.*/
+  ADC2->CTRL2 = ADC_CTRL2_ADCEN | ADC_CTRL2_ADCALINIT;
+  while ((ADC2->CTRL2 & ADC_CTRL2_ADCALINIT) != 0);
+
+  /* Calibration.*/
+  ADC2->CTRL2 = ADC_CTRL2_ADCEN | ADC_CTRL2_ADCAL;
+  while ((ADC2->CTRL2 & ADC_CTRL2_ADCAL) != 0);
+
+  /* Return the ADC in low power mode.*/
+  ADC2->CTRL2 = 0;
+  crmDisableADC2();
+#endif
+
+#if AT32_ADC_USE_ADC3
+  /* Driver initialization.*/
+  adcObjectInit(&ADCD3);
+  ADCD3.adc = ADC3;
+  ADCD3.dmastp  = NULL;
+  ADCD3.dmamode = AT32_DMA_CTRL_CHSEL(ADC3_DMA_CHANNEL) |
+                  AT32_DMA_CTRL_CHPL(AT32_ADC_ADC3_DMA_PRIORITY) |
+                  AT32_DMA_CTRL_MWIDTH_HWORD | AT32_DMA_CTRL_PWIDTH_HWORD |
+                  AT32_DMA_CTRL_MINCM        | AT32_DMA_CTRL_FDTIEN        |
+                  AT32_DMA_CTRL_DTERRIEN;
+
+  /* Temporary activation.*/
+  crmEnableADC3(true);
+  ADC3->CTRL1 = 0;
+  ADC3->CTRL2 = ADC_CTRL2_ADCEN;
+
+  /* Reset calibration just to be safe.*/
+  ADC3->CTRL2 = ADC_CTRL2_ADCEN | ADC_CTRL2_ADCALINIT;
+  while ((ADC3->CTRL2 & ADC_CTRL2_ADCALINIT) != 0);
+
+  /* Calibration.*/
+  ADC3->CTRL2 = ADC_CTRL2_ADCEN | ADC_CTRL2_ADCAL;
+  while ((ADC3->CTRL2 & ADC_CTRL2_ADCAL) != 0);
+
+  /* Return the ADC in low power mode.*/
+  ADC3->CTRL2 = 0;
+  crmDisableADC3();
 #endif
 }
 
@@ -139,16 +217,55 @@ void adc_lld_start(ADCDriver *adcp) {
                                      (at32_dmasts_t)adc_lld_serve_rx_interrupt,
                                      (void *)adcp);
       osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
-
-#if AT32_DMA_SUPPORTS_DMAMUX
-      dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC1_DMAMUX_CHANNEL, AT32_DMAMUX_ADC1);
-#endif
-
       dmaStreamSetPeripheral(adcp->dmastp, &ADC1->ODT);
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC1_DMAMUX_CHANNEL, AT32_DMAMUX_ADC1);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(adcp->dmastp, AT32_DMAMUX_ADC1);
+#endif
+#endif
       crmEnableADC1(true);
     }
 #endif
 
+#if AT32_ADC_USE_ADC2
+    if (&ADCD2 == adcp) {
+      adcp->dmastp = dmaStreamAllocI(AT32_ADC_ADC2_DMA_STREAM,
+                                     AT32_ADC_ADC2_IRQ_PRIORITY,
+                                     (at32_dmasts_t)adc_lld_serve_rx_interrupt,
+                                     (void *)adcp);
+      osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
+      dmaStreamSetPeripheral(adcp->dmastp, &ADC2->ODT);
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC2_DMAMUX_CHANNEL, AT32_DMAMUX_ADC2);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(adcp->dmastp, AT32_DMAMUX_ADC2);
+#endif
+#endif
+      crmEnableADC2(true);
+    }
+#endif
+
+#if AT32_ADC_USE_ADC3
+    if (&ADCD3 == adcp) {
+      adcp->dmastp = dmaStreamAllocI(AT32_ADC_ADC3_DMA_STREAM,
+                                     AT32_ADC_ADC3_IRQ_PRIORITY,
+                                     (at32_dmasts_t)adc_lld_serve_rx_interrupt,
+                                     (void *)adcp);
+      osalDbgAssert(adcp->dmastp != NULL, "unable to allocate stream");
+      dmaStreamSetPeripheral(adcp->dmastp, &ADC3->ODT);
+#if AT32_DMA_SUPPORTS_DMAMUX
+#if AT32_USE_DMA_V1 && AT32_DMA_USE_DMAMUX
+      dmaSetRequestSource(adcp->dmastp, AT32_ADC_ADC3_DMAMUX_CHANNEL, AT32_DMAMUX_ADC3);
+#elif AT32_USE_DMA_V2 || AT32_USE_DMA_V3
+      dmaSetRequestSource(adcp->dmastp, AT32_DMAMUX_ADC3);
+#endif
+#endif
+      crmEnableADC3(true);
+    }
+#endif
     /* ADC setup, the calibration procedure has already been performed
        during initialization.*/
     adcp->adc->CTRL1 = 0;
@@ -178,6 +295,30 @@ void adc_lld_stop(ADCDriver *adcp) {
       crmDisableADC1();
     }
 #endif
+
+#if AT32_ADC_USE_ADC2
+    if (&ADCD2 == adcp) {
+      ADC2->CTRL1 = 0;
+      ADC2->CTRL2 = 0;
+
+      dmaStreamFreeI(adcp->dmastp);
+      adcp->dmastp = NULL;
+
+      crmDisableADC2();
+    }
+#endif
+
+#if AT32_ADC_USE_ADC3
+    if (&ADCD3 == adcp) {
+      ADC3->CTRL1 = 0;
+      ADC3->CTRL2 = 0;
+
+      dmaStreamFreeI(adcp->dmastp);
+      adcp->dmastp = NULL;
+
+      crmDisableADC3();
+    }
+#endif
   }
 }
 
@@ -195,11 +336,11 @@ void adc_lld_start_conversion(ADCDriver *adcp) {
   /* DMA setup.*/
   mode = adcp->dmamode;
   if (grpp->circular) {
-    mode |= AT32_DMA_CCTRL_LM;
+    mode |= AT32_DMA_CTRL_LM;
     if (adcp->depth > 1) {
       /* If circular buffer depth > 1, then the half transfer interrupt
          is enabled in order to allow streaming processing.*/
-      mode |= AT32_DMA_CCTRL_HDTIEN;
+      mode |= AT32_DMA_CTRL_HDTIEN;
     }
   }
   dmaStreamSetMemory0(adcp->dmastp, adcp->samples);

@@ -1,7 +1,5 @@
 /*
     ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
-    ChibiOS - Copyright (C) 2023..2024 HorrorTroll
-    ChibiOS - Copyright (C) 2023..2024 Zhaqian
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -11,7 +9,7 @@
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    WITHOUT WARRANTIENS OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
 */
@@ -49,7 +47,7 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_ICU_USE_TMR1) || defined(__DOXYGEN__)
-#define AT32_ICU_USE_TMR1                   FALSE
+#define AT32_ICU_USE_TMR1                  FALSE
 #endif
 
 /**
@@ -58,7 +56,7 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_ICU_USE_TMR2) || defined(__DOXYGEN__)
-#define AT32_ICU_USE_TMR2                   FALSE
+#define AT32_ICU_USE_TMR2                  FALSE
 #endif
 
 /**
@@ -67,7 +65,7 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_ICU_USE_TMR3) || defined(__DOXYGEN__)
-#define AT32_ICU_USE_TMR3                   FALSE
+#define AT32_ICU_USE_TMR3                  FALSE
 #endif
 
 /**
@@ -76,7 +74,7 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_ICU_USE_TMR4) || defined(__DOXYGEN__)
-#define AT32_ICU_USE_TMR4                   FALSE
+#define AT32_ICU_USE_TMR4                  FALSE
 #endif
 
 /**
@@ -85,7 +83,16 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_ICU_USE_TMR5) || defined(__DOXYGEN__)
-#define AT32_ICU_USE_TMR5                   FALSE
+#define AT32_ICU_USE_TMR5                  FALSE
+#endif
+
+/**
+ * @brief   ICUD8 driver enable switch.
+ * @details If set to @p TRUE the support for ICUD8 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_ICU_USE_TMR8) || defined(__DOXYGEN__)
+#define AT32_ICU_USE_TMR8                  FALSE
 #endif
 
 /**
@@ -94,7 +101,7 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_ICU_USE_TMR9) || defined(__DOXYGEN__)
-#define AT32_ICU_USE_TMR9                   FALSE
+#define AT32_ICU_USE_TMR9                  FALSE
 #endif
 
 /**
@@ -103,7 +110,7 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_ICU_USE_TMR10) || defined(__DOXYGEN__)
-#define AT32_ICU_USE_TMR10                  FALSE
+#define AT32_ICU_USE_TMR10                 FALSE
 #endif
 
 /**
@@ -112,63 +119,182 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_ICU_USE_TMR11) || defined(__DOXYGEN__)
-#define AT32_ICU_USE_TMR11                  FALSE
+#define AT32_ICU_USE_TMR11                 FALSE
+#endif
+
+/**
+ * @brief   ICUD12 driver enable switch.
+ * @details If set to @p TRUE the support for ICUD12 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_ICU_USE_TMR12) || defined(__DOXYGEN__)
+#define AT32_ICU_USE_TMR12                 FALSE
+#endif
+
+/**
+ * @brief   ICUD13 driver enable switch.
+ * @details If set to @p TRUE the support for ICUD13 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_ICU_USE_TMR13) || defined(__DOXYGEN__)
+#define AT32_ICU_USE_TMR13                 FALSE
+#endif
+
+/**
+ * @brief   ICUD14 driver enable switch.
+ * @details If set to @p TRUE the support for ICUD14 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_ICU_USE_TMR14) || defined(__DOXYGEN__)
+#define AT32_ICU_USE_TMR14                 FALSE
+#endif
+
+/**
+ * @brief   ICUD15 driver enable switch.
+ * @details If set to @p TRUE the support for ICUD15 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_ICU_USE_TMR15) || defined(__DOXYGEN__)
+#define AT32_ICU_USE_TMR15                 FALSE
+#endif
+
+/**
+ * @brief   ICUD20 driver enable switch.
+ * @details If set to @p TRUE the support for ICUD20 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_ICU_USE_TMR20) || defined(__DOXYGEN__)
+#define AT32_ICU_USE_TMR20                 FALSE
+#endif
+
+/**
+ * @brief   ICUD21 driver enable switch.
+ * @details If set to @p TRUE the support for ICUD21 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_ICU_USE_TMR21) || defined(__DOXYGEN__)
+#define AT32_ICU_USE_TMR21                 FALSE
+#endif
+
+/**
+ * @brief   ICUD22 driver enable switch.
+ * @details If set to @p TRUE the support for ICUD22 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_ICU_USE_TMR22) || defined(__DOXYGEN__)
+#define AT32_ICU_USE_TMR22                 FALSE
 #endif
 
 /**
  * @brief   ICUD1 interrupt priority level setting.
  */
 #if !defined(AT32_ICU_TMR1_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ICU_TMR1_IRQ_PRIORITY          7
+#define AT32_ICU_TMR1_IRQ_PRIORITY         7
 #endif
 
 /**
  * @brief   ICUD2 interrupt priority level setting.
  */
 #if !defined(AT32_ICU_TMR2_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ICU_TMR2_IRQ_PRIORITY          7
+#define AT32_ICU_TMR2_IRQ_PRIORITY         7
 #endif
 
 /**
  * @brief   ICUD3 interrupt priority level setting.
  */
 #if !defined(AT32_ICU_TMR3_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ICU_TMR3_IRQ_PRIORITY          7
+#define AT32_ICU_TMR3_IRQ_PRIORITY         7
 #endif
 
 /**
  * @brief   ICUD4 interrupt priority level setting.
  */
 #if !defined(AT32_ICU_TMR4_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ICU_TMR4_IRQ_PRIORITY          7
+#define AT32_ICU_TMR4_IRQ_PRIORITY         7
 #endif
 
 /**
  * @brief   ICUD5 interrupt priority level setting.
  */
 #if !defined(AT32_ICU_TMR5_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ICU_TMR5_IRQ_PRIORITY          7
+#define AT32_ICU_TMR5_IRQ_PRIORITY         7
+#endif
+
+/**
+ * @brief   ICUD8 interrupt priority level setting.
+ */
+#if !defined(AT32_ICU_TMR8_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ICU_TMR8_IRQ_PRIORITY         7
 #endif
 
 /**
  * @brief   ICUD9 interrupt priority level setting.
  */
 #if !defined(AT32_ICU_TMR9_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ICU_TMR9_IRQ_PRIORITY          7
+#define AT32_ICU_TMR9_IRQ_PRIORITY         7
 #endif
 
 /**
  * @brief   ICUD10 interrupt priority level setting.
  */
 #if !defined(AT32_ICU_TMR10_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ICU_TMR10_IRQ_PRIORITY         7
+#define AT32_ICU_TMR10_IRQ_PRIORITY        7
 #endif
 
 /**
  * @brief   ICUD11 interrupt priority level setting.
  */
 #if !defined(AT32_ICU_TMR11_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_ICU_TMR11_IRQ_PRIORITY         7
+#define AT32_ICU_TMR11_IRQ_PRIORITY        7
+#endif
+
+/**
+ * @brief   ICUD12 interrupt priority level setting.
+ */
+#if !defined(AT32_ICU_TMR12_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ICU_TMR12_IRQ_PRIORITY        7
+#endif
+
+/**
+ * @brief   ICUD13 interrupt priority level setting.
+ */
+#if !defined(AT32_ICU_TMR13_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ICU_TMR13_IRQ_PRIORITY        7
+#endif
+
+/**
+ * @brief   ICUD14 interrupt priority level setting.
+ */
+#if !defined(AT32_ICU_TMR14_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ICU_TMR14_IRQ_PRIORITY        7
+#endif
+
+/**
+ * @brief   ICUD15 interrupt priority level setting.
+ */
+#if !defined(AT32_ICU_TMR15_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ICU_TMR15_IRQ_PRIORITY        7
+#endif
+
+/**
+ * @brief   ICUD20 interrupt priority level setting.
+ */
+#if !defined(AT32_ICU_TMR20_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ICU_TMR20_IRQ_PRIORITY        7
+#endif
+
+/**
+ * @brief   ICUD21 interrupt priority level setting.
+ */
+#if !defined(AT32_ICU_TMR21_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ICU_TMR21_IRQ_PRIORITY        7
+#endif
+
+/**
+ * @brief   ICUD22 interrupt priority level setting.
+ */
+#if !defined(AT32_ICU_TMR22_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_ICU_TMR22_IRQ_PRIORITY        7
 #endif
 /** @} */
 
@@ -177,35 +303,67 @@
 /*===========================================================================*/
 
 #if !defined(AT32_HAS_TMR1)
-#define AT32_HAS_TMR1                       FALSE
+#define AT32_HAS_TMR1                      FALSE
 #endif
 
 #if !defined(AT32_HAS_TMR2)
-#define AT32_HAS_TMR2                       FALSE
+#define AT32_HAS_TMR2                      FALSE
 #endif
 
 #if !defined(AT32_HAS_TMR3)
-#define AT32_HAS_TMR3                       FALSE
+#define AT32_HAS_TMR3                      FALSE
 #endif
 
 #if !defined(AT32_HAS_TMR4)
-#define AT32_HAS_TMR4                       FALSE
+#define AT32_HAS_TMR4                      FALSE
 #endif
 
 #if !defined(AT32_HAS_TMR5)
-#define AT32_HAS_TMR5                       FALSE
+#define AT32_HAS_TMR5                      FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR8)
+#define AT32_HAS_TMR8                      FALSE
 #endif
 
 #if !defined(AT32_HAS_TMR9)
-#define AT32_HAS_TMR9                       FALSE
+#define AT32_HAS_TMR9                      FALSE
 #endif
 
 #if !defined(AT32_HAS_TMR10)
-#define AT32_HAS_TMR10                      FALSE
+#define AT32_HAS_TMR10                     FALSE
 #endif
 
 #if !defined(AT32_HAS_TMR11)
-#define AT32_HAS_TMR11                      FALSE
+#define AT32_HAS_TMR11                     FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR12)
+#define AT32_HAS_TMR12                     FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR13)
+#define AT32_HAS_TMR13                     FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR14)
+#define AT32_HAS_TMR14                     FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR15)
+#define AT32_HAS_TMR15                     FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR20)
+#define AT32_HAS_TMR20                     FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR21)
+#define AT32_HAS_TMR21                     FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR22)
+#define AT32_HAS_TMR22                     FALSE
 #endif
 
 #if AT32_ICU_USE_TMR1 && !AT32_HAS_TMR1
@@ -228,6 +386,10 @@
 #error "TMR5 not present in the selected device"
 #endif
 
+#if AT32_ICU_USE_TMR8 && !AT32_HAS_TMR8
+#error "TMR8 not present in the selected device"
+#endif
+
 #if AT32_ICU_USE_TMR9 && !AT32_HAS_TMR9
 #error "TMR9 not present in the selected device"
 #endif
@@ -240,10 +402,42 @@
 #error "TMR11 not present in the selected device"
 #endif
 
-#if !AT32_ICU_USE_TMR1  && !AT32_ICU_USE_TMR2  &&                           \
-    !AT32_ICU_USE_TMR3  && !AT32_ICU_USE_TMR4  &&                           \
-    !AT32_ICU_USE_TMR5  && !AT32_ICU_USE_TMR9  &&                           \
-    !AT32_ICU_USE_TMR10 && !AT32_ICU_USE_TMR11
+#if AT32_ICU_USE_TMR12 && !AT32_HAS_TMR12
+#error "TMR12 not present in the selected device"
+#endif
+
+#if AT32_ICU_USE_TMR13 && !AT32_HAS_TMR13
+#error "TMR13 not present in the selected device"
+#endif
+
+#if AT32_ICU_USE_TMR14 && !AT32_HAS_TMR14
+#error "TMR14 not present in the selected device"
+#endif
+
+#if AT32_ICU_USE_TMR15 && !AT32_HAS_TMR15
+#error "TMR15 not present in the selected device"
+#endif
+
+#if AT32_ICU_USE_TMR20 && !AT32_HAS_TMR20
+#error "TMR20 not present in the selected device"
+#endif
+
+#if AT32_ICU_USE_TMR21 && !AT32_HAS_TMR21
+#error "TMR21 not present in the selected device"
+#endif
+
+#if AT32_ICU_USE_TMR22 && !AT32_HAS_TMR22
+#error "TMR22 not present in the selected device"
+#endif
+
+#if !AT32_ICU_USE_TMR1  && !AT32_ICU_USE_TMR2  &&                         \
+    !AT32_ICU_USE_TMR3  && !AT32_ICU_USE_TMR4  &&                         \
+    !AT32_ICU_USE_TMR5  && !AT32_ICU_USE_TMR8  &&                         \
+    !AT32_ICU_USE_TMR9  && !AT32_ICU_USE_TMR10 &&                         \
+    !AT32_ICU_USE_TMR11 && !AT32_ICU_USE_TMR12 &&                         \
+    !AT32_ICU_USE_TMR13 && !AT32_ICU_USE_TMR14 &&                         \
+    !AT32_ICU_USE_TMR15 && !AT32_ICU_USE_TMR20 &&                         \
+    !AT32_ICU_USE_TMR21 && !AT32_ICU_USE_TMR22
 #error "ICU driver activated but no TMR peripheral assigned"
 #endif
 
@@ -288,6 +482,14 @@
 #endif
 #endif
 
+#if AT32_ICU_USE_TMR8
+#if defined(AT32_TMR8_IS_USED)
+#error "ICUD8 requires TMR8 but the timer is already used"
+#else
+#define AT32_TMR8_IS_USED
+#endif
+#endif
+
 #if AT32_ICU_USE_TMR9
 #if defined(AT32_TMR9_IS_USED)
 #error "ICUD9 requires TMR9 but the timer is already used"
@@ -312,45 +514,141 @@
 #endif
 #endif
 
+#if AT32_ICU_USE_TMR12
+#if defined(AT32_TMR12_IS_USED)
+#error "ICUD12 requires TMR12 but the timer is already used"
+#else
+#define AT32_TMR12_IS_USED
+#endif
+#endif
+
+#if AT32_ICU_USE_TMR13
+#if defined(AT32_TMR13_IS_USED)
+#error "ICUD13 requires TMR13 but the timer is already used"
+#else
+#define AT32_TMR13_IS_USED
+#endif
+#endif
+
+#if AT32_ICU_USE_TMR14
+#if defined(AT32_TMR14_IS_USED)
+#error "ICUD14 requires TMR14 but the timer is already used"
+#else
+#define AT32_TMR14_IS_USED
+#endif
+#endif
+
+#if AT32_ICU_USE_TMR15
+#if defined(AT32_TMR15_IS_USED)
+#error "ICUD15 requires TMR15 but the timer is already used"
+#else
+#define AT32_TMR15_IS_USED
+#endif
+#endif
+
+#if AT32_ICU_USE_TMR20
+#if defined(AT32_TMR20_IS_USED)
+#error "ICUD20 requires TMR20 but the timer is already used"
+#else
+#define AT32_TMR20_IS_USED
+#endif
+#endif
+
+#if AT32_ICU_USE_TMR21
+#if defined(AT32_TMR21_IS_USED)
+#error "ICUD21 requires TMR21 but the timer is already used"
+#else
+#define AT32_TMR21_IS_USED
+#endif
+#endif
+
+#if AT32_ICU_USE_TMR22
+#if defined(AT32_TMR22_IS_USED)
+#error "ICUD22 requires TMR22 but the timer is already used"
+#else
+#define AT32_TMR22_IS_USED
+#endif
+#endif
+
 /* IRQ priority checks.*/
-#if AT32_ICU_USE_TMR1 && !defined(AT32_TMR1_SUPPRESS_ISR) &&                \
+#if AT32_ICU_USE_TMR1 && !defined(AT32_TMR1_SUPPRESS_ISR) &&              \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR1_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to TMR1"
 #endif
 
-#if AT32_ICU_USE_TMR2 && !defined(AT32_TMR2_SUPPRESS_ISR) &&                \
+#if AT32_ICU_USE_TMR2 && !defined(AT32_TMR2_SUPPRESS_ISR) &&              \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR2_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to TMR2"
 #endif
 
-#if AT32_ICU_USE_TMR3 && !defined(AT32_TMR3_SUPPRESS_ISR) &&                \
+#if AT32_ICU_USE_TMR3 && !defined(AT32_TMR3_SUPPRESS_ISR) &&              \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR3_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to TMR3"
 #endif
 
-#if AT32_ICU_USE_TMR4 && !defined(AT32_TMR4_SUPPRESS_ISR) &&                \
+#if AT32_ICU_USE_TMR4 && !defined(AT32_TMR4_SUPPRESS_ISR) &&              \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR4_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to TMR4"
 #endif
 
-#if AT32_ICU_USE_TMR5 && !defined(AT32_TMR5_SUPPRESS_ISR) &&                \
+#if AT32_ICU_USE_TMR5 && !defined(AT32_TMR5_SUPPRESS_ISR) &&              \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR5_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to TMR5"
 #endif
 
-#if AT32_ICU_USE_TMR9 && !defined(AT32_TMR9_SUPPRESS_ISR) &&                \
+#if AT32_ICU_USE_TMR8 && !defined(AT32_TMR8_SUPPRESS_ISR) &&              \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR8_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR8"
+#endif
+
+#if AT32_ICU_USE_TMR9 && !defined(AT32_TMR9_SUPPRESS_ISR) &&              \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR9_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to TMR9"
 #endif
 
-#if AT32_ICU_USE_TMR10 && !defined(AT32_TMR10_SUPPRESS_ISR) &&              \
+#if AT32_ICU_USE_TMR10 && !defined(AT32_TMR10_SUPPRESS_ISR) &&            \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR10_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to TMR10"
 #endif
 
-#if AT32_ICU_USE_TMR11 && !defined(AT32_TMR11_SUPPRESS_ISR) &&              \
+#if AT32_ICU_USE_TMR11 && !defined(AT32_TMR11_SUPPRESS_ISR) &&            \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR11_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to TMR11"
+#endif
+
+#if AT32_ICU_USE_TMR12 && !defined(AT32_TMR12_SUPPRESS_ISR) &&            \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR12_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR12"
+#endif
+
+#if AT32_ICU_USE_TMR13 && !defined(AT32_TMR13_SUPPRESS_ISR) &&            \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR13_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR13"
+#endif
+
+#if AT32_ICU_USE_TMR14 && !defined(AT32_TMR14_SUPPRESS_ISR) &&            \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR14_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR14"
+#endif
+
+#if AT32_ICU_USE_TMR15 && !defined(AT32_TMR15_SUPPRESS_ISR) &&            \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR15_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR15"
+#endif
+
+#if AT32_ICU_USE_TMR20 && !defined(AT32_TMR20_SUPPRESS_ISR) &&            \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR20_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR20"
+#endif
+
+#if AT32_ICU_USE_TMR21 && !defined(AT32_TMR21_SUPPRESS_ISR) &&            \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR21_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR21"
+#endif
+
+#if AT32_ICU_USE_TMR22 && !defined(AT32_TMR22_SUPPRESS_ISR) &&            \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_ICU_TMR22_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR22"
 #endif
 
 /*===========================================================================*/
@@ -532,6 +830,10 @@ extern ICUDriver ICUD4;
 extern ICUDriver ICUD5;
 #endif
 
+#if AT32_ICU_USE_TMR8 && !defined(__DOXYGEN__)
+extern ICUDriver ICUD8;
+#endif
+
 #if AT32_ICU_USE_TMR9 && !defined(__DOXYGEN__)
 extern ICUDriver ICUD9;
 #endif
@@ -542,6 +844,34 @@ extern ICUDriver ICUD10;
 
 #if AT32_ICU_USE_TMR11 && !defined(__DOXYGEN__)
 extern ICUDriver ICUD11;
+#endif
+
+#if AT32_ICU_USE_TMR12 && !defined(__DOXYGEN__)
+extern ICUDriver ICUD12;
+#endif
+
+#if AT32_ICU_USE_TMR13 && !defined(__DOXYGEN__)
+extern ICUDriver ICUD13;
+#endif
+
+#if AT32_ICU_USE_TMR14 && !defined(__DOXYGEN__)
+extern ICUDriver ICUD14;
+#endif
+
+#if AT32_ICU_USE_TMR15 && !defined(__DOXYGEN__)
+extern ICUDriver ICUD15;
+#endif
+
+#if AT32_ICU_USE_TMR20 && !defined(__DOXYGEN__)
+extern ICUDriver ICUD20;
+#endif
+
+#if AT32_ICU_USE_TMR21 && !defined(__DOXYGEN__)
+extern ICUDriver ICUD21;
+#endif
+
+#if AT32_ICU_USE_TMR22 && !defined(__DOXYGEN__)
+extern ICUDriver ICUD22;
 #endif
 
 #ifdef __cplusplus

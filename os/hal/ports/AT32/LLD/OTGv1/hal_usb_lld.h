@@ -1,7 +1,5 @@
 /*
     ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
-    ChibiOS - Copyright (C) 2023..2024 HorrorTroll
-    ChibiOS - Copyright (C) 2023..2024 Zhaqian
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -60,7 +58,7 @@
  * @note    The default is @p FALSE
  */
 #if !defined(AT32_USB_USE_OTG1) || defined(__DOXYGEN__)
-#define AT32_USB_USE_OTG1                   FALSE
+#define AT32_USB_USE_OTG1                  FALSE
 #endif
 
 /**
@@ -69,21 +67,21 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_USB_USE_OTG2) || defined(__DOXYGEN__)
-#define AT32_USB_USE_OTG2                   FALSE
+#define AT32_USB_USE_OTG2                  FALSE
 #endif
 
 /**
  * @brief   OTG1 interrupt priority level setting.
  */
 #if !defined(AT32_USB_OTG1_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_USB_OTG1_IRQ_PRIORITY          14
+#define AT32_USB_OTG1_IRQ_PRIORITY         14
 #endif
 
 /**
  * @brief   OTG2 interrupt priority level setting.
  */
 #if !defined(AT32_USB_OTG2_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_USB_OTG2_IRQ_PRIORITY          14
+#define AT32_USB_OTG2_IRQ_PRIORITY         14
 #endif
 
 /**
@@ -91,7 +89,7 @@
  * @note    Must be a multiple of 4.
  */
 #if !defined(AT32_USB_OTG1_RX_FIFO_SIZE) || defined(__DOXYGEN__)
-#define AT32_USB_OTG1_RX_FIFO_SIZE          512
+#define AT32_USB_OTG1_RX_FIFO_SIZE         512
 #endif
 
 /**
@@ -99,7 +97,7 @@
  * @note    Must be a multiple of 4.
  */
 #if !defined(AT32_USB_OTG2_RX_FIFO_SIZE) || defined(__DOXYGEN__)
-#define AT32_USB_OTG2_RX_FIFO_SIZE          1024
+#define AT32_USB_OTG2_RX_FIFO_SIZE         1024
 #endif
 
 /**
@@ -108,7 +106,7 @@
  * @note    Has effect only if @p BOARD_OTG2_USES_ULPI is defined.
  */
 #if !defined(AT32_USE_USB_OTG2_HS) || defined(__DOXYGEN__)
-#define AT32_USE_USB_OTG2_HS                TRUE
+#define AT32_USE_USB_OTG2_HS               TRUE
 #endif
 
 /**
@@ -127,14 +125,82 @@
  *          callbacks.
  */
 #if !defined(AT32_USB_OTGFIFO_FILL_BASEPRI) || defined(__DOXYGEN__)
-#define AT32_USB_OTGFIFO_FILL_BASEPRI       0
+#define AT32_USB_OTGFIFO_FILL_BASEPRI      0
 #endif
 
 /**
  * @brief   Host wake-up procedure duration.
  */
 #if !defined(AT32_USB_HOST_WAKEUP_DURATION) || defined(__DOXYGEN__)
-#define AT32_USB_HOST_WAKEUP_DURATION       2
+#define AT32_USB_HOST_WAKEUP_DURATION      2
+#endif
+
+/**
+ * @brief   OTG2 supports HS or only FS.
+ * @note    The default is @p TRUE.
+ */
+#if !defined(AT32_OTG2_SUPPORTS_HS) || defined(__DOXYGEN__)
+#define AT32_OTG2_SUPPORTS_HS             TRUE
+#endif
+
+/**
+ * @brief   OTGFS1 register block base address.
+ */
+#if !defined(OTG_FS1_ADDR) || defined(__DOXYGEN__)    
+#if defined(OTGFS1_BASE)            
+#define OTG_FS1_ADDR                      OTGFS1_BASE
+#elif defined(OTGFS_BASE)
+#define OTG_FS1_ADDR                      OTGFS_BASE
+#else
+#define OTG_FS1_ADDR                      0x50000000UL
+#endif
+#endif
+
+#if (AT32_OTG2_SUPPORTS_HS == TRUE)
+/**
+ * @brief   OTGHS register block base address.
+ */
+#if !defined(OTG_FS2_ADDR) || defined(__DOXYGEN__)  
+#if defined(OTGHS_BASE)       
+#define OTG_HS_ADDR                       OTGHS_BASE
+#else
+#define OTG_HS_ADDR                       0x40040000UL
+#endif
+#endif
+#else
+/**
+ * @brief   OTGFS2 register block base address.
+ */
+#if !defined(OTG_FS2_ADDR) || defined(__DOXYGEN__)    
+#if defined(OTGFS2_BASE)            
+#define OTG_FS2_ADDR                      OTGFS2_BASE
+#else
+#define OTG_FS2_ADDR                      0x40040000UL
+#endif
+#endif
+#endif
+
+/**
+ * @brief   Accesses to the OTG_FS1 registers block.
+ */
+#if !defined(OTG_FS1) || defined(__DOXYGEN__)    
+#define OTG_FS1                          ((at32_otg_t *)OTG_FS1_ADDR)
+#endif
+
+#if (AT32_OTG2_SUPPORTS_HS == TRUE)
+/**
+ * @brief   Accesses to the OTG_FS2 registers block.
+ */
+#if !defined(OTG_HS) || defined(__DOXYGEN__)   
+#define OTG_HS                           ((at32_otg_t *)OTG_HS_ADDR)
+#endif
+#else
+/**
+ * @brief   Accesses to the OTG_FS2 registers block.
+ */
+#if !defined(OTG_FS2) || defined(__DOXYGEN__)   
+#define OTG_FS2                          ((at32_otg_t *)OTG_FS2_ADDR)
+#endif
 #endif
 
 /*===========================================================================*/
@@ -146,15 +212,9 @@
 #error "AT32_OTG_STEPPING not defined in registry"
 #endif
 
-#if (AT32_OTG_STEPPING < 1) || (AT32_OTG_STEPPING > 2)
+#if (AT32_OTG_STEPPING < 1) || (AT32_OTG_STEPPING > 3)
 #error "unsupported AT32_OTG_STEPPING"
 #endif
-
-/*
-#if !defined(AT32_HAS_OTG1) || !defined(AT32_HAS_OTG2)
-#error "AT32_HAS_OTGx not defined in registry"
-#endif
-*/
 
 #if AT32_HAS_OTG1 && !defined(AT32_OTG1_ENDPOINTS)
 #error "AT32_OTG1_ENDPOINTS not defined in registry"
@@ -172,12 +232,12 @@
 #error "AT32_OTG2_FIFO_MEM_SIZE not defined in registry"
 #endif
 
-#if (AT32_USB_USE_OTG1 && !defined(AT32_OTG1_HANDLER)) ||                   \
+#if (AT32_USB_USE_OTG1 && !defined(AT32_OTG1_HANDLER)) ||                 \
     (AT32_USB_USE_OTG2 && !defined(AT32_OTG2_HANDLER))
 #error "AT32_OTGx_HANDLER not defined in registry"
 #endif
 
-#if (AT32_USB_USE_OTG1 && !defined(AT32_OTG1_NUMBER)) ||                    \
+#if (AT32_USB_USE_OTG1 && !defined(AT32_OTG1_NUMBER)) ||                  \
     (AT32_USB_USE_OTG2 && !defined(AT32_OTG2_NUMBER))
 #error "AT32_OTGx_NUMBER not defined in registry"
 #endif
@@ -207,12 +267,12 @@
   #define USB_MAX_ENDPOINTS                 AT32_OTG2_ENDPOINTS
 #endif
 
-#if AT32_USB_USE_OTG1 &&                                                 \
+#if AT32_USB_USE_OTG1 &&                                                \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_USB_OTG1_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to OTG1"
 #endif
 
-#if AT32_USB_USE_OTG2 &&                                                 \
+#if AT32_USB_USE_OTG2 &&                                                \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_USB_OTG2_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to OTG2"
 #endif
@@ -480,11 +540,11 @@ struct USBDriver {
   /**
    * @brief   Pointer to the OTG peripheral associated to this driver.
    */
-  at32_otg_t                    *otg;
+  at32_otg_t                   *otg;
   /**
    * @brief   Peripheral-specific parameters.
    */
-  const at32_otg_params_t       *otgparams;
+  const at32_otg_params_t      *otgparams;
   /**
    * @brief   Pointer to the next address in the packet memory.
    */
@@ -518,9 +578,9 @@ struct USBDriver {
  * @notapi
  */
 #if (AT32_OTG_STEPPING == 1) || defined(__DOXYGEN__)
-#define usb_lld_connect_bus(usbp) ((usbp)->otg->GCCFG |= GCCFG_BVALIDSESEN)
+#define usb_lld_connect_bus(usbp) ((usbp)->otg->GCCFG |= GCCFG_VBUSBSEN)
 #else
-#define usb_lld_connect_bus(usbp) ((usbp)->otg->DCTL &= ~DCTL_SFTDISCON)
+#define usb_lld_connect_bus(usbp) ((usbp)->otg->DCTL &= ~DCTL_SDIS)
 #endif
 
 /**
@@ -529,9 +589,9 @@ struct USBDriver {
  * @notapi
  */
 #if (AT32_OTG_STEPPING == 1) || defined(__DOXYGEN__)
-#define usb_lld_disconnect_bus(usbp) ((usbp)->otg->GCCFG &= ~GCCFG_BVALIDSESEN)
+#define usb_lld_disconnect_bus(usbp) ((usbp)->otg->GCCFG &= ~GCCFG_VBUSBSEN)
 #else
-#define usb_lld_disconnect_bus(usbp) ((usbp)->otg->DCTL |= DCTL_SFTDISCON)
+#define usb_lld_disconnect_bus(usbp) ((usbp)->otg->DCTL |= DCTL_SDIS)
 #endif
 
 /**
@@ -541,13 +601,9 @@ struct USBDriver {
  */
 #define usb_lld_wakeup_host(usbp)                                           \
   do {                                                                      \
-    (usbp)->otg->DCTL |= DCTL_RWKUPSIG;                                     \
-    /* remote wakeup doesn't trigger the wakeup interrupt, therefore
-       we use the SOF interrupt to detect resume of the bus.*/              \
-    (usbp)->otg->GINTSTS |= GINTSTS_SOF;                                    \
-    (usbp)->otg->GINTMSK |= GINTMSK_SOFMSK;                                 \
+    (usbp)->otg->DCTL |= DCTL_RWUSIG;                                       \
     osalThreadSleepMilliseconds(AT32_USB_HOST_WAKEUP_DURATION);             \
-    (usbp)->otg->DCTL &= ~DCTL_RWKUPSIG;                                    \
+    (usbp)->otg->DCTL &= ~DCTL_RWUSIG;                                      \
   } while (false)
 
 /*===========================================================================*/

@@ -1,7 +1,5 @@
 /*
     ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
-    ChibiOS - Copyright (C) 2023..2024 HorrorTroll
-    ChibiOS - Copyright (C) 2023..2024 Zhaqian
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -11,7 +9,7 @@
 
     Unless required by applicable law or agreed to in writing, software
     distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    WITHOUT WARRANTIENS OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
 */
@@ -77,6 +75,30 @@ GPTDriver GPTD5;
 #endif
 
 /**
+ * @brief   GPTD6 driver identifier.
+ * @note    The driver GPTD6 allocates the timer TMR6 when enabled.
+ */
+#if AT32_GPT_USE_TMR6 || defined(__DOXYGEN__)
+GPTDriver GPTD6;
+#endif
+
+/**
+ * @brief   GPTD7 driver identifier.
+ * @note    The driver GPTD7 allocates the timer TMR7 when enabled.
+ */
+#if AT32_GPT_USE_TMR7 || defined(__DOXYGEN__)
+GPTDriver GPTD7;
+#endif
+
+/**
+ * @brief   GPTD8 driver identifier.
+ * @note    The driver GPTD8 allocates the timer TMR8 when enabled.
+ */
+#if AT32_GPT_USE_TMR8 || defined(__DOXYGEN__)
+GPTDriver GPTD8;
+#endif
+
+/**
  * @brief   GPTD9 driver identifier.
  * @note    The driver GPTD9 allocates the timer TMR9 when enabled.
  */
@@ -98,6 +120,70 @@ GPTDriver GPTD10;
  */
 #if AT32_GPT_USE_TMR11 || defined(__DOXYGEN__)
 GPTDriver GPTD11;
+#endif
+
+/**
+ * @brief   GPTD12 driver identifier.
+ * @note    The driver GPTD12 allocates the timer TMR12 when enabled.
+ */
+#if AT32_GPT_USE_TMR12 || defined(__DOXYGEN__)
+GPTDriver GPTD12;
+#endif
+
+/**
+ * @brief   GPTD13 driver identifier.
+ * @note    The driver GPTD13 allocates the timer TMR13 when enabled.
+ */
+#if AT32_GPT_USE_TMR13 || defined(__DOXYGEN__)
+GPTDriver GPTD13;
+#endif
+
+/**
+ * @brief   GPTD14 driver identifier.
+ * @note    The driver GPTD14 allocates the timer TMR14 when enabled.
+ */
+#if AT32_GPT_USE_TMR14 || defined(__DOXYGEN__)
+GPTDriver GPTD14;
+#endif
+
+/**
+ * @brief   GPTD15 driver identifier.
+ * @note    The driver GPTD14 allocates the timer TMR14 when enabled.
+ */
+#if AT32_GPT_USE_TMR15 || defined(__DOXYGEN__)
+GPTDriver GPTD15;
+#endif
+
+/**
+ * @brief   GPTD16 driver identifier.
+ * @note    The driver GPTD14 allocates the timer TMR14 when enabled.
+ */
+#if AT32_GPT_USE_TMR16 || defined(__DOXYGEN__)
+GPTDriver GPTD16;
+#endif
+
+/**
+ * @brief   GPTD17 driver identifier.
+ * @note    The driver GPTD14 allocates the timer TMR14 when enabled.
+ */
+#if AT32_GPT_USE_TMR17 || defined(__DOXYGEN__)
+GPTDriver GPTD17;
+#endif
+
+/**
+ * @brief   GPTD21 driver identifier.
+ * @note    The driver GPTD21 allocates the timer TMR21 when enabled.
+ */
+#if AT32_GPT_USE_TMR21 || defined(__DOXYGEN__)
+GPTDriver GPTD21;
+#endif
+
+/**
+ * @brief   GPTD22 driver identifier.
+ * @note    The driver GPTD22 allocates the timer TMR22 when enabled.
+ */
+#if AT32_GPT_USE_TMR22 || defined(__DOXYGEN__)
+GPTDriver GPTD22;
 #endif
 
 /*===========================================================================*/
@@ -217,6 +303,69 @@ OSAL_IRQ_HANDLER(AT32_TMR5_HANDLER) {
 #endif /* !defined(AT32_TMR5_SUPPRESS_ISR) */
 #endif /* AT32_GPT_USE_TMR5 */
 
+#if AT32_GPT_USE_TMR6 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR6_SUPPRESS_ISR)
+#if !defined(AT32_TMR6_HANDLER)
+#error "AT32_TMR6_HANDLER not defined"
+#endif
+/**
+ * @brief   TMR6 interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_TMR6_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  gpt_lld_serve_interrupt(&GPTD6);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif /* !defined(AT32_TMR6_SUPPRESS_ISR) */
+#endif /* AT32_GPT_USE_TMR6 */
+
+#if AT32_GPT_USE_TMR7 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR7_SUPPRESS_ISR)
+#if !defined(AT32_TMR7_HANDLER)
+#error "AT32_TMR7_HANDLER not defined"
+#endif
+/**
+ * @brief   TMR7 interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_TMR7_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  gpt_lld_serve_interrupt(&GPTD7);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif /* !defined(AT32_TMR7_SUPPRESS_ISR) */
+#endif /* AT32_GPT_USE_TMR7 */
+
+#if AT32_GPT_USE_TMR8 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR8_SUPPRESS_ISR)
+#if !defined(AT32_TMR8_OVF_HANDLER)
+#error "AT32_TMR8_OVF_HANDLER not defined"
+#endif
+/**
+ * @brief   TMR8 interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_TMR8_OVF_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  gpt_lld_serve_interrupt(&GPTD8);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif /* !defined(AT32_TMR8_SUPPRESS_ISR) */
+#endif /* AT32_GPT_USE_TMR8 */
+
 #if AT32_GPT_USE_TMR9 || defined(__DOXYGEN__)
 #if !defined(AT32_TMR9_SUPPRESS_ISR)
 #error "TMR9 ISR not defined by platform"
@@ -234,6 +383,84 @@ OSAL_IRQ_HANDLER(AT32_TMR5_HANDLER) {
 #error "TMR11 ISR not defined by platform"
 #endif /* !defined(AT32_TMR11_SUPPRESS_ISR) */
 #endif /* AT32_GPT_USE_TMR11 */
+
+#if AT32_GPT_USE_TMR12 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR12_SUPPRESS_ISR)
+#error "TMR12 ISR not defined by platform"
+#endif /* !defined(AT32_TMR12_SUPPRESS_ISR) */
+#endif /* AT32_GPT_USE_TMR12 */
+
+#if AT32_GPT_USE_TMR13 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR13_SUPPRESS_ISR)
+#error "TMR13 ISR not defined by platform"
+#endif /* !defined(AT32_TMR13_SUPPRESS_ISR) */
+#endif /* AT32_GPT_USE_TMR13 */
+
+#if AT32_GPT_USE_TMR14 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR14_SUPPRESS_ISR)
+#error "TMR14 ISR not defined by platform"
+#endif /* !defined(AT32_TMR14_SUPPRESS_ISR) */
+#endif /* AT32_GPT_USE_TMR14 */
+
+#if AT32_GPT_USE_TMR15 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR15_SUPPRESS_ISR)
+#error "TMR15 ISR not defined by platform"
+#endif /* !defined(AT32_TMR15_SUPPRESS_ISR) */
+#endif /* AT32_GPT_USE_TMR15 */
+
+#if AT32_GPT_USE_TMR16 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR16_SUPPRESS_ISR)
+#error "TMR16 ISR not defined by platform"
+#endif /* !defined(AT32_TMR16_SUPPRESS_ISR) */
+#endif /* AT32_GPT_USE_TMR16 */
+
+#if AT32_GPT_USE_TMR17 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR17_SUPPRESS_ISR)
+#error "TMR17 ISR not defined by platform"
+#endif /* !defined(AT32_TMR17_SUPPRESS_ISR) */
+#endif /* AT32_GPT_USE_TMR17 */
+
+#if AT32_GPT_USE_TMR21 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR21_SUPPRESS_ISR)
+#if !defined(AT32_TMR21_HANDLER)
+#error "AT32_TMR21_HANDLER not defined"
+#endif
+/**
+ * @brief   TMR21 interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_TMR21_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  gpt_lld_serve_interrupt(&GPTD21);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif /* !defined(AT32_TMR21_SUPPRESS_ISR) */
+#endif /* AT32_GPT_USE_TMR21 */
+
+#if AT32_GPT_USE_TMR22 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR22_SUPPRESS_ISR)
+#if !defined(AT32_TMR22_HANDLER)
+#error "AT32_TMR22_HANDLER not defined"
+#endif
+/**
+ * @brief   TMR22 interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_TMR22_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  gpt_lld_serve_interrupt(&GPTD22);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif /* !defined(AT32_TMR22_SUPPRESS_ISR) */
+#endif /* AT32_GPT_USE_TMR22 */
 
 /*===========================================================================*/
 /* Driver exported functions.                                                */
@@ -269,6 +496,7 @@ void gpt_lld_init(void) {
 
 #if AT32_GPT_USE_TMR4
   /* Driver initialization.*/
+  GPTD4.tmr = AT32_TMR4;
   gptObjectInit(&GPTD4);
   GPTD4.tmr = AT32_TMR4;
   GPTD4.has_plus_mode = (bool)AT32_TMR4_IS_32BITS;
@@ -279,6 +507,27 @@ void gpt_lld_init(void) {
   gptObjectInit(&GPTD5);
   GPTD5.tmr = AT32_TMR5;
   GPTD5.has_plus_mode = (bool)AT32_TMR5_IS_32BITS;
+#endif
+
+#if AT32_GPT_USE_TMR6
+  /* Driver initialization.*/
+  gptObjectInit(&GPTD6);
+  GPTD6.tmr = AT32_TMR6;
+  GPTD6.has_plus_mode = (bool)AT32_TMR6_IS_32BITS;
+#endif
+
+#if AT32_GPT_USE_TMR7
+  /* Driver initialization.*/
+  gptObjectInit(&GPTD7);
+  GPTD7.tmr = AT32_TMR7;
+  GPTD7.has_plus_mode = (bool)AT32_TMR7_IS_32BITS;
+#endif
+
+#if AT32_GPT_USE_TMR8
+  /* Driver initialization.*/
+  gptObjectInit(&GPTD8);
+  GPTD8.tmr = AT32_TMR8;
+  GPTD8.has_plus_mode = (bool)AT32_TMR8_IS_32BITS;
 #endif
 
 #if AT32_GPT_USE_TMR9
@@ -301,6 +550,62 @@ void gpt_lld_init(void) {
   GPTD11.tmr = AT32_TMR11;
   GPTD11.has_plus_mode = (bool)AT32_TMR11_IS_32BITS;
 #endif
+
+#if AT32_GPT_USE_TMR12
+  /* Driver initialization.*/
+  gptObjectInit(&GPTD12);
+  GPTD12.tmr = AT32_TMR12;
+  GPTD12.has_plus_mode = (bool)AT32_TMR12_IS_32BITS;
+#endif
+
+#if AT32_GPT_USE_TMR13
+  /* Driver initialization.*/
+  gptObjectInit(&GPTD13);
+  GPTD13.tmr = AT32_TMR13;
+  GPTD13.has_plus_mode = (bool)AT32_TMR13_IS_32BITS;
+#endif
+
+#if AT32_GPT_USE_TMR14
+  /* Driver initialization.*/
+  gptObjectInit(&GPTD14);
+  GPTD14.tmr = AT32_TMR14;
+  GPTD14.has_plus_mode = (bool)AT32_TMR14_IS_32BITS;
+#endif
+
+#if AT32_GPT_USE_TMR15
+  /* Driver initialization.*/
+  gptObjectInit(&GPTD15);
+  GPTD15.tmr = AT32_TMR15;
+  GPTD15.has_plus_mode = (bool)AT32_TMR15_IS_32BITS;
+#endif
+
+#if AT32_GPT_USE_TMR16
+  /* Driver initialization.*/
+  gptObjectInit(&GPTD16);
+  GPTD16.tmr = AT32_TMR16;
+  GPTD16.has_plus_mode = (bool)AT32_TMR16_IS_32BITS;
+#endif
+
+#if AT32_GPT_USE_TMR17
+  /* Driver initialization.*/
+  gptObjectInit(&GPTD17);
+  GPTD17.tmr = AT32_TMR17;
+  GPTD17.has_plus_mode = (bool)AT32_TMR17_IS_32BITS;
+#endif
+
+#if AT32_GPT_USE_TMR21
+  /* Driver initialization.*/
+  gptObjectInit(&GPTD21);
+  GPTD21.tmr = AT32_TMR21;
+  GPTD21.has_plus_mode = (bool)AT32_TMR21_IS_32BITS;
+#endif
+
+#if AT32_GPT_USE_TMR22
+  /* Driver initialization.*/
+  gptObjectInit(&GPTD22);
+  GPTD22.tmr = AT32_TMR22;
+  GPTD22.has_plus_mode = (bool)AT32_TMR22_IS_32BITS;
+#endif
 }
 
 /**
@@ -322,7 +627,11 @@ void gpt_lld_start(GPTDriver *gptp) {
 #if !defined(AT32_TMR1_SUPPRESS_ISR)
       nvicEnableVector(AT32_TMR1_OVF_NUMBER, AT32_GPT_TMR1_IRQ_PRIORITY);
 #endif
+#if defined(AT32_TMR1CLK)
+      gptp->clock = AT32_TMR1CLK;
+#else
       gptp->clock = AT32_TMRCLK2;
+#endif
     }
 #endif
 
@@ -333,7 +642,11 @@ void gpt_lld_start(GPTDriver *gptp) {
 #if !defined(AT32_TMR2_SUPPRESS_ISR)
       nvicEnableVector(AT32_TMR2_NUMBER, AT32_GPT_TMR2_IRQ_PRIORITY);
 #endif
+#if defined(AT32_TMR2CLK)
+      gptp->clock = AT32_TMR2CLK;
+#else
       gptp->clock = AT32_TMRCLK1;
+#endif
     }
 #endif
 
@@ -344,7 +657,11 @@ void gpt_lld_start(GPTDriver *gptp) {
 #if !defined(AT32_TMR3_SUPPRESS_ISR)
       nvicEnableVector(AT32_TMR3_NUMBER, AT32_GPT_TMR3_IRQ_PRIORITY);
 #endif
+#if defined(AT32_TMR3CLK)
+      gptp->clock = AT32_TMR3CLK;
+#else
       gptp->clock = AT32_TMRCLK1;
+#endif
     }
 #endif
 
@@ -355,7 +672,11 @@ void gpt_lld_start(GPTDriver *gptp) {
 #if !defined(AT32_TMR4_SUPPRESS_ISR)
       nvicEnableVector(AT32_TMR4_NUMBER, AT32_GPT_TMR4_IRQ_PRIORITY);
 #endif
+#if defined(AT32_TMR4CLK)
+      gptp->clock = AT32_TMR4CLK;
+#else
       gptp->clock = AT32_TMRCLK1;
+#endif
     }
 #endif
 
@@ -366,7 +687,56 @@ void gpt_lld_start(GPTDriver *gptp) {
 #if !defined(AT32_TMR5_SUPPRESS_ISR)
       nvicEnableVector(AT32_TMR5_NUMBER, AT32_GPT_TMR5_IRQ_PRIORITY);
 #endif
+#if defined(AT32_TMR5CLK)
+      gptp->clock = AT32_TMR5CLK;
+#else
       gptp->clock = AT32_TMRCLK1;
+#endif
+    }
+#endif
+
+#if AT32_GPT_USE_TMR6
+    if (&GPTD6 == gptp) {
+      crmEnableTMR6(true);
+      crmResetTMR6();
+#if !defined(AT32_TMR6_SUPPRESS_ISR)
+      nvicEnableVector(AT32_TMR6_NUMBER, AT32_GPT_TMR6_IRQ_PRIORITY);
+#endif
+#if defined(AT32_TMR6CLK)
+      gptp->clock = AT32_TMR6CLK;
+#else
+      gptp->clock = AT32_TMRCLK1;
+#endif
+    }
+#endif
+
+#if AT32_GPT_USE_TMR7
+    if (&GPTD7 == gptp) {
+      crmEnableTMR7(true);
+      crmResetTMR7();
+#if !defined(AT32_TMR7_SUPPRESS_ISR)
+      nvicEnableVector(AT32_TMR7_NUMBER, AT32_GPT_TMR7_IRQ_PRIORITY);
+#endif
+#if defined(AT32_TMR7CLK)
+      gptp->clock = AT32_TMR7CLK;
+#else
+      gptp->clock = AT32_TMRCLK1;
+#endif
+    }
+#endif
+
+#if AT32_GPT_USE_TMR8
+    if (&GPTD8 == gptp) {
+      crmEnableTMR8(true);
+      crmResetTMR8();
+#if !defined(AT32_TMR8_SUPPRESS_ISR)
+      nvicEnableVector(AT32_TMR8_OVF_NUMBER, AT32_GPT_TMR8_IRQ_PRIORITY);
+#endif
+#if defined(AT32_TMR8CLK)
+      gptp->clock = AT32_TMR8CLK;
+#else
+      gptp->clock = AT32_TMRCLK2;
+#endif
     }
 #endif
 
@@ -377,7 +747,11 @@ void gpt_lld_start(GPTDriver *gptp) {
 #if !defined(AT32_TMR9_SUPPRESS_ISR)
       nvicEnableVector(AT32_TMR9_NUMBER, AT32_GPT_TMR9_IRQ_PRIORITY);
 #endif
+#if defined(AT32_TMR9CLK)
+      gptp->clock = AT32_TMR9CLK;
+#else
       gptp->clock = AT32_TMRCLK2;
+#endif
     }
 #endif
 
@@ -388,7 +762,11 @@ void gpt_lld_start(GPTDriver *gptp) {
 #if !defined(AT32_TMR10_SUPPRESS_ISR)
       nvicEnableVector(AT32_TMR10_NUMBER, AT32_GPT_TMR10_IRQ_PRIORITY);
 #endif
+#if defined(AT32_TMR10CLK)
+      gptp->clock = AT32_TMR10CLK;
+#else
       gptp->clock = AT32_TMRCLK2;
+#endif
     }
 #endif
 
@@ -399,7 +777,122 @@ void gpt_lld_start(GPTDriver *gptp) {
 #if !defined(AT32_TMR11_SUPPRESS_ISR)
       nvicEnableVector(AT32_TMR11_NUMBER, AT32_GPT_TMR11_IRQ_PRIORITY);
 #endif
+#if defined(AT32_TMR11CLK)
+      gptp->clock = AT32_TMR11CLK;
+#else
       gptp->clock = AT32_TMRCLK2;
+#endif
+    }
+#endif
+
+#if AT32_GPT_USE_TMR12
+    if (&GPTD12 == gptp) {
+      crmEnableTMR12(true);
+      crmResetTMR12();
+#if !defined(AT32_TMR12_SUPPRESS_ISR)
+      nvicEnableVector(AT32_TMR12_NUMBER, AT32_GPT_TMR12_IRQ_PRIORITY);
+#endif
+#if defined(AT32_TMR12CLK)
+      gptp->clock = AT32_TMR12CLK;
+#else
+      gptp->clock = AT32_TMRCLK1;
+#endif
+    }
+#endif
+
+#if AT32_GPT_USE_TMR13
+    if (&GPTD13 == gptp) {
+      crmEnableTMR13(true);
+      crmResetTMR13();
+#if !defined(AT32_TMR13_SUPPRESS_ISR)
+      nvicEnableVector(AT32_TMR13_NUMBER, AT32_GPT_TMR13_IRQ_PRIORITY);
+#endif
+#if defined(AT32_TMR13CLK)
+      gptp->clock = AT32_TMR13CLK;
+#else
+      gptp->clock = AT32_TMRCLK1;
+#endif
+    }
+#endif
+
+#if AT32_GPT_USE_TMR14
+    if (&GPTD14 == gptp) {
+      crmEnableTMR14(true);
+      crmResetTMR14();
+#if !defined(AT32_TMR14_SUPPRESS_ISR)
+      nvicEnableVector(AT32_TMR14_NUMBER, AT32_GPT_TMR14_IRQ_PRIORITY);
+#endif
+#if defined(AT32_TMR14CLK)
+      gptp->clock = AT32_TMR14CLK;
+#else
+      gptp->clock = AT32_TMRCLK1;
+#endif
+    }
+#endif
+
+#if AT32_GPT_USE_TMR15
+    if (&GPTD15 == gptp) {
+      crmEnableTMR15(true);
+      crmResetTMR15();
+#if defined(AT32_TMR15CLK)
+      gptp->clock = AT32_TMR15CLK;
+#else
+      gptp->clock = AT32_TMRCLK2;
+#endif
+    }
+#endif
+
+#if AT32_GPT_USE_TMR16
+    if (&GPTD16 == gptp) {
+      crmEnableTMR16(true);
+      crmResetTMR16();
+#if defined(AT32_TMR16CLK)
+      gptp->clock = AT32_TMR16CLK;
+#else
+      gptp->clock = AT32_TMRCLK2;
+#endif
+    }
+#endif
+
+#if AT32_GPT_USE_TMR17
+    if (&GPTD17 == gptp) {
+      crmEnableTMR17(true);
+      crmResetTMR17();
+#if defined(AT32_TMR17CLK)
+      gptp->clock = AT32_TMR17CLK;
+#else
+      gptp->clock = AT32_TMRCLK2;
+#endif
+    }
+#endif
+
+#if AT32_GPT_USE_TMR21
+    if (&GPTD21 == gptp) {
+      crmEnableTMR21(true);
+      crmResetTMR21();
+#if !defined(AT32_TMR21_SUPPRESS_ISR)
+      nvicEnableVector(AT32_TMR21_NUMBER, AT32_GPT_TMR21_IRQ_PRIORITY);
+#endif
+#if defined(AT32_TMR21CLK)
+      gptp->clock = AT32_TMR21CLK;
+#else
+      gptp->clock = AT32_TMRCLK1;
+#endif
+    }
+#endif
+
+#if AT32_GPT_USE_TMR22
+    if (&GPTD22 == gptp) {
+      crmEnableTMR22(true);
+      crmResetTMR22();
+#if !defined(AT32_TMR22_SUPPRESS_ISR)
+      nvicEnableVector(AT32_TMR22_NUMBER, AT32_GPT_TMR22_IRQ_PRIORITY);
+#endif
+#if defined(AT32_TMR22CLK)
+      gptp->clock = AT32_TMR22CLK;
+#else
+      gptp->clock = AT32_TMRCLK1;
+#endif
     }
 #endif
   }
@@ -416,9 +909,9 @@ void gpt_lld_start(GPTDriver *gptp) {
 
   /* Timer configuration.*/
   gptp->tmr->CTRL2 = gptp->config->ctrl2;
-  gptp->tmr->DIV   = div;                       /* Prescaler value.         */
-  gptp->tmr->ISTS  = 0;                         /* Clear pending IRQs.      */
-  gptp->tmr->IDEN  = gptp->config->iden &       /* DMA-related IDEN bits.   */
+  gptp->tmr->DIV   = div;                        /* Prescaler value.         */
+  gptp->tmr->ISTS  = 0;                          /* Clear pending IRQs.      */
+  gptp->tmr->IDEN  = gptp->config->iden &        /* DMA-related IDEN bits.   */
                      ~AT32_TMR_IDEN_IRQ_MASK;
 }
 
@@ -432,9 +925,9 @@ void gpt_lld_start(GPTDriver *gptp) {
 void gpt_lld_stop(GPTDriver *gptp) {
 
   if (gptp->state == GPT_READY) {
-    gptp->tmr->CTRL1 = 0;                       /* Timer disabled.          */
-    gptp->tmr->IDEN  = 0;                       /* All IRQs disabled.       */
-    gptp->tmr->ISTS  = 0;                       /* Clear pending IRQs.      */
+    gptp->tmr->CTRL1 = 0;                        /* Timer disabled.          */
+    gptp->tmr->IDEN  = 0;                        /* All IRQs disabled.       */
+    gptp->tmr->ISTS  = 0;                        /* Clear pending IRQs.      */
 
 #if AT32_GPT_USE_TMR1
     if (&GPTD1 == gptp) {
@@ -481,6 +974,33 @@ void gpt_lld_stop(GPTDriver *gptp) {
     }
 #endif
 
+#if AT32_GPT_USE_TMR6
+    if (&GPTD6 == gptp) {
+#if !defined(AT32_TMR6_SUPPRESS_ISR)
+      nvicDisableVector(AT32_TMR6_NUMBER);
+#endif
+      crmDisableTMR6();
+    }
+#endif
+
+#if AT32_GPT_USE_TMR7
+    if (&GPTD7 == gptp) {
+#if !defined(AT32_TMR7_SUPPRESS_ISR)
+      nvicDisableVector(AT32_TMR7_NUMBER);
+#endif
+      crmDisableTMR7();
+    }
+#endif
+
+#if AT32_GPT_USE_TMR8
+    if (&GPTD8 == gptp) {
+#if !defined(AT32_TMR8_SUPPRESS_ISR)
+      nvicDisableVector(AT32_TMR8_OVF_NUMBER);
+#endif
+      crmDisableTMR8();
+    }
+#endif
+
 #if AT32_GPT_USE_TMR9
     if (&GPTD9 == gptp) {
 #if !defined(AT32_TMR9_SUPPRESS_ISR)
@@ -505,6 +1025,69 @@ void gpt_lld_stop(GPTDriver *gptp) {
       nvicDisableVector(AT32_TMR11_NUMBER);
 #endif
       crmDisableTMR11();
+    }
+#endif
+
+#if AT32_GPT_USE_TMR12
+    if (&GPTD12 == gptp) {
+#if !defined(AT32_TMR12_SUPPRESS_ISR)
+      nvicDisableVector(AT32_TMR12_NUMBER);
+#endif
+      crmDisableTMR12();
+    }
+#endif
+
+#if AT32_GPT_USE_TMR13
+    if (&GPTD13 == gptp) {
+#if !defined(AT32_TMR13_SUPPRESS_ISR)
+      nvicDisableVector(AT32_TMR13_NUMBER);
+#endif
+      crmDisableTMR13();
+    }
+#endif
+
+#if AT32_GPT_USE_TMR14
+    if (&GPTD14 == gptp) {
+#if !defined(AT32_TMR14_SUPPRESS_ISR)
+      nvicDisableVector(AT32_TMR14_NUMBER);
+#endif
+      crmDisableTMR14();
+    }
+#endif
+
+#if AT32_GPT_USE_TMR15
+    if (&GPTD15 == gptp) {
+      crmDisableTMR15();
+    }
+#endif
+
+#if AT32_GPT_USE_TMR16
+    if (&GPTD16 == gptp) {
+      crmDisableTMR16();
+    }
+#endif
+
+#if AT32_GPT_USE_TMR17
+    if (&GPTD17 == gptp) {
+      crmDisableTMR17();
+    }
+#endif
+
+#if AT32_GPT_USE_TMR21
+    if (&GPTD21 == gptp) {
+#if !defined(AT32_TMR21_SUPPRESS_ISR)
+      nvicDisableVector(AT32_TMR21_NUMBER);
+#endif
+      crmDisableTMR21();
+    }
+#endif
+
+#if AT32_GPT_USE_TMR22
+    if (&GPTD22 == gptp) {
+#if !defined(AT32_TMR22_SUPPRESS_ISR)
+      nvicDisableVector(AT32_TMR22_NUMBER);
+#endif
+      crmDisableTMR22();
     }
 #endif
   }
@@ -543,8 +1126,8 @@ void gpt_lld_start_timer(GPTDriver *gptp, gptcnt_t interval) {
 void gpt_lld_stop_timer(GPTDriver *gptp) {
 
   gptp->tmr->CTRL1 &= ~(AT32_TMR_CTRL1_PRBEN | AT32_TMR_CTRL1_OVFS | 
-                        AT32_TMR_CTRL1_TMREN);  /* Initially stopped.       */
-  gptp->tmr->ISTS  = 0;                         /* Clear pending IRQs.      */
+                        AT32_TMR_CTRL1_TMREN);                         /* Initially stopped.       */
+  gptp->tmr->ISTS  = 0;                                                /* Clear pending IRQs.      */
 
   /* All interrupts disabled.*/
   gptp->tmr->IDEN &= ~AT32_TMR_IDEN_IRQ_MASK;
@@ -563,13 +1146,13 @@ void gpt_lld_stop_timer(GPTDriver *gptp) {
  */
 void gpt_lld_polled_delay(GPTDriver *gptp, gptcnt_t interval) {
 
-  gptp->tmr->PR    = (uint32_t)(interval - 1U); /* Time constant.           */
-  gptp->tmr->SWEVT = AT32_TMR_SWEVT_OVFSWTR;    /* Update event.            */
-  gptp->tmr->ISTS  = 0;                         /* Clear pending IRQs.      */
+  gptp->tmr->PR     = (uint32_t)(interval - 1U);   /* Time constant.           */
+  gptp->tmr->SWEVT  = AT32_TMR_SWEVT_OVFSWTR;      /* Update event.            */
+  gptp->tmr->ISTS   = 0;                           /* Clear pending IRQs.      */
   gptp->tmr->CTRL1 |= AT32_TMR_CTRL1_OCMEN | AT32_TMR_CTRL1_OVFS | AT32_TMR_CTRL1_TMREN;
   while (!(gptp->tmr->ISTS & AT32_TMR_ISTS_OVFIF))
     ;
-  gptp->tmr->ISTS  = 0;                         /* Clear pending IRQs.      */
+  gptp->tmr->ISTS = 0;                         /* Clear pending IRQs.      */
 }
 
 /**

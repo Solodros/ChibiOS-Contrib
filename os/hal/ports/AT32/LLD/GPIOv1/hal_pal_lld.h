@@ -1,7 +1,5 @@
 /*
-    ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
-    ChibiOS - Copyright (C) 2023..2024 HorrorTroll
-    ChibiOS - Copyright (C) 2023..2024 Zhaqian
+    Copyright (C) Zhaqian
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -110,6 +108,10 @@ typedef struct {
   uint32_t      cfglr;
   /** Initial value for CFGHR register.*/
   uint32_t      cfghr;
+#if AT32_GPIO_HAS_HDRV || defined(__DOXYGEN__)
+  /** Initial value for HDRV register.*/
+  uint32_t      hdrv;
+#endif
 } at32_gpio_setup_t;
 
 /**
@@ -121,18 +123,28 @@ typedef struct {
  */
 typedef struct {
   /** @brief Port A setup data.*/
-  at32_gpio_setup_t     PAData;
+  at32_gpio_setup_t    PAData;
   /** @brief Port B setup data.*/
-  at32_gpio_setup_t     PBData;
+  at32_gpio_setup_t    PBData;
 #if AT32_HAS_GPIOC || defined(__DOXYGEN__)
   /** @brief Port C setup data.*/
-  at32_gpio_setup_t     PCData;
+  at32_gpio_setup_t    PCData;
 #endif
+#if AT32_HAS_GPIOD || defined(__DOXYGEN__)
   /** @brief Port D setup data.*/
-  at32_gpio_setup_t     PDData;
+  at32_gpio_setup_t    PDData;
+#endif
+#if AT32_HAS_GPIOE || defined(__DOXYGEN__)
+  /** @brief Port D setup data.*/
+  at32_gpio_setup_t    PEData;
+#endif
 #if AT32_HAS_GPIOF || defined(__DOXYGEN__)
   /** @brief Port F setup data.*/
-  at32_gpio_setup_t     PFData;
+  at32_gpio_setup_t    PFData;
+#endif
+#if AT32_HAS_GPIOG || defined(__DOXYGEN__)
+  /** @brief Port G setup data.*/
+  at32_gpio_setup_t    PGData;
 #endif
 } PALConfig;
 
@@ -171,7 +183,7 @@ typedef uint32_t iopadid_t;
 
 /*===========================================================================*/
 /* I/O Ports Identifiers.                                                    */
-/* The low level driver wraps the definitions already present in the AT32    */
+/* The low level driver wraps the definitions already present in the AT32   */
 /* firmware library.                                                         */
 /*===========================================================================*/
 
@@ -204,10 +216,25 @@ typedef uint32_t iopadid_t;
 #endif
 
 /**
+ * @brief   GPIO port E identifier.
+ */
+#if AT32_HAS_GPIOE || defined(__DOXYGEN__)
+#define IOPORT5         GPIOE
+#endif
+
+
+/**
  * @brief   GPIO port F identifier.
  */
 #if AT32_HAS_GPIOF || defined(__DOXYGEN__)
-#define IOPORT5         GPIOF
+#define IOPORT6         GPIOF
+#endif
+
+/**
+ * @brief   GPIO port G identifier.
+ */
+#if AT32_HAS_GPIOG || defined(__DOXYGEN__)
+#define IOPORT7         GPIOG
 #endif
 
 /*===========================================================================*/
@@ -314,7 +341,7 @@ typedef uint32_t iopadid_t;
 #define pal_lld_writegroup(port, mask, offset, bits) {                      \
   uint32_t w = ((~(uint32_t)(bits) & (uint32_t)(mask)) << (16U + (offset))) | \
                ((uint32_t)(bits) & (uint32_t)(mask)) << (offset);           \
-  (port)->SCR = w;                                                          \
+  (port)->SCR = w;                                                         \
 }
 
 /**

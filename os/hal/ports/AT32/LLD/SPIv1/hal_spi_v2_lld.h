@@ -1,7 +1,5 @@
 /*
     ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
-    ChibiOS - Copyright (C) 2023..2024 HorrorTroll
-    ChibiOS - Copyright (C) 2023..2024 Zhaqian
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -18,14 +16,14 @@
 
 /**
  * @file    SPIv1/hal_spi_v2_lld.h
- * @brief   AT32 SPI (v2) subsystem low level driver header.
+ * @brief   AT32 SPI subsystem low level driver header.
  *
  * @addtogroup SPI
  * @{
  */
 
-#ifndef HAL_SPI_V2_LLD_H
-#define HAL_SPI_V2_LLD_H
+#ifndef HAL_SPI_LLD_H
+#define HAL_SPI_LLD_H
 
 #if HAL_USE_SPI || defined(__DOXYGEN__)
 
@@ -42,6 +40,38 @@
  * @brief   Slave mode support flag.
  */
 #define SPI_SUPPORTS_SLAVE_MODE         TRUE
+
+/**
+ * @name    Register helpers not found in AT headers
+ * @{
+ */
+#define SPI_CTRL1_MDIV_VALUE(n)           ((n & 0x7) << 3)
+#define SPI_CTRL1_MDIV_DIV2               SPI_CTRL1_MDIV_VALUE(0)
+#define SPI_CTRL1_MDIV_DIV4               SPI_CTRL1_MDIV_VALUE(1)
+#define SPI_CTRL1_MDIV_DIV8               SPI_CTRL1_MDIV_VALUE(2)
+#define SPI_CTRL1_MDIV_DIV16              SPI_CTRL1_MDIV_VALUE(3)
+#define SPI_CTRL1_MDIV_DIV32              SPI_CTRL1_MDIV_VALUE(4)
+#define SPI_CTRL1_MDIV_DIV64              SPI_CTRL1_MDIV_VALUE(5)
+#define SPI_CTRL1_MDIV_DIV128             SPI_CTRL1_MDIV_VALUE(6)
+#define SPI_CTRL1_MDIV_DIV256             SPI_CTRL1_MDIV_VALUE(7)
+#define SPI_CTRL1_MDIV_DIV512             SPI_CTRL1_MDIV_VALUE(8)
+#define SPI_CTRL1_MDIV_DIV1024            SPI_CTRL1_MDIV_VALUE(9)
+
+#define SPI_CTRL2_MDIV_VALUE(n)           ((n & 0x8) << 5)
+#define SPI_CTRL2_MDIV_DIV2               SPI_CTRL2_MDIV_VALUE(0)
+#define SPI_CTRL2_MDIV_DIV4               SPI_CTRL2_MDIV_VALUE(1)
+#define SPI_CTRL2_MDIV_DIV8               SPI_CTRL1_MDIV_VALUE(2)
+#define SPI_CTRL2_MDIV_DIV16              SPI_CTRL2_MDIV_VALUE(3)
+#define SPI_CTRL2_MDIV_DIV32              SPI_CTRL2_MDIV_VALUE(4)
+#define SPI_CTRL2_MDIV_DIV64              SPI_CTRL2_MDIV_VALUE(5)
+#define SPI_CTRL2_MDIV_DIV128             SPI_CTRL2_MDIV_VALUE(6)
+#define SPI_CTRL2_MDIV_DIV256             SPI_CTRL2_MDIV_VALUE(7)
+#define SPI_CTRL2_MDIV_DIV512             SPI_CTRL2_MDIV_VALUE(8)
+#define SPI_CTRL2_MDIV_DIV1024            SPI_CTRL2_MDIV_VALUE(9)
+
+#define SPI_CTRL1_MDIV_DIV3               (0x0U)
+#define SPI_CTRL2_MDIV_DIV3               (0x1U << 9)
+
 /** @} */
 
 /*===========================================================================*/
@@ -58,7 +88,7 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_SPI_USE_SPI1) || defined(__DOXYGEN__)
-#define AT32_SPI_USE_SPI1                   FALSE
+#define AT32_SPI_USE_SPI1                  FALSE
 #endif
 
 /**
@@ -67,28 +97,92 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_SPI_USE_SPI2) || defined(__DOXYGEN__)
-#define AT32_SPI_USE_SPI2                   FALSE
+#define AT32_SPI_USE_SPI2                  FALSE
+#endif
+
+/**
+ * @brief   SPI3 driver enable switch.
+ * @details If set to @p TRUE the support for SPI3 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_SPI_USE_SPI3) || defined(__DOXYGEN__)
+#define AT32_SPI_USE_SPI3                  FALSE
+#endif
+
+/**
+ * @brief   SPI4 driver enable switch.
+ * @details If set to @p TRUE the support for SPI4 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_SPI_USE_SPI4) || defined(__DOXYGEN__)
+#define AT32_SPI_USE_SPI4                  FALSE
+#endif
+
+/**
+ * @brief   SPI5 driver enable switch.
+ * @details If set to @p TRUE the support for SPI5 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_SPI_USE_SPI5) || defined(__DOXYGEN__)
+#define AT32_SPI_USE_SPI5                  FALSE
+#endif
+
+/**
+ * @brief   SPI6 driver enable switch.
+ * @details If set to @p TRUE the support for SPI6 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_SPI_USE_SPI6) || defined(__DOXYGEN__)
+#define AT32_SPI_USE_SPI6                  FALSE
 #endif
 
 /**
  * @brief   Filler pattern used when there is nothing to transmit.
  */
 #if !defined(AT32_SPI_FILLER_PATTERN) || defined(__DOXYGEN__)
-#define AT32_SPI_FILLER_PATTERN             0xFFFFFFFFU
+#define AT32_SPI_FILLER_PATTERN            0xFFFFFFFFU
 #endif
 
 /**
  * @brief   SPI1 interrupt priority level setting.
  */
 #if !defined(AT32_SPI_SPI1_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_SPI_SPI1_IRQ_PRIORITY          10
+#define AT32_SPI_SPI1_IRQ_PRIORITY         10
 #endif
 
 /**
  * @brief   SPI2 interrupt priority level setting.
  */
 #if !defined(AT32_SPI_SPI2_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_SPI_SPI2_IRQ_PRIORITY          10
+#define AT32_SPI_SPI2_IRQ_PRIORITY         10
+#endif
+
+/**
+ * @brief   SPI3 interrupt priority level setting.
+ */
+#if !defined(AT32_SPI_SPI3_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI3_IRQ_PRIORITY         10
+#endif
+
+/**
+ * @brief   SPI4 interrupt priority level setting.
+ */
+#if !defined(AT32_SPI_SPI4_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI4_IRQ_PRIORITY         10
+#endif
+
+/**
+ * @brief   SPI5 interrupt priority level setting.
+ */
+#if !defined(AT32_SPI_SPI5_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI5_IRQ_PRIORITY         10
+#endif
+
+/**
+ * @brief   SPI6 interrupt priority level setting.
+ */
+#if !defined(AT32_SPI_SPI6_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI6_IRQ_PRIORITY         10
 #endif
 
 /**
@@ -98,7 +192,7 @@
  *          over the TX stream.
  */
 #if !defined(AT32_SPI_SPI1_DMA_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_SPI_SPI1_DMA_PRIORITY          1
+#define AT32_SPI_SPI1_DMA_PRIORITY         1
 #endif
 
 /**
@@ -108,7 +202,47 @@
  *          over the TX stream.
  */
 #if !defined(AT32_SPI_SPI2_DMA_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_SPI_SPI2_DMA_PRIORITY          1
+#define AT32_SPI_SPI2_DMA_PRIORITY         1
+#endif
+
+/**
+ * @brief   SPI3 DMA priority (0..3|lowest..highest).
+ * @note    The priority level is used for both the TX and RX DMA streams but
+ *          because of the streams ordering the RX stream has always priority
+ *          over the TX stream.
+ */
+#if !defined(AT32_SPI_SPI3_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI3_DMA_PRIORITY         1
+#endif
+
+/**
+ * @brief   SPI4 DMA priority (0..3|lowest..highest).
+ * @note    The priority level is used for both the TX and RX DMA streams but
+ *          because of the streams ordering the RX stream has always priority
+ *          over the TX stream.
+ */
+#if !defined(AT32_SPI_SPI4_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI4_DMA_PRIORITY         1
+#endif
+
+/**
+ * @brief   SPI5 DMA priority (0..3|lowest..highest).
+ * @note    The priority level is used for both the TX and RX DMA streams but
+ *          because of the streams ordering the RX stream has always priority
+ *          over the TX stream.
+ */
+#if !defined(AT32_SPI_SPI5_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI5_DMA_PRIORITY         1
+#endif
+
+/**
+ * @brief   SPI6 DMA priority (0..3|lowest..highest).
+ * @note    The priority level is used for both the TX and RX DMA streams but
+ *          because of the streams ordering the RX stream has always priority
+ *          over the TX stream.
+ */
+#if !defined(AT32_SPI_SPI6_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI6_DMA_PRIORITY         1
 #endif
 
 /**
@@ -116,6 +250,64 @@
  */
 #if !defined(AT32_SPI_DMA_ERROR_HOOK) || defined(__DOXYGEN__)
 #define AT32_SPI_DMA_ERROR_HOOK(spip)      osalSysHalt("DMA failure")
+#endif
+
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_USE_DMA_V1 
+
+/**
+ * @brief   SPI1 DMA MUX setting.
+ */
+#if !defined(AT32_SPI_SPI1_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_SPI_SPI1_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI1_RX_DMAMUX_CHANNEL    1
+#define AT32_SPI_SPI1_TX_DMAMUX_CHANNEL    2
+#endif
+
+/**
+ * @brief   SPI2 DMA MUX setting.
+ */
+#if !defined(AT32_SPI_SPI2_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_SPI_SPI2_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI2_RX_DMAMUX_CHANNEL    1
+#define AT32_SPI_SPI2_TX_DMAMUX_CHANNEL    2
+#endif
+
+/**
+ * @brief   SPI3 DMA MUX setting.
+ */
+#if !defined(AT32_SPI_SPI3_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_SPI_SPI3_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI3_RX_DMAMUX_CHANNEL    1
+#define AT32_SPI_SPI3_TX_DMAMUX_CHANNEL    2
+#endif
+
+/**
+ * @brief   SPI4 DMA MUX setting.
+ */
+#if !defined(AT32_SPI_SPI4_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_SPI_SPI4_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI4_RX_DMAMUX_CHANNEL    1
+#define AT32_SPI_SPI4_TX_DMAMUX_CHANNEL    2
+#endif
+
+/**
+ * @brief   SPI5 DMA MUX setting.
+ */
+#if !defined(AT32_SPI_SPI5_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_SPI_SPI5_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI5_RX_DMAMUX_CHANNEL    1
+#define AT32_SPI_SPI5_TX_DMAMUX_CHANNEL    2
+#endif
+
+/**
+ * @brief   SPI6 DMA MUX setting.
+ */
+#if !defined(AT32_SPI_SPI6_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_SPI_SPI6_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI6_RX_DMAMUX_CHANNEL    1
+#define AT32_SPI_SPI6_TX_DMAMUX_CHANNEL    2
+#endif
+
 #endif
 /** @} */
 
@@ -131,19 +323,153 @@
 #error "SPI2 not present in the selected device"
 #endif
 
-#if !AT32_SPI_USE_SPI1 && !AT32_SPI_USE_SPI2
+#if AT32_SPI_USE_SPI3 && !AT32_HAS_SPI3
+#error "SPI3 not present in the selected device"
+#endif
+
+#if AT32_SPI_USE_SPI4 && !AT32_HAS_SPI4
+#error "SPI4 not present in the selected device"
+#endif
+
+#if AT32_SPI_USE_SPI5 && !AT32_HAS_SPI5
+#error "SPI5 not present in the selected device"
+#endif
+
+#if AT32_SPI_USE_SPI6 && !AT32_HAS_SPI6
+#error "SPI6 not present in the selected device"
+#endif
+
+#if !AT32_SPI_USE_SPI1 && !AT32_SPI_USE_SPI2 && !AT32_SPI_USE_SPI3 &&    \
+    !AT32_SPI_USE_SPI4 && !AT32_SPI_USE_SPI5 && !AT32_SPI_USE_SPI6
 #error "SPI driver activated but no SPI peripheral assigned"
 #endif
 
-#if AT32_SPI_USE_SPI1 &&                                                    \
+#if AT32_SPI_USE_SPI1 &&                                                   \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_SPI_SPI1_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to SPI1"
 #endif
 
-#if AT32_SPI_USE_SPI2 &&                                                    \
+#if AT32_SPI_USE_SPI2 &&                                                   \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_SPI_SPI2_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to SPI2"
 #endif
+
+#if AT32_SPI_USE_SPI3 &&                                                   \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_SPI_SPI3_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to SPI3"
+#endif
+
+#if AT32_SPI_USE_SPI4 &&                                                   \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_SPI_SPI4_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to SPI4"
+#endif
+
+#if AT32_SPI_USE_SPI5 &&                                                   \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_SPI_SPI5_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to SPI5"
+#endif
+
+#if AT32_SPI_USE_SPI6 &&                                                   \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_SPI_SPI6_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to SPI6"
+#endif
+
+/* Check on the presence of the DMA streams settings in mcuconf.h.*/
+#if AT32_SPI_USE_SPI1 && (!defined(AT32_SPI_SPI1_RX_DMA_STREAM) ||        \
+                          !defined(AT32_SPI_SPI1_TX_DMA_STREAM))
+#error "SPI1 DMA streams not defined"
+#endif
+
+#if AT32_SPI_USE_SPI2 && (!defined(AT32_SPI_SPI2_RX_DMA_STREAM) ||        \
+                          !defined(AT32_SPI_SPI2_TX_DMA_STREAM))
+#error "SPI2 DMA streams not defined"
+#endif
+
+#if AT32_SPI_USE_SPI3 && (!defined(AT32_SPI_SPI3_RX_DMA_STREAM) ||        \
+                          !defined(AT32_SPI_SPI3_TX_DMA_STREAM))
+#error "SPI3 DMA streams not defined"
+#endif
+
+#if AT32_SPI_USE_SPI4 && (!defined(AT32_SPI_SPI4_RX_DMA_STREAM) ||        \
+                          !defined(AT32_SPI_SPI4_TX_DMA_STREAM))
+#error "SPI4 DMA streams not defined"
+#endif
+
+#if AT32_SPI_USE_SPI5 && (!defined(AT32_SPI_SPI5_RX_DMA_STREAM) ||        \
+                          !defined(AT32_SPI_SPI5_TX_DMA_STREAM))
+#error "SPI5 DMA streams not defined"
+#endif
+
+#if AT32_SPI_USE_SPI6 && (!defined(AT32_SPI_SPI6_RX_BDMA_STREAM) ||       \
+                          !defined(AT32_SPI_SPI6_TX_BDMA_STREAM))
+#error "SPI6 BDMA streams not defined"
+#endif
+
+/* Devices without DMAMUX require an additional check.*/
+#if AT32_ADVANCED_DMA && !AT32_DMA_SUPPORTS_DMAMUX
+
+/* Check on the validity of the assigned DMA channels.*/
+#if AT32_SPI_USE_SPI1 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI1_RX_DMA_STREAM, AT32_SPI1_RX_DMA_MSK)
+#error "invalid DMA stream associated to SPI1 RX"
+#endif
+
+#if AT32_SPI_USE_SPI1 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI1_TX_DMA_STREAM, AT32_SPI1_TX_DMA_MSK)
+#error "invalid DMA stream associated to SPI1 TX"
+#endif
+
+#if AT32_SPI_USE_SPI2 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI2_RX_DMA_STREAM, AT32_SPI2_RX_DMA_MSK)
+#error "invalid DMA stream associated to SPI2 RX"
+#endif
+
+#if AT32_SPI_USE_SPI2 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI2_TX_DMA_STREAM, AT32_SPI2_TX_DMA_MSK)
+#error "invalid DMA stream associated to SPI2 TX"
+#endif
+
+#if AT32_SPI_USE_SPI3 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI3_RX_DMA_STREAM, AT32_SPI3_RX_DMA_MSK)
+#error "invalid DMA stream associated to SPI3 RX"
+#endif
+
+#if AT32_SPI_USE_SPI3 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI3_TX_DMA_STREAM, AT32_SPI3_TX_DMA_MSK)
+#error "invalid DMA stream associated to SPI3 TX"
+#endif
+
+#if AT32_SPI_USE_SPI4 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI4_RX_DMA_STREAM, AT32_SPI4_RX_DMA_MSK)
+#error "invalid DMA stream associated to SPI4 RX"
+#endif
+
+#if AT32_SPI_USE_SPI4 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI4_TX_DMA_STREAM, AT32_SPI4_TX_DMA_MSK)
+#error "invalid DMA stream associated to SPI4 TX"
+#endif
+
+#if AT32_SPI_USE_SPI5 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI5_RX_DMA_STREAM, AT32_SPI5_RX_DMA_MSK)
+#error "invalid DMA stream associated to SPI5 RX"
+#endif
+
+#if AT32_SPI_USE_SPI5 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI5_TX_DMA_STREAM, AT32_SPI5_TX_DMA_MSK)
+#error "invalid DMA stream associated to SPI5 TX"
+#endif
+
+#if AT32_SPI_USE_SPI6 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI6_RX_DMA_STREAM, AT32_SPI6_RX_DMA_MSK)
+#error "invalid DMA stream associated to SPI6 RX"
+#endif
+
+#if AT32_SPI_USE_SPI6 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_SPI_SPI6_TX_DMA_STREAM, AT32_SPI6_TX_DMA_MSK)
+#error "invalid DMA stream associated to SPI6 TX"
+#endif
+
+#endif /* AT32_ADVANCED_DMA */
 
 #if !defined(AT32_DMA_REQUIRED)
 #define AT32_DMA_REQUIRED
@@ -164,10 +490,12 @@
 #define spi_lld_driver_fields                                               \
   /* Pointer to the SPIx registers block.*/                                 \
   SPI_TypeDef               *spi;                                           \
+  /** DMA type for this instance.*/                                         \
+  bool                      is_edma;                                        \
   /* Receive DMA stream.*/                                                  \
-  const at32_dma_stream_t   *dmarx;                                         \
+  const at32_dma_stream_t  *dmarx;                                          \
   /* Transmit DMA stream.*/                                                 \
-  const at32_dma_stream_t   *dmatx;                                         \
+  const at32_dma_stream_t  *dmatx;                                          \
   /* RX DMA mode bit mask.*/                                                \
   uint32_t                  rxdmamode;                                      \
   /* TX DMA mode bit mask.*/                                                \
@@ -198,6 +526,22 @@ extern SPIDriver SPID1;
 extern SPIDriver SPID2;
 #endif
 
+#if AT32_SPI_USE_SPI3 && !defined(__DOXYGEN__)
+extern SPIDriver SPID3;
+#endif
+
+#if AT32_SPI_USE_SPI4 && !defined(__DOXYGEN__)
+extern SPIDriver SPID4;
+#endif
+
+#if AT32_SPI_USE_SPI5 && !defined(__DOXYGEN__)
+extern SPIDriver SPID5;
+#endif
+
+#if AT32_SPI_USE_SPI6 && !defined(__DOXYGEN__)
+extern SPIDriver SPID6;
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -221,6 +565,6 @@ extern "C" {
 
 #endif /* HAL_USE_SPI */
 
-#endif /* HAL_SPI_V2_LLD_H */
+#endif /* HAL_SPI_LLD_H */
 
 /** @} */

@@ -1,7 +1,5 @@
 /*
     ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
-    ChibiOS - Copyright (C) 2023..2024 HorrorTroll
-    ChibiOS - Copyright (C) 2023..2024 Zhaqian
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,7 +13,6 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
-
 /*
    Concepts and parts of this file have been contributed by Uladzimir Pylinsky
    aka barthess.
@@ -57,7 +54,7 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_I2C_USE_I2C1) || defined(__DOXYGEN__)
-#define AT32_I2C_USE_I2C1                   FALSE
+#define AT32_I2C_USE_I2C1                  FALSE
 #endif
 
 /**
@@ -66,28 +63,44 @@
  * @note    The default is @p FALSE.
  */
 #if !defined(AT32_I2C_USE_I2C2) || defined(__DOXYGEN__)
-#define AT32_I2C_USE_I2C2                   FALSE
+#define AT32_I2C_USE_I2C2                  FALSE
+#endif
+
+/**
+ * @brief   I2C3 driver enable switch.
+ * @details If set to @p TRUE the support for I2C3 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_I2C_USE_I2C3) || defined(__DOXYGEN__)
+#define AT32_I2C_USE_I2C3                  FALSE
 #endif
 
 /**
  * @brief   I2C timeout on busy condition in milliseconds.
  */
 #if !defined(AT32_I2C_BUSY_TIMEOUT) || defined(__DOXYGEN__)
-#define AT32_I2C_BUSY_TIMEOUT               50
+#define AT32_I2C_BUSY_TIMEOUT              50
 #endif
 
 /**
  * @brief   I2C1 interrupt priority level setting.
  */
 #if !defined(AT32_I2C_I2C1_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_I2C_I2C1_IRQ_PRIORITY          10
+#define AT32_I2C_I2C1_IRQ_PRIORITY         10
 #endif
 
 /**
  * @brief   I2C2 interrupt priority level setting.
  */
 #if !defined(AT32_I2C_I2C2_IRQ_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_I2C_I2C2_IRQ_PRIORITY          10
+#define AT32_I2C_I2C2_IRQ_PRIORITY         10
+#endif
+
+/**
+ * @brief   I2C3 interrupt priority level setting.
+ */
+#if !defined(AT32_I2C_I2C3_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C3_IRQ_PRIORITY         10
 #endif
 
 /**
@@ -97,7 +110,7 @@
 *          over the TX stream.
 */
 #if !defined(AT32_I2C_I2C1_DMA_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_I2C_I2C1_DMA_PRIORITY          1
+#define AT32_I2C_I2C1_DMA_PRIORITY         1
 #endif
 
 /**
@@ -107,7 +120,17 @@
 *          over the TX stream.
 */
 #if !defined(AT32_I2C_I2C2_DMA_PRIORITY) || defined(__DOXYGEN__)
-#define AT32_I2C_I2C2_DMA_PRIORITY          1
+#define AT32_I2C_I2C2_DMA_PRIORITY         1
+#endif
+
+/**
+* @brief   I2C3 DMA priority (0..3|lowest..highest).
+* @note    The priority level is used for both the TX and RX DMA streams but
+*          because of the streams ordering the RX stream has always priority
+*          over the TX stream.
+*/
+#if !defined(AT32_I2C_I2C3_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C3_DMA_PRIORITY         1
 #endif
 
 /**
@@ -116,7 +139,86 @@
  *          error can only happen because programming errors.
  */
 #if !defined(AT32_I2C_DMA_ERROR_HOOK) || defined(__DOXYGEN__)
-#define AT32_I2C_DMA_ERROR_HOOK(i2cp)       osalSysHalt("DMA failure")
+#define AT32_I2C_DMA_ERROR_HOOK(i2cp)      osalSysHalt("DMA failure")
+#endif
+
+/**
+ * @brief   DMA stream used for I2C1 RX operations.
+ * @note    This option is only available on platforms with enhanced DMA.
+ */
+#if !defined(AT32_I2C_I2C1_RX_DMA_STREAM) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C1_RX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 0)
+#endif
+
+/**
+ * @brief   DMA stream used for I2C1 TX operations.
+ * @note    This option is only available on platforms with enhanced DMA.
+ */
+#if !defined(AT32_I2C_I2C1_TX_DMA_STREAM) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C1_TX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 6)
+#endif
+
+/**
+ * @brief   DMA stream used for I2C2 RX operations.
+ * @note    This option is only available on platforms with enhanced DMA.
+ */
+#if !defined(AT32_I2C_I2C2_RX_DMA_STREAM) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C2_RX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 2)
+#endif
+
+/**
+ * @brief   DMA stream used for I2C2 TX operations.
+ * @note    This option is only available on platforms with enhanced DMA.
+ */
+#if !defined(AT32_I2C_I2C2_TX_DMA_STREAM) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C2_TX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 7)
+#endif
+
+/**
+ * @brief   DMA stream used for I2C3 RX operations.
+ * @note    This option is only available on platforms with enhanced DMA.
+ */
+#if !defined(AT32_I2C_I2C3_RX_DMA_STREAM) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C3_RX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 2)
+#endif
+
+/**
+ * @brief   DMA stream used for I2C3 TX operations.
+ * @note    This option is only available on platforms with enhanced DMA.
+ */
+#if !defined(AT32_I2C_I2C3_TX_DMA_STREAM) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C3_TX_DMA_STREAM        AT32_DMA_STREAM_ID(1, 4)
+#endif
+
+#if AT32_DMA_SUPPORTS_DMAMUX && AT32_USE_DMA_V1 
+
+/**
+ * @brief   I2C1 DMA MUX setting.
+ */
+#if !defined(AT32_I2C_I2C1_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_I2C_I2C1_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C1_RX_DMAMUX_CHANNEL    1
+#define AT32_I2C_I2C1_TX_DMAMUX_CHANNEL    2
+#endif
+
+/**
+ * @brief   I2C2 DMA MUX setting.
+ */
+#if !defined(AT32_I2C_I2C2_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_I2C_I2C2_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C2_RX_DMAMUX_CHANNEL    1
+#define AT32_I2C_I2C2_TX_DMAMUX_CHANNEL    2
+#endif
+
+/**
+ * @brief   I2C3 DMA MUX setting.
+ */
+#if !defined(AT32_I2C_I2C3_RX_DMAMUX_CHANNEL) || \
+    !defined(AT32_I2C_I2C3_TX_DMAMUX_CHANNEL) || defined(__DOXYGEN__)
+#define AT32_I2C_I2C3_RX_DMAMUX_CHANNEL    1
+#define AT32_I2C_I2C3_TX_DMAMUX_CHANNEL    2
+#endif
+
 #endif
 /** @} */
 
@@ -133,37 +235,114 @@
 #error "I2C2 not present in the selected device"
 #endif
 
-#if !AT32_I2C_USE_I2C1 && !AT32_I2C_USE_I2C2
+#if AT32_I2C_USE_I2C3 && !AT32_HAS_I2C3
+#error "I2C3 not present in the selected device"
+#endif
+
+#if !AT32_I2C_USE_I2C1 && !AT32_I2C_USE_I2C2 &&                           \
+    !AT32_I2C_USE_I2C3
 #error "I2C driver activated but no I2C peripheral assigned"
 #endif
 
-#if AT32_I2C_USE_I2C1 &&                                                    \
+#if AT32_I2C_USE_I2C1 &&                                                   \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_I2C_I2C1_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to I2C1"
 #endif
 
-#if AT32_I2C_USE_I2C2 &&                                                    \
+#if AT32_I2C_USE_I2C2 &&                                                   \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_I2C_I2C2_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to I2C2"
 #endif
 
-#if AT32_I2C_USE_I2C1 &&                                                    \
+#if AT32_I2C_USE_I2C3 &&                                                   \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_I2C_I2C3_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to I2C3"
+#endif
+
+#if AT32_I2C_USE_I2C1 &&                                                   \
     !AT32_DMA_IS_VALID_PRIORITY(AT32_I2C_I2C1_DMA_PRIORITY)
 #error "Invalid DMA priority assigned to I2C1"
 #endif
 
-#if AT32_I2C_USE_I2C2 &&                                                    \
+#if AT32_I2C_USE_I2C2 &&                                                   \
     !AT32_DMA_IS_VALID_PRIORITY(AT32_I2C_I2C2_DMA_PRIORITY)
 #error "Invalid DMA priority assigned to I2C2"
 #endif
+
+#if AT32_I2C_USE_I2C3 &&                                                   \
+    !AT32_DMA_IS_VALID_PRIORITY(AT32_I2C_I2C3_DMA_PRIORITY)
+#error "Invalid DMA priority assigned to I2C3"
+#endif
+
+/* The following checks are only required when there is a DMA able to
+   reassign streams to different channels.*/
+#if AT32_ADVANCED_DMA && (!AT32_DMA_SUPPORTS_DMAMUX)
+
+#if AT32_I2C_USE_I2C1 && (!defined(AT32_I2C_I2C1_RX_DMA_STREAM) ||         \
+                           !defined(AT32_I2C_I2C1_TX_DMA_STREAM))
+#error "I2C1 DMA streams not defined"
+#endif
+
+#if AT32_I2C_USE_I2C2 && (!defined(AT32_I2C_I2C2_RX_DMA_STREAM) ||         \
+                           !defined(AT32_I2C_I2C2_TX_DMA_STREAM))
+#error "I2C2 DMA streams not defined"
+#endif
+
+#if AT32_I2C_USE_I2C3 && (!defined(AT32_I2C_I2C3_RX_DMA_STREAM) ||         \
+                           !defined(AT32_I2C_I2C3_TX_DMA_STREAM))
+#error "I2C3 DMA streams not defined"
+#endif
+
+/* Check on the validity of the assigned DMA channels.*/
+#if AT32_I2C_USE_I2C1 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C1_RX_DMA_STREAM,                     \
+                           AT32_I2C1_RX_DMA_MSK)
+#error "invalid DMA stream associated to I2C1 RX"
+#endif
+
+#if AT32_I2C_USE_I2C1 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C1_TX_DMA_STREAM,                     \
+                           AT32_I2C1_TX_DMA_MSK)
+#error "invalid DMA stream associated to I2C1 TX"
+#endif
+
+#if AT32_I2C_USE_I2C2 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C2_RX_DMA_STREAM,                     \
+                           AT32_I2C2_RX_DMA_MSK)
+#error "invalid DMA stream associated to I2C2 RX"
+#endif
+
+#if AT32_I2C_USE_I2C2 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C2_TX_DMA_STREAM,                     \
+                           AT32_I2C2_TX_DMA_MSK)
+#error "invalid DMA stream associated to I2C2 TX"
+#endif
+
+#if AT32_I2C_USE_I2C3 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C3_RX_DMA_STREAM,                     \
+                           AT32_I2C3_RX_DMA_MSK)
+#error "invalid DMA stream associated to I2C3 RX"
+#endif
+
+#if AT32_I2C_USE_I2C3 &&                                                   \
+    !AT32_DMA_IS_VALID_ID(AT32_I2C_I2C3_TX_DMA_STREAM,                     \
+                           AT32_I2C3_TX_DMA_MSK)
+#error "invalid DMA stream associated to I2C3 TX"
+#endif
+
+#endif /* AT32_ADVANCED_DMA */
 
 #if !defined(AT32_DMA_REQUIRED)
 #define AT32_DMA_REQUIRED
 #endif
 
 /* Check clock range. */
-#if !(I2C_CLK_FREQ >= 2) && (I2C_CLK_FREQ <= 72)
+#if defined(AT32F415xx) || defined(AT32F413xx) || defined(AT32F403_7xx)
+#if !(I2C_CLK_FREQ >= 2) && (I2C_CLK_FREQ <= 120)
 #error "I2C peripheral clock frequency out of range."
+#endif
+#else
+#error "unspecified, unsupported or invalid AT32 platform"
 #endif
 
 /*===========================================================================*/
@@ -301,6 +480,10 @@ extern I2CDriver I2CD1;
 
 #if AT32_I2C_USE_I2C2
 extern I2CDriver I2CD2;
+#endif
+
+#if AT32_I2C_USE_I2C3
+extern I2CDriver I2CD3;
 #endif
 #endif /* !defined(__DOXYGEN__) */
 

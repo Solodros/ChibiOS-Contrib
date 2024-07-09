@@ -1,7 +1,5 @@
 /*
     ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
-    ChibiOS - Copyright (C) 2023..2024 HorrorTroll
-    ChibiOS - Copyright (C) 2023..2024 Zhaqian
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -91,6 +89,12 @@ OSAL_IRQ_HANDLER(AT32_USART3_HANDLER) {
 #if HAL_USE_SERIAL
 #if AT32_SERIAL_USE_USART3
   sd_lld_serve_interrupt(&SD3);
+#endif
+#endif
+
+#if HAL_USE_SIO
+#if AT32_SIO_USE_USART3
+  sio_lld_serve_interrupt(&SIOD3);
 #endif
 #endif
 

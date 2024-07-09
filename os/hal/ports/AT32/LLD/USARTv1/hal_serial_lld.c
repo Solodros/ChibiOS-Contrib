@@ -1,7 +1,5 @@
 /*
     ChibiOS - Copyright (C) 2006..2018 Giovanni Di Sirio
-    ChibiOS - Copyright (C) 2023..2024 HorrorTroll
-    ChibiOS - Copyright (C) 2023..2024 Zhaqian
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -61,6 +59,31 @@ SerialDriver SD4;
 SerialDriver SD5;
 #endif
 
+/** @brief USART6 serial driver identifier.*/
+#if AT32_SERIAL_USE_USART6 || defined(__DOXYGEN__)
+SerialDriver SD6;
+#endif
+
+/** @brief UART7 serial driver identifier.*/
+#if AT32_SERIAL_USE_UART7 || defined(__DOXYGEN__)
+SerialDriver SD7;
+#endif
+
+/** @brief UART8 serial driver identifier.*/
+#if AT32_SERIAL_USE_UART8 || defined(__DOXYGEN__)
+SerialDriver SD8;
+#endif
+
+/** @brief UART9 serial driver identifier.*/
+#if AT32_SERIAL_USE_UART9 || defined(__DOXYGEN__)
+SerialDriver SD9;
+#endif
+
+/** @brief UART10 serial driver identifier.*/
+#if AT32_SERIAL_USE_UART10 || defined(__DOXYGEN__)
+SerialDriver SD10;
+#endif
+
 /*===========================================================================*/
 /* Driver local variables and types.                                         */
 /*===========================================================================*/
@@ -70,7 +93,7 @@ static const SerialConfig default_config =
 {
   SERIAL_DEFAULT_BITRATE,
   0,
-  USART_CTRL2_STOPBN1_BITS,
+  USART_CTRL2_STOPBN_1_BITS,
   0
 };
 
@@ -86,22 +109,22 @@ static const SerialConfig default_config =
  * @param[in] config    the architecture-dependent serial driver configuration
  */
 static void usart_init(SerialDriver *sdp, const SerialConfig *config) {
-  uint32_t baudr;
+  uint32_t brr;
   USART_TypeDef *u = sdp->usart;
 
-  baudr = (uint32_t)((sdp->clock + config->speed/2) / config->speed);
+  brr = (uint32_t)((sdp->clock + config->speed/2) / config->speed);
 
 #if defined(USART_CTRL1_OVER8)
-  /* Correcting BAUDR value when oversampling by 8 instead of 16.
+  /* Correcting BRR value when oversampling by 8 instead of 16.
      Fraction is still 4 bits wide, but only lower 3 bits used.
      Mantissa is doubled, but Fraction is left the same.*/
   if (config->ctrl1 & USART_CTRL1_OVER8)
-    baudr = ((baudr & ~7) * 2) | (baudr & 7);
+    brr = ((brr & ~7) * 2) | (brr & 7);
 #endif
 
-  osalDbgAssert(baudr < 0x10000, "invalid BAUDR value");
+  osalDbgAssert(brr < 0x10000, "invalid BRR value");
 
-  u->BAUDR = baudr;
+  u->BAUDR = brr;
 
   /* Note that some bits are enforced.*/
   u->CTRL2 = config->ctrl2 | USART_CTRL2_BFIEN;
@@ -110,8 +133,8 @@ static void usart_init(SerialDriver *sdp, const SerialConfig *config) {
                              USART_CTRL1_RDBFIEN | USART_CTRL1_TEN |
                              USART_CTRL1_REN;
   u->STS = 0;
-  (void)u->STS; /* STS reset step 1.*/
-  (void)u->DT;  /* DT reset step 2.*/
+  (void)u->STS;  /* STS reset step 1.*/
+  (void)u->DT;   /* STS reset step 2.*/
 
   /* Deciding mask to be applied on the data register on receive, this is
      required in order to mask out the parity bit.*/
@@ -193,6 +216,46 @@ static void notify5(io_queue_t *qp) {
 
   (void)qp;
   UART5->CTRL1 |= USART_CTRL1_TDBEIEN | USART_CTRL1_TDCIEN;
+}
+#endif
+
+#if AT32_SERIAL_USE_USART6 || defined(__DOXYGEN__)
+static void notify6(io_queue_t *qp) {
+
+  (void)qp;
+  USART6->CTRL1 |= USART_CTRL1_TDBEIEN | USART_CTRL1_TDCIEN;
+}
+#endif
+
+#if AT32_SERIAL_USE_UART7 || defined(__DOXYGEN__)
+static void notify7(io_queue_t *qp) {
+
+  (void)qp;
+  UART7->CTRL1 |= USART_CTRL1_TDBEIEN | USART_CTRL1_TDCIEN;
+}
+#endif
+
+#if AT32_SERIAL_USE_UART8 || defined(__DOXYGEN__)
+static void notify8(io_queue_t *qp) {
+
+  (void)qp;
+  UART8->CTRL1 |= USART_CTRL1_TDBEIEN | USART_CTRL1_TDCIEN;
+}
+#endif
+
+#if AT32_SERIAL_USE_UART9 || defined(__DOXYGEN__)
+static void notify9(io_queue_t *qp) {
+
+  (void)qp;
+  UART9->CTRL1 |= USART_CTRL1_TDBEIEN | USART_CTRL1_TDCIEN;
+}
+#endif
+
+#if AT32_SERIAL_USE_UART10 || defined(__DOXYGEN__)
+static void notify10(io_queue_t *qp) {
+
+  (void)qp;
+  UART10->CTRL1 |= USART_CTRL1_TDBEIEN | USART_CTRL1_TDCIEN;
 }
 #endif
 
@@ -305,6 +368,111 @@ OSAL_IRQ_HANDLER(AT32_UART5_HANDLER) {
 #endif
 #endif
 
+#if AT32_SERIAL_USE_USART6 || defined(__DOXYGEN__)
+#if !defined(AT32_USART6_SUPPRESS_ISR)
+#if !defined(AT32_USART6_HANDLER)
+#error "AT32_USART6_HANDLER not defined"
+#endif
+/**
+ * @brief   USART6 interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_USART6_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  sd_lld_serve_interrupt(&SD6);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif
+#endif
+
+#if AT32_SERIAL_USE_UART7 || defined(__DOXYGEN__)
+#if !defined(AT32_UART7_SUPPRESS_ISR)
+#if !defined(AT32_UART7_HANDLER)
+#error "AT32_UART7_HANDLER not defined"
+#endif
+/**
+ * @brief   UART7 interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_UART7_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  sd_lld_serve_interrupt(&SD7);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif
+#endif
+
+#if AT32_SERIAL_USE_UART8 || defined(__DOXYGEN__)
+#if !defined(AT32_UART8_SUPPRESS_ISR)
+#if !defined(AT32_UART8_HANDLER)
+#error "AT32_UART8_HANDLER not defined"
+#endif
+/**
+ * @brief   UART8 interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_UART8_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  sd_lld_serve_interrupt(&SD8);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif
+#endif
+
+#if AT32_SERIAL_USE_UART9 || defined(__DOXYGEN__)
+#if !defined(AT32_UART9_SUPPRESS_ISR)
+#if !defined(AT32_UART9_HANDLER)
+#error "AT32_UART9_HANDLER not defined"
+#endif
+/**
+ * @brief   UART9 interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_UART9_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  sd_lld_serve_interrupt(&SD9);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif
+#endif
+
+#if AT32_SERIAL_USE_UART10 || defined(__DOXYGEN__)
+#if !defined(AT32_UART10_SUPPRESS_ISR)
+#if !defined(AT32_UART10_HANDLER)
+#error "AT32_UART10_HANDLER not defined"
+#endif
+/**
+ * @brief   UART10 interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_UART10_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  sd_lld_serve_interrupt(&SD10);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif
+#endif
+
 /*===========================================================================*/
 /* Driver exported functions.                                                */
 /*===========================================================================*/
@@ -319,7 +487,11 @@ void sd_lld_init(void) {
 #if AT32_SERIAL_USE_USART1
   sdObjectInit(&SD1, NULL, notify1);
   SD1.usart = USART1;
+#if defined(AT32_USART1CLK)
+  SD1.clock = AT32_USART1CLK;
+#else
   SD1.clock = AT32_PCLK2;
+#endif
 #if !defined(AT32_USART1_SUPPRESS_ISR) && defined(AT32_USART1_NUMBER)
   nvicEnableVector(AT32_USART1_NUMBER, AT32_SERIAL_USART1_PRIORITY);
 #endif
@@ -328,7 +500,11 @@ void sd_lld_init(void) {
 #if AT32_SERIAL_USE_USART2
   sdObjectInit(&SD2, NULL, notify2);
   SD2.usart = USART2;
+#if defined(AT32_USART2CLK)
+  SD2.clock = AT32_USART2CLK;
+#else
   SD2.clock = AT32_PCLK1;
+#endif
 #if !defined(AT32_USART2_SUPPRESS_ISR) && defined(AT32_USART2_NUMBER)
   nvicEnableVector(AT32_USART2_NUMBER, AT32_SERIAL_USART2_PRIORITY);
 #endif
@@ -337,7 +513,11 @@ void sd_lld_init(void) {
 #if AT32_SERIAL_USE_USART3
   sdObjectInit(&SD3, NULL, notify3);
   SD3.usart = USART3;
+#if defined(AT32_USART3CLK)
+  SD3.clock = AT32_USART3CLK;
+#else
   SD3.clock = AT32_PCLK1;
+#endif
 #if !defined(AT32_USART3_SUPPRESS_ISR) && defined(AT32_USART3_NUMBER)
   nvicEnableVector(AT32_USART3_NUMBER, AT32_SERIAL_USART3_PRIORITY);
 #endif
@@ -346,7 +526,11 @@ void sd_lld_init(void) {
 #if AT32_SERIAL_USE_UART4
   sdObjectInit(&SD4, NULL, notify4);
   SD4.usart = UART4;
+#if defined(AT32_UART4CLK)
+  SD4.clock = AT32_UART4CLK;
+#else
   SD4.clock = AT32_PCLK1;
+#endif
 #if !defined(AT32_UART4_SUPPRESS_ISR) && defined(AT32_UART4_NUMBER)
   nvicEnableVector(AT32_UART4_NUMBER, AT32_SERIAL_UART4_PRIORITY);
 #endif
@@ -355,9 +539,78 @@ void sd_lld_init(void) {
 #if AT32_SERIAL_USE_UART5
   sdObjectInit(&SD5, NULL, notify5);
   SD5.usart = UART5;
+#if defined(AT32_UART5CLK)
+  SD5.clock = AT32_UART5CLK;
+#else
   SD5.clock = AT32_PCLK1;
+#endif
 #if !defined(AT32_UART5_SUPPRESS_ISR) && defined(AT32_UART5_NUMBER)
   nvicEnableVector(AT32_UART5_NUMBER, AT32_SERIAL_UART5_PRIORITY);
+#endif
+#endif
+
+#if AT32_SERIAL_USE_USART6
+  sdObjectInit(&SD6, NULL, notify6);
+  SD6.usart = USART6;
+#if defined(AT32_USART6CLK)
+  SD6.clock = AT32_USART6CLK;
+#else
+  SD6.clock = AT32_PCLK2;
+#endif
+#if !defined(AT32_USART6_SUPPRESS_ISR) && defined(AT32_USART6_NUMBER)
+  nvicEnableVector(AT32_USART6_NUMBER, AT32_SERIAL_USART6_PRIORITY);
+#endif
+#endif
+
+#if AT32_SERIAL_USE_UART7
+  sdObjectInit(&SD7, NULL, notify7);
+  SD7.usart = UART7;
+#if defined(AT32_UART7CLK)
+  SD7.clock = AT32_UART7CLK;
+#else
+  SD7.clock = AT32_PCLK1;
+#endif
+#if !defined(AT32_UART7_SUPPRESS_ISR) && defined(AT32_UART7_NUMBER)
+  nvicEnableVector(AT32_UART7_NUMBER, AT32_SERIAL_UART7_PRIORITY);
+#endif
+#endif
+
+#if AT32_SERIAL_USE_UART8
+  sdObjectInit(&SD8, NULL, notify8);
+  SD8.usart = UART8;
+#if defined(AT32_UART8CLK)
+  SD8.clock = AT32_UART8CLK;
+#else
+  SD8.clock = AT32_PCLK1;
+#endif
+#if !defined(AT32_UART8_SUPPRESS_ISR) && defined(AT32_UART8_NUMBER)
+  nvicEnableVector(AT32_UART8_NUMBER, AT32_SERIAL_UART8_PRIORITY);
+#endif
+#endif
+
+#if AT32_SERIAL_USE_UART9
+  sdObjectInit(&SD9, NULL, notify9);
+  SD9.usart = UART9;
+#if defined(AT32_UART9CLK)
+  SD9.clock = AT32_UART9CLK;
+#else
+  SD9.clock = AT32_PCLK2;
+#endif
+#if !defined(AT32_UART9_SUPPRESS_ISR) && defined(AT32_UART9_NUMBER)
+  nvicEnableVector(AT32_UART9_NUMBER, AT32_SERIAL_UART9_PRIORITY);
+#endif
+#endif
+
+#if AT32_SERIAL_USE_UART10
+  sdObjectInit(&SD10, NULL, notify10);
+  SD10.usart = UART10;
+#if defined(AT32_UART10CLK)
+  SD10.clock = AT32_UART10CLK;
+#else
+  SD10.clock = AT32_PCLK2;
+#endif
+#if !defined(AT32_UART10_SUPPRESS_ISR) && defined(AT32_UART10_NUMBER)
+  nvicEnableVector(AT32_UART10_NUMBER, AT32_SERIAL_UART10_PRIORITY);
 #endif
 #endif
 }
@@ -401,6 +654,31 @@ void sd_lld_start(SerialDriver *sdp, const SerialConfig *config) {
 #if AT32_SERIAL_USE_UART5
     if (&SD5 == sdp) {
       crmEnableUART5(true);
+    }
+#endif
+#if AT32_SERIAL_USE_USART6
+    if (&SD6 == sdp) {
+      crmEnableUSART6(true);
+    }
+#endif
+#if AT32_SERIAL_USE_UART7
+    if (&SD7 == sdp) {
+      crmEnableUART7(true);
+    }
+#endif
+#if AT32_SERIAL_USE_UART8
+    if (&SD8 == sdp) {
+      crmEnableUART8(true);
+    }
+#endif
+#if AT32_SERIAL_USE_UART9
+    if (&SD9 == sdp) {
+      crmEnableUART9(true);
+    }
+#endif
+#if AT32_SERIAL_USE_UART10
+    if (&SD10 == sdp) {
+      crmEnableUART10(true);
     }
 #endif
   }
@@ -450,6 +728,36 @@ void sd_lld_stop(SerialDriver *sdp) {
       return;
     }
 #endif
+#if AT32_SERIAL_USE_USART6
+    if (&SD6 == sdp) {
+      crmDisableUSART6();
+      return;
+    }
+#endif
+#if AT32_SERIAL_USE_UART7
+    if (&SD7 == sdp) {
+      crmDisableUART7();
+      return;
+    }
+#endif
+#if AT32_SERIAL_USE_UART8
+    if (&SD8 == sdp) {
+      crmDisableUART8();
+      return;
+    }
+#endif
+#if AT32_SERIAL_USE_UART9
+    if (&SD9 == sdp) {
+      crmDisableUART9();
+      return;
+    }
+#endif
+#if AT32_SERIAL_USE_UART10
+    if (&SD10 == sdp) {
+      crmDisableUART10();
+      return;
+    }
+#endif
   }
 }
 
@@ -474,11 +782,11 @@ void sd_lld_serve_interrupt(SerialDriver *sdp) {
   /* Data available.*/
   osalSysLockFromISR();
   while (sts & (USART_STS_RDBF | USART_STS_ROERR | USART_STS_NERR | USART_STS_FERR |
-                USART_STS_PERR)) {
+               USART_STS_PERR)) {
     uint8_t b;
 
     /* Error condition detection.*/
-    if (sts & (USART_STS_ROERR | USART_STS_NERR | USART_STS_FERR | USART_STS_PERR))
+    if (sts & (USART_STS_ROERR | USART_STS_NERR | USART_STS_FERR  | USART_STS_PERR))
       set_error(sdp, sts);
     b = (uint8_t)u->DT & sdp->rxmask;
     if (sts & USART_STS_RDBF)
