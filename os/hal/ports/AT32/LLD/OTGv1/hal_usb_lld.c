@@ -170,7 +170,7 @@ static void otg_disable_ep(USBDriver *usbp) {
     otgp->ie[i].DIEPINT = 0xFFFFFFFF;
     otgp->oe[i].DOEPINT = 0xFFFFFFFF;
   }
-  otgp->DAINTMSK = DAINTMSK_OUTEPTMSK(0) | DAINTMSK_INEPTMSK(0);
+  //otgp->DAINTMSK = DAINTMSK_OUTEPTMSK(0) | DAINTMSK_INEPTMSK(0);
 }
 
 static void otg_rxfifo_flush(USBDriver *usbp) {
