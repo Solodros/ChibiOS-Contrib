@@ -875,7 +875,7 @@ typedef struct
   __IO uint32_t  REV;                               /*!< Revision                                                              */
   __IO uint32_t  RESERVED3[43];
   __IO uint32_t  DT;                                /*!< 32/16/8 bit data port register                                        */
-} QSPI1_TypeDef;
+} QSPI_TypeDef;
 
 
 /* ================================================================================ */
@@ -1232,6 +1232,7 @@ typedef struct
 #define SPI3                              ((SPI_TypeDef *) SPI3_BASE)
 #define I2SF5                             ((SPI_TypeDef *) I2SF5_BASE)
 #define ERTC                              ((ERTC_TypeDef *)ERTC_BASE)
+#define CRC                               ((CRC_TypeDef *)CRC_BASE)
 
 /**
   * @}
@@ -1307,6 +1308,23 @@ typedef struct
 /******************  Bit definition for ADC_VMLB register  ***************/
 #define ADC_VMLB_LB                      (0x0000U << 0)
 
+
+/* =========================================================================================================================== */
+/* ================                                           CRC                                             ================ */
+/* =========================================================================================================================== */
+
+/******************  Bit definition for CRC_CTRL register  ***************/
+#define CRC_CTRL_RST                    (0x1U << 0)
+#define CRC_CTRL_POLYSIZE               (0x3U << 3)
+#define CRC_CTRL_POLYSIZE_32            (0x0U << 3)
+#define CRC_CTRL_POLYSIZE_16            (0x1U << 3)
+#define CRC_CTRL_POLYSIZE_8             (0x2U << 3)
+#define CRC_CTRL_POLYSIZE_7             (0x3U << 3)
+#define CRC_CTRL_REVID_0                (0x0U << 5)
+#define CRC_CTRL_REVID_1                (0x1U << 5)
+#define CRC_CTRL_REVID_2                (0x2U << 5)
+#define CRC_CTRL_REVID_3                (0x3U << 5)
+#define CRC_CTRL_REVOD                  (0x1U << 7)
 
 /* =========================================================================================================================== */
 /* ================                                           CRM                                             ================ */

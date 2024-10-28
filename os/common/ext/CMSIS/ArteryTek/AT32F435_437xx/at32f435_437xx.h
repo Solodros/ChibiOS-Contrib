@@ -1657,7 +1657,7 @@ typedef struct
 #define SDIO1                             ((SDIO_TypeDef *) SDIO1_BASE)
 #define SDIO2                             ((SDIO_TypeDef *) SDIO2_BASE)
 #define SDIO                              SDIO1
-
+#define CRC                               ((CRC_TypeDef *)CRC_BASE)
 /**
   * @}
   */
@@ -1697,6 +1697,24 @@ typedef struct
 /** @addtogroup Bit_definition
   * @{
   */
+
+/* =========================================================================================================================== */
+/* ================                                           CRC                                             ================ */
+/* =========================================================================================================================== */
+
+/******************  Bit definition for CRC_CTRL register  ***************/
+#define CRC_CTRL_RST                    (0x1U << 0)
+#define CRC_CTRL_POLYSIZE               (0x3U << 3)
+#define CRC_CTRL_POLYSIZE_32            (0x0U << 3)
+#define CRC_CTRL_POLYSIZE_16            (0x1U << 3)
+#define CRC_CTRL_POLYSIZE_8             (0x2U << 3)
+#define CRC_CTRL_POLYSIZE_7             (0x3U << 3)
+#define CRC_CTRL_REVID_0                (0x0U << 5)
+#define CRC_CTRL_REVID_1                (0x1U << 5)
+#define CRC_CTRL_REVID_2                (0x2U << 5)
+#define CRC_CTRL_REVID_3                (0x3U << 5)
+#define CRC_CTRL_REVOD                  (0x1U << 7)
+
 /******************  Bit definition for CRM_CTRL register  *****************/
 #define CRM_CTRL_HICKEN                  (0x1U << 0)
 #define CRM_CTRL_HICKSTBL                (0x1U << 1)

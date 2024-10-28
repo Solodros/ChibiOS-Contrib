@@ -216,15 +216,20 @@
  */
 #define AT32_SPI_USE_SPI1                   TRUE
 #define AT32_SPI_USE_SPI2                   FALSE
+#define AT32_SPI_USE_SPI3                   FALSE
 #define AT32_SPI_SPI1_RX_DMA_STREAM         AT32_DMA_STREAM_ID_ANY
 #define AT32_SPI_SPI1_TX_DMA_STREAM         AT32_DMA_STREAM_ID_ANY
 #define AT32_SPI_SPI2_RX_DMA_STREAM         AT32_DMA_STREAM_ID_ANY
 #define AT32_SPI_SPI2_TX_DMA_STREAM         AT32_DMA_STREAM_ID_ANY
+#define AT32_SPI_SPI3_RX_DMA_STREAM         AT32_DMA_STREAM_ID_ANY
+#define AT32_SPI_SPI3_TX_DMA_STREAM         AT32_DMA_STREAM_ID_ANY
 
 #define AT32_SPI_SPI1_DMA_PRIORITY          1
 #define AT32_SPI_SPI2_DMA_PRIORITY          1
+#define AT32_SPI_SPI3_DMA_PRIORITY          1
 #define AT32_SPI_SPI1_IRQ_PRIORITY          10
 #define AT32_SPI_SPI2_IRQ_PRIORITY          10
+#define AT32_SPI_SPI3_IRQ_PRIORITY          10
 #define AT32_SPI_DMA_ERROR_HOOK(spip)       osalSysHalt("DMA failure")
 
 /*
@@ -276,6 +281,13 @@
 #define AT32_USE_USB_OTG2_HS                TRUE
 #define AT32_OTG2_SUPPORTS_HS               TRUE
 
+#define STM32_CRC_USE_CRC1                  TRUE
+#define AT32_CRC_USE_CRC1                   TRUE
+#define CRC_USE_DMA                         FALSE
+#define AT32_CRC_CRC1_DMA_IRQ_PRIORITY      5
+#define AT32_CRC_CRC1_DMA_PRIORITY          2
+#define AT32_CRC_CRC1_DMA_STREAM            AT32_DMA_STREAM_ID_ANY
+#define CRCSW_USE_CRC1                      FALSE
 
 /*
  * WDG driver system settings.

@@ -41,6 +41,10 @@
 #define SPI_SPID2_MEMORY
 #endif
 
+#if !defined(SPI_SPID3_MEMORY)
+#define SPI_SPID3_MEMORY
+#endif
+
 /*===========================================================================*/
 /* Driver exported variables.                                                */
 /*===========================================================================*/
@@ -53,6 +57,11 @@ SPI_SPID1_MEMORY SPIDriver SPID1;
 /** @brief SPI2 driver identifier.*/
 #if AT32_SPI_USE_SPI2 || defined(__DOXYGEN__)
 SPI_SPID2_MEMORY SPIDriver SPID2;
+#endif
+
+/** @brief SPI3 driver identifier.*/
+#if AT32_SPI_USE_SPI3 || defined(__DOXYGEN__)
+SPI_SPID3_MEMORY SPIDriver SPID3;
 #endif
 
 /*===========================================================================*/
@@ -128,6 +137,12 @@ static msg_t spi_lld_stop_abort(SPIDriver *spip) {
 #if AT32_SPI_USE_SPI2
     else if (&SPID2 == spip) {
       crmResetSPI2();
+    }
+#endif
+
+#if AT32_SPI_USE_SPI3
+    else if (&SPID3 == spip) {
+      crmResetSPI3();
     }
 #endif
 
@@ -277,6 +292,20 @@ void spi_lld_init(void) {
                     AT32_DMA_CTRL_DTD_M2P |
                     AT32_DMA_CTRL_DTERRIEN;
 #endif
+
+#if AT32_SPI_USE_SPI3
+  spiObjectInit(&SPID3);
+  SPID3.spi       = SPI3;
+  SPID3.dmarx     = NULL;
+  SPID3.dmatx     = NULL;
+  SPID3.rxdmamode = AT32_DMA_CTRL_CHPL(AT32_SPI_SPI3_DMA_PRIORITY) |
+                    AT32_DMA_CTRL_DTD_P2M |
+                    AT32_DMA_CTRL_FDTIEN |
+                    AT32_DMA_CTRL_DTERRIEN;
+  SPID3.txdmamode = AT32_DMA_CTRL_CHPL(AT32_SPI_SPI3_DMA_PRIORITY) |
+                    AT32_DMA_CTRL_DTD_M2P |
+                    AT32_DMA_CTRL_DTERRIEN;
+#endif
 }
 
 /**
@@ -330,6 +359,23 @@ msg_t spi_lld_start(SPIDriver *spip) {
 #if AT32_DMA_SUPPORTS_DMAMUX
       dmaSetRequestSource(spip->dmarx, AT32_DMAMUX_SPI2_RX);
       dmaSetRequestSource(spip->dmatx, AT32_DMAMUX_SPI2_TX);
+#endif
+    }
+#endif
+#if AT32_SPI_USE_SPI3
+    else if (&SPID3 == spip) {
+      msg = spi_lld_get_dma(spip,
+                            AT32_SPI_SPI3_RX_DMA_STREAM,
+                            AT32_SPI_SPI3_TX_DMA_STREAM,
+                            AT32_SPI_SPI3_IRQ_PRIORITY);
+      if (msg != HAL_RET_SUCCESS) {
+        return msg;
+      }
+      crmEnableSPI3(true);
+      crmResetSPI3();
+#if AT32_DMA_SUPPORTS_DMAMUX
+      dmaSetRequestSource(spip->dmarx, AT32_DMAMUX_SPI3_RX);
+      dmaSetRequestSource(spip->dmatx, AT32_DMAMUX_SPI3_TX);
 #endif
     }
 #endif
@@ -415,6 +461,11 @@ void spi_lld_stop(SPIDriver *spip) {
     }
 #endif
 
+#if AT32_SPI_USE_SPI3
+    else if (&SPID3 == spip) {
+      crmDisableSPI3();
+    }
+#endif
     else {
       osalDbgAssert(false, "invalid SPI instance");
     }

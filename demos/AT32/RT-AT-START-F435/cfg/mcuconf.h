@@ -330,6 +330,13 @@
 #define AT32_USB_OTG2_IRQ_PRIORITY          14
 #define AT32_USB_OTG2_RX_FIFO_SIZE          512
 
+#define STM32_CRC_USE_CRC1                  TRUE
+#define AT32_CRC_USE_CRC1                   TRUE
+#define CRC_USE_DMA                         FALSE
+#define AT32_CRC_CRC1_DMA_IRQ_PRIORITY      5
+#define AT32_CRC_CRC1_DMA_PRIORITY          2
+#define AT32_CRC_CRC1_DMA_STREAM            AT32_DMA_STREAM_ID_ANY
+#define CRCSW_USE_CRC1                      FALSE
 
 
 /*

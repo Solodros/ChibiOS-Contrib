@@ -20,7 +20,7 @@ ifeq ($(HALCONFDIR),)
   endif
 endif
 
-HALCONF := $(strip $(shell cat $(HALCONFDIR)/halconf.h | egrep -e "\#define"))
+HALCONF := $(strip $(shell cat $(HALCONFDIR)/halconf.h $(CONFDIR)/halconf_community.h | egrep -e "\#define"))
 endif #ifeq ($(USE_SMART_BUILD), yes)
 
 # Drivers compatible with the platform.
@@ -35,6 +35,7 @@ include $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/LLD/ADCv2/driver.mk
 include $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/LLD/I2Cv2/driver.mk
 include $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/LLD/USARTv2/driver.mk
 include $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/LLD/SPIv2/driver.mk
+include $(CHIBIOS_CONTRIB)/os/hal/ports/AT32/LLD/CRCv1/driver.mk
 
 
 # Shared variables
