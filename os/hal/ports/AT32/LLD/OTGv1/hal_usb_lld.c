@@ -170,7 +170,7 @@ static void otg_disable_ep(USBDriver *usbp) {
     otgp->ie[i].DIEPINT = 0xFFFFFFFF;
     otgp->oe[i].DOEPINT = 0xFFFFFFFF;
   }
-  otgp->DAINTMSK = DAINTMSK_OUTEPTMSK(0) | DAINTMSK_INEPTMSK(0);
+  //otgp->DAINTMSK = DAINTMSK_OUTEPTMSK(0) | DAINTMSK_INEPTMSK(0);
 }
 
 static void otg_rxfifo_flush(USBDriver *usbp) {
@@ -891,7 +891,11 @@ void usb_lld_stop(USBDriver *usbp) {
 #if AT32_USB_USE_OTG2
     if (&USBD2 == usbp) {
       nvicDisableVector(AT32_OTG2_NUMBER);
+#if AT32_OTG2_SUPPORTS_HS
       crmDisableOTG_HS();
+#else
+      crmDisableOTG_FS2();
+#endif
     }
 #endif
   }

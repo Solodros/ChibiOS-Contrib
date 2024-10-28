@@ -72,6 +72,15 @@
 #endif
 
 /**
+ * @brief   SPI3 driver enable switch.
+ * @details If set to @p TRUE the support for SPI2 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_SPI_USE_SPI3) || defined(__DOXYGEN__)
+#define AT32_SPI_USE_SPI3                   FALSE
+#endif
+
+/**
  * @brief   Filler pattern used when there is nothing to transmit.
  */
 #if !defined(AT32_SPI_FILLER_PATTERN) || defined(__DOXYGEN__)
@@ -93,6 +102,13 @@
 #endif
 
 /**
+ * @brief   SPI3 interrupt priority level setting.
+ */
+#if !defined(AT32_SPI_SPI3_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI3_IRQ_PRIORITY          10
+#endif
+
+/**
  * @brief   SPI1 DMA priority (0..3|lowest..highest).
  * @note    The priority level is used for both the TX and RX DMA streams but
  *          because of the streams ordering the RX stream has always priority
@@ -110,6 +126,16 @@
  */
 #if !defined(AT32_SPI_SPI2_DMA_PRIORITY) || defined(__DOXYGEN__)
 #define AT32_SPI_SPI2_DMA_PRIORITY          1
+#endif
+
+/**
+ * @brief   SPI3 DMA priority (0..3|lowest..highest).
+ * @note    The priority level is used for both the TX and RX DMA streams but
+ *          because of the streams ordering the RX stream has always priority
+ *          over the TX stream.
+ */
+#if !defined(AT32_SPI_SPI3_DMA_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_SPI_SPI3_DMA_PRIORITY          1
 #endif
 
 /**
@@ -139,7 +165,11 @@
 #error "SPI2 not present in the selected device"
 #endif
 
-#if !AT32_SPI_USE_SPI1 && !AT32_SPI_USE_SPI2
+#if AT32_SPI_USE_SPI3 && !AT32_HAS_SPI3
+#error "SPI3 not present in the selected device"
+#endif
+
+#if !AT32_SPI_USE_SPI1 && !AT32_SPI_USE_SPI2 && !AT32_SPI_USE_SPI3
 #error "SPI driver activated but no SPI peripheral assigned"
 #endif
 
@@ -151,6 +181,11 @@
 #if AT32_SPI_USE_SPI2 &&                                                    \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_SPI_SPI2_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to SPI2"
+#endif
+
+#if AT32_SPI_USE_SPI3 &&                                                    \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_SPI_SPI3_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to SPI3"
 #endif
 
 #if !defined(AT32_DMA_REQUIRED)
@@ -204,6 +239,10 @@ extern SPIDriver SPID1;
 
 #if AT32_SPI_USE_SPI2 && !defined(__DOXYGEN__)
 extern SPIDriver SPID2;
+#endif
+
+#if AT32_SPI_USE_SPI3 && !defined(__DOXYGEN__)
+extern SPIDriver SPID3;
 #endif
 
 #ifdef __cplusplus

@@ -16,12 +16,12 @@
 */
 
 /**
- * @file    AT32F405xx/at32_crm.h
+ * @file    AT32F435xx/at32_crm.h
  * @brief   CRM helper driver header.
  * @note    This file requires definitions from the AT header file
- *          @p at32f402_405xx.h.
+ *          @p at32f435_437xx.h.
  *
- * @addtogroup AT32F405xx_CRM
+ * @addtogroup AT32F435xx_CRM
  * @{
  */
 
@@ -302,6 +302,56 @@
 /** @} */
 
 /**
+ * @brief   Enables the ADC2 peripheral clock.
+ * @note    The @p lp parameter is ignored in this family.
+ *
+ * @param[in] lp        low power enable flag
+ *
+ * @api
+ */
+#define crmEnableADC2(lp) crmEnableAPB2(CRM_APB2EN_ADC2EN, lp)
+
+/**
+ * @brief   Disables the ADC2 peripheral clock.
+ *
+ * @api
+ */
+#define crmDisableADC2() crmDisableAPB2(CRM_APB2EN_ADC2EN)
+
+/**
+ * @brief   Resets the ADC2 peripheral.
+ *
+ * @api
+ */
+#define crmResetADC2() crmResetAPB2(CRM_APB2RST_ADC2RST)
+/** @} */
+
+/**
+ * @brief   Enables the ADC3 peripheral clock.
+ * @note    The @p lp parameter is ignored in this family.
+ *
+ * @param[in] lp        low power enable flag
+ *
+ * @api
+ */
+#define crmEnableADC3(lp) crmEnableAPB2(CRM_APB2EN_ADC3EN, lp)
+
+/**
+ * @brief   Disables the ADC3 peripheral clock.
+ *
+ * @api
+ */
+#define crmDisableADC3() crmDisableAPB2(CRM_APB2EN_ADC3EN)
+
+/**
+ * @brief   Resets the ADC3 peripheral.
+ *
+ * @api
+ */
+#define crmResetADC3() crmResetAPB2(CRM_APB2RST_ADC3RST)
+/** @} */
+
+/**
  * @name    CRC peripherals specific CRM operations
  * @{
  */
@@ -386,6 +436,30 @@
  * @api
  */
 #define crmResetCAN1() crmResetAPB1(CRM_APB1RST_CAN1RST)
+
+/**
+ * @brief   Enables the CAN2 peripheral clock.
+ * @note    The @p lp parameter is ignored in this family.
+ *
+ * @param[in] lp        low power enable flag
+ *
+ * @api
+ */
+#define crmEnableCAN2(lp) crmEnableAPB1(CRM_APB1EN_CAN2EN, lp)
+
+/**
+ * @brief   Disables the CAN2 peripheral clock.
+ *
+ * @api
+ */
+#define crmDisableCAN2() crmDisableAPB1(CRM_APB1EN_CAN2EN)
+
+/**
+ * @brief   Resets the CAN2 peripheral.
+ *
+ * @api
+ */
+#define crmResetCAN2() crmResetAPB1(CRM_APB1RST_CAN2RST)
 
 /**
  * @name    DMA peripherals specific CRM operations
@@ -555,21 +629,21 @@
  *
  * @api
  */
-#define crmEnableOTG_HS(lp) crmEnableAHB1(CRM_AHBEN1_OTGHSEN, lp)
+#define crmEnableOTG_FS2(lp) crmEnableAHB1(CRM_AHBEN1_OTGFS2EN, lp)
 
 /**
  * @brief   Disables the OTG_HS peripheral clock.
  *
  * @api
  */
-#define crmDisableOTG_HS() crmDisableAHB1(CRM_AHBEN1_OTGHSEN)
+#define crmDisableOTG_FS2() crmDisableAHB1(CRM_AHBEN1_OTGFS2EN)
 
 /**
  * @brief   Resets the OTG_HS peripheral.
  *
  * @api
  */
-#define crmResetOTG_HS() crmResetAHB1(CRM_AHBRST1_OTGHSRST)
+#define crmResetOTG_FS2() crmResetAHB1(CRM_AHBRST1_OTGFS2RST)
 /** @} */
 
 /**
@@ -675,6 +749,30 @@
  * @api
  */
 #define crmResetSPI3() crmResetAPB1(CRM_APB1RST_SPI3RST)
+
+/**
+ * @brief   Enables the SPI4 peripheral clock.
+ * @note    The @p lp parameter is ignored in this family.
+ *
+ * @param[in] lp        low power enable flag
+ *
+ * @api
+ */
+#define crmEnableSPI4(lp) crmEnableAPB2(CRM_APB2EN_SPI4EN, lp)
+
+/**
+ * @brief   Disables the SPI4 peripheral clock.
+ *
+ * @api
+ */
+#define crmDisableSPI4() crmDisableAPB2(CRM_APB2EN_SPI4EN)
+
+/**
+ * @brief   Resets the SPI4 peripheral.
+ *
+ * @api
+ */
+#define crmResetSPI4() crmResetAPB2(CRM_APB2RST_SPI4RST)
 /** @} */
 
 /**
@@ -778,6 +876,30 @@
 #define crmResetTMR4() crmResetAPB1(CRM_APB1RST_TMR4RST)
 
 /**
+ * @brief   Enables the TMR5 peripheral clock.
+ * @note    The @p lp parameter is ignored in this family.
+ *
+ * @param[in] lp        low power enable flag
+ *
+ * @api
+ */
+#define crmEnableTMR5(lp) crmEnableAPB1(CRM_APB1EN_TMR5EN, lp)
+
+/**
+ * @brief   Disables the TMR5 peripheral clock.
+ *
+ * @api
+ */
+#define crmDisableTMR5() crmDisableAPB1(CRM_APB1EN_TMR5EN)
+
+/**
+ * @brief   Resets the TMR5 peripheral.
+ *
+ * @api
+ */
+#define crmResetTMR5() crmResetAPB1(CRM_APB1RST_TMR5RST)
+
+/**
  * @brief   Enables the TMR6 peripheral clock.
  * @note    The @p lp parameter is ignored in this family.
  *
@@ -824,6 +946,31 @@
  * @api
  */
 #define crmResetTMR7() crmResetAPB1(CRM_APB1RST_TMR7RST)
+
+/**
+ * @brief   Enables the TMR8 peripheral clock.
+ * 
+ * @note    The @p lp parameter is ignored in this family.
+ *
+ * @param[in] lp        low power enable flag
+ *
+ * @api
+ */
+#define crmEnableTMR8(lp) crmEnableAPB2(CRM_APB2EN_TMR8EN, lp)
+
+/**
+ * @brief   Disables the TMR8 peripheral clock.
+ *
+ * @api
+ */
+#define crmDisableTMR8() crmDisableAPB2(CRM_APB2EN_TMR8EN)
+
+/**
+ * @brief   Resets the TMR8 peripheral.
+ *
+ * @api
+ */
+#define crmResetTMR8() crmResetAPB2(CRM_APB2RST_TMR8RST)
 
 /**
 
@@ -901,6 +1048,30 @@
 #define crmResetTMR11() crmResetAPB2(CRM_APB2RST_TMR11RST)
 
 /**
+ * @brief   Enables the TMR12 peripheral clock.
+ * @note    The @p lp parameter is ignored in this family.
+ *
+ * @param[in] lp        low power enable flag
+ *
+ * @api
+ */
+#define crmEnableTMR12(lp) crmEnableAPB1(CRM_APB1EN_TMR12EN, lp)
+
+/**
+ * @brief   Disables the TMR12 peripheral clock.
+ *
+ * @api
+ */
+#define crmDisableTMR12() crmDisableAPB1(CRM_APB1EN_TMR12EN)
+
+/**
+ * @brief   Resets the TMR12 peripheral.
+ *
+ * @api
+ */
+#define crmResetTMR12() crmResetAPB1(CRM_APB1RST_TMR12RST)
+
+/**
  * @brief   Enables the TMR13 peripheral clock.
  * @note    The @p lp parameter is ignored in this family.
  *
@@ -947,6 +1118,30 @@
  * @api
  */
 #define crmResetTMR14() crmResetAPB1(CRM_APB1RST_TMR14RST)
+
+/**
+ * @brief   Enables the TMR20 peripheral clock.
+ * @note    The @p lp parameter is ignored in this family.
+ *
+ * @param[in] lp        low power enable flag
+ *
+ * @api
+ */
+#define crmEnableTMR20(lp) crmEnableAPB2(CRM_APB2EN_TMR20EN, lp)
+
+/**
+ * @brief   Disables the TMR20 peripheral clock.
+ *
+ * @api
+ */
+#define crmDisableTMR20() crmDisableAPB2(CRM_APB2EN_TMR20EN)
+
+/**
+ * @brief   Resets the TMR20 peripheral.
+ *
+ * @api
+ */
+#define crmResetTMR20() crmResetAPB2(CRM_APB2RST_TMR20RST)
 /** @} */
 
 /**
@@ -1203,6 +1398,40 @@
  * @api
  */
 #define crmResetSCFG() crmResetAPB2(CRM_APB2RST_SCFGRST)
+
+/** @} */
+
+
+/**
+ * @name    sdio peripherals specific CRM operations
+ * @{
+ */
+/**
+ * @brief   Enables the sdio peripheral clock.
+ * @note    The @p lp parameter is ignored in this family.
+ *
+ * @param[in] lp        low power enable flag
+ *
+ * @api
+ */
+#define crmEnableSDIO1(lp) crmEnableAHB2(CRM_AHBEN2_SDIO1EN, lp)
+#define crmEnableSDIO      crmEnableSDIO1
+
+/**
+ * @brief   Disables the SDIO1 peripheral clock.
+ *
+ * @api
+ */
+#define crmDisableSDIO1() crmDisableAHB2(CRM_AHBEN2_SDIO1EN)
+#define crmDisableSDIO    crmDisableSDIO1
+/**
+ * @brief   Resets the SCFG peripheral.
+ *
+ * @api
+ */
+#define crmResetSDIO1() crmResetAHB2(CRM_AHBRST2_SDIO1RST)
+#define crmResetSDIO    crmResetSDIO1
+
 /** @} */
 
 /*===========================================================================*/
