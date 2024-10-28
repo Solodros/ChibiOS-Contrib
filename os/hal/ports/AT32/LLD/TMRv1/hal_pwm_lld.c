@@ -77,6 +77,14 @@ PWMDriver PWMD5;
 #endif
 
 /**
+ * @brief   PWMD8 driver identifier.
+ * @note    The driver PWMD8 allocates the timer TMR8 when enabled.
+ */
+#if AT32_PWM_USE_TMR8 || defined(__DOXYGEN__)
+PWMDriver PWMD8;
+#endif
+
+/**
  * @brief   PWMD9 driver identifier.
  * @note    The driver PWMD9 allocates the timer TMR9 when enabled.
  */
@@ -98,6 +106,38 @@ PWMDriver PWMD10;
  */
 #if AT32_PWM_USE_TMR11 || defined(__DOXYGEN__)
 PWMDriver PWMD11;
+#endif
+
+/**
+ * @brief   PWMD12 driver identifier.
+ * @note    The driver PWMD12 allocates the timer TMR12 when enabled.
+ */
+#if AT32_PWM_USE_TMR12 || defined(__DOXYGEN__)
+PWMDriver PWMD12;
+#endif
+
+/**
+ * @brief   PWMD13 driver identifier.
+ * @note    The driver PWMD13 allocates the timer TMR13 when enabled.
+ */
+#if AT32_PWM_USE_TMR13 || defined(__DOXYGEN__)
+PWMDriver PWMD13;
+#endif
+
+/**
+ * @brief   PWMD14 driver identifier.
+ * @note    The driver PWMD14 allocates the timer TMR14 when enabled.
+ */
+#if AT32_PWM_USE_TMR14 || defined(__DOXYGEN__)
+PWMDriver PWMD14;
+#endif
+
+/**
+ * @brief   PWMD20 driver identifier.
+ * @note    The driver PWMD20 allocates the timer TMR20 when enabled.
+ */
+#if AT32_PWM_USE_TMR20 || defined(__DOXYGEN__)
+PWMDriver PWMD20;
 #endif
 
 /*===========================================================================*/
@@ -240,6 +280,50 @@ OSAL_IRQ_HANDLER(AT32_TMR5_HANDLER) {
 #endif /* !defined(AT32_TMR5_SUPPRESS_ISR) */
 #endif /* AT32_PWM_USE_TMR5 */
 
+#if AT32_PWM_USE_TMR8 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR8_SUPPRESS_ISR)
+#if !defined(AT32_TMR8_OVF_HANDLER)
+#error "AT32_TMR8_OVF_HANDLER not defined"
+#endif
+/**
+ * @brief   TMR8 update interrupt handler.
+ * @note    It is assumed that this interrupt is only activated if the callback
+ *          pointer is not equal to @p NULL in order to not perform an extra
+ *          check in a potentially critical interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_TMR8_OVF_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  pwm_lld_serve_interrupt(&PWMD8);
+
+  OSAL_IRQ_EPILOGUE();
+}
+
+#if !defined(AT32_TMR8_CH_HANDLER)
+#error "AT32_TMR8_CH_HANDLER not defined"
+#endif
+/**
+ * @brief   TMR8 compare interrupt handler.
+ * @note    It is assumed that the various sources are only activated if the
+ *          associated callback pointer is not equal to @p NULL in order to not
+ *          perform an extra check in a potentially critical interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_TMR8_CH_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  pwm_lld_serve_interrupt(&PWMD8);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif /* !defined(AT32_TMR8_SUPPRESS_ISR) */
+#endif /* AT32_PWM_USE_TMR8 */
+
 #if AT32_PWM_USE_TMR9 || defined(__DOXYGEN__)
 #if !defined(AT32_TMR9_SUPPRESS_ISR)
 #error "TMR9 ISR not defined by platform"
@@ -257,6 +341,68 @@ OSAL_IRQ_HANDLER(AT32_TMR5_HANDLER) {
 #error "TMR11 ISR not defined by platform"
 #endif /* !defined(AT32_TMR11_SUPPRESS_ISR) */
 #endif /* AT32_PWM_USE_TMR11 */
+
+#if AT32_PWM_USE_TMR12 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR12_SUPPRESS_ISR)
+#error "TMR12 ISR not defined by platform"
+#endif /* !defined(AT32_TMR12_SUPPRESS_ISR) */
+#endif /* AT32_PWM_USE_TMR12 */
+
+#if AT32_PWM_USE_TMR13 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR13_SUPPRESS_ISR)
+#error "TMR13 ISR not defined by platform"
+#endif /* !defined(AT32_TMR13_SUPPRESS_ISR) */
+#endif /* AT32_PWM_USE_TMR13 */
+
+#if AT32_PWM_USE_TMR14 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR14_SUPPRESS_ISR)
+#error "TMR14 ISR not defined by platform"
+#endif /* !defined(AT32_TMR14_SUPPRESS_ISR) */
+#endif /* AT32_PWM_USE_TMR14 */
+
+#if AT32_PWM_USE_TMR20 || defined(__DOXYGEN__)
+#if !defined(AT32_TMR20_SUPPRESS_ISR)
+#if !defined(AT32_TMR20_OVF_HANDLER)
+#error "AT32_TMR20_OVF_HANDLER not defined"
+#endif
+/**
+ * @brief   TMR20 update interrupt handler.
+ * @note    It is assumed that this interrupt is only activated if the callback
+ *          pointer is not equal to @p NULL in order to not perform an extra
+ *          check in a potentially critical interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_TMR20_OVF_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  pwm_lld_serve_interrupt(&PWMD20);
+
+  OSAL_IRQ_EPILOGUE();
+}
+
+#if !defined(AT32_TMR20_CH_HANDLER)
+#error "AT32_TMR20_CH_HANDLER not defined"
+#endif
+/**
+ * @brief   TMR20 compare interrupt handler.
+ * @note    It is assumed that the various sources are only activated if the
+ *          associated callback pointer is not equal to @p NULL in order to not
+ *          perform an extra check in a potentially critical interrupt handler.
+ *
+ * @isr
+ */
+OSAL_IRQ_HANDLER(AT32_TMR20_CH_HANDLER) {
+
+  OSAL_IRQ_PROLOGUE();
+
+  pwm_lld_serve_interrupt(&PWMD20);
+
+  OSAL_IRQ_EPILOGUE();
+}
+#endif /* !defined(AT32_TMR20_SUPPRESS_ISR) */
+#endif /* AT32_PWM_USE_TMR20 */
 
 /*===========================================================================*/
 /* Driver exported functions.                                                */
@@ -314,6 +460,15 @@ void pwm_lld_init(void) {
   PWMD5.has_plus_mode = (bool)AT32_TMR5_IS_32BITS;
 #endif
 
+#if AT32_PWM_USE_TMR8
+  /* Driver initialization.*/
+  pwmObjectInit(&PWMD8);
+  PWMD1.channels = AT32_TMR8_CHANNELS;
+  PWMD1.tmr = AT32_TMR8;
+  PWMD1.has_brk = true;
+  PWMD1.has_plus_mode = (bool)AT32_TMR8_IS_32BITS;
+#endif
+
 #if AT32_PWM_USE_TMR9
   /* Driver initialization.*/
   pwmObjectInit(&PWMD9);
@@ -340,6 +495,43 @@ void pwm_lld_init(void) {
   PWMD11.has_brk = false;
   PWMD11.has_plus_mode = (bool)AT32_TMR11_IS_32BITS;
 #endif
+
+#if AT32_PWM_USE_TMR12
+  /* Driver initialization.*/
+  pwmObjectInit(&PWMD12);
+  PWMD11.channels = AT32_TMR12_CHANNELS;
+  PWMD11.tmr = AT32_TMR12;
+  PWMD11.has_brk = false;
+  PWMD11.has_plus_mode = (bool)AT32_TMR12_IS_32BITS;
+#endif
+
+#if AT32_PWM_USE_TMR13
+  /* Driver initialization.*/
+  pwmObjectInit(&PWMD13);
+  PWMD11.channels = AT32_TMR13_CHANNELS;
+  PWMD11.tmr = AT32_TMR13;
+  PWMD11.has_brk = false;
+  PWMD11.has_plus_mode = (bool)AT32_TMR13_IS_32BITS;
+#endif
+
+#if AT32_PWM_USE_TMR14
+  /* Driver initialization.*/
+  pwmObjectInit(&PWMD14);
+  PWMD11.channels = AT32_TMR14_CHANNELS;
+  PWMD11.tmr = AT32_TMR14;
+  PWMD11.has_brk = false;
+  PWMD11.has_plus_mode = (bool)AT32_TMR14_IS_32BITS;
+#endif
+
+#if AT32_PWM_USE_TMR20
+  /* Driver initialization.*/
+  pwmObjectInit(&PWMD20);
+  PWMD1.channels = AT32_TMR20_CHANNELS;
+  PWMD1.tmr = AT32_TMR20;
+  PWMD1.has_brk = true;
+  PWMD1.has_plus_mode = (bool)AT32_TMR20_IS_32BITS;
+#endif
+
 }
 
 /**
@@ -413,6 +605,18 @@ void pwm_lld_start(PWMDriver *pwmp) {
     }
 #endif
 
+#if AT32_PWM_USE_TMR8
+    if (&PWMD8 == pwmp) {
+      crmEnableTMR8(true);
+      crmResetTMR8();
+#if !defined(AT32_TMR8_SUPPRESS_ISR)
+      nvicEnableVector(AT32_TMR8_OVF_NUMBER, AT32_PWM_TMR8_IRQ_PRIORITY);
+      nvicEnableVector(AT32_TMR8_CH_NUMBER, AT32_PWM_TMR8_IRQ_PRIORITY);
+#endif
+      pwmp->clock = AT32_TMRCLK2;
+    }
+#endif
+
 #if AT32_PWM_USE_TMR9
     if (&PWMD9 == pwmp) {
       crmEnableTMR9(true);
@@ -433,6 +637,42 @@ void pwm_lld_start(PWMDriver *pwmp) {
     if (&PWMD11 == pwmp) {
       crmEnableTMR11(true);
       crmResetTMR11();
+      pwmp->clock = AT32_TMRCLK2;
+    }
+#endif
+
+#if AT32_PWM_USE_TMR12
+    if (&PWMD12 == pwmp) {
+      crmEnableTMR12(true);
+      crmResetTMR12();
+      pwmp->clock = AT32_TMRCLK1;
+    }
+#endif
+
+#if AT32_PWM_USE_TMR13
+    if (&PWMD13 == pwmp) {
+      crmEnableTMR13(true);
+      crmResetTMR13();
+      pwmp->clock = AT32_TMRCLK1;
+    }
+#endif
+
+#if AT32_PWM_USE_TMR14
+    if (&PWMD14 == pwmp) {
+      crmEnableTMR14(true);
+      crmResetTMR14();
+      pwmp->clock = AT32_TMRCLK1;
+    }
+#endif
+
+#if AT32_PWM_USE_TMR20
+    if (&PWMD20 == pwmp) {
+      crmEnableTMR20(true);
+      crmResetTMR20();
+#if !defined(AT32_TMR20_SUPPRESS_ISR)
+      nvicEnableVector(AT32_TMR20_OVF_NUMBER, AT32_PWM_TMR20_IRQ_PRIORITY);
+      nvicEnableVector(AT32_TMR20_CH_NUMBER, AT32_PWM_TMR20_IRQ_PRIORITY);
+#endif
       pwmp->clock = AT32_TMRCLK2;
     }
 #endif
@@ -620,6 +860,16 @@ void pwm_lld_stop(PWMDriver *pwmp) {
     }
 #endif
 
+#if AT32_PWM_USE_TMR8
+    if (&PWMD8 == pwmp) {
+#if !defined(AT32_TMR8_SUPPRESS_ISR)
+      nvicDisableVector(AT32_TMR8_OVF_NUMBER);
+      nvicDisableVector(AT32_TMR8_CH_NUMBER);
+#endif
+      crmDisableTMR8();
+    }
+#endif
+
 #if AT32_PWM_USE_TMR9
     if (&PWMD9 == pwmp) {
       crmDisableTMR9();
@@ -637,6 +887,35 @@ void pwm_lld_stop(PWMDriver *pwmp) {
       crmDisableTMR11();
     }
 #endif
+
+#if AT32_PWM_USE_TMR12
+    if (&PWMD12 == pwmp) {
+      crmDisableTMR12();
+    }
+#endif
+
+#if AT32_PWM_USE_TMR13
+    if (&PWMD13 == pwmp) {
+      crmDisableTMR13();
+    }
+#endif
+
+#if AT32_PWM_USE_TMR14
+    if (&PWMD14 == pwmp) {
+      crmDisableTMR14();
+    }
+#endif
+
+#if AT32_PWM_USE_TMR20
+    if (&PWMD20 == pwmp) {
+#if !defined(AT32_TMR20_SUPPRESS_ISR)
+      nvicDisableVector(AT32_TMR20_OVF_NUMBER);
+      nvicDisableVector(AT32_TMR20_CH_NUMBER);
+#endif
+      crmDisableTMR20();
+    }
+#endif
+
   }
 }
 

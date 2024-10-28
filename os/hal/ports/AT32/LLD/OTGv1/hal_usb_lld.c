@@ -891,7 +891,11 @@ void usb_lld_stop(USBDriver *usbp) {
 #if AT32_USB_USE_OTG2
     if (&USBD2 == usbp) {
       nvicDisableVector(AT32_OTG2_NUMBER);
+#if AT32_OTG2_SUPPORTS_HS
       crmDisableOTG_HS();
+#else
+      crmDisableOTG_FS2();
+#endif
     }
 #endif
   }

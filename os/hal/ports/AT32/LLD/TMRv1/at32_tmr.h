@@ -307,9 +307,16 @@
 #define AT32_TMR3       ((at32_tmr_t *)TMR3_BASE)
 #define AT32_TMR4       ((at32_tmr_t *)TMR4_BASE)
 #define AT32_TMR5       ((at32_tmr_t *)TMR5_BASE)
+#define AT32_TMR6       ((at32_tmr_t *)TMR6_BASE)
+#define AT32_TMR7       ((at32_tmr_t *)TMR7_BASE)
+#define AT32_TMR8       ((at32_tmr_t *)TMR8_BASE)
 #define AT32_TMR9       ((at32_tmr_t *)TMR9_BASE)
 #define AT32_TMR10      ((at32_tmr_t *)TMR10_BASE)
 #define AT32_TMR11      ((at32_tmr_t *)TMR11_BASE)
+#define AT32_TMR12      ((at32_tmr_t *)TMR12_BASE)
+#define AT32_TMR13      ((at32_tmr_t *)TMR13_BASE)
+#define AT32_TMR14      ((at32_tmr_t *)TMR14_BASE)
+#define AT32_TMR20      ((at32_tmr_t *)TMR20_BASE)
 /** @} */
 
 /*===========================================================================*/
