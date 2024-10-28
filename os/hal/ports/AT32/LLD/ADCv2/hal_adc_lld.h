@@ -54,7 +54,7 @@
  * @brief   Maximum ADC clock frequency.
  */
 #if !defined(AT32_ADCCLK_MAX)
-#if defined(AT32F435_7xx) || defined(AT32F423xx)
+#if defined(AT32F435_437xx) || defined(AT32F423xx)
 #define AT32_ADCCLK_MAX        80000000
 #else
 #define AT32_ADCCLK_MAX        28000000

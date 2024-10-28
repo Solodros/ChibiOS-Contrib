@@ -89,6 +89,33 @@
 #endif
 
 /**
+ * @brief   GPTD6 driver enable switch.
+ * @details If set to @p TRUE the support for GPTD6 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_GPT_USE_TMR6) || defined(__DOXYGEN__)
+#define AT32_GPT_USE_TMR6                  FALSE
+#endif
+
+/**
+ * @brief   GPTD7 driver enable switch.
+ * @details If set to @p TRUE the support for GPTD7 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_GPT_USE_TMR7) || defined(__DOXYGEN__)
+#define AT32_GPT_USE_TMR7                  FALSE
+#endif
+
+/**
+ * @brief   GPTD8 driver enable switch.
+ * @details If set to @p TRUE the support for GPTD8 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_GPT_USE_TMR8) || defined(__DOXYGEN__)
+#define AT32_GPT_USE_TMR8                  FALSE
+#endif
+
+/**
  * @brief   GPTD9 driver enable switch.
  * @details If set to @p TRUE the support for GPTD9 is included.
  * @note    The default is @p FALSE.
@@ -113,6 +140,42 @@
  */
 #if !defined(AT32_GPT_USE_TMR11) || defined(__DOXYGEN__)
 #define AT32_GPT_USE_TMR11                  FALSE
+#endif
+
+/**
+ * @brief   GPTD12 driver enable switch.
+ * @details If set to @p TRUE the support for GPTD12 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_GPT_USE_TMR12) || defined(__DOXYGEN__)
+#define AT32_GPT_USE_TMR12                 FALSE
+#endif
+
+/**
+ * @brief   GPTD13 driver enable switch.
+ * @details If set to @p TRUE the support for GPTD13 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_GPT_USE_TMR13) || defined(__DOXYGEN__)
+#define AT32_GPT_USE_TMR13                 FALSE
+#endif
+
+/**
+ * @brief   GPTD14 driver enable switch.
+ * @details If set to @p TRUE the support for GPTD14 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_GPT_USE_TMR14) || defined(__DOXYGEN__)
+#define AT32_GPT_USE_TMR14                 FALSE
+#endif
+
+/**
+ * @brief   GPTD20 driver enable switch.
+ * @details If set to @p TRUE the support for GPTD20 is included.
+ * @note    The default is @p FALSE.
+ */
+#if !defined(AT32_GPT_USE_TMR20) || defined(__DOXYGEN__)
+#define AT32_GPT_USE_TMR20                 FALSE
 #endif
 
 /**
@@ -151,6 +214,27 @@
 #endif
 
 /**
+ * @brief   GPTD6 interrupt priority level setting.
+ */
+#if !defined(AT32_GPT_TMR6_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_GPT_TMR6_IRQ_PRIORITY         7
+#endif
+
+/**
+ * @brief   GPTD7 interrupt priority level setting.
+ */
+#if !defined(AT32_GPT_TMR7_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_GPT_TMR7_IRQ_PRIORITY         7
+#endif
+
+/**
+ * @brief   GPTD8 interrupt priority level setting.
+ */
+#if !defined(AT32_GPT_TMR8_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_GPT_TMR8_IRQ_PRIORITY         7
+#endif
+
+/**
  * @brief   GPTD9 interrupt priority level setting.
  */
 #if !defined(AT32_GPT_TMR9_IRQ_PRIORITY) || defined(__DOXYGEN__)
@@ -170,6 +254,36 @@
 #if !defined(AT32_GPT_TMR11_IRQ_PRIORITY) || defined(__DOXYGEN__)
 #define AT32_GPT_TMR11_IRQ_PRIORITY         7
 #endif
+
+/**
+ * @brief   GPTD12 interrupt priority level setting.
+ */
+#if !defined(AT32_GPT_TMR12_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_GPT_TMR12_IRQ_PRIORITY        7
+#endif
+
+/**
+ * @brief   GPTD13 interrupt priority level setting.
+ */
+#if !defined(AT32_GPT_TMR13_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_GPT_TMR13_IRQ_PRIORITY        7
+#endif
+
+/**
+ * @brief   GPTD14 interrupt priority level setting.
+ */
+#if !defined(AT32_GPT_TMR14_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_GPT_TMR14_IRQ_PRIORITY        7
+#endif
+
+/**
+ * @brief   GPTD20 interrupt priority level setting.
+ */
+#if !defined(AT32_GPT_TMR20_IRQ_PRIORITY) || defined(__DOXYGEN__)
+#define AT32_GPT_TMR20_IRQ_PRIORITY        7
+#endif
+
+
 /** @} */
 
 /*===========================================================================*/
@@ -196,6 +310,18 @@
 #define AT32_HAS_TMR5                       FALSE
 #endif
 
+#if !defined(AT32_HAS_TMR6)
+#define AT32_HAS_TMR6                      FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR7)
+#define AT32_HAS_TMR7                      FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR8)
+#define AT32_HAS_TMR8                      FALSE
+#endif
+
 #if !defined(AT32_HAS_TMR9)
 #define AT32_HAS_TMR9                       FALSE
 #endif
@@ -206,6 +332,22 @@
 
 #if !defined(AT32_HAS_TMR11)
 #define AT32_HAS_TMR11                      FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR12)
+#define AT32_HAS_TMR12                     FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR13)
+#define AT32_HAS_TMR13                     FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR14)
+#define AT32_HAS_TMR14                     FALSE
+#endif
+
+#if !defined(AT32_HAS_TMR20)
+#define AT32_HAS_TMR20                     FALSE
 #endif
 
 #if AT32_GPT_USE_TMR1 && !AT32_HAS_TMR1
@@ -228,6 +370,18 @@
 #error "TMR5 not present in the selected device"
 #endif
 
+#if AT32_GPT_USE_TMR6 && !AT32_HAS_TMR6
+#error "TMR6 not present in the selected device"
+#endif
+
+#if AT32_GPT_USE_TMR7 && !AT32_HAS_TMR7
+#error "TMR7 not present in the selected device"
+#endif
+
+#if AT32_GPT_USE_TMR8 && !AT32_HAS_TMR8
+#error "TMR8 not present in the selected device"
+#endif
+
 #if AT32_GPT_USE_TMR9 && !AT32_HAS_TMR9
 #error "TMR9 not present in the selected device"
 #endif
@@ -240,10 +394,30 @@
 #error "TMR11 not present in the selected device"
 #endif
 
-#if !AT32_GPT_USE_TMR1  && !AT32_GPT_USE_TMR2 &&                            \
-    !AT32_GPT_USE_TMR3  && !AT32_GPT_USE_TMR4 &&                            \
-    !AT32_GPT_USE_TMR5  && !AT32_GPT_USE_TMR9 &&                            \
-    !AT32_GPT_USE_TMR10 && !AT32_GPT_USE_TMR11
+#if AT32_GPT_USE_TMR12 && !AT32_HAS_TMR12
+#error "TMR12 not present in the selected device"
+#endif
+
+#if AT32_GPT_USE_TMR13 && !AT32_HAS_TMR13
+#error "TMR13 not present in the selected device"
+#endif
+
+#if AT32_GPT_USE_TMR14 && !AT32_HAS_TMR14
+#error "TMR14 not present in the selected device"
+#endif
+
+#if AT32_GPT_USE_TMR20 && !AT32_HAS_TMR20
+#error "TMR20 not present in the selected device"
+#endif
+
+#if !AT32_GPT_USE_TMR1  && !AT32_GPT_USE_TMR2 &&                          \
+    !AT32_GPT_USE_TMR3  && !AT32_GPT_USE_TMR4 &&                          \
+    !AT32_GPT_USE_TMR5  && !AT32_GPT_USE_TMR6 &&                          \
+    !AT32_GPT_USE_TMR7  && !AT32_GPT_USE_TMR8 &&                          \
+    !AT32_GPT_USE_TMR9  && !AT32_GPT_USE_TMR10 &&                         \
+    !AT32_GPT_USE_TMR11 && !AT32_GPT_USE_TMR12 &&                         \
+    !AT32_GPT_USE_TMR13 && !AT32_GPT_USE_TMR14 &&                         \
+    !AT32_GPT_USE_TMR20
 #error "GPT driver activated but no TMR peripheral assigned"
 #endif
 
@@ -288,6 +462,30 @@
 #endif
 #endif
 
+#if AT32_GPT_USE_TMR6
+#if defined(AT32_TMR6_IS_USED)
+#error "GPTD6 requires TMR6 but the timer is already used"
+#else
+#define AT32_TMR6_IS_USED
+#endif
+#endif
+
+#if AT32_GPT_USE_TMR7
+#if defined(AT32_TMR7_IS_USED)
+#error "GPTD7 requires TMR7 but the timer is already used"
+#else
+#define AT32_TMR7_IS_USED
+#endif
+#endif
+
+#if AT32_GPT_USE_TMR8
+#if defined(AT32_TMR8_IS_USED)
+#error "GPTD8 requires TMR8 but the timer is already used"
+#else
+#define AT32_TMR8_IS_USED
+#endif
+#endif
+
 #if AT32_GPT_USE_TMR9
 #if defined(AT32_TMR9_IS_USED)
 #error "GPTD9 requires TMR9 but the timer is already used"
@@ -309,6 +507,38 @@
 #error "GPTD11 requires TMR11 but the timer is already used"
 #else
 #define AT32_TMR11_IS_USED
+#endif
+#endif
+
+#if AT32_GPT_USE_TMR12
+#if defined(AT32_TMR12_IS_USED)
+#error "GPTD12 requires TMR12 but the timer is already used"
+#else
+#define AT32_TMR12_IS_USED
+#endif
+#endif
+
+#if AT32_GPT_USE_TMR13
+#if defined(AT32_TMR13_IS_USED)
+#error "GPTD13 requires TMR13 but the timer is already used"
+#else
+#define AT32_TMR13_IS_USED
+#endif
+#endif
+
+#if AT32_GPT_USE_TMR14
+#if defined(AT32_TMR14_IS_USED)
+#error "GPTD14 requires TMR14 but the timer is already used"
+#else
+#define AT32_TMR14_IS_USED
+#endif
+#endif
+
+#if AT32_GPT_USE_TMR20
+#if defined(AT32_TMR20_IS_USED)
+#error "GPTD20 requires TMR20 but the timer is already used"
+#else
+#define AT32_TMR20_IS_USED
 #endif
 #endif
 
@@ -338,6 +568,21 @@
 #error "Invalid IRQ priority assigned to TMR5"
 #endif
 
+#if AT32_GPT_USE_TMR6 && !defined(AT32_TMR6_SUPPRESS_ISR) &&              \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_GPT_TMR6_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR6"
+#endif
+
+#if AT32_GPT_USE_TMR7 && !defined(AT32_TMR7_SUPPRESS_ISR) &&              \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_GPT_TMR7_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR7"
+#endif
+
+#if AT32_GPT_USE_TMR8 && !defined(AT32_TMR8_SUPPRESS_ISR) &&              \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_GPT_TMR8_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR8"
+#endif
+
 #if AT32_GPT_USE_TMR9 && !defined(AT32_TMR9_SUPPRESS_ISR) &&                \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_GPT_TMR9_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to TMR9"
@@ -351,6 +596,26 @@
 #if AT32_GPT_USE_TMR11 && !defined(AT32_TMR11_SUPPRESS_ISR) &&              \
     !OSAL_IRQ_IS_VALID_PRIORITY(AT32_GPT_TMR11_IRQ_PRIORITY)
 #error "Invalid IRQ priority assigned to TMR11"
+#endif
+
+#if AT32_GPT_USE_TMR12 && !defined(AT32_TMR12_SUPPRESS_ISR) &&            \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_GPT_TMR12_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR12"
+#endif
+
+#if AT32_GPT_USE_TMR13 && !defined(AT32_TMR13_SUPPRESS_ISR) &&            \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_GPT_TMR13_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR13"
+#endif
+
+#if AT32_GPT_USE_TMR14 && !defined(AT32_TMR14_SUPPRESS_ISR) &&            \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_GPT_TMR14_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR14"
+#endif
+
+#if AT32_GPT_USE_TMR20 && !defined(AT32_TMR20_SUPPRESS_ISR) &&            \
+    !OSAL_IRQ_IS_VALID_PRIORITY(AT32_GPT_TMR20_IRQ_PRIORITY)
+#error "Invalid IRQ priority assigned to TMR20"
 #endif
 
 /*===========================================================================*/
@@ -496,6 +761,18 @@ extern GPTDriver GPTD4;
 extern GPTDriver GPTD5;
 #endif
 
+#if AT32_GPT_USE_TMR6 && !defined(__DOXYGEN__)
+extern GPTDriver GPTD6;
+#endif
+
+#if AT32_GPT_USE_TMR7 && !defined(__DOXYGEN__)
+extern GPTDriver GPTD7;
+#endif
+
+#if AT32_GPT_USE_TMR8 && !defined(__DOXYGEN__)
+extern GPTDriver GPTD8;
+#endif
+
 #if AT32_GPT_USE_TMR9 && !defined(__DOXYGEN__)
 extern GPTDriver GPTD9;
 #endif
@@ -506,6 +783,22 @@ extern GPTDriver GPTD10;
 
 #if AT32_GPT_USE_TMR11 && !defined(__DOXYGEN__)
 extern GPTDriver GPTD11;
+#endif
+
+#if AT32_GPT_USE_TMR12 && !defined(__DOXYGEN__)
+extern GPTDriver GPTD12;
+#endif
+
+#if AT32_GPT_USE_TMR13 && !defined(__DOXYGEN__)
+extern GPTDriver GPTD13;
+#endif
+
+#if AT32_GPT_USE_TMR14 && !defined(__DOXYGEN__)
+extern GPTDriver GPTD14;
+#endif
+
+#if AT32_GPT_USE_TMR20 && !defined(__DOXYGEN__)
+extern GPTDriver GPTD20;
 #endif
 
 #ifdef __cplusplus
