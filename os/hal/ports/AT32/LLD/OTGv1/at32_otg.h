@@ -834,6 +834,7 @@ typedef struct {
  * @name DOEPINT register bit definitions
  * @{
  */
+#define DOEPINT_STPPKRX         (1U << 15)  /**< SETUP packet received.     */
 #define DOEPINT_B2BSTUP         (1U << 6)   /**< Back-to-back SETUP packets
                                                  received.                  */
 #define DOEPINT_OUTTEPD         (1U << 4)   /**< OUT token received when
