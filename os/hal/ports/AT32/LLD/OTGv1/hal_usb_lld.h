@@ -112,6 +112,15 @@
 #endif
 
 /**
+ * @brief   Enables HS mode on OTG2 DMA.
+ * @note    The default is @p TRUE.
+ * @note    Has effect only if @p BOARD_OTG2_USES_ULPI is defined.
+ */
+#if !defined(AT32_USE_USB_OTG2_HS_DMA) || defined(__DOXYGEN__)
+#define AT32_USE_USB_OTG2_HS_DMA                FALSE
+#endif
+
+/**
  * @brief   Exception priority level during TXFIFOs operations.
  * @note    Because an undocumented silicon behavior the operation of
  *          copying a packet into a TXFIFO must not be interrupted by
@@ -243,6 +252,7 @@ typedef struct {
   uint32_t                      rx_fifo_size;
   uint32_t                      otg_ram_size;
   uint32_t                      num_endpoints;
+  uint32_t                      dma_en;
 } at32_otg_params_t;
 
 /**
