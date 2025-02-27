@@ -111,10 +111,6 @@
 #define AT32_USE_USB_OTG2_HS                TRUE
 #endif
 
-#if defined(AT32_USE_USB_OTG2_HS)
-#   include "magic_settings.h"
-#endif
-
 /**
  * @brief   Enables HS mode on OTG2 DMA.
  * @note    The default is @p TRUE.

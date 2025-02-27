@@ -822,6 +822,11 @@ void usb_lld_init(void) {
  *
  * @notapi
  */
+
+ bool __attribute__((weak)) usb_device_speed(void){
+    return true;
+ }
+
 void usb_lld_start(USBDriver *usbp) {
   at32_otg_t *otgp = usbp->otg;
 
@@ -863,17 +868,15 @@ void usb_lld_start(USBDriver *usbp) {
                - USB turn-around time = USBTRDTIM_VALUE_HS or USBTRDTIM_VALUE_FS.*/
       otgp->GUSBCFG = GUSBCFG_FDEVMODE | GUSBCFG_USBTRDTIM(USBTRDTIM_VALUE_HS);
 #if AT32_USE_USB_OTG2_HS
-#  if defined(USB_SPEEED_DEFAULT_FS)
-    if(CUSTOM_USB_SPEEED_DEFAULT_FS)
       /* USB 2.0 High Speed PHY in HS mode.*/
-      otgp->DCFG = 0x02200000 | DCFG_DEVSPD_HS;
-    else
-      /* USB 2.0 High Speed PHY in FS mode.*/
-      otgp->DCFG = 0x02200000 | DCFG_DEVSPD_HS_FS;
-#  else
-      /* USB 2.0 High Speed PHY in HS mode.*/
-      otgp->DCFG = 0x02200000 | DCFG_DEVSPD_HS;
-#  endif
+      //otgp->DCFG = 0x02200000 | DCFG_DEVSPD_HS;
+
+      if (usb_device_speed() == true){
+        /* USB 2.0 High Speed PHY in HS mode.*/
+        otgp->DCFG = 0x02200000 | DCFG_DEVSPD_HS;
+      }else {
+        otgp->DCFG = 0x02200000 | DCFG_DEVSPD_HS_FS;
+      }
 #else
       /* USB 2.0 High Speed PHY in FS mode.*/
       otgp->DCFG = 0x02200000 | DCFG_DEVSPD_HS_FS;
