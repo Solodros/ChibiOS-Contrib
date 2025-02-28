@@ -73,11 +73,11 @@
 #define AT32_CAN_MAX_FILTERS               14
 
 /* DMA attributes.*/
-#define AT32_ADVANCED_DMA                  FALSE
-
 #if (AT32_DMA_USE_DMAMUX == TRUE) || defined(__DOXYGEN__)
+#define AT32_ADVANCED_DMA                  TRUE
 #define AT32_DMA_SUPPORTS_DMAMUX           TRUE
 #else
+#define AT32_ADVANCED_DMA                  FALSE
 #define AT32_DMA_SUPPORTS_DMAMUX           FALSE
 #endif
 
@@ -101,8 +101,11 @@
 #define AT32_HAS_GPIOB                     TRUE
 #define AT32_HAS_GPIOD                     TRUE
 
+#if !defined(AT32_HAS_GPIOC) || defined(__DOXYGEN__)
 #define AT32_HAS_GPIOC                     FALSE
+#elif !defined(AT32_HAS_GPIOF)
 #define AT32_HAS_GPIOF                     FALSE
+#endif
 
 /* I2C attributes.*/
 #define AT32_HAS_I2C1                      TRUE
@@ -265,6 +268,16 @@
 /* WDT attributes.*/
 #define AT32_HAS_WDT                       TRUE
 #define AT32_WDT_IS_WINDOWED               FALSE
+
+/* CRC attributes.*/
+#define AT32_HAS_CRC                       TRUE
+
+/* STM32 compatibility define. */
+#if AT32_CRC_USE_CRC1 == TRUE 
+#define STM32_CRC_USE_CRC1 TRUE
+#else
+#define STM32_CRC_USE_CRC1 FALSE
+#endif
 /** @} */
 #endif /* defined(AT32F415K_MD) */
 
@@ -288,11 +301,11 @@
 #define AT32_CAN_MAX_FILTERS               14
 
 /* DMA attributes.*/
-#define AT32_ADVANCED_DMA                  FALSE
-
 #if (AT32_DMA_USE_DMAMUX == TRUE) || defined(__DOXYGEN__)
+#define AT32_ADVANCED_DMA                  TRUE
 #define AT32_DMA_SUPPORTS_DMAMUX           TRUE
 #else
+#define AT32_ADVANCED_DMA                  FALSE
 #define AT32_DMA_SUPPORTS_DMAMUX           FALSE
 #endif
 
@@ -316,8 +329,11 @@
 #define AT32_HAS_GPIOB                     TRUE
 #define AT32_HAS_GPIOD                     TRUE
 
+#if !defined(AT32_HAS_GPIOC) || defined(__DOXYGEN__)
 #define AT32_HAS_GPIOC                     FALSE
+#elif !defined(AT32_HAS_GPIOF)
 #define AT32_HAS_GPIOF                     FALSE
+#endif
 
 /* I2C attributes.*/
 #define AT32_HAS_I2C1                      TRUE
@@ -480,6 +496,16 @@
 /* WDT attributes.*/
 #define AT32_HAS_WDT                       TRUE
 #define AT32_WDT_IS_WINDOWED               FALSE
+
+/* CRC attributes.*/
+#define AT32_HAS_CRC                       TRUE
+
+/* STM32 compatibility define. */
+#if AT32_CRC_USE_CRC1 == TRUE 
+#define STM32_CRC_USE_CRC1 TRUE
+#else
+#define STM32_CRC_USE_CRC1 FALSE
+#endif
 /** @} */
 #endif /* defined(AT32F415K_HD) */
 
@@ -503,11 +529,11 @@
 #define AT32_CAN_MAX_FILTERS               14
 
 /* DMA attributes.*/
-#define AT32_ADVANCED_DMA                  FALSE
-
 #if (AT32_DMA_USE_DMAMUX == TRUE) || defined(__DOXYGEN__)
+#define AT32_ADVANCED_DMA                  TRUE
 #define AT32_DMA_SUPPORTS_DMAMUX           TRUE
 #else
+#define AT32_ADVANCED_DMA                  FALSE
 #define AT32_DMA_SUPPORTS_DMAMUX           FALSE
 #endif
 
@@ -705,6 +731,16 @@
 /* WDT attributes.*/
 #define AT32_HAS_WDT                       TRUE
 #define AT32_WDT_IS_WINDOWED               FALSE
+
+/* CRC attributes.*/
+#define AT32_HAS_CRC                       TRUE
+
+/* STM32 compatibility define. */
+#if AT32_CRC_USE_CRC1 == TRUE 
+#define STM32_CRC_USE_CRC1 TRUE
+#else
+#define STM32_CRC_USE_CRC1 FALSE
+#endif
 /** @} */
 #endif /* defined(AT32F415C_MD) */
 
@@ -728,11 +764,11 @@
 #define AT32_CAN_MAX_FILTERS               14
 
 /* DMA attributes.*/
-#define AT32_ADVANCED_DMA                  FALSE
-
 #if (AT32_DMA_USE_DMAMUX == TRUE) || defined(__DOXYGEN__)
+#define AT32_ADVANCED_DMA                  TRUE
 #define AT32_DMA_SUPPORTS_DMAMUX           TRUE
 #else
+#define AT32_ADVANCED_DMA                  FALSE
 #define AT32_DMA_SUPPORTS_DMAMUX           FALSE
 #endif
 
@@ -930,6 +966,16 @@
 /* WDT attributes.*/
 #define AT32_HAS_WDT                       TRUE
 #define AT32_WDT_IS_WINDOWED               FALSE
+
+/* CRC attributes.*/
+#define AT32_HAS_CRC                       TRUE
+
+/* STM32 compatibility define. */
+#if AT32_CRC_USE_CRC1 == TRUE 
+#define STM32_CRC_USE_CRC1 TRUE
+#else
+#define STM32_CRC_USE_CRC1 FALSE
+#endif
 /** @} */
 #endif /* defined(AT32F415C_HD) */
 
@@ -953,11 +999,11 @@
 #define AT32_CAN_MAX_FILTERS               14
 
 /* DMA attributes.*/
-#define AT32_ADVANCED_DMA                  FALSE
-
 #if (AT32_DMA_USE_DMAMUX == TRUE) || defined(__DOXYGEN__)
+#define AT32_ADVANCED_DMA                  TRUE
 #define AT32_DMA_SUPPORTS_DMAMUX           TRUE
 #else
+#define AT32_ADVANCED_DMA                  FALSE
 #define AT32_DMA_SUPPORTS_DMAMUX           FALSE
 #endif
 
@@ -1174,6 +1220,16 @@
 /* WDT attributes.*/
 #define AT32_HAS_WDT                       TRUE
 #define AT32_WDT_IS_WINDOWED               FALSE
+
+/* CRC attributes.*/
+#define AT32_HAS_CRC                       TRUE
+
+/* STM32 compatibility define. */
+#if AT32_CRC_USE_CRC1 == TRUE 
+#define STM32_CRC_USE_CRC1 TRUE
+#else
+#define STM32_CRC_USE_CRC1 FALSE
+#endif
 /** @} */
 #endif /* defined(AT32F415R_MD) */
 
@@ -1197,11 +1253,11 @@
 #define AT32_CAN_MAX_FILTERS               14
 
 /* DMA attributes.*/
-#define AT32_ADVANCED_DMA                  FALSE
-
 #if (AT32_DMA_USE_DMAMUX == TRUE) || defined(__DOXYGEN__)
+#define AT32_ADVANCED_DMA                  TRUE
 #define AT32_DMA_SUPPORTS_DMAMUX           TRUE
 #else
+#define AT32_ADVANCED_DMA                  FALSE
 #define AT32_DMA_SUPPORTS_DMAMUX           FALSE
 #endif
 
@@ -1418,6 +1474,16 @@
 /* WDT attributes.*/
 #define AT32_HAS_WDT                       TRUE
 #define AT32_WDT_IS_WINDOWED               FALSE
+
+/* CRC attributes.*/
+#define AT32_HAS_CRC                       TRUE
+
+/* STM32 compatibility define. */
+#if AT32_CRC_USE_CRC1 == TRUE 
+#define STM32_CRC_USE_CRC1 TRUE
+#else
+#define STM32_CRC_USE_CRC1 FALSE
+#endif
 /** @} */
 #endif /* defined(AT32F415R_HD) */
 
